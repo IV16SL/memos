@@ -2,6 +2,7 @@ package s3objectpresigner
 
 import (
 	"context"
+	"log/slog"
 	"time"
 
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -28,15 +29,6 @@ func (p *S3ObjectPresigner) CheckAndPresign(ctx context.Context) {
 		return
 	}
 
-	s3Config := workspaceStorageSetting.GetS3Config()
-	if s3Config == nil {
-		return
-	}
-	s3Client, err := s3.NewClient(ctx, s3Config)
-	if err != nil {
-		return
-	}
-
 	s3StorageType := storepb.ResourceStorageType_S3
 	resources, err := p.Store.ListResources(ctx, &store.FindResource{
 		GetBlob:     false,
@@ -53,18 +45,36 @@ func (p *S3ObjectPresigner) CheckAndPresign(ctx context.Context) {
 		}
 
 		if s3ObjectPayload.LastPresignedTime != nil {
-			// Skip if the presigned URL is still valid for the next 6 days.
-			// The default expiration time is 7 days.
-			if time.Now().Before(s3ObjectPayload.LastPresignedTime.AsTime().Add(6 * 24 * time.Hour)) {
+			// Skip if the presigned URL is still valid for the next 4 days.
+			// The expiration time is set to 5 days.
+			if time.Now().Before(s3ObjectPayload.LastPresignedTime.AsTime().Add(4 * 24 * time.Hour)) {
 				continue
 			}
 		}
+
+		s3Config := workspaceStorageSetting.GetS3Config()
+		if s3ObjectPayload.S3Config != nil {
+			s3Config = s3ObjectPayload.S3Config
+		}
+		if s3Config == nil {
+			slog.Error("S3 config is not found")
+			continue
+		}
+
+		s3Client, err := s3.NewClient(ctx, s3Config)
+		if err != nil {
+			slog.Error("Failed to create S3 client", slog.Any("err", err))
+			continue
+		}
+
 		presignURL, err := s3Client.PresignGetObject(ctx, s3ObjectPayload.Key)
 		if err != nil {
 			return
 		}
+		s3ObjectPayload.S3Config = s3Config
 		s3ObjectPayload.LastPresignedTime = timestamppb.New(time.Now())
 		if err := p.Store.UpdateResource(ctx, &store.UpdateResource{
+			ID:        resource.ID,
 			Reference: &presignURL,
 			Payload: &storepb.ResourcePayload{
 				Payload: &storepb.ResourcePayload_S3Object_{

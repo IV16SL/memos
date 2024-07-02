@@ -46,6 +46,17 @@ func (s *APIV1Service) GetWorkspaceSetting(ctx context.Context, request *v1pb.Ge
 		return nil, status.Errorf(codes.NotFound, "workspace setting not found")
 	}
 
+	// For storage setting, only host can get it.
+	if workspaceSetting.Key == storepb.WorkspaceSettingKey_STORAGE {
+		user, err := s.GetCurrentUser(ctx)
+		if err != nil {
+			return nil, status.Errorf(codes.Internal, "failed to get current user: %v", err)
+		}
+		if user == nil || user.Role != store.RoleHost {
+			return nil, status.Errorf(codes.PermissionDenied, "permission denied")
+		}
+	}
+
 	return convertWorkspaceSettingFromStore(workspaceSetting), nil
 }
 
@@ -54,7 +65,7 @@ func (s *APIV1Service) SetWorkspaceSetting(ctx context.Context, request *v1pb.Se
 		return nil, status.Errorf(codes.InvalidArgument, "setting workspace setting is not allowed in demo mode")
 	}
 
-	user, err := getCurrentUser(ctx, s.Store)
+	user, err := s.GetCurrentUser(ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get current user: %v", err)
 	}
@@ -121,11 +132,8 @@ func convertWorkspaceGeneralSettingFromStore(setting *storepb.WorkspaceGeneralSe
 		return nil
 	}
 	generalSetting := &v1pb.WorkspaceGeneralSetting{
-		InstanceUrl:           setting.InstanceUrl,
-		DisallowSignup:        setting.DisallowSignup,
-		DisallowPasswordLogin: setting.DisallowPasswordLogin,
-		AdditionalScript:      setting.AdditionalScript,
-		AdditionalStyle:       setting.AdditionalStyle,
+		AdditionalScript: setting.AdditionalScript,
+		AdditionalStyle:  setting.AdditionalStyle,
 	}
 	if setting.CustomProfile != nil {
 		generalSetting.CustomProfile = &v1pb.WorkspaceCustomProfile{
@@ -144,11 +152,8 @@ func convertWorkspaceGeneralSettingToStore(setting *v1pb.WorkspaceGeneralSetting
 		return nil
 	}
 	generalSetting := &storepb.WorkspaceGeneralSetting{
-		InstanceUrl:           setting.InstanceUrl,
-		DisallowSignup:        setting.DisallowSignup,
-		DisallowPasswordLogin: setting.DisallowPasswordLogin,
-		AdditionalScript:      setting.AdditionalScript,
-		AdditionalStyle:       setting.AdditionalStyle,
+		AdditionalScript: setting.AdditionalScript,
+		AdditionalStyle:  setting.AdditionalStyle,
 	}
 	if setting.CustomProfile != nil {
 		generalSetting.CustomProfile = &storepb.WorkspaceCustomProfile{
@@ -193,7 +198,7 @@ func convertWorkspaceStorageSettingToStore(setting *v1pb.WorkspaceStorageSetting
 		UploadSizeLimitMb: setting.UploadSizeLimitMb,
 	}
 	if setting.S3Config != nil {
-		settingpb.S3Config = &storepb.WorkspaceStorageSetting_S3Config{
+		settingpb.S3Config = &storepb.StorageS3Config{
 			AccessKeyId:     setting.S3Config.AccessKeyId,
 			AccessKeySecret: setting.S3Config.AccessKeySecret,
 			Endpoint:        setting.S3Config.Endpoint,
@@ -212,6 +217,8 @@ func convertWorkspaceMemoRelatedSettingFromStore(setting *storepb.WorkspaceMemoR
 		DisallowPublicVisible: setting.DisallowPublicVisible,
 		DisplayWithUpdateTime: setting.DisplayWithUpdateTime,
 		ContentLengthLimit:    setting.ContentLengthLimit,
+		EnableAutoCompact:     setting.EnableAutoCompact,
+		EnableDoubleClickEdit: setting.EnableDoubleClickEdit,
 	}
 }
 
@@ -223,5 +230,7 @@ func convertWorkspaceMemoRelatedSettingToStore(setting *v1pb.WorkspaceMemoRelate
 		DisallowPublicVisible: setting.DisallowPublicVisible,
 		DisplayWithUpdateTime: setting.DisplayWithUpdateTime,
 		ContentLengthLimit:    setting.ContentLengthLimit,
+		EnableAutoCompact:     setting.EnableAutoCompact,
+		EnableDoubleClickEdit: setting.EnableDoubleClickEdit,
 	}
 }

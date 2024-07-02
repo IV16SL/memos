@@ -38,7 +38,7 @@ const (
 )
 
 func (s *APIV1Service) CreateResource(ctx context.Context, request *v1pb.CreateResourceRequest) (*v1pb.Resource, error) {
-	user, err := getCurrentUser(ctx, s.Store)
+	user, err := s.GetCurrentUser(ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get current user: %v", err)
 	}
@@ -84,7 +84,7 @@ func (s *APIV1Service) CreateResource(ctx context.Context, request *v1pb.CreateR
 }
 
 func (s *APIV1Service) ListResources(ctx context.Context, _ *v1pb.ListResourcesRequest) (*v1pb.ListResourcesResponse, error) {
-	user, err := getCurrentUser(ctx, s.Store)
+	user, err := s.GetCurrentUser(ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get current user: %v", err)
 	}
@@ -114,7 +114,7 @@ func (s *APIV1Service) SearchResources(ctx context.Context, request *v1pb.Search
 	if filter.UID != nil {
 		resourceFind.UID = filter.UID
 	}
-	user, err := getCurrentUser(ctx, s.Store)
+	user, err := s.GetCurrentUser(ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get current user: %v", err)
 	}
@@ -176,9 +176,12 @@ func (s *APIV1Service) GetResourceBinary(ctx context.Context, request *v1pb.GetR
 			return nil, status.Errorf(codes.Internal, "failed to find memo by ID: %v", resource.MemoID)
 		}
 		if memo != nil && memo.Visibility != store.Public {
-			user, err := getCurrentUser(ctx, s.Store)
+			user, err := s.GetCurrentUser(ctx)
 			if err != nil {
 				return nil, status.Errorf(codes.Internal, "failed to get current user: %v", err)
+			}
+			if user == nil {
+				return nil, status.Errorf(codes.Unauthenticated, "unauthorized access")
 			}
 			if memo.Visibility == store.Private && user.ID != resource.CreatorID {
 				return nil, status.Errorf(codes.Unauthenticated, "unauthorized access")
@@ -195,6 +198,9 @@ func (s *APIV1Service) GetResourceBinary(ctx context.Context, request *v1pb.GetR
 
 		file, err := os.Open(resourcePath)
 		if err != nil {
+			if os.IsNotExist(err) {
+				return nil, status.Errorf(codes.NotFound, "file not found for resource: %s", request.Name)
+			}
 			return nil, status.Errorf(codes.Internal, "failed to open the file: %v", err)
 		}
 		defer file.Close()
@@ -204,8 +210,13 @@ func (s *APIV1Service) GetResourceBinary(ctx context.Context, request *v1pb.GetR
 		}
 	}
 
+	contentType := resource.Type
+	if strings.HasPrefix(contentType, "text/") {
+		contentType += "; charset=utf-8"
+	}
+
 	httpBody := &httpbody.HttpBody{
-		ContentType: resource.Type,
+		ContentType: contentType,
 		Data:        blob,
 	}
 	return httpBody, nil
@@ -253,7 +264,7 @@ func (s *APIV1Service) DeleteResource(ctx context.Context, request *v1pb.DeleteR
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "invalid resource id: %v", err)
 	}
-	user, err := getCurrentUser(ctx, s.Store)
+	user, err := s.GetCurrentUser(ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get current user: %v", err)
 	}
@@ -373,6 +384,7 @@ func SaveResourceBlob(ctx context.Context, s *store.Store, create *store.Resourc
 		create.Payload = &storepb.ResourcePayload{
 			Payload: &storepb.ResourcePayload_S3Object_{
 				S3Object: &storepb.ResourcePayload_S3Object{
+					S3Config:          s3Config,
 					Key:               key,
 					LastPresignedTime: timestamppb.New(time.Now()),
 				},
