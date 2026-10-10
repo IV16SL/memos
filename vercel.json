@@ -32,6 +32,14 @@
     },
     {
       "destination": "/api/handler",
+      "source": "/robots.txt"
+    },
+    {
+      "destination": "/api/handler",
+      "source": "/sitemap.xml"
+    },
+    {
+      "destination": "/index.html",
       "source": "/(.*)"
     }
   ]
