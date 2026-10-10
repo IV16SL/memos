@@ -62,6 +62,7 @@ func NewTestService(t *testing.T) *TestService {
 		MarkdownService: markdownService,
 		SSEHub:          api.NewSSEHub(),
 	}
+	service.InitUploadSessions()
 
 	return &TestService{
 		Service: service,

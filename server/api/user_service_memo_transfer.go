@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"log/slog"
-	"os"
 	"time"
 
 	"google.golang.org/genproto/googleapis/api/httpbody"
@@ -19,7 +18,6 @@ import (
 
 const (
 	importMemosProcedure = "/memos.api.UserService/ImportMemos"
-	memoImportTempPrefix = ".memos-rpc-import-"
 	// maxMemoImportBytes caps one staged archive.
 	maxMemoImportBytes = 4 << 30
 )
@@ -90,25 +88,23 @@ func (s *APIService) ImportMemos(ctx context.Context, request *apipb.ImportMemos
 		if int64(len(request.Data)) > u.Spec.TotalSize {
 			return nil, status.Errorf(codes.InvalidArgument, "data exceeds total_size")
 		}
-		id, upload, err = s.memoImports.create(s.Profile.Data, memoImportTempPrefix, user.ID, u.Spec.TotalSize, memoImportState{})
+		id, upload, err = s.memoImports.create(ctx, user.ID, u.Spec.TotalSize, memoImportState{})
 		if err != nil {
 			return nil, err
 		}
-		upload.mu.Lock()
 	case *apipb.ImportMemosRequest_UploadId:
 		id = u.UploadId
-		upload, err = s.memoImports.resume(id, user.ID)
+		upload, err = s.memoImports.resume(ctx, id, user.ID)
 		if err != nil {
 			return nil, err
 		}
 	default:
 		return nil, status.Errorf(codes.InvalidArgument, "spec or upload_id is required")
 	}
-	defer upload.mu.Unlock()
 	if err := ctx.Err(); err != nil {
 		return nil, status.FromContextError(err).Err()
 	}
-	if err := upload.write(request.WriteOffset, request.Data, request.FinishWrite); err != nil {
+	if err := upload.write(ctx, request.WriteOffset, request.Data, request.FinishWrite); err != nil {
 		return nil, err
 	}
 	response := &apipb.ImportMemosResponse{UploadId: id, CommittedSize: upload.committedSize, MaxChunkSize: uploadChunkSize}
@@ -122,7 +118,9 @@ func (s *APIService) ImportMemos(ctx context.Context, request *apipb.ImportMemos
 			return nil, err
 		}
 	}
-	upload.expireTime = time.Now().Add(uploadTTL)
+	if err := upload.touch(ctx); err != nil {
+		slog.Warn("failed to extend upload expiry", "error", err)
+	}
 	return response, nil
 }
 
@@ -130,12 +128,28 @@ func (s *APIService) ImportMemos(ctx context.Context, request *apipb.ImportMemos
 // setting the response result. An import completes the session; a plan
 // leaves it staged.
 func (s *APIService) finishMemoImport(ctx context.Context, user *store.User, upload *uploadSession[memoImportState], request *apipb.ImportMemosRequest, response *apipb.ImportMemosResponse) error {
-	file, err := os.Open(upload.path)
+	// Exactly one instance may import a session; concurrent finishers
+	// resolve the winner's report instead of importing twice.
+	claimed, err := upload.claimFinalize(ctx)
 	if err != nil {
-		return status.Errorf(codes.Internal, "failed to open upload file: %v", err)
+		return err
 	}
-	defer file.Close()
-	archive, err := memoexport.Read(file, upload.totalSize)
+	if !claimed {
+		return s.resolveMemoImport(ctx, upload, response)
+	}
+	finalized := false
+	defer func() {
+		if !finalized {
+			if rerr := upload.releaseFinalize(ctx); rerr != nil {
+				slog.Warn("failed to release upload finalize lease", "error", rerr)
+			}
+		}
+	}()
+	data, err := upload.readAll(ctx)
+	if err != nil {
+		return status.Errorf(codes.Internal, "failed to read staged upload: %v", err)
+	}
+	archive, err := memoexport.Read(bytes.NewReader(data), upload.totalSize)
 	if err != nil {
 		return status.Errorf(codes.InvalidArgument, "invalid memo export file: %v", err)
 	}
@@ -159,8 +173,39 @@ func (s *APIService) finishMemoImport(ctx context.Context, user *store.User, upl
 		return status.Error(codes.Internal, "failed to import memos")
 	}
 	upload.state.report = report
-	upload.complete = true
-	os.Remove(upload.path)
+	if err := upload.saveState(ctx); err != nil {
+		return err
+	}
+	if err := upload.markComplete(ctx); err != nil {
+		return err
+	}
+	if err := upload.deleteChunks(ctx); err != nil {
+		return err
+	}
+	finalized = true
 	response.Result = &apipb.ImportMemosResponse_Report{Report: report}
 	return nil
+}
+
+// resolveMemoImport waits for another instance's in-flight import of the
+// same session and returns its report.
+func (s *APIService) resolveMemoImport(ctx context.Context, upload *uploadSession[memoImportState], response *apipb.ImportMemosResponse) error {
+	deadline := time.Now().Add(30 * time.Second)
+	for {
+		if err := upload.refresh(ctx); err != nil {
+			return err
+		}
+		if upload.complete {
+			response.Result = &apipb.ImportMemosResponse_Report{Report: upload.state.report}
+			return nil
+		}
+		if time.Now().After(deadline) {
+			return status.Errorf(codes.Internal, "memo import did not complete")
+		}
+		select {
+		case <-ctx.Done():
+			return status.FromContextError(ctx.Err()).Err()
+		case <-time.After(100 * time.Millisecond):
+		}
+	}
 }

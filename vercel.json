@@ -1,0 +1,38 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/handler.go": {
+      "maxDuration": 60,
+      "memory": 1024,
+      "regions": [
+        "sin1"
+      ]
+    }
+  },
+  "rewrites": [
+    {
+      "destination": "/api/handler",
+      "source": "/memos.api.:path*"
+    },
+    {
+      "destination": "/api/handler",
+      "source": "/api/:path*"
+    },
+    {
+      "destination": "/api/handler",
+      "source": "/file/:path*"
+    },
+    {
+      "destination": "/api/handler",
+      "source": "/mcp"
+    },
+    {
+      "destination": "/api/handler",
+      "source": "/healthz"
+    },
+    {
+      "destination": "/api/handler",
+      "source": "/(.*)"
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"log"
+	"time"
 
 	// Import the PostgreSQL driver.
 	_ "github.com/lib/pq"
@@ -29,6 +30,11 @@ func NewDB(profile *profile.Profile) (store.Driver, error) {
 		log.Printf("Failed to open database: %s", err)
 		return nil, errors.Wrapf(err, "failed to open database: %s", profile.DSN)
 	}
+	// Serverless-friendly pool: each function instance caps its own
+	// connections; use the pooled (PgBouncer) DSN endpoint in MEMOS_DSN.
+	db.SetMaxOpenConns(8)
+	db.SetMaxIdleConns(2)
+	db.SetConnMaxLifetime(time.Minute)
 
 	var driver store.Driver = &DB{
 		db:      db,

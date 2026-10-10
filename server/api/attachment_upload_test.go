@@ -5,7 +5,6 @@ import (
 	"context"
 	"io"
 	"os"
-	"path/filepath"
 	"strings"
 	"sync"
 	"testing"
@@ -90,7 +89,16 @@ func TestUploadAttachmentChunksAndRetries(t *testing.T) {
 	content, err := os.ReadFile(rows[0].Reference)
 	require.NoError(t, err)
 	require.Equal(t, "abcdef", string(content))
-	require.NoFileExists(t, svc.attachmentUploads.entries[id].path)
+	// The finished session stays resolvable until expiry, but its staged
+	// chunks are removed.
+	var completeInt, chunks int
+	db := svc.Store.GetDriver().GetDB()
+	err = db.QueryRow(`SELECT complete FROM vercel_upload_session WHERE id = ?`, id).Scan(&completeInt)
+	require.NoError(t, err)
+	require.Equal(t, 1, completeInt)
+	err = db.QueryRow(`SELECT COUNT(*) FROM vercel_upload_chunk WHERE session_id = ?`, id).Scan(&chunks)
+	require.NoError(t, err)
+	require.Zero(t, chunks)
 
 	_, err = svc.DeleteAttachment(ctx, &apipb.DeleteAttachmentRequest{Name: result.Attachment.Name})
 	require.NoError(t, err)
@@ -151,7 +159,10 @@ func TestUploadAttachmentValidation(t *testing.T) {
 	require.Equal(t, codes.OutOfRange, status.Code(err))
 	_, err = svc.UploadAttachment(ctx, &apipb.UploadAttachmentRequest{Upload: uploadSpec("file", 1<<60)})
 	require.Equal(t, codes.ResourceExhausted, status.Code(err))
-	require.Empty(t, svc.attachmentUploads.entries, "rejected spec calls must not register uploads")
+	require.NoError(t, svc.attachmentUploads.ensureTables(ctx))
+	var rejected int
+	require.NoError(t, svc.Store.GetDriver().GetDB().QueryRow(`SELECT COUNT(*) FROM vercel_upload_session WHERE kind = 'attachment'`).Scan(&rejected))
+	require.Zero(t, rejected, "rejected spec calls must not register uploads")
 
 	id := startTestUpload(ctx, t, svc, 3)
 	other := createSpaceTestUser(context.Background(), t, svc, "other-uploader", store.RoleUser)
@@ -248,6 +259,17 @@ func TestUploadAttachmentRechecksMemoAndSize(t *testing.T) {
 
 func TestUploadAttachmentExpiryAndLimits(t *testing.T) {
 	svc, ctx := newUploadTestService(t)
+	db := svc.Store.GetDriver().GetDB()
+	chunkCount := func() int {
+		var n int
+		require.NoError(t, db.QueryRow(`SELECT COUNT(*) FROM vercel_upload_chunk`).Scan(&n))
+		return n
+	}
+	expire := func(id string) {
+		_, err := db.Exec(`UPDATE vercel_upload_session SET expire_at = ? WHERE id = ?`, time.Now().Add(-time.Second).Unix(), id)
+		require.NoError(t, err)
+	}
+
 	ids := make([]string, uploadMaxActivePerUser)
 	for i := range ids {
 		ids[i] = startTestUpload(ctx, t, svc, 0)
@@ -257,32 +279,29 @@ func TestUploadAttachmentExpiryAndLimits(t *testing.T) {
 	_, err = svc.UploadAttachment(ctx, &apipb.UploadAttachmentRequest{Upload: uploadID(ids[0]), FinishWrite: true})
 	require.NoError(t, err)
 	startTestUpload(ctx, t, svc, 0) // Completed uploads do not consume an active slot.
-	upload := svc.attachmentUploads.entries[ids[1]]
-	upload.mu.Lock()
-	upload.expireTime = time.Now().Add(-time.Second)
-	upload.mu.Unlock()
+
+	// Expire a session directly in the database; continuing it must fail.
+	expire(ids[1])
 	_, err = svc.UploadAttachment(ctx, &apipb.UploadAttachmentRequest{Upload: uploadID(ids[1])})
 	require.Equal(t, codes.NotFound, status.Code(err))
 
-	orphan := filepath.Join(svc.Profile.Data, attachmentUploadTempPrefix+"orphan")
-	recent := filepath.Join(svc.Profile.Data, attachmentUploadTempPrefix+"recent")
-	unrelated := filepath.Join(svc.Profile.Data, "keep.txt")
-	for _, path := range []string{orphan, recent, unrelated} {
-		require.NoError(t, os.WriteFile(path, []byte("x"), 0600))
-	}
-	old := time.Now().Add(-2 * uploadTTL)
-	require.NoError(t, os.Chtimes(orphan, old, old))
-	require.NoError(t, os.Chtimes(unrelated, old, old))
-	svc.attachmentUploads.mu.Lock()
-	svc.attachmentUploads.sweepLocked(time.Now(), 0)
-	svc.attachmentUploads.removeOrphansLocked(svc.Profile.Data, time.Now())
-	svc.attachmentUploads.mu.Unlock()
-	require.NoFileExists(t, upload.path)
-	require.NoFileExists(t, orphan)
-	require.FileExists(t, recent)
-	require.FileExists(t, unrelated)
-	svc.CloseUploads()
-	require.Empty(t, svc.attachmentUploads.entries)
+	// Expired sessions and their chunks are swept when the next upload starts.
+	// Finish one session first to free an active slot for the sweep trigger.
+	_, err = svc.UploadAttachment(ctx, &apipb.UploadAttachmentRequest{Upload: uploadID(ids[3]), FinishWrite: true})
+	require.NoError(t, err)
+	chunked := startTestUpload(ctx, t, svc, 4)
+	_, err = svc.UploadAttachment(ctx, &apipb.UploadAttachmentRequest{Upload: uploadID(chunked), Data: []byte("ab")})
+	require.NoError(t, err)
+	require.Equal(t, 1, chunkCount())
+	expire(chunked)
+	swept := startTestUpload(ctx, t, svc, 0)
+	require.NotEmpty(t, swept)
+	require.Equal(t, 0, chunkCount(), "expired session chunks must be swept")
+	var gone int
+	require.NoError(t, db.QueryRow(`SELECT COUNT(*) FROM vercel_upload_session WHERE id = ?`, chunked).Scan(&gone))
+	require.Zero(t, gone, "expired session must be swept")
+
+	svc.CloseUploads() // no-op for DB-backed sessions; must not fail.
 }
 
 func TestUploadAttachmentAboveLegacyRequestLimit(t *testing.T) {

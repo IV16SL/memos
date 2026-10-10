@@ -112,7 +112,24 @@ func NewAPIService(secret string, profile *profile.Profile, store *store.Store) 
 		imageProcessingSemaphore: semaphore.NewWeighted(2),
 	}
 	service.linkMetadataFetcher = linkmeta.NewHTMLMetaFetcher()
+	service.initUploadSessions()
 	return service
+}
+
+// initUploadSessions wires the DB-backed upload session managers. It must be
+// called whenever an APIService is built without NewAPIService (e.g. tests
+// that assemble the struct directly); otherwise chunked uploads panic on a
+// nil database handle.
+func (s *APIService) InitUploadSessions() {
+	s.initUploadSessions()
+}
+
+func (s *APIService) initUploadSessions() {
+	// DB-backed upload sessions (serverless-safe): chunks may land on any
+	// instance, so sessions live in the database instead of process memory.
+	db := s.Store.GetDriver().GetDB()
+	s.attachmentUploads = newUploadSessions(db, s.Profile.Driver, uploadKindAttachment, encodeAttachmentState, decodeAttachmentState)
+	s.memoImports = newUploadSessions(db, s.Profile.Driver, uploadKindMemoImport, encodeMemoImportState, decodeMemoImportState)
 }
 
 // newGatewayMarshaler mirrors grpc-gateway's default JSON marshaler with one

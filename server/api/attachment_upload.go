@@ -1,9 +1,9 @@
 package api
 
 import (
+	"bytes"
 	"context"
-	"io"
-	"os"
+	"log/slog"
 	"time"
 
 	"google.golang.org/grpc/codes"
@@ -17,7 +17,6 @@ import (
 
 const (
 	attachmentUploadMetadataLimit = 64 << 10
-	attachmentUploadTempPrefix    = ".memos-rpc-upload-"
 	attachmentUploadProcedure     = "/memos.api.AttachmentService/UploadAttachment"
 )
 
@@ -56,24 +55,23 @@ func (s *APIService) UploadAttachment(ctx context.Context, request *apipb.Upload
 		if err != nil {
 			return nil, err
 		}
-		upload.mu.Lock()
 	case *apipb.UploadAttachmentRequest_UploadId:
 		id = u.UploadId
-		upload, err = s.attachmentUploads.resume(id, user.ID)
+		upload, err = s.attachmentUploads.resume(ctx, id, user.ID)
 		if err != nil {
 			return nil, err
 		}
 	default:
 		return nil, status.Errorf(codes.InvalidArgument, "spec or upload_id is required")
 	}
-	defer upload.mu.Unlock()
 	if err := ctx.Err(); err != nil {
 		return nil, status.FromContextError(err).Err()
 	}
-	if err := upload.write(request.WriteOffset, request.Data, request.FinishWrite); err != nil {
+	if err := upload.write(ctx, request.WriteOffset, request.Data, request.FinishWrite); err != nil {
 		return nil, err
 	}
 	var attachment *apipb.Attachment
+	finished := false
 	if upload.complete {
 		// Recheck access and existence; a completed upload must not resurrect a
 		// deleted attachment or disclose metadata after access is revoked.
@@ -84,14 +82,23 @@ func (s *APIService) UploadAttachment(ctx context.Context, request *apipb.Upload
 		}
 		attachment, err = s.finishAttachmentUpload(ctx, upload)
 		if err == nil {
-			upload.complete = true
-			os.Remove(upload.path)
+			if err := upload.markComplete(ctx); err != nil {
+				return nil, err
+			}
+			if err := upload.deleteChunks(ctx); err != nil {
+				return nil, err
+			}
+			finished = true
 		}
 	}
 	if err != nil {
 		return nil, err
 	}
-	upload.expireTime = time.Now().Add(uploadTTL)
+	if !finished {
+		if err := upload.touch(ctx); err != nil {
+			slog.Warn("failed to extend upload expiry", "error", err)
+		}
+	}
 	return &apipb.UploadAttachmentResponse{
 		UploadId: id, CommittedSize: upload.committedSize, Attachment: attachment, MaxChunkSize: uploadChunkSize,
 	}, nil
@@ -136,10 +143,27 @@ func (s *APIService) startAttachmentUpload(ctx context.Context, request *apipb.U
 		return "", nil, err
 	}
 	state := attachmentUploadState{metadata: metadata, uid: create.UID}
-	return s.attachmentUploads.create(s.Profile.Data, attachmentUploadTempPrefix, ownerID, spec.TotalSize, state)
+	return s.attachmentUploads.create(ctx, ownerID, spec.TotalSize, state)
 }
 
 func (s *APIService) finishAttachmentUpload(ctx context.Context, upload *attachmentUpload) (*apipb.Attachment, error) {
+	// Exactly one instance may finalize a session; concurrent finishers
+	// resolve the winner's outcome instead of inserting a duplicate.
+	claimed, err := upload.claimFinalize(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if !claimed {
+		return s.resolveFinalizedAttachment(ctx, upload)
+	}
+	finalized := false
+	defer func() {
+		if !finalized {
+			if rerr := upload.releaseFinalize(ctx); rerr != nil {
+				slog.Warn("failed to release upload finalize lease", "error", rerr)
+			}
+		}
+	}()
 	if upload.state.finalizeAttempted {
 		// A database operation may commit before returning an error. Resolve that
 		// outcome before saving another object under the upload's stable UID.
@@ -161,16 +185,13 @@ func (s *APIService) finishAttachmentUpload(ctx context.Context, upload *attachm
 	if err := checkUploadSize(setting, upload.totalSize); err != nil {
 		return nil, err
 	}
-	file, err := os.Open(upload.path)
+	file, err := upload.readAll(ctx)
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "failed to open upload file: %v", err)
+		return nil, status.Errorf(codes.Internal, "failed to read staged upload: %v", err)
 	}
-	defer file.Close()
 	metadata := proto.CloneOf(upload.state.metadata)
-	metadata.Content = make([]byte, min(upload.totalSize, 512))
-	if _, err := io.ReadFull(file, metadata.Content); err != nil {
-		return nil, status.Errorf(codes.Internal, "failed to read attachment header: %v", err)
-	}
+	headerLen := min(len(file), int(min(upload.totalSize, 512)))
+	metadata.Content = file[:headerLen]
 	// Revalidate memo permissions and media metadata with the actual MIME type.
 	create, err := s.prepareAttachment(ctx, &apipb.CreateAttachmentRequest{Attachment: metadata, AttachmentId: upload.state.uid})
 	if err != nil {
@@ -178,5 +199,38 @@ func (s *APIService) finishAttachmentUpload(ctx context.Context, upload *attachm
 	}
 	create.Size = upload.totalSize
 	upload.state.finalizeAttempted = true
-	return s.processAndSaveAttachment(ctx, create, setting, file)
+	if err := upload.saveState(ctx); err != nil {
+		return nil, err
+	}
+	attachment, err := s.processAndSaveAttachment(ctx, create, setting, bytes.NewReader(file))
+	if err == nil {
+		finalized = true
+	}
+	return attachment, err
+}
+
+// resolveFinalizedAttachment waits for another instance's in-flight
+// finalization of the same session and returns its outcome.
+func (s *APIService) resolveFinalizedAttachment(ctx context.Context, upload *attachmentUpload) (*apipb.Attachment, error) {
+	deadline := time.Now().Add(30 * time.Second)
+	for {
+		persisted, err := s.Store.GetAttachment(ctx, &store.FindAttachment{UID: &upload.state.uid})
+		if err != nil {
+			return nil, status.Errorf(codes.Internal, "failed to resolve previous finalization: %v", err)
+		}
+		if persisted != nil {
+			if persisted.CreatorID != upload.ownerID {
+				return nil, status.Errorf(codes.AlreadyExists, "attachment ID already exists")
+			}
+			return s.GetAttachment(ctx, &apipb.GetAttachmentRequest{Name: "attachments/" + upload.state.uid})
+		}
+		if time.Now().After(deadline) {
+			return nil, status.Errorf(codes.Internal, "attachment finalization did not complete")
+		}
+		select {
+		case <-ctx.Done():
+			return nil, status.FromContextError(ctx.Err()).Err()
+		case <-time.After(100 * time.Millisecond):
+		}
+	}
 }

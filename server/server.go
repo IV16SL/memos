@@ -105,6 +105,12 @@ func NewServer(ctx context.Context, profile *profile.Profile, store *store.Store
 	return s, nil
 }
 
+// Handler exposes the underlying http.Handler so the whole server can run
+// inside a serverless function (e.g. Vercel Go runtime) without Start().
+func (s *Server) Handler() http.Handler {
+	return s.echoServer
+}
+
 func (s *Server) Start() error {
 	var address, network string
 	if len(s.Profile.UNIXSock) == 0 {
