@@ -12,7 +12,7 @@
   "rewrites": [
     {
       "destination": "/api/handler",
-      "source": "/memos.api.:path*"
+      "source": "/memos.api.(.*)"
     },
     {
       "destination": "/api/handler",
