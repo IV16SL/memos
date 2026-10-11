@@ -944,6 +944,7 @@
     "invalid-expression": "Изразът за търсене не можа да бъде приложен",
     "keyboard-hint": "Enter за търсене · Shift+Enter за нов ред",
     "load-error": "Не можаха да се заредят бележките",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Режим на търсене",
     "syntax-help": "Синтаксис на търсенето",
     "text": "Текст"

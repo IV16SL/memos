@@ -944,6 +944,7 @@
     "invalid-expression": "A expressão de pesquisa não pôde ser aplicada",
     "keyboard-hint": "Prima Enter para pesquisar · Shift+Enter para uma nova linha",
     "load-error": "Não foi possível carregar os memorandos",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Modo de pesquisa",
     "syntax-help": "Sintaxe de pesquisa",
     "text": "Texto"

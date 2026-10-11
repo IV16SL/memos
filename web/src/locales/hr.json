@@ -944,6 +944,7 @@
     "invalid-expression": "Izraz za pretraživanje nije moguće primijeniti",
     "keyboard-hint": "Enter za pretraživanje · Shift+Enter za novi redak",
     "load-error": "Nije moguće učitati dopise",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Način pretraživanja",
     "syntax-help": "Sintaksa pretraživanja",
     "text": "Tekst"

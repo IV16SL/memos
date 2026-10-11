@@ -944,6 +944,7 @@
     "invalid-expression": "Пошуковий вираз не вдалося застосувати",
     "keyboard-hint": "Enter для пошуку · Shift+Enter для нового рядка",
     "load-error": "Не вдалося завантажити нотатки",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Режим пошуку",
     "syntax-help": "Синтаксис пошуку",
     "text": "Текст"

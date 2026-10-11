@@ -1005,6 +1005,7 @@
     "invalid-expression": "搜索表达式无法应用",
     "keyboard-hint": "按 Enter 键搜索 · 按 Shift+Enter 键换行",
     "load-error": "无法加载备忘录",
+    "waking-database": "正在唤醒数据库，请稍候…",
     "mode": "搜索模式",
     "syntax-help": "搜索语法",
     "text": "文本"

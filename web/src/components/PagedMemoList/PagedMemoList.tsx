@@ -11,7 +11,7 @@ import { useDelayedFlag } from "@/hooks/useDelayedFlag";
 import { useInfiniteMemos } from "@/hooks/useMemoQueries";
 import { hoistMemoToFront } from "@/hooks/useMemoSorting";
 import { combineCELFilters } from "@/lib/cel-filter";
-import { DEFAULT_LIST_MEMOS_PAGE_SIZE, LOADING_INDICATOR_DELAY_MS } from "@/lib/constants";
+import { DEFAULT_LIST_MEMOS_PAGE_SIZE, LOADING_INDICATOR_DELAY_MS, SLOW_LOAD_HINT_DELAY_MS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { State } from "@/types/proto/api/common_pb";
 import type { Memo } from "@/types/proto/api/memo_service_pb";
@@ -36,6 +36,20 @@ const Loader = () => (
     <LoaderCircleIcon className="h-6 w-6 animate-spin text-muted-foreground" />
   </div>
 );
+
+// Initial-page loader with a slow-load hint: when the first page takes more than
+// a few seconds (e.g. the database is waking from auto-suspend), say so explicitly
+// instead of spinning silently and looking broken.
+const InitialLoader = () => {
+  const t = useTranslate();
+  const showSlowHint = useDelayedFlag(true, SLOW_LOAD_HINT_DELAY_MS);
+  return (
+    <div className="w-full flex flex-col justify-center items-center py-8 gap-2">
+      <LoaderCircleIcon className="h-6 w-6 animate-spin text-muted-foreground" />
+      {showSlowHint && <p className="text-sm text-muted-foreground">{t("search.waking-database")}</p>}
+    </div>
+  );
+};
 
 interface Props {
   renderer: (memo: Memo, options: { compact: boolean }) => ReactElement;
@@ -235,7 +249,7 @@ const PagedMemoList = (props: Props) => {
     !isDisplayPending && !isError && !isFetchingNextPage && !hasNextPage && displayMemoList.length === 0 ? (
       <Placeholder scene={hasFilters ? "search" : "memo"} message={props.emptyMessage ?? t("message.no-data")} className="w-full" />
     ) : null;
-  const initialLoader = isDisplayPending && showLoader ? <Loader /> : null;
+  const initialLoader = isDisplayPending && showLoader ? <InitialLoader /> : null;
   // Only a query the user typed can be edited or cleared from the error; facet and scope
   // filters are fixed by the route.
   const hasSearch = filters.some(isSearchFilter);

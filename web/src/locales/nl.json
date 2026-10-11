@@ -944,6 +944,7 @@
     "invalid-expression": "Zoekuitdrukking kon niet worden toegepast",
     "keyboard-hint": "Druk op Enter om te zoeken · Shift+Enter voor een nieuwe regel",
     "load-error": "Memo's konden niet worden geladen",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Zoekmodus",
     "syntax-help": "Zoeksyntaxis",
     "text": "Tekst"

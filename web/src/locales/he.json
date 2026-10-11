@@ -944,6 +944,7 @@
     "invalid-expression": "לא ניתן היה להחיל את ביטוי החיפוש",
     "keyboard-hint": "Enter לחיפוש · Shift+Enter לשורה חדשה",
     "load-error": "לא ניתן היה לטעון תזכירים",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "מצב חיפוש",
     "syntax-help": "תחביר חיפוש",
     "text": "טקסט"

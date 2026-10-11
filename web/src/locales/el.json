@@ -944,6 +944,7 @@
     "invalid-expression": "Δεν ήταν δυνατή η εφαρμογή της έκφρασης αναζήτησης",
     "keyboard-hint": "Enter για αναζήτηση · Shift+Enter για νέα γραμμή",
     "load-error": "Δεν ήταν δυνατή η φόρτωση των σημειωμάτων",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Λειτουργία αναζήτησης",
     "syntax-help": "Σύνταξη αναζήτησης",
     "text": "Κείμενο"

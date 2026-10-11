@@ -944,6 +944,7 @@
     "invalid-expression": "Sökuttrycket kunde inte tillämpas",
     "keyboard-hint": "Enter för att söka · Shift+Enter för en ny rad",
     "load-error": "Kunde inte läsa in PM",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Sökläge",
     "syntax-help": "Söksyntax",
     "text": "Text"

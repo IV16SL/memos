@@ -944,6 +944,7 @@
     "invalid-expression": "Impossibile applicare l'espressione di ricerca",
     "keyboard-hint": "Invio per cercare · Maiusc+Invio per andare a capo",
     "load-error": "Impossibile caricare i promemoria",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Modalità di ricerca",
     "syntax-help": "Sintassi di ricerca",
     "text": "Testo"

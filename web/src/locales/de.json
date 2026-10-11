@@ -944,6 +944,7 @@
     "invalid-expression": "Suchausdruck konnte nicht angewendet werden",
     "keyboard-hint": "Eingabetaste zum Suchen · Umschalt+Eingabetaste für eine neue Zeile",
     "load-error": "Memos konnten nicht geladen werden",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Suchmodus",
     "syntax-help": "Suchsyntax",
     "text": "Text"

@@ -944,6 +944,7 @@
     "invalid-expression": "Paieškos išraiškos pritaikyti nepavyko",
     "keyboard-hint": "Paspauskite „Enter“, kad ieškotumėte · Paspauskite „Shift“ + „Enter“, kad pereitumėte į naują eilutę",
     "load-error": "Nepavyko įkelti atmintinių",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Paieškos režimas",
     "syntax-help": "Paieškos sintaksė",
     "text": "Tekstas"

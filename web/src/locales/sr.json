@@ -944,6 +944,7 @@
     "invalid-expression": "Израз за претрагу није могао бити примењен",
     "keyboard-hint": "Enter за претрагу · Shift+Enter за нови ред",
     "load-error": "Није могуће учитати белешке",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Режим претраге",
     "syntax-help": "Синтакса претраге",
     "text": "Текст"

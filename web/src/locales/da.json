@@ -944,6 +944,7 @@
     "invalid-expression": "Søgeudtrykket kunne ikke anvendes",
     "keyboard-hint": "Enter for at søge · Shift+Enter for en ny linje",
     "load-error": "Notater kunne ikke indlæses",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Søgetilstand",
     "syntax-help": "Søgesyntaks",
     "text": "Tekst"

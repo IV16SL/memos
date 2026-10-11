@@ -987,6 +987,7 @@
     "invalid-expression": "搜尋表達式無法套用",
     "keyboard-hint": "按 Enter 鍵搜尋 · 按 Shift+Enter 鍵換行",
     "load-error": "無法載入備忘錄",
+    "waking-database": "正在喚醒資料庫，請稍候…",
     "mode": "搜尋模式",
     "syntax-help": "搜尋語法",
     "text": "文字"

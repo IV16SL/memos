@@ -944,6 +944,7 @@
     "invalid-expression": "Nie można zastosować wyrażenia wyszukiwania",
     "keyboard-hint": "Enter, aby wyszukać · Shift+Enter, aby przejść do nowego wiersza",
     "load-error": "Nie można wczytać notatek",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Tryb wyszukiwania",
     "syntax-help": "Składnia wyszukiwania",
     "text": "Tekst"

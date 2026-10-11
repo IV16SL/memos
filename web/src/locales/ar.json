@@ -969,6 +969,7 @@
     "invalid-expression": "تعذر تطبيق عبارة البحث",
     "keyboard-hint": "اضغط Enter للبحث، Shift+Enter لسطر جديد",
     "load-error": "تعذر تحميل المذكرات",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "وضع البحث",
     "retry": "إعادة المحاولة",
     "syntax-help": "صيغة البحث",

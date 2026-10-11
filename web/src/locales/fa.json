@@ -969,6 +969,7 @@
     "invalid-expression": "عبارت جستجو قابل اعمال نیست",
     "keyboard-hint": "برای جستجو Enter کنید · Shift+Enter برای خط جدید",
     "load-error": "یادداشت‌ها بارگیری نشدند",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "حالت جستجو",
     "retry": "دوباره امتحان کنید",
     "syntax-help": "نحو جستجو",

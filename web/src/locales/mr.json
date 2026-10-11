@@ -969,6 +969,7 @@
     "invalid-expression": "शोध अभिव्यक्ती लागू करता आली नाही",
     "keyboard-hint": "शोधण्यासाठी एंटर दाबा · नवीन ओळीसाठी शिफ्ट+एंटर दाबा",
     "load-error": "मेमो लोड करता आले नाहीत",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "शोध मोड",
     "retry": "पुन्हा प्रयत्न करा",
     "syntax-help": "शोध वाक्यरचना",

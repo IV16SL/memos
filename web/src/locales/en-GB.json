@@ -969,6 +969,7 @@
     "invalid-expression": "Search expression couldn’t be applied",
     "keyboard-hint": "Enter to search · Shift+Enter for a new line",
     "load-error": "Couldn’t load memos",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Search mode",
     "retry": "Retry",
     "syntax-help": "Search syntax",

@@ -969,6 +969,7 @@
     "invalid-expression": "ไม่สามารถใช้นิพจน์การค้นหาได้",
     "keyboard-hint": "กด Enter เพื่อค้นหา · กด Shift+Enter เพื่อขึ้นบรรทัดใหม่",
     "load-error": "ไม่สามารถโหลดบันทึกช่วยจำ",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "โหมดการค้นหา",
     "retry": "ลองใหม่",
     "syntax-help": "ไวยากรณ์การค้นหา",

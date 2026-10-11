@@ -944,6 +944,7 @@
     "invalid-expression": "No s'ha pogut aplicar l'expressió de cerca",
     "keyboard-hint": "Introduïu per cercar · Majúscules+Introduïu per a una nova línia",
     "load-error": "No s'han pogut carregar els memoràndums",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Mode de cerca",
     "syntax-help": "Sintaxi de cerca",
     "text": "Text"

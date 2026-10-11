@@ -944,6 +944,7 @@
     "invalid-expression": "検索式を適用できませんでした",
     "keyboard-hint": "Enterキーを押して検索、Shift+Enterで改行",
     "load-error": "メモを読み込めませんでした",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "検索モード",
     "syntax-help": "検索構文",
     "text": "テキスト"

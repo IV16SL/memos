@@ -944,6 +944,7 @@
     "invalid-expression": "Hľadaný výraz sa nepodarilo použiť",
     "keyboard-hint": "Enter pre vyhľadávanie · Shift+Enter pre nový riadok",
     "load-error": "Nepodarilo sa načítať poznámky",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Režim vyhľadávania",
     "syntax-help": "Syntax vyhľadávania",
     "text": "Text"

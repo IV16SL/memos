@@ -944,6 +944,7 @@
     "invalid-expression": "საძიებო გამოსახულების გამოყენება ვერ მოხერხდა",
     "keyboard-hint": "ძიებისთვის დააჭირეთ Enter · ახალი ხაზისთვის დააჭირეთ Shift+Enter",
     "load-error": "მემორანდუმების ჩატვირთვა ვერ მოხერხდა",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "ძიების რეჟიმი",
     "syntax-help": "ძიების სინტაქსი",
     "text": "ტექსტი"

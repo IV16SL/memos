@@ -944,6 +944,7 @@
     "invalid-expression": "Otsinguavaldist ei saanud rakendada",
     "keyboard-hint": "Otsimiseks vajutage sisestusklahvi · uue rea alustamiseks vajutage Shift+Enter",
     "load-error": "Memode laadimine ebaõnnestus",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Otsingurežiim",
     "syntax-help": "Otsingu süntaks",
     "text": "Tekst"

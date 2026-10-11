@@ -451,6 +451,7 @@
     "invalid-expression": "Søkjeuttrykket kunne diverre ikkje nyttast",
     "keyboard-hint": "Enter for å søkje · Shift+Enter for ei ny line",
     "load-error": "Klarte diverre ikkje å laste notata",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Søkjemodus",
     "retry": "Prøv att",
     "syntax-help": "Søkjesyntaks",

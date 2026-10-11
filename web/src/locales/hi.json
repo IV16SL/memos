@@ -969,6 +969,7 @@
     "invalid-expression": "सर्च एक्सप्रेशन अप्लाई नहीं किया जा सका",
     "keyboard-hint": "सर्च करने के लिए एंटर करें · नई लाइन के लिए Shift+Enter दबाएं",
     "load-error": "मेमो लोड नहीं हो सके",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "सर्च मोड",
     "retry": "रिट्री करें",
     "syntax-help": "सर्च सिंटैक्स",

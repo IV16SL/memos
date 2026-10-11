@@ -944,6 +944,7 @@
     "invalid-expression": "Meklēšanas izteiksmi nevarēja lietot",
     "keyboard-hint": "Nospiediet taustiņu Enter, lai meklētu · Shift+Enter, lai pārietu uz jaunu rindu",
     "load-error": "Nevarēja ielādēt piezīmes",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Meklēšanas režīms",
     "syntax-help": "Meklēšanas sintakse",
     "text": "Teksts"

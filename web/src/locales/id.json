@@ -969,6 +969,7 @@
     "invalid-expression": "Ekspresi pencarian tidak dapat diterapkan",
     "keyboard-hint": "Tekan Enter untuk mencari · Shift+Enter untuk baris baru",
     "load-error": "Memo tidak dapat dimuat",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Mode pencarian",
     "retry": "Coba lagi",
     "syntax-help": "Sintaks pencarian",

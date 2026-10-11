@@ -944,6 +944,7 @@
     "invalid-expression": "Expresia de căutare nu a putut fi aplicată",
     "keyboard-hint": "Enter pentru căutare · Shift+Enter pentru o linie nouă",
     "load-error": "Nu s-au putut încărca note",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Mod de căutare",
     "syntax-help": "Sintaxă de căutare",
     "text": "Text"

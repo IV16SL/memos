@@ -380,6 +380,7 @@
     "invalid-expression": "Arama ifadesi uygulanamadı",
     "keyboard-hint": "Aramak için Enter · Yeni satır için Shift+Enter",
     "load-error": "Notlar yüklenemedi",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Arama modu",
     "retry": "Yeniden dene",
     "syntax-help": "Arama sözdizimi",

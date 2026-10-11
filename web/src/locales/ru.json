@@ -969,6 +969,7 @@
     "invalid-expression": "Не удалось применить выражение поиска",
     "keyboard-hint": "Нажмите Enter для поиска · Shift+Enter для новой строки",
     "load-error": "Не удалось загрузить заметки",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Режим поиска",
     "retry": "Повторить попытку",
     "syntax-help": "Синтаксис поиска",

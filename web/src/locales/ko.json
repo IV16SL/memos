@@ -969,6 +969,7 @@
     "invalid-expression": "검색 표현식을 적용할 수 없습니다.",
     "keyboard-hint": "Enter 키를 눌러 검색 · Shift+Enter 키를 눌러 새 줄로 이동",
     "load-error": "메모를 로드할 수 없습니다.",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "검색 모드",
     "retry": "다시 시도",
     "syntax-help": "검색 구문",

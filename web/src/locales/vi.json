@@ -969,6 +969,7 @@
     "invalid-expression": "Không thể áp dụng biểu thức tìm kiếm",
     "keyboard-hint": "Nhấn Enter để tìm kiếm · Shift+Enter để xuống dòng mới",
     "load-error": "Không thể tải ghi nhớ",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Chế độ tìm kiếm",
     "retry": "Thử lại",
     "syntax-help": "Cú pháp tìm kiếm",

@@ -944,6 +944,7 @@
     "invalid-expression": "A keresési kifejezés nem alkalmazható",
     "keyboard-hint": "Enter a kereséshez · Shift+Enter új sorhoz",
     "load-error": "Nem sikerült betölteni a feljegyzéseket",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Keresési mód",
     "syntax-help": "Keresési szintaxis",
     "text": "Szöveg"

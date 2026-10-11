@@ -944,6 +944,7 @@
     "invalid-expression": "Hakulauseketta ei voitu käyttää",
     "keyboard-hint": "Enter hakeaksesi · Shift+Enter uudelle riville",
     "load-error": "Muistiinpanoja ei voitu ladata",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Hakutila",
     "syntax-help": "Hakusyntaksi",
     "text": "Teksti"

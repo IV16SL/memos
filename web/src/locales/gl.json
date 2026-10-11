@@ -944,6 +944,7 @@
     "invalid-expression": "Non se puido aplicar a expresión de busca",
     "keyboard-hint": "Intro para buscar · Maiús+Intro para unha nova liña",
     "load-error": "Non se puideron cargar as notas",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Modo de busca",
     "syntax-help": "Sintaxe de busca",
     "text": "Texto"

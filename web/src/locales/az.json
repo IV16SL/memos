@@ -451,6 +451,7 @@
     "invalid-expression": "Axtarış ifadəsi tətbiq edilə bilmədi",
     "keyboard-hint": "Axtarmaq üçün Enter · yeni sətir üçün Shift+Enter",
     "load-error": "Qeydlər yüklənmədi",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Axtarış rejimi",
     "retry": "Yenidən cəhd et",
     "syntax-help": "Axtarış sintaksisi",

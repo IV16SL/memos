@@ -944,6 +944,7 @@
     "invalid-expression": "Iskalnega izraza ni bilo mogoče uporabiti",
     "keyboard-hint": "Enter za iskanje · Shift+Enter za novo vrstico",
     "load-error": "Zapiskov ni bilo mogoče naložiti",
+    "waking-database": "Waking up the database, please wait…",
     "mode": "Način iskanja",
     "syntax-help": "Sintaksa iskanja",
     "text": "Besedilo"
