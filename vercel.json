@@ -9,12 +9,7 @@
       ]
     }
   },
-  "crons": [
-    {
-      "path": "/api/db-ping",
-      "schedule": "*/4 1-12 * * *"
-    }
-  ],
+  "crons": [],
   "rewrites": [
     {
       "destination": "/api/handler",
