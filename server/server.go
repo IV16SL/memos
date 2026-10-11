@@ -80,6 +80,17 @@ func NewServer(ctx context.Context, profile *profile.Profile, store *store.Store
 		return c.String(http.StatusOK, "Service ready.")
 	})
 
+	// Lightweight database ping for keep-alive cron jobs (e.g. Vercel Cron).
+	// Touches the database so managed Postgres providers with auto-suspend
+	// (e.g. Neon, 5 min idle) stay awake during configured hours. Returns 503
+	// when the database is unreachable so the cron failure is visible.
+	echoServer.GET("/api/db-ping", func(c *echo.Context) error {
+		if err := s.Store.GetDriver().GetDB().PingContext(c.Request().Context()); err != nil {
+			return c.String(http.StatusServiceUnavailable, "DB unreachable.")
+		}
+		return c.String(http.StatusOK, "DB ready.")
+	})
+
 	// Serve frontend static files.
 	frontend.NewFrontendService(profile, store).Serve(ctx, echoServer)
 
