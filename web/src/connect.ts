@@ -171,7 +171,13 @@ const authInterceptor: Interceptor = (next) => async (req) => {
       req.header.set(RETRY_HEADER, RETRY_HEADER_VALUE);
       return await next(req);
     } catch (refreshError) {
-      redirectOnAuthFailure();
+      // Only wipe the session when the server definitively rejects the refresh
+      // token. Transient failures (network timeout, 503 cold start, DB wake-up)
+      // must not clear localStorage — otherwise a single hiccup permanently
+      // logs the user out, since hasStoredToken() will never retry again.
+      if (refreshError instanceof ConnectError && refreshError.code === Code.Unauthenticated) {
+        redirectOnAuthFailure();
+      }
       throw refreshError;
     }
   }

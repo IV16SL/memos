@@ -1,3 +1,4 @@
+import { Code, ConnectError } from "@connectrpc/connect";
 import { useQueryClient } from "@tanstack/react-query";
 import { createContext, type ReactNode, useCallback, useContext, useMemo, useState } from "react";
 import { clearAccessToken, getAccessToken } from "@/auth-state";
@@ -140,7 +141,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
     } catch (error) {
       console.error("Failed to initialize auth:", error);
-      clearAccessToken();
+      // Only clear the stored token when the server definitively rejects the
+      // session. Transient failures must keep localStorage intact so the next
+      // reload can retry the refresh instead of staying logged out forever.
+      if (error instanceof ConnectError && error.code === Code.Unauthenticated) {
+        clearAccessToken();
+      }
       setState(UNAUTHENTICATED_STATE);
     }
   }, [fetchUserSettings, queryClient]);
