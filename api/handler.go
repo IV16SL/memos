@@ -9,10 +9,15 @@ package handler
 
 import (
 	"net/http"
+	"regexp"
 	"sync"
 
 	"github.com/usememos/memos/serverless"
 )
+
+// dsnRedactor masks credentials in connection strings before they ever
+// reach an HTTP response body.
+var dsnRedactor = regexp.MustCompile(`://[^:/@\s]+:[^/@\s]+@`)
 
 var (
 	initOnce sync.Once
@@ -28,7 +33,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		h, initErr = serverless.NewHTTPHandler()
 	})
 	if initErr != nil {
-		http.Error(w, "memos backend unavailable", http.StatusServiceUnavailable)
+		safe := dsnRedactor.ReplaceAllString(initErr.Error(), "://***:***@")
+		http.Error(w, "memos backend init failed: "+safe, http.StatusServiceUnavailable)
 		return
 	}
 	h.ServeHTTP(w, r)
