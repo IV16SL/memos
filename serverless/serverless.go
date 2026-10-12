@@ -37,6 +37,13 @@ func envOr(key, fallback string) string {
 // concurrent use.
 func NewHTTPHandler() (http.Handler, error) {
 	dataDir := envOr("MEMOS_DATA", "/tmp/memos-data")
+	// Vercel's synthetic Go build has no VCS metadata, so GetCurrentVersion()
+	// returns "". The web-clipper (and other clients) reject an empty version,
+	// so fall back to the calendar version of this fork.
+	ver := version.GetCurrentVersion()
+	if ver == "" {
+		ver = "26.10"
+	}
 	p := &profile.Profile{
 		Driver:         envOr("MEMOS_DRIVER", "postgres"),
 		DSN:            os.Getenv("MEMOS_DSN"),
@@ -44,7 +51,7 @@ func NewHTTPHandler() (http.Handler, error) {
 		InstanceURL:    os.Getenv("MEMOS_INSTANCE_URL"),
 		RateLimit:      true,
 		TrustedProxies: []string{"private"},
-		Version:        version.GetCurrentVersion(),
+		Version:        ver,
 		Commit:         version.Commit,
 	}
 	if err := p.Validate(); err != nil {
