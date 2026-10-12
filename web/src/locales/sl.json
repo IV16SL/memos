@@ -314,7 +314,8 @@
     "layout-list-description": "En sam stolpec za branje",
     "on-this-memo": "V tem zapisku",
     "parent-memo": "Nadrejeni zapisek",
-    "view-options": "Možnosti pogleda"
+    "view-options": "Možnosti pogleda",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Uspešno arhivirano",

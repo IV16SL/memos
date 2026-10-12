@@ -314,7 +314,8 @@
     "layout-list-description": "Unha única columna de ancho de lectura",
     "on-this-memo": "Nesta nota",
     "parent-memo": "Nota principal",
-    "view-options": "Ver opcións"
+    "view-options": "Ver opcións",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Arquivada correctamente",

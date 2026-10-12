@@ -352,7 +352,8 @@
     "layout-list-description": "O singură coloană cu lățime de citire",
     "on-this-memo": "Pe această notă",
     "parent-memo": "Notă părinte",
-    "view-options": "Opțiuni de vizualizare"
+    "view-options": "Opțiuni de vizualizare",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Arhivat cu succes",

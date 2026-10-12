@@ -314,7 +314,8 @@
     "layout-list-description": "Jedan stupac širine za čitanje",
     "on-this-memo": "Na ovom podsjetniku",
     "parent-memo": "Nadređeni podsjetnik",
-    "view-options": "Opcije prikaza"
+    "view-options": "Opcije prikaza",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Uspješno arhivirano",

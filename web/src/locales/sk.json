@@ -352,7 +352,8 @@
     "layout-list-description": "Jeden stĺpec na šírku čítania",
     "on-this-memo": "V tejto poznámke",
     "parent-memo": "Nadradená poznámka",
-    "view-options": "Možnosti zobrazenia"
+    "view-options": "Možnosti zobrazenia",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Úspešne archivované",

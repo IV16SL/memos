@@ -352,7 +352,8 @@
     "layout-list-description": "Üks lugemislaiusega veerg",
     "on-this-memo": "Sellel memo peal",
     "parent-memo": "Ülemmemo",
-    "view-options": "Vaate valikud"
+    "view-options": "Vaate valikud",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Arhiveerimine õnnestus",

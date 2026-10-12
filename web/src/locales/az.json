@@ -415,7 +415,8 @@
       "public-description": "Hamıya görünür",
       "space": "Üzvlər",
       "space-description": "{{space}} daxilində hamı"
-    }
+    },
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Uğurla arxivləndi",

@@ -309,7 +309,8 @@
       "uncheck-all": "Hapus centang semua tugas",
       "updated": "Tugas diperbarui"
     },
-    "view-options": "Opsi tampilan"
+    "view-options": "Opsi tampilan",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Berhasil diarsipkan",

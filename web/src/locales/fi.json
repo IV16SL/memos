@@ -352,7 +352,8 @@
     "layout-list-description": "Yksi lukuleveyden sarake",
     "on-this-memo": "Tässä muistiossa",
     "parent-memo": "Ylämuistio",
-    "view-options": "Näytä asetukset"
+    "view-options": "Näytä asetukset",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Arkistointi onnistui",

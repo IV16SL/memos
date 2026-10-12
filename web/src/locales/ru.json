@@ -314,7 +314,8 @@
     "back-to": "Назад к {{source}}",
     "connections": "Подключения",
     "on-this-memo": "К этой заметке",
-    "parent-memo": "Родительская заметка"
+    "parent-memo": "Родительская заметка",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Перемещено в архив",

@@ -344,7 +344,8 @@
       "check-all": "Tüm görevleri kontrol et",
       "uncheck-all": "Tüm görevlerin işaretini kaldırın",
       "updated": "Görevler güncellendi"
-    }
+    },
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Başarıyla arşivlendi",

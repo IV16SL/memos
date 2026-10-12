@@ -415,7 +415,8 @@
       "public-description": "Anyone, even signed out",
       "space": "Members",
       "space-description": "Everyone in {{space}}"
-    }
+    },
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Archived successfully",

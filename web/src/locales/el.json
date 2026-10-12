@@ -352,7 +352,8 @@
     "layout-list-description": "Μία στήλη πλάτους ανάγνωσης",
     "on-this-memo": "Σε αυτό το σημείωμα",
     "parent-memo": "Γονικό σημείωμα",
-    "view-options": "Επιλογές προβολής"
+    "view-options": "Επιλογές προβολής",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Αρχειοθετήθηκε με επιτυχία",

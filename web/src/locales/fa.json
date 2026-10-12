@@ -309,7 +309,8 @@
       "uncheck-all": "انتخاب همه وظایف را بردارید",
       "updated": "وظایف به‌روزرسانی شدند"
     },
-    "view-options": "گزینه‌های مشاهده"
+    "view-options": "گزینه‌های مشاهده",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "با موفقیت آرشیو شد",

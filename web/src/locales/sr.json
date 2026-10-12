@@ -352,7 +352,8 @@
     "layout-list-description": "Једна колона ширине читања",
     "on-this-memo": "На овој поруци",
     "parent-memo": "Надређена порука",
-    "view-options": "Опције приказа"
+    "view-options": "Опције приказа",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Архивирано је успешно",

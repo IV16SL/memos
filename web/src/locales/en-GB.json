@@ -314,7 +314,8 @@
     "new-badge": "New",
     "on-this-memo": "On this memo",
     "parent-memo": "Parent memo",
-    "view-options": "View options"
+    "view-options": "View options",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Archived successfully",

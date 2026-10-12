@@ -314,7 +314,8 @@
     "layout-list-description": "En enda kolumn med läsbredd",
     "on-this-memo": "På detta PM",
     "parent-memo": "Överordnat PM",
-    "view-options": "Visningsalternativ"
+    "view-options": "Visningsalternativ",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Arkiverad framgångsrikt",

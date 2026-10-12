@@ -314,7 +314,8 @@
     "layout-list-description": "Una sola columna de ancho de lectura",
     "on-this-memo": "En este memo",
     "parent-memo": "Memo principal",
-    "view-options": "Opciones de vista"
+    "view-options": "Opciones de vista",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Archivado correctamente",

@@ -314,7 +314,8 @@
     "layout-list-description": "Один стовпець ширини для читання",
     "on-this-memo": "У цій нотатці",
     "parent-memo": "Батьківська нотатка",
-    "view-options": "Параметри перегляду"
+    "view-options": "Параметри перегляду",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Архівовано успішно",

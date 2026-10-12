@@ -314,7 +314,8 @@
     "layout-list-description": "Pojedyncza kolumna o szerokości odczytu",
     "on-this-memo": "W tej notatce",
     "parent-memo": "Notatka nadrzędna",
-    "view-options": "Opcje widoku"
+    "view-options": "Opcje widoku",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Zarchiwizowano pomyślnie",

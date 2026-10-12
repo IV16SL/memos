@@ -314,7 +314,8 @@
     "layout-list-description": "Uma única coluna com uma largura de leitura",
     "on-this-memo": "Neste memorando",
     "parent-memo": "Memorando pai",
-    "view-options": "Opções de visualização"
+    "view-options": "Opções de visualização",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Arquivado com sucesso",

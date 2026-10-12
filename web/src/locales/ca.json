@@ -314,7 +314,8 @@
     "layout-list-description": "Una sola columna d'amplada de lectura",
     "on-this-memo": "En aquesta nota",
     "parent-memo": "Nota principal",
-    "view-options": "Opcions de visualització"
+    "view-options": "Opcions de visualització",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Arxivat correctament",

@@ -352,7 +352,8 @@
     "layout-list-description": "Vienas skaitymo pločio stulpelis",
     "on-this-memo": "Šiame priminime",
     "parent-memo": "Pagrindinis priminimas",
-    "view-options": "Peržiūros parinktys"
+    "view-options": "Peržiūros parinktys",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Sėkmingai suarchyvuota",

@@ -309,7 +309,8 @@
       "uncheck-all": "إلغاء تحديد جميع المهام",
       "updated": "تم تحديث المهام"
     },
-    "view-options": "خيارات العرض"
+    "view-options": "خيارات العرض",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "تمت الأرشفة بنجاح",

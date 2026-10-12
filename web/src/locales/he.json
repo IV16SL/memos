@@ -385,7 +385,8 @@
     "back-to": "חזרה אל {{source}}",
     "connections": "חיבורים",
     "on-this-memo": "על תזכיר זה",
-    "parent-memo": "תזכיר אב"
+    "parent-memo": "תזכיר אב",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "הועבר לארכיון בהצלחה",

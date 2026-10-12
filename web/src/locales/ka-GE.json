@@ -314,7 +314,8 @@
     "layout-list-description": "ერთი წაკითხვის სიგანის სვეტი",
     "on-this-memo": "ამ მემოზე",
     "parent-memo": "მშობელი მემო",
-    "view-options": "ნახვის პარამეტრები"
+    "view-options": "ნახვის პარამეტრები",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "წარმატებით დაარქივდა",

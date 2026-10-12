@@ -393,7 +393,8 @@
     "back-to": "返回 {{source}}",
     "connections": "關聯",
     "on-this-memo": "在此備忘錄中",
-    "parent-memo": "原始備忘錄"
+    "parent-memo": "原始備忘錄",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "封存成功",

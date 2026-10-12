@@ -314,7 +314,8 @@
     "layout-list-description": "Jeden sloupec na šířku pro čtení",
     "on-this-memo": "V této poznámkě",
     "parent-memo": "Nadřazená poznámka",
-    "view-options": "Možnosti zobrazení"
+    "view-options": "Možnosti zobrazení",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Úspěšně archivováno",

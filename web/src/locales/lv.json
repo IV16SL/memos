@@ -352,7 +352,8 @@
     "layout-list-description": "Viena lasīšanas platuma kolonna",
     "on-this-memo": "Šajā piezīmē",
     "parent-memo": "Galvenā piezīme",
-    "view-options": "Skata opcijas"
+    "view-options": "Skata opcijas",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Veiksmīgi arhivēts",

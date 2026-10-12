@@ -309,7 +309,8 @@
       "uncheck-all": "Bỏ chọn tất cả nhiệm vụ",
       "updated": "Nhiệm vụ đã được cập nhật"
     },
-    "view-options": "Tùy chọn xem"
+    "view-options": "Tùy chọn xem",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Lưu trữ thành công",

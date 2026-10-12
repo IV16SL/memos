@@ -309,7 +309,8 @@
       "uncheck-all": "ยกเลิกการเลือกงานทั้งหมด",
       "updated": "อัปเดตงานแล้ว"
     },
-    "view-options": "ตัวเลือกการดู"
+    "view-options": "ตัวเลือกการดู",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "เก็บถาวรเรียบร้อยแล้ว",

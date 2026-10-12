@@ -314,7 +314,8 @@
     "back-to": "{{source}}に戻る",
     "connections": "接続",
     "on-this-memo": "このメモについて",
-    "parent-memo": "親メモ"
+    "parent-memo": "親メモ",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "アーカイブが完了しました",

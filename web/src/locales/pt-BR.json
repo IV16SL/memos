@@ -309,7 +309,8 @@
       "uncheck-all": "Desmarcar todas as tarefas",
       "updated": "Tarefas atualizadas"
     },
-    "view-options": "Opções de visualização"
+    "view-options": "Opções de visualização",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Arquivado com êxito",

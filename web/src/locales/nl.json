@@ -314,7 +314,8 @@
     "layout-list-description": "Een enkele kolom met leesbreedte",
     "on-this-memo": "In deze memo",
     "parent-memo": "Hoofdmemo",
-    "view-options": "Weergaveopties"
+    "view-options": "Weergaveopties",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Succesvol gearchiveerd",

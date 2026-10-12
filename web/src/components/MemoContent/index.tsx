@@ -1,6 +1,7 @@
-import { memo, useRef } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { useContentSearchTerms } from "@/contexts/MemoFilterContext";
 import { cn } from "@/lib/utils";
+import { useTranslate } from "@/utils/i18n";
 import { MemoMarkdownRenderer } from "./MemoMarkdownRenderer";
 import { useResolvedMentionUsernames } from "./MentionResolutionContext";
 import type { MemoContentProps } from "./types";
@@ -13,9 +14,20 @@ import { useSearchMatchHighlight } from "./useSearchMatchHighlight";
 const MemoContent = (props: MemoContentProps) => {
   const { className, contentClassName, content, attachments, onClick, onDoubleClick } = props;
   const resolvedMentionUsernames = useResolvedMentionUsernames(content);
+  const t = useTranslate();
   // Whatever the page's search matched is painted here, without altering the rendered tree.
   const contentRef = useRef<HTMLDivElement>(null);
   useSearchMatchHighlight(contentRef, useContentSearchTerms());
+
+  // `<!--more-->` support: the rehype plugin wraps post-marker content in [data-more-content].
+  // Detail pages (/memos/:id) always show full content; list views collapse with an expand button.
+  const [hasMore, setHasMore] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  useEffect(() => {
+    const isDetail = /^\/memos\/[^/]+/.test(window.location.pathname);
+    setHasMore(!isDetail && !!contentRef.current?.querySelector("[data-more-marker]"));
+    setExpanded(false);
+  }, [content]);
 
   return (
     <div className={`w-full flex flex-col justify-start items-start text-foreground ${className || ""}`}>
@@ -35,6 +47,8 @@ const MemoContent = (props: MemoContentProps) => {
           // GitHub renders footnote ref/backref links without an underline (underline on hover only).
           "[&_[data-footnote-ref]]:no-underline [&_[data-footnote-ref]:hover]:underline",
           "[&_.data-footnote-backref]:no-underline [&_.data-footnote-backref:hover]:underline",
+          // `<!--more-->`: collapse post-marker content until expanded.
+          hasMore && !expanded && "[&_[data-more-content]]:hidden",
           contentClassName,
         )}
         onMouseUp={onClick}
@@ -49,6 +63,15 @@ const MemoContent = (props: MemoContentProps) => {
           compact={Boolean(props.compact)}
         />
       </div>
+      {hasMore && !expanded && (
+        <button
+          type="button"
+          onClick={() => setExpanded(true)}
+          className="mt-2 rounded-lg border border-border bg-muted px-3 py-1 text-[13px] text-muted-foreground hover:bg-accent"
+        >
+          {t("memo.expand")}
+        </button>
+      )}
     </div>
   );
 };

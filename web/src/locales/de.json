@@ -314,7 +314,8 @@
     "layout-list-description": "Eine einzelne Spalte in Lesebreite",
     "on-this-memo": "Zu diesem Memo",
     "parent-memo": "Übergeordnetes Memo",
-    "view-options": "Ansichtsoptionen"
+    "view-options": "Ansichtsoptionen",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Erfolgreich archiviert",

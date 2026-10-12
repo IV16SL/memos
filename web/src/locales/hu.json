@@ -314,7 +314,8 @@
     "layout-list-description": "Egyetlen olvasási szélességű oszlop",
     "on-this-memo": "Ezen a feljegyzésen",
     "parent-memo": "Szülő feljegyzés",
-    "view-options": "Megtekintési beállítások"
+    "view-options": "Megtekintési beállítások",
+    "expand": "Show more"
   },
   "message": {
     "archived-successfully": "Sikeres archiválás",
