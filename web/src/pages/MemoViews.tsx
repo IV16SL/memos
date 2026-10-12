@@ -21,7 +21,7 @@ import {
   Trash2Icon,
   XIcon,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import ConfirmDialog from "@/components/ConfirmDialog";
@@ -42,133 +42,154 @@ import { handleError } from "@/lib/error";
 import { getMemoViewId } from "@/lib/memo-views";
 import { cn } from "@/lib/utils";
 import { MemoView, MemoView_IconSchema, MemoViewSchema } from "@/types/proto/api/user_service_pb";
-import { useTranslate } from "@/utils/i18n";
+import { useTranslate, type Translations } from "@/utils/i18n";
 
-const memoViewExamples = [
+const getMemoViewExamples = (t: (key: Translations) => string) => [
   {
-    title: "Pinned",
+    id: "pinned",
+    title: t("setting.memo-view.example-pinned-title"),
     filter: "pinned",
-    description: "Only pinned memos.",
+    description: t("setting.memo-view.example-pinned-description"),
     icon: PinIcon,
   },
   {
-    title: "Recent notes",
+    id: "recent",
+    title: t("setting.memo-view.example-recent-title"),
     filter: 'created_ts >= now - duration("1h")',
-    description: "Memos created in the last hour.",
+    description: t("setting.memo-view.example-recent-description"),
     icon: Clock3Icon,
   },
   {
-    title: "Public memos",
+    id: "public",
+    title: t("setting.memo-view.example-public-title"),
     filter: 'visibility == "PUBLIC"',
-    description: "Only public memos.",
+    description: t("setting.memo-view.example-public-description"),
     icon: ShieldIcon,
   },
   {
-    title: "Project tags",
+    id: "project-tags",
+    title: t("setting.memo-view.example-project-tags-title"),
     filter: 'tag in ["work", "personal"]',
-    description: "Match one or more exact tags.",
+    description: t("setting.memo-view.example-project-tags-description"),
     icon: TagsIcon,
   },
   {
-    title: "Untagged",
+    id: "untagged",
+    title: t("setting.memo-view.example-untagged-title"),
     filter: "size(tags) == 0",
-    description: "Memos without any tags.",
+    description: t("setting.memo-view.example-untagged-description"),
     icon: TagsIcon,
   },
   {
-    title: "Archive tree",
+    id: "archive-tree",
+    title: t("setting.memo-view.example-archive-tree-title"),
     filter: 'tags.exists(t, t.startsWith("archive"))',
-    description: "Match hierarchical tags by prefix.",
+    description: t("setting.memo-view.example-archive-tree-description"),
     icon: TagsIcon,
   },
   {
-    title: "Unassigned",
+    id: "unassigned",
+    title: t("setting.memo-view.example-unassigned-title"),
     filter: "space == null",
-    description: "Memos that are not placed in any space.",
+    description: t("setting.memo-view.example-unassigned-description"),
     icon: AstroidIcon,
   },
   {
-    title: "In one space",
+    id: "one-space",
+    title: t("setting.memo-view.example-one-space-title"),
     filter: 'space == "spaces/your-space-id"',
-    description: "Memos placed in a space. Use the space ID from its URL or settings.",
+    description: t("setting.memo-view.example-one-space-description"),
     icon: AstroidIcon,
   },
   {
-    title: "Open tasks",
+    id: "open-tasks",
+    title: t("setting.memo-view.example-open-tasks-title"),
     filter: "has_task_list && has_incomplete_tasks",
-    description: "Memos with unfinished tasks.",
+    description: t("setting.memo-view.example-open-tasks-description"),
     icon: ClipboardCheckIcon,
   },
   {
-    title: "Links or code",
+    id: "links-code",
+    title: t("setting.memo-view.example-links-code-title"),
     filter: "has_link || has_code",
-    description: "Memos containing links or code blocks.",
+    description: t("setting.memo-view.example-links-code-description"),
     icon: FilterIcon,
   },
   {
-    title: "No location",
+    id: "no-location",
+    title: t("setting.memo-view.example-no-location-title"),
     filter: "!has_location",
-    description: "Memos without an attached location.",
+    description: t("setting.memo-view.example-no-location-description"),
     icon: MapPinIcon,
   },
   {
-    title: "Content search",
+    id: "content-search",
+    title: t("setting.memo-view.example-content-search-title"),
     filter: 'content.contains("TODO")',
-    description: "Search text inside memo content.",
+    description: t("setting.memo-view.example-content-search-description"),
     icon: SearchIcon,
   },
   {
-    title: "Starts with",
+    id: "starts-with",
+    title: t("setting.memo-view.example-starts-with-title"),
     filter: 'content.startsWith("TODO")',
-    description: "Memos whose content begins with text (also endsWith).",
+    description: t("setting.memo-view.example-starts-with-description"),
     icon: SearchIcon,
   },
   {
-    title: "Regex match",
+    id: "regex",
+    title: t("setting.memo-view.example-regex-title"),
     filter: 'content.matches("v[0-9]+")',
-    description: "Match content with a regular expression.",
+    description: t("setting.memo-view.example-regex-description"),
     icon: FilterIcon,
   },
   {
-    title: "All tags complete",
+    id: "all-tags-complete",
+    title: t("setting.memo-view.example-all-tags-complete-title"),
     filter: 'tags.all(t, t.endsWith("-done"))',
-    description: "Every tag ends in -done (tagged memos only).",
+    description: t("setting.memo-view.example-all-tags-complete-description"),
     icon: TagsIcon,
   },
   {
-    title: "One project tag",
+    id: "one-project-tag",
+    title: t("setting.memo-view.example-one-project-tag-title"),
     filter: 'tags.exists_one(t, t.startsWith("project/"))',
-    description: "Exactly one tag matches the predicate.",
+    description: t("setting.memo-view.example-one-project-tag-description"),
     icon: TagsIcon,
   },
   {
-    title: "Any of these tags",
+    id: "any-tags",
+    title: t("setting.memo-view.example-any-tags-title"),
     filter: 'sets.intersects(tags, ["work", "urgent"])',
-    description: "Tags intersect the given set.",
+    description: t("setting.memo-view.example-any-tags-description"),
     icon: TagsIcon,
   },
   {
-    title: "Exactly these tags",
+    id: "exact-tags",
+    title: t("setting.memo-view.example-exact-tags-title"),
     filter: 'sets.equivalent(tags, ["inbox"])',
-    description: "Tagged with exactly this set, nothing more.",
+    description: t("setting.memo-view.example-exact-tags-description"),
     icon: TagsIcon,
   },
   {
-    title: "Memos from 2024",
+    id: "from-2024",
+    title: t("setting.memo-view.example-from-2024-title"),
     filter: "created_ts.getFullYear() == 2024",
-    description: "Filter by calendar year.",
+    description: t("setting.memo-view.example-from-2024-description"),
     icon: Clock3Icon,
   },
   {
-    title: "Weekend notes",
+    id: "weekend",
+    title: t("setting.memo-view.example-weekend-title"),
     filter: "created_ts.getDayOfWeek() == 0 || created_ts.getDayOfWeek() == 6",
-    description: "Created on a Sunday or Saturday (0 = Sunday).",
+    description: t("setting.memo-view.example-weekend-description"),
     icon: Clock3Icon,
   },
   {
-    title: "Long notes",
+    id: "long-notes",
+    title: t("setting.memo-view.example-long-notes-title"),
     filter: "size(content) > 280",
-    description: "Memos longer than 280 characters.",
+    description: t("setting.memo-view.example-long-notes-description"),
     icon: FilterIcon,
   },
 ];
@@ -213,8 +234,11 @@ const createEmptyMemoView = () =>
     filter: "",
   });
 
+type MemoViewExample = ReturnType<typeof getMemoViewExamples>[number];
+
 interface MemoViewGuideProps {
-  onUseExample: (example: (typeof memoViewExamples)[number]) => void;
+  examples: MemoViewExample[];
+  onUseExample: (example: MemoViewExample) => void;
 }
 
 interface MemoViewsRouteState {
@@ -222,13 +246,14 @@ interface MemoViewsRouteState {
   memoView?: MemoView;
 }
 
-const MemoViewGuide = ({ onUseExample }: MemoViewGuideProps) => {
+const MemoViewGuide = ({ examples, onUseExample }: MemoViewGuideProps) => {
+  const t = useTranslate();
   return (
     <aside className="flex flex-col gap-5">
       <div className="rounded-lg border border-border p-4">
-        <h2 className="text-sm font-semibold text-foreground">Expression examples</h2>
+        <h2 className="text-sm font-semibold text-foreground">{t("setting.memo-view.examples-title")}</h2>
         <div className="mt-3 flex flex-col gap-2">
-          {memoViewExamples.map((example) => {
+          {examples.map((example) => {
             const Icon = example.icon;
             return (
               <button
@@ -250,7 +275,7 @@ const MemoViewGuide = ({ onUseExample }: MemoViewGuideProps) => {
       </div>
 
       <div className="rounded-lg border border-border p-4">
-        <h2 className="text-sm font-semibold text-foreground">Supported fields</h2>
+        <h2 className="text-sm font-semibold text-foreground">{t("setting.memo-view.fields-title")}</h2>
         <div className="mt-3 flex flex-wrap gap-2">
           {filterFields.map((field) => (
             <Badge key={field} variant="secondary" className="font-mono">
@@ -265,6 +290,7 @@ const MemoViewGuide = ({ onUseExample }: MemoViewGuideProps) => {
 
 const MemoViews = () => {
   const t = useTranslate();
+  const examples = useMemo(() => getMemoViewExamples(t), [t]);
   const location = useLocation();
   const navigate = useNavigate();
   const user = useCurrentUser();
@@ -306,7 +332,7 @@ const MemoViews = () => {
     setDraft((current) => ({ ...current, ...state }));
   };
 
-  const handleUseExample = (example: (typeof memoViewExamples)[number]) => {
+  const handleUseExample = (example: MemoViewExample) => {
     setDraft(
       create(MemoViewSchema, {
         name: draft.name,
@@ -342,11 +368,11 @@ const MemoViews = () => {
 
   const validateDraft = async () => {
     if (!draft.title || !draft.filter) {
-      toast.error("Title and filter cannot be empty");
+      toast.error(t("setting.memo-view.toast-empty"));
       return false;
     }
     if (!user?.name) {
-      toast.error("No current user");
+      toast.error(t("setting.memo-view.toast-no-user"));
       return false;
     }
 
@@ -358,7 +384,7 @@ const MemoViews = () => {
         validateOnly: true,
       });
       validateState.setFinish();
-      toast.success("Filter expression looks valid");
+      toast.success(t("setting.memo-view.toast-valid"));
       return true;
     } catch (error: unknown) {
       await handleError(error, toast.error, {
@@ -371,11 +397,11 @@ const MemoViews = () => {
 
   const handleCreateMemoView = async () => {
     if (!draft.title || !draft.filter) {
-      toast.error("Title and filter cannot be empty");
+      toast.error(t("setting.memo-view.toast-empty"));
       return;
     }
     if (!user?.name) {
-      toast.error("No current user");
+      toast.error(t("setting.memo-view.toast-no-user"));
       return;
     }
 
@@ -389,7 +415,7 @@ const MemoViews = () => {
       createState.setFinish();
       setDraft(createEmptyMemoView());
       setIsCreateFormOpen(false);
-      toast.success("View created successfully");
+      toast.success(t("setting.memo-view.toast-created"));
     } catch (error: unknown) {
       await handleError(error, toast.error, {
         context: "Create memo view",
@@ -400,7 +426,7 @@ const MemoViews = () => {
 
   const handleUpdateMemoView = async () => {
     if (!draft.title || !draft.filter) {
-      toast.error("Title and filter cannot be empty");
+      toast.error(t("setting.memo-view.toast-empty"));
       return;
     }
 
@@ -414,7 +440,7 @@ const MemoViews = () => {
       updateState.setFinish();
       setDraft(createEmptyMemoView());
       setIsCreateFormOpen(false);
-      toast.success("View updated successfully");
+      toast.success(t("setting.memo-view.toast-updated"));
     } catch (error: unknown) {
       await handleError(error, toast.error, {
         context: "Update memo view",
@@ -457,11 +483,8 @@ const MemoViews = () => {
             <FilterIcon className="h-4 w-4" />
             <span className="text-sm font-medium">{t("common.views")}</span>
           </div>
-          <h1 className="text-2xl font-semibold tracking-normal text-foreground">Views</h1>
-          <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
-            Create reusable views with fields, operators, time helpers, and tag matching. Use examples as starting points, then validate
-            before saving.
-          </p>
+          <h1 className="text-2xl font-semibold tracking-normal text-foreground">{t("common.views")}</h1>
+          <p className="max-w-2xl text-sm leading-6 text-muted-foreground">{t("setting.memo-view.description")}</p>
         </div>
         <Button onClick={isCreateFormOpen ? handleCloseForm : handleOpenCreateForm}>
           {isCreateFormOpen ? <XIcon className="h-4 w-4" /> : <PlusIcon className="h-4 w-4" />}
@@ -481,8 +504,8 @@ const MemoViews = () => {
             <div className="grid gap-5 p-4 sm:p-5">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h2 className="text-base font-semibold text-foreground">{isEditing ? "Edit view" : "Create view"}</h2>
-                  <p className="mt-1 text-sm text-muted-foreground">Name the view and define the memo filter expression it should apply.</p>
+                  <h2 className="text-base font-semibold text-foreground">{isEditing ? t("setting.memo-view.edit-view") : t("setting.memo-view.create")}</h2>
+                  <p className="mt-1 text-sm text-muted-foreground">{t("setting.memo-view.form-description")}</p>
                 </div>
                 <a
                   className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
@@ -490,7 +513,7 @@ const MemoViews = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Docs
+                  {t("setting.memo-view.docs")}
                   <ExternalLinkIcon className="h-3.5 w-3.5" />
                 </a>
               </div>
@@ -509,7 +532,7 @@ const MemoViews = () => {
                     <Input
                       id="view-title"
                       value={draft.title}
-                      placeholder="Pinned, Recent notes, Work"
+                      placeholder={t("setting.memo-view.title-placeholder")}
                       onChange={(event) => setDraftState({ title: event.target.value })}
                     />
                   </div>
@@ -524,21 +547,14 @@ const MemoViews = () => {
                     placeholder='pinned && tag in ["work"]'
                     onChange={(event) => setDraftState({ filter: event.target.value })}
                   />
-                  <p className="text-xs leading-5 text-muted-foreground">
-                    Combine expressions with <span className="font-mono">&&</span>, <span className="font-mono">||</span>, and{" "}
-                    <span className="font-mono">!</span>. Time fields are timestamps — use <span className="font-mono">now</span>,{" "}
-                    <span className="font-mono">duration("24h")</span>, <span className="font-mono">timestamp(...)</span>, and accessors
-                    like <span className="font-mono">created_ts.getFullYear()</span>. Tags support{" "}
-                    <span className="font-mono">sets.contains/intersects/equivalent</span> and{" "}
-                    <span className="font-mono">size(content)</span> measures length.
-                  </p>
+                  <p className="text-xs leading-5 text-muted-foreground">{t("setting.memo-view.filter-help")}</p>
                 </div>
               </div>
 
               <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
                 <Button variant="outline" disabled={validateState.isLoading || isSaving} onClick={validateDraft}>
                   <CheckCircle2Icon className="h-4 w-4" />
-                  Validate
+                  {t("setting.memo-view.validate")}
                 </Button>
                 <Button disabled={isSaving || validateState.isLoading} onClick={handleSaveMemoView}>
                   <SaveIcon className="h-4 w-4" />
@@ -551,23 +567,23 @@ const MemoViews = () => {
           {!(memoViews.length === 0 && isCreateFormOpen) && (
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-base font-semibold text-foreground">All views</h2>
+                <h2 className="text-base font-semibold text-foreground">{t("setting.memo-view.all-views")}</h2>
                 {!isPending && !isError && <Badge variant="outline">{memoViews.length}</Badge>}
               </div>
 
               {isPending ? (
-                <p className="py-10 text-center text-sm text-muted-foreground">Loading views…</p>
+                <p className="py-10 text-center text-sm text-muted-foreground">{t("setting.memo-view.loading")}</p>
               ) : isError ? (
                 <div className="py-10 text-center">
-                  <p className="text-sm text-muted-foreground">Couldn’t load views.</p>
+                  <p className="text-sm text-muted-foreground">{t("setting.memo-view.load-error")}</p>
                   <Button variant="outline" className="mt-4" onClick={() => void refetch()}>
-                    Retry
+                    {t("setting.memo-view.retry")}
                   </Button>
                 </div>
               ) : memoViews.length === 0 ? (
                 <div className="rounded-lg border border-dashed border-border px-4 py-10 text-center">
-                  <p className="text-sm font-medium text-foreground">No views yet</p>
-                  <p className="mt-1 text-sm text-muted-foreground">Save a filter to quickly return to the memos you need.</p>
+                  <p className="text-sm font-medium text-foreground">{t("setting.memo-view.empty-title")}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{t("setting.memo-view.empty-description")}</p>
                   <Button variant="outline" className="mt-4" onClick={handleOpenCreateForm}>
                     <PlusIcon className="size-4" />
                     {t("setting.memo-view.create")}
@@ -613,7 +629,7 @@ const MemoViews = () => {
           )}
         </div>
 
-        {isCreateFormOpen ? <MemoViewGuide onUseExample={handleUseExample} /> : null}
+        {isCreateFormOpen ? <MemoViewGuide examples={examples} onUseExample={handleUseExample} /> : null}
       </div>
 
       <ConfirmDialog
