@@ -13,6 +13,7 @@ import { remarkPreserveType } from "@/utils/remark-plugins/remark-preserve-type"
 import { remarkSplitMixedTaskLists } from "@/utils/remark-plugins/remark-split-mixed-task-lists";
 import { remarkMemoSyntax } from "@/utils/remark-plugins/remark-tag";
 import { SANITIZE_SCHEMA } from "./constants";
+import { rehypeMoreMarker } from "./rehypeMoreMarker";
 
 /**
  * The memo markdown pipeline, in one place. The renderer and the outline both build from these,
@@ -31,6 +32,8 @@ export const buildRemarkPlugins = (mathRemarkPlugins: PluggableList = []): Plugg
 
 export const buildRehypePlugins = (mathRehypePlugins: PluggableList = []): PluggableList => [
   rehypeRaw,
+  // Convert <!--more--> to a marker element before sanitize strips comments.
+  rehypeMoreMarker,
   [rehypeSanitize, SANITIZE_SCHEMA],
   rehypeHeadingId,
   ...mathRehypePlugins,
