@@ -59,9 +59,10 @@ export function pinFace(photo: string | undefined, author: { avatarUrl?: string;
  * all used it; otherwise there is none and the coordinates stand in. `memos` is newest first.
  */
 export function pointLabel(memos: Memo[]): string {
-  const labels = new Set(memos.map((memo) => memo.location?.placeholder.trim() ?? ""));
+  const str = (v: unknown): string => (typeof v === "string" ? v : "");
+  const labels = new Set(memos.map((memo) => str(memo.location?.placeholder).trim() || ""));
   const creators = new Set(memos.map((memo) => memo.creator));
-  if (creators.size === 1) return memos[0]?.location?.placeholder.trim() ?? "";
+  if (creators.size === 1) return str(memos[0]?.location?.placeholder).trim();
   return labels.size === 1 ? [...labels][0] : "";
 }
 

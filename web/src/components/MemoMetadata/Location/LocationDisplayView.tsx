@@ -35,7 +35,9 @@ const LocationDisplayView = ({ location }: LocationDisplayViewProps) => {
           />
         )}
         <div className="space-y-1 px-3 py-2.5">
-          {location.placeholder.trim() && <p className="wrap-anywhere text-sm font-medium">{displayText}</p>}
+          {typeof location.placeholder === "string" && location.placeholder.trim() && (
+            <p className="wrap-anywhere text-sm font-medium">{displayText}</p>
+          )}
           <p className="text-2xs tabular-nums text-muted-foreground">{getLocationCoordinatesText(location, 6)}</p>
         </div>
       </PopoverContent>

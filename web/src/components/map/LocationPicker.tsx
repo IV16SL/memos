@@ -207,7 +207,7 @@ interface LocationPickerProps {
   className?: string;
 }
 
-const DEFAULT_CENTER: MapPoint = { lat: 48.8584, lng: 2.2945 };
+const DEFAULT_CENTER: MapPoint = { lat: 39.9042, lng: 116.4074 }; // Beijing
 const noopOnLocationChange = () => {};
 
 const LocationPicker = ({ readonly: readOnly = false, latlng, onChange = noopOnLocationChange, className }: LocationPickerProps) => {
