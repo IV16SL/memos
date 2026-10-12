@@ -231,11 +231,13 @@ function Markers({ memos, pins, selected, onSelect }: Pick<Props, "memos" | "pin
 
 export function MapCanvas(props: Props) {
   const initial = useRef(props.viewport);
-  const [initLat, initLng] = initial.current ? wgs84ToGcj02(initial.current.lat, initial.current.lng) : [20, 0];
+  // Default to a China-centered view (Amap tiles); fitMemos overrides once memos load.
+  const [initLat, initLng] = initial.current ? wgs84ToGcj02(initial.current.lat, initial.current.lng) : wgs84ToGcj02(35, 105);
+  const initZoom = initial.current?.zoom ?? 4;
   return (
     <MapContainer
       center={[initLat, initLng]}
-      zoom={initial.current?.zoom ?? 2}
+      zoom={initZoom}
       maxZoom={19}
       minZoom={0}
       zoomControl={false}
