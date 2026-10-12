@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  
+  <defs>
+    <clipPath id="bgClip">
+      <rect x="0" y="0" width="1024" height="1024" rx="25"/>
+    </clipPath>
+    <g id="huanShape" transform="rotate(45.226077 512 512)">
+      <path d="m 394.05787,306.23048 c 0.44949,56.95671 0.66177,83.85605 1.11297,141.0307 0.42876,54.32966 -5.28897,137.94179 28.09875,139.44137 54.57649,-1.36701 17.44127,-125.13218 39.89003,-187.644 29.88557,-62.80477 106.09554,-71.9338 145.47206,-42.72317 40.76222,32.79686 48.65611,68.7904 48.95129,106.1938 0.18397,76.38349 1.19276,151.14143 1.81172,229.57239 0.62742,79.50256 -8.3129,145.68411 27.66333,146.86627 50.99873,-0.17115 35.85136,-80.02448 35.94869,-123.7421 0.12707,-18.50171 1.5097,-52.76107 4.52198,-66.65221 5.02538,-17.24955 11.02558,-30.44534 20.60383,-40.88661 20.96658,-25.99076 36.88677,-25.4972 55.38849,-27.66841 33.72921,-1.6141 84.15515,27.87017 111.0262,47.64281 39.59567,33.3313 23.82546,60.21144 4.9823,69.82226 -39.38568,20.36957 -86.0894,-56.31014 -110.51019,-33.97214 -24.10411,22.76645 -7.48131,22.68107 -6.88481,140.43939 1.71796,93.77408 -94.91336,134.24628 -140.8942,122.01747 -33.98921,-8.23876 -56.7168,-31.71582 -71.43551,-79.56905 -13.17018,-42.81865 -8.22324,-89.33313 -8.57147,-133.45811 -0.40637,-51.49405 -1.48955,-146.5799 -1.4072,-178.31333 -0.22175,-28.0986 -0.36284,-45.97793 -0.63467,-80.42247 -0.25939,-32.86706 -39.90898,-29.39382 -48.63439,-9.0867 -11.7442,29.68256 -5.52623,82.3999 -7.56415,126.91581 -2.03793,44.5159 -12.95864,86.66758 -72.8188,101.7317 -98.45996,17.56243 -134.50461,-83.72968 -135.41442,-199.01635 -0.51602,-65.38857 -1.22466,-155.18055 -1.68181,-213.10952 -0.25832,-32.73287 -49.54942,-74.24637 -67.20577,35.3159 -5.95389,50.11277 -59.33051,37.67184 -71.72784,10.34963 -10.90173,-21.44628 4.51619,-136.79087 81.21459,-155.21349 98.01715,-23.5433 137.68674,70.34057 138.699,154.13816 z"/>
+    </g>
+  </defs>
+  <rect x="0" y="0" width="1024" height="1024" rx="25" fill="#000000"/>
+  <g clip-path="url(#bgClip)">
+    <g fill="#000000" opacity="0.35">
+    <use href="#huanShape" transform="translate(7.50,7.50)"/>
+    <use href="#huanShape" transform="translate(15.00,15.00)"/>
+    <use href="#huanShape" transform="translate(22.50,22.50)"/>
+    <use href="#huanShape" transform="translate(30.00,30.00)"/>
+    <use href="#huanShape" transform="translate(37.50,37.50)"/>
+    <use href="#huanShape" transform="translate(45.00,45.00)"/>
+    <use href="#huanShape" transform="translate(52.50,52.50)"/>
+    <use href="#huanShape" transform="translate(60.00,60.00)"/>
+    <use href="#huanShape" transform="translate(67.50,67.50)"/>
+    <use href="#huanShape" transform="translate(75.00,75.00)"/>
+    <use href="#huanShape" transform="translate(82.50,82.50)"/>
+    <use href="#huanShape" transform="translate(90.00,90.00)"/>
+    <use href="#huanShape" transform="translate(97.50,97.50)"/>
+    <use href="#huanShape" transform="translate(105.00,105.00)"/>
+    <use href="#huanShape" transform="translate(112.50,112.50)"/>
+    <use href="#huanShape" transform="translate(120.00,120.00)"/>
+    <use href="#huanShape" transform="translate(127.50,127.50)"/>
+    <use href="#huanShape" transform="translate(135.00,135.00)"/>
+    <use href="#huanShape" transform="translate(142.50,142.50)"/>
+    <use href="#huanShape" transform="translate(150.00,150.00)"/>
+    <use href="#huanShape" transform="translate(157.50,157.50)"/>
+    <use href="#huanShape" transform="translate(165.00,165.00)"/>
+    <use href="#huanShape" transform="translate(172.50,172.50)"/>
+    <use href="#huanShape" transform="translate(180.00,180.00)"/>
+    <use href="#huanShape" transform="translate(187.50,187.50)"/>
+    <use href="#huanShape" transform="translate(195.00,195.00)"/>
+    <use href="#huanShape" transform="translate(202.50,202.50)"/>
+    <use href="#huanShape" transform="translate(210.00,210.00)"/>
+    <use href="#huanShape" transform="translate(217.50,217.50)"/>
+    <use href="#huanShape" transform="translate(225.00,225.00)"/>
+    <use href="#huanShape" transform="translate(232.50,232.50)"/>
+    <use href="#huanShape" transform="translate(240.00,240.00)"/>
+    <use href="#huanShape" transform="translate(247.50,247.50)"/>
+    <use href="#huanShape" transform="translate(255.00,255.00)"/>
+    <use href="#huanShape" transform="translate(262.50,262.50)"/>
+    <use href="#huanShape" transform="translate(270.00,270.00)"/>
+    <use href="#huanShape" transform="translate(277.50,277.50)"/>
+    <use href="#huanShape" transform="translate(285.00,285.00)"/>
+    <use href="#huanShape" transform="translate(292.50,292.50)"/>
+    <use href="#huanShape" transform="translate(300.00,300.00)"/>
+    <use href="#huanShape" transform="translate(307.50,307.50)"/>
+    <use href="#huanShape" transform="translate(315.00,315.00)"/>
+    <use href="#huanShape" transform="translate(322.50,322.50)"/>
+    <use href="#huanShape" transform="translate(330.00,330.00)"/>
+    <use href="#huanShape" transform="translate(337.50,337.50)"/>
+    <use href="#huanShape" transform="translate(345.00,345.00)"/>
+    <use href="#huanShape" transform="translate(352.50,352.50)"/>
+    <use href="#huanShape" transform="translate(360.00,360.00)"/>
+    <use href="#huanShape" transform="translate(367.50,367.50)"/>
+    <use href="#huanShape" transform="translate(375.00,375.00)"/>
+    <use href="#huanShape" transform="translate(382.50,382.50)"/>
+    <use href="#huanShape" transform="translate(390.00,390.00)"/>
+    <use href="#huanShape" transform="translate(397.50,397.50)"/>
+    <use href="#huanShape" transform="translate(405.00,405.00)"/>
+    <use href="#huanShape" transform="translate(412.50,412.50)"/>
+    <use href="#huanShape" transform="translate(420.00,420.00)"/>
+    <use href="#huanShape" transform="translate(427.50,427.50)"/>
+    <use href="#huanShape" transform="translate(435.00,435.00)"/>
+    <use href="#huanShape" transform="translate(442.50,442.50)"/>
+    <use href="#huanShape" transform="translate(450.00,450.00)"/>
+    <use href="#huanShape" transform="translate(457.50,457.50)"/>
+    <use href="#huanShape" transform="translate(465.00,465.00)"/>
+    <use href="#huanShape" transform="translate(472.50,472.50)"/>
+    <use href="#huanShape" transform="translate(480.00,480.00)"/>
+    <use href="#huanShape" transform="translate(487.50,487.50)"/>
+    <use href="#huanShape" transform="translate(495.00,495.00)"/>
+    <use href="#huanShape" transform="translate(502.50,502.50)"/>
+    <use href="#huanShape" transform="translate(510.00,510.00)"/>
+    <use href="#huanShape" transform="translate(517.50,517.50)"/>
+    <use href="#huanShape" transform="translate(525.00,525.00)"/>
+    <use href="#huanShape" transform="translate(532.50,532.50)"/>
+    <use href="#huanShape" transform="translate(540.00,540.00)"/>
+    <use href="#huanShape" transform="translate(547.50,547.50)"/>
+    <use href="#huanShape" transform="translate(555.00,555.00)"/>
+    <use href="#huanShape" transform="translate(562.50,562.50)"/>
+    <use href="#huanShape" transform="translate(570.00,570.00)"/>
+    <use href="#huanShape" transform="translate(577.50,577.50)"/>
+    <use href="#huanShape" transform="translate(585.00,585.00)"/>
+    <use href="#huanShape" transform="translate(592.50,592.50)"/>
+    <use href="#huanShape" transform="translate(600.00,600.00)"/>
+    <use href="#huanShape" transform="translate(607.50,607.50)"/>
+    <use href="#huanShape" transform="translate(615.00,615.00)"/>
+    <use href="#huanShape" transform="translate(622.50,622.50)"/>
+    <use href="#huanShape" transform="translate(630.00,630.00)"/>
+    <use href="#huanShape" transform="translate(637.50,637.50)"/>
+    <use href="#huanShape" transform="translate(645.00,645.00)"/>
+    <use href="#huanShape" transform="translate(652.50,652.50)"/>
+    <use href="#huanShape" transform="translate(660.00,660.00)"/>
+    <use href="#huanShape" transform="translate(667.50,667.50)"/>
+    <use href="#huanShape" transform="translate(675.00,675.00)"/>
+    <use href="#huanShape" transform="translate(682.50,682.50)"/>
+    <use href="#huanShape" transform="translate(690.00,690.00)"/>
+    <use href="#huanShape" transform="translate(697.50,697.50)"/>
+    <use href="#huanShape" transform="translate(705.00,705.00)"/>
+    <use href="#huanShape" transform="translate(712.50,712.50)"/>
+    <use href="#huanShape" transform="translate(720.00,720.00)"/>
+    <use href="#huanShape" transform="translate(727.50,727.50)"/>
+    <use href="#huanShape" transform="translate(735.00,735.00)"/>
+    <use href="#huanShape" transform="translate(742.50,742.50)"/>
+    <use href="#huanShape" transform="translate(750.00,750.00)"/>
+    <use href="#huanShape" transform="translate(757.50,757.50)"/>
+    <use href="#huanShape" transform="translate(765.00,765.00)"/>
+    <use href="#huanShape" transform="translate(772.50,772.50)"/>
+    <use href="#huanShape" transform="translate(780.00,780.00)"/>
+    <use href="#huanShape" transform="translate(787.50,787.50)"/>
+    <use href="#huanShape" transform="translate(795.00,795.00)"/>
+    <use href="#huanShape" transform="translate(802.50,802.50)"/>
+    <use href="#huanShape" transform="translate(810.00,810.00)"/>
+    <use href="#huanShape" transform="translate(817.50,817.50)"/>
+    <use href="#huanShape" transform="translate(825.00,825.00)"/>
+    <use href="#huanShape" transform="translate(832.50,832.50)"/>
+    <use href="#huanShape" transform="translate(840.00,840.00)"/>
+    <use href="#huanShape" transform="translate(847.50,847.50)"/>
+    <use href="#huanShape" transform="translate(855.00,855.00)"/>
+    <use href="#huanShape" transform="translate(862.50,862.50)"/>
+    <use href="#huanShape" transform="translate(870.00,870.00)"/>
+    <use href="#huanShape" transform="translate(877.50,877.50)"/>
+    <use href="#huanShape" transform="translate(885.00,885.00)"/>
+    <use href="#huanShape" transform="translate(892.50,892.50)"/>
+    <use href="#huanShape" transform="translate(900.00,900.00)"/>
+    </g>
+    <use href="#huanShape" fill="#ffffff"/>
+  </g>
+</svg>
