@@ -248,7 +248,8 @@
       "save-in-progress": "Αποθήκευση σε εξέλιξη",
       "unsupported-attachment-image-url": "Μη υποστηριζόμενη διεύθυνση URL εικόνας συνημμένου: {{url}}",
       "wait-for-upload": "Περιμένετε να ολοκληρωθεί η μεταφόρτωση"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Η φόρτωση του στοιχείου των εισερχομένων απέτυχε",

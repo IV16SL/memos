@@ -210,7 +210,8 @@
       "save-in-progress": "Shranjevanje v teku",
       "unsupported-attachment-image-url": "URL nepodprte slike priloge: {{url}}",
       "wait-for-upload": "Počakajte, da se nalaganje zaključi"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Ni bilo mogoče naložiti elementa prejetega",

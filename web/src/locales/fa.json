@@ -210,7 +210,8 @@
       "save-in-progress": "در حال ذخیره در حال انجام است",
       "unsupported-attachment-image-url": "آدرس تصویر پیوست پشتیبانی نشده: {{url}}",
       "wait-for-upload": "منتظر بمانید تا آپلود کامل شود"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "بارگذاری آیتم صندوق ورودی ناموفق بود",

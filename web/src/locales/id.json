@@ -210,7 +210,8 @@
       "save-in-progress": "Penyimpanan sedang berlangsung",
       "unsupported-attachment-image-url": "URL gambar lampiran tidak didukung: {{url}}",
       "wait-for-upload": "Tunggu hingga unggahan selesai"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Gagal memuat item kotak masuk",

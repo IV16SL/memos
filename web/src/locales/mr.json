@@ -210,7 +210,8 @@
       "save-in-progress": "जतन करण्याची प्रक्रिया सुरू आहे",
       "unsupported-attachment-image-url": "असमर्थित संलग्नक प्रतिमेचा URL: {{url}}",
       "wait-for-upload": "अपलोड पूर्ण होण्याची प्रतीक्षा करा"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "इनबॉक्स आयटम लोड करण्यात अयशस्वी",

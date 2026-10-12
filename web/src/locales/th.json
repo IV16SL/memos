@@ -210,7 +210,8 @@
       "save-in-progress": "กำลังบันทึก",
       "unsupported-attachment-image-url": "URL รูปภาพไฟล์แนบไม่รองรับ: {{url}}",
       "wait-for-upload": "รอจนกว่าการอัปโหลดจะเสร็จสมบูรณ์"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "ไม่สามารถโหลดรายการกล่องจดหมายได้",

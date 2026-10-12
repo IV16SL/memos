@@ -210,7 +210,8 @@
       "save-in-progress": "Spremanje u tijeku",
       "unsupported-attachment-image-url": "Nepodržani URL slike privitka: {{url}}",
       "wait-for-upload": "Pričekajte da se prijenos dovrši"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Neuspjelo učitavanje stavke pristigle pošte",

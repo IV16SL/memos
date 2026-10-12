@@ -240,7 +240,8 @@
       "transcribe-error": "Ses metne dönüştürülemedi",
       "transcribe-success": "Transkripsiyon eklendi",
       "transcribing": "Metne dönüştürülüyor..."
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Gelen kutusu öğesi yüklenemedi",

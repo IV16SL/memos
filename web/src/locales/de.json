@@ -210,7 +210,8 @@
       "save-in-progress": "Speichern läuft",
       "unsupported-attachment-image-url": "Nicht unterstützte URL für Anhangsbild: {{url}}",
       "wait-for-upload": "Warten, bis der Upload abgeschlossen ist"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Fehler beim Laden des Eintrags",

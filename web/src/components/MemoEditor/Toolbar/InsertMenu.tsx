@@ -1,4 +1,5 @@
 import { uniqBy } from "lodash-es";
+import toast from "react-hot-toast";
 import {
   CheckIcon,
   ImageIcon,
@@ -96,17 +97,21 @@ const InsertMenu = (props: InsertMenuProps) => {
     setLocationDialogOpen(true);
     if (!initialLocation && !locationInitialized) {
       if (navigator.geolocation) {
+        // Mobile GPS cold-start can hang without a timeout; enableHighAccuracy
+        // forces the OS location stack instead of a stale cached fix.
         navigator.geolocation.getCurrentPosition(
           (position) => {
             handleLocationPositionChange({ lat: position.coords.latitude, lng: position.coords.longitude });
           },
           (error) => {
             console.error("Geolocation error:", error);
+            toast.error(t("editor.location-error"));
           },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 },
         );
       }
     }
-  }, [initialLocation, locationInitialized, handleLocationPositionChange]);
+  }, [initialLocation, locationInitialized, handleLocationPositionChange, t]);
 
   const handleLocationConfirm = useCallback(() => {
     const newLocation = getLocation();

@@ -311,7 +311,8 @@
       "transcribe-success": "Transcription added",
       "transcribing": "Transcribing...",
       "trigger": "Record audio"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Failed to load inbox item",

@@ -210,7 +210,8 @@
       "save-in-progress": "Probíhá ukládání",
       "unsupported-attachment-image-url": "Nepodporovaná adresa URL obrázku přílohy: {{url}}",
       "wait-for-upload": "Počkejte na dokončení nahrávání"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Nepodařilo se načíst položku doručené pošty",

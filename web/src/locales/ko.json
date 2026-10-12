@@ -210,7 +210,8 @@
       "save-in-progress": "저장 중",
       "unsupported-attachment-image-url": "지원되지 않는 첨부 이미지 URL: {{url}}",
       "wait-for-upload": "업로드가 완료될 때까지 기다리세요"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "알림함 항목을 불러오지 못했습니다",

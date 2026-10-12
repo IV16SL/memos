@@ -248,7 +248,8 @@
       "save-in-progress": "Notiek saglabāšana",
       "unsupported-attachment-image-url": "Neatbalstīts pielikuma attēla URL: {{url}}",
       "wait-for-upload": "Pagaidiet, līdz augšupielāde ir pabeigta"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Neizdevās ielādēt iesūtnes vienumu",

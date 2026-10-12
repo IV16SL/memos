@@ -210,7 +210,8 @@
       "save-in-progress": "Opslaan bezig",
       "unsupported-attachment-image-url": "Niet-ondersteunde URL voor bijlageafbeelding: {{url}}",
       "wait-for-upload": "Wachten tot de upload is voltooid"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Postvak-item laden mislukt",

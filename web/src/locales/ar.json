@@ -210,7 +210,8 @@
       "save-in-progress": "جارٍ الحفظ",
       "unsupported-attachment-image-url": "رابط صورة المرفق غير مدعوم: {{url}}",
       "wait-for-upload": "انتظر حتى يكتمل التحميل"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "فشل تحميل عنصر صندوق الوارد",

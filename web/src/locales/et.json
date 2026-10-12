@@ -248,7 +248,8 @@
       "save-in-progress": "Salvestamine pooleli",
       "unsupported-attachment-image-url": "Toetamata manuse pildi URL: {{url}}",
       "wait-for-upload": "Oota üleslaadimise lõppemist"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Postkasti üksuse laadimine ebaõnnestus",

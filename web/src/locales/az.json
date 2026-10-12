@@ -311,7 +311,8 @@
       "transcribe-success": "Transkripsiya əlavə edildi",
       "transcribing": "Mətnə çevrilir...",
       "trigger": "Audio yaz"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Gələnlər elementi yüklənmədi",

@@ -248,7 +248,8 @@
       "save-in-progress": "Запазването е в процес",
       "unsupported-attachment-image-url": "Неподдържан URL адрес на прикаченото изображение: {{url}}",
       "wait-for-upload": "Изчакайте качването да завърши"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Неуспешно зареждане на елемент от входящата кутия",

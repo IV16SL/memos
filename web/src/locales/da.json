@@ -248,7 +248,8 @@
       "save-in-progress": "Gemning i gang",
       "unsupported-attachment-image-url": "Ikke-understøttet URL til vedhæftet billede: {{url}}",
       "wait-for-upload": "Vent på, at uploaden er fuldført"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Indbakkeelementet kunne ikke indlæses",

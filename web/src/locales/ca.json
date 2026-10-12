@@ -210,7 +210,8 @@
       "save-in-progress": "Desa en curs",
       "unsupported-attachment-image-url": "URL d'imatge adjunta no compatible: {{url}}",
       "wait-for-upload": "Espera que es completi la càrrega"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Error en carregar la bústia",

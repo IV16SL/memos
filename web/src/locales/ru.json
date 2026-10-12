@@ -210,7 +210,8 @@
     },
     "comment": "Комментарий",
     "new-memo": "Новая заметка",
-    "saved": "Сохранено"
+    "saved": "Сохранено",
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Не удалось загрузить элемент уведомления",

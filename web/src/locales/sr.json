@@ -248,7 +248,8 @@
       "save-in-progress": "Чување у току",
       "unsupported-attachment-image-url": "Неподржана URL адреса слике прилога: {{url}}",
       "wait-for-upload": "Сачекај да се отпремање заврши"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Учитавање ставке пријемног сандучета није успело",

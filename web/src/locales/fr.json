@@ -210,7 +210,8 @@
       "save-in-progress": "Enregistrement en cours",
       "unsupported-attachment-image-url": "URL d'image de pièce jointe non prise en charge : {{url}}",
       "wait-for-upload": "Veuillez patienter jusqu'à la fin du chargement"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Échec du chargement de l'élément",

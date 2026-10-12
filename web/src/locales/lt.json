@@ -248,7 +248,8 @@
       "save-in-progress": "Vykdomas išsaugojimas",
       "unsupported-attachment-image-url": "Nepalaikomas priedo vaizdo URL: {{url}}",
       "wait-for-upload": "Palaukite, kol įkėlimas bus baigtas"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Nepavyko įkelti gautųjų elemento",

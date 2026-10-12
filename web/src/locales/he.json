@@ -281,7 +281,8 @@
     },
     "comment": "תגובה",
     "new-memo": "תזכיר חדש",
-    "saved": "נשמר"
+    "saved": "נשמר",
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "טעינת פריט מתיבת הדואר הנכנס נכשלה",

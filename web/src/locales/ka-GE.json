@@ -210,7 +210,8 @@
       "save-in-progress": "შენახვა მიმდინარეობს",
       "unsupported-attachment-image-url": "დანართის სურათის URL, რომელიც არ არის მხარდაჭერილი: {{url}}",
       "wait-for-upload": "დაელოდეთ ატვირთვის დასრულებას"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "ინბოქსის ელემენტის ჩატვირთვა ვერ მოხერხდა",

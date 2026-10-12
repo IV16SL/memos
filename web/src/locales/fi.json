@@ -248,7 +248,8 @@
       "save-in-progress": "Tallennus käynnissä",
       "unsupported-attachment-image-url": "Liitteenä olevan kuvan URL-osoitetta ei tueta: {{url}}",
       "wait-for-upload": "Odota latauksen valmistumista"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Saapuneet-kansion kohteen lataaminen epäonnistui",

@@ -210,7 +210,8 @@
       "save-in-progress": "Lagring pågår",
       "unsupported-attachment-image-url": "Ustøttet vedleggsbilde-URL: {{url}}",
       "wait-for-upload": "Vent til opplastingen er fullført"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Kunne ikke laste innbokselement",

@@ -248,7 +248,8 @@
       "save-in-progress": "Salvare în curs",
       "unsupported-attachment-image-url": "Adresa URL a imaginii atașate neacceptată: {{url}}",
       "wait-for-upload": "Așteptați finalizarea încărcării"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Nu s-a încărcat elementul din căsuța de e-mail",

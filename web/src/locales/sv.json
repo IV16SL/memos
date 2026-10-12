@@ -210,7 +210,8 @@
       "save-in-progress": "Spara pågår",
       "unsupported-attachment-image-url": "Bild-URL för bilaga som inte stöds: {{url}}",
       "wait-for-upload": "Vänta tills uppladdningen är klar"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Misslyckades att ladda inkorgsobjekt",

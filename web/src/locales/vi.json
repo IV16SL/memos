@@ -210,7 +210,8 @@
       "save-in-progress": "Đang lưu",
       "unsupported-attachment-image-url": "URL ảnh đính kèm không được hỗ trợ: {{url}}",
       "wait-for-upload": "Chờ quá trình tải lên hoàn tất"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Không thể tải mục hộp thư",

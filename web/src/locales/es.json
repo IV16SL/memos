@@ -210,7 +210,8 @@
       "save-in-progress": "Guardado en curso",
       "unsupported-attachment-image-url": "URL de imagen de adjunto no compatible: {{url}}",
       "wait-for-upload": "Esperar a que finalice la carga"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Error al cargar el elemento de bandeja de entrada",

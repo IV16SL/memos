@@ -210,7 +210,8 @@
       "save-in-progress": "Mentés folyamatban",
       "unsupported-attachment-image-url": "Nem támogatott mellékletkép URL: {{url}}",
       "wait-for-upload": "Várja meg a feltöltés befejezését"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Nem sikerült betölteni az értesítést",

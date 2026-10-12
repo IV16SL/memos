@@ -286,7 +286,8 @@
       "save-in-progress": "Lagring går føre seg",
       "unsupported-attachment-image-url": "Biletadressa til vedlegget er ikkje støtta: {{url}}",
       "wait-for-upload": "Vent til opplastinga er ferdig"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Klarte diverre ikkje å laste innbokselementet",

@@ -210,7 +210,8 @@
       "save-in-progress": "Zapisywanie w toku",
       "unsupported-attachment-image-url": "Nieobsługiwany adres URL obrazu w załączniku: {{url}}",
       "wait-for-upload": "Poczekaj na zakończenie przesyłania"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "Nie udało się załadować elementu skrzynki odbiorczej",

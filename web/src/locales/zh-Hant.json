@@ -289,7 +289,8 @@
       "trigger": "錄製音訊"
     },
     "comment": "評論",
-    "saved": "已儲存"
+    "saved": "已儲存",
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "載入失敗",

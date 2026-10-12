@@ -210,7 +210,8 @@
       "save-in-progress": "保存処理中",
       "unsupported-attachment-image-url": "サポートされていない添付ファイル画像のURL: {{url}}",
       "wait-for-upload": "アップロードが完了するまでお待ちください"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "受信トレイアイテムの読み込みに失敗しました",

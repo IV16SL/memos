@@ -210,7 +210,8 @@
       "save-in-progress": "सेव हो रहा है",
       "unsupported-attachment-image-url": "अनसपोर्टेड अटैचमेंट इमेज URL: {{url}}",
       "wait-for-upload": "अपलोड पूरा होने का इंतज़ार करें"
-    }
+    },
+    "location-error": "Location failed, please pick manually"
   },
   "inbox": {
     "failed-to-load": "इनबॉक्स आइटम लोड करने में विफल",
