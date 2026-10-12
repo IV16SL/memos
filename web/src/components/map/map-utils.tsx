@@ -10,6 +10,28 @@ export const OpenStreetMapTileLayer = ({ eventHandlers }: Pick<TileLayerProps, "
   <TileLayer url={OPENSTREETMAP_TILE_URL} attribution={OPENSTREETMAP_ATTRIBUTION} maxZoom={19} eventHandlers={eventHandlers} />
 );
 
+// Amap (高德) standard tiles. Public tile endpoint, no API key required.
+// Tiles are in GCJ-02; convert WGS-84 coordinates with gcj02.ts before placing markers.
+const AMAP_TILE_URL = "https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}";
+
+const AMAP_ATTRIBUTION = '&copy; <a href="https://www.amap.com/">高德地图</a>';
+
+interface AmapTileLayerProps extends Pick<TileLayerProps, "eventHandlers"> {
+  /** Apply dark-mode CSS filter to tiles (Amap publishes no dark tile style). */
+  dark?: boolean;
+}
+
+export const AmapTileLayer = ({ dark, eventHandlers }: AmapTileLayerProps = {}) => (
+  <TileLayer
+    url={AMAP_TILE_URL}
+    subdomains={["1", "2", "3", "4"]}
+    attribution={AMAP_ATTRIBUTION}
+    maxZoom={18}
+    eventHandlers={eventHandlers}
+    className={dark ? "amap-tiles-dark" : undefined}
+  />
+);
+
 export const MinimalAttributionControl = () => <AttributionControl prefix={false} />;
 
 interface MarkerIconOptions {

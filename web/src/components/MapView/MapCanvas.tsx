@@ -7,6 +7,7 @@ import { MapContainer, Marker, useMapEvents } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import { getLocationDisplayText } from "@/components/MemoMetadata/Location/locationHelpers";
 import { BasemapLayer } from "@/components/map/BasemapLayer";
+import { gcj02ToWgs84, wgs84ToGcj02 } from "@/components/map/gcj02";
 import { createMarkerIcon, MinimalAttributionControl } from "@/components/map/map-utils";
 import UserAvatar from "@/components/UserAvatar";
 import { cn } from "@/lib/utils";
@@ -30,7 +31,7 @@ interface Props {
   onTileError: () => void;
 }
 
-// Positron's own city dots are 4px black; ours are bigger, colored and white-edged so they never blend in.
+// Amap's own POI dots are small; ours are bigger, colored and white-edged so they never blend in.
 const markerIcon = createMarkerIcon({ size: 22, dot: 16 });
 const selectedIcon = createMarkerIcon({ size: 36, dot: 20, halo: true });
 const FACE_EDGE = "border-2 border-white shadow-[0_1px_4px_rgba(15,23,42,0.4)]";
@@ -67,10 +68,13 @@ const faceKey = (face: MapPinFace): string =>
 
 export function fitMemos(map: L.Map, memos: Memo[]) {
   if (memos.length)
-    map.fitBounds(L.latLngBounds(memos.map((memo) => [memo.location!.latitude, memo.location!.longitude])), {
-      padding: [64, 96],
-      maxZoom: 15,
-    });
+    map.fitBounds(
+      L.latLngBounds(memos.map((memo) => wgs84ToGcj02(memo.location!.latitude, memo.location!.longitude))),
+      {
+        padding: [64, 96],
+        maxZoom: 15,
+      },
+    );
 }
 
 function MapBehavior(props: Props) {
@@ -80,7 +84,9 @@ function MapBehavior(props: Props) {
   const map = useMapEvents({
     moveend: () => {
       const center = map.getCenter().wrap();
-      latest.current.onMove({ lat: center.lat, lng: center.lng, zoom: map.getZoom() });
+      // Map works in GCJ-02; report WGS-84 outward (viewport is stored in URL).
+      const [lat, lng] = gcj02ToWgs84(center.lat, center.lng);
+      latest.current.onMove({ lat, lng, zoom: map.getZoom() });
     },
     click: () => latest.current.onDismiss(),
   });
@@ -96,9 +102,10 @@ function MapBehavior(props: Props) {
   useEffect(() => {
     const viewport = props.viewport;
     if (!viewport) return;
+    const [vLat, vLng] = wgs84ToGcj02(viewport.lat, viewport.lng);
     const center = map.getCenter().wrap();
-    if (Math.abs(center.lat - viewport.lat) > 0.00002 || Math.abs(center.lng - viewport.lng) > 0.00002 || map.getZoom() !== viewport.zoom) {
-      map.setView([viewport.lat, viewport.lng], viewport.zoom, { animate: false });
+    if (Math.abs(center.lat - vLat) > 0.00002 || Math.abs(center.lng - vLng) > 0.00002 || map.getZoom() !== viewport.zoom) {
+      map.setView([vLat, vLng], viewport.zoom, { animate: false });
     }
   }, [map, props.viewport?.lat, props.viewport?.lng, props.viewport?.zoom]);
   useEffect(() => {
@@ -110,7 +117,8 @@ function MapBehavior(props: Props) {
   const selectedLocation = props.memos.find((item) => item.name === selectedName)?.location;
   useEffect(() => {
     if (!selectedLocation || !props.panelSize.width) return;
-    const point = map.latLngToContainerPoint([selectedLocation.latitude, selectedLocation.longitude]);
+    const [sLat, sLng] = wgs84ToGcj02(selectedLocation.latitude, selectedLocation.longitude);
+    const point = map.latLngToContainerPoint([sLat, sLng]);
     const offset = revealOffset(point, map.getSize(), props.panelSize, props.desktop);
     if (offset[0] || offset[1]) map.panBy(offset, { animate: false });
   }, [
@@ -130,13 +138,15 @@ function Markers({ memos, pins, selected, onSelect }: Pick<Props, "memos" | "pin
   const markers = useRef(new Map<string, L.Marker>());
   const selection = useMemo(() => new Set(selected), [selected]);
   // Identity-stable positions: a fresh tuple per render would make every marker re-enter the cluster tree.
+  // Amap tiles are GCJ-02; stored coordinates are WGS-84.
   const points = useMemo(
     () =>
       memos.map((memo) => {
         const pin = pins.get(memo.name);
+        const [lat, lng] = wgs84ToGcj02(memo.location!.latitude, memo.location!.longitude);
         return {
           memo,
-          position: [memo.location!.latitude, memo.location!.longitude] as [number, number],
+          position: [lat, lng] as [number, number],
           face: pin?.face ?? { kind: "dot" as const },
           label: pin?.label ?? getLocationDisplayText(memo.location!),
         };
@@ -221,9 +231,10 @@ function Markers({ memos, pins, selected, onSelect }: Pick<Props, "memos" | "pin
 
 export function MapCanvas(props: Props) {
   const initial = useRef(props.viewport);
+  const [initLat, initLng] = initial.current ? wgs84ToGcj02(initial.current.lat, initial.current.lng) : [20, 0];
   return (
     <MapContainer
-      center={[initial.current?.lat ?? 20, initial.current?.lng ?? 0]}
+      center={[initLat, initLng]}
       zoom={initial.current?.zoom ?? 2}
       maxZoom={19}
       minZoom={0}

@@ -39,6 +39,11 @@
 }
 
 @layer components {
+  /* Amap dark mode: Amap publishes no dark tile style, approximate with a filter. */
+  .amap-tiles-dark {
+    filter: brightness(0.65) invert(0.92) contrast(0.9) hue-rotate(180deg) saturate(0.35);
+  }
+
   .map-attribution-minimal .leaflet-control-attribution {
     margin: 0 0.25rem 0.25rem 0 !important;
     border-radius: 0.25rem;

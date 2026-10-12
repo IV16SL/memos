@@ -6,11 +6,19 @@ import { createPortal } from "react-dom";
 import { MapContainer, Marker, useMap, useMapEvents } from "react-leaflet";
 import { cn } from "@/lib/utils";
 import { BasemapLayer } from "./BasemapLayer";
+import { gcj02ToWgs84, wgs84ToGcj02 } from "./gcj02";
 import { defaultMarkerIcon, MinimalAttributionControl } from "./map-utils";
 import type { MapPoint } from "./types";
 
-const toLatLng = (point: MapPoint): LatLng => new LatLng(point.lat, point.lng);
-const fromLatLng = (latlng: LatLng): MapPoint => ({ lat: latlng.lat, lng: latlng.lng });
+// MapPoint is WGS-84 (stored); the Amap tiles render GCJ-02. Convert at the boundary.
+const toLatLng = (point: MapPoint): LatLng => {
+  const [lat, lng] = wgs84ToGcj02(point.lat, point.lng);
+  return new LatLng(lat, lng);
+};
+const fromLatLng = (latlng: LatLng): MapPoint => {
+  const [lat, lng] = gcj02ToWgs84(latlng.lat, latlng.lng);
+  return { lat, lng };
+};
 
 interface LocationMarkerProps {
   position: LatLng | undefined;
