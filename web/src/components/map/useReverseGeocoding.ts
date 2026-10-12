@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { wgs84ToGcj02 } from "./gcj02";
 
-/** Amap Web API key for reverse geocoding. Get one at https://console.amap.com/ (free tier suffices). */
-const AMAP_API_KEY = "27ee1590129461660552e207012da511";
+/** Amap Web API key for reverse geocoding. Set via VITE_AMAP_API_KEY at build time. */
+const AMAP_API_KEY = import.meta.env.VITE_AMAP_API_KEY as string | undefined;
 
 const NOMINATIM = {
   endpoint: "https://nominatim.openstreetmap.org/reverse",
