@@ -15,7 +15,11 @@
     "loading": "正在加载 Memo…",
     "new-here": "在这里记录",
     "saved-outside-filter": "已保存，这条 Memo 不在当前地图结果中。",
-    "open-memo": "打开 Memo"
+    "open-memo": "打开 Memo",
+    "location-selected": "已选位置",
+    "location-choose": "选择位置",
+    "open-in-amap": "在高德地图打开",
+    "open-in-amap-aria": "在高德地图中打开位置"
   },
   "about": {
     "api-docs": "API 文档",

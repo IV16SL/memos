@@ -965,7 +965,11 @@
     "loading": "Завантаження нотаток…",
     "new-here": "Пишіть тут",
     "saved-outside-filter": "Збережено. Ця нотатка знаходиться поза межами поточних результатів на карті.",
-    "open-memo": "Відкрити мемо"
+    "open-memo": "Відкрити мемо",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Нова нотатка цього дня",

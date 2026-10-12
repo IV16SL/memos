@@ -5,6 +5,7 @@ import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { MapContainer, Marker, useMap, useMapEvents } from "react-leaflet";
 import { cn } from "@/lib/utils";
+import { useTranslate } from "@/utils/i18n";
 import { BasemapLayer } from "./BasemapLayer";
 import { gcj02ToWgs84, wgs84ToGcj02 } from "./gcj02";
 import { defaultMarkerIcon, MinimalAttributionControl } from "./map-utils";
@@ -86,22 +87,23 @@ interface ControlButtonsProps {
   position: MapPoint | undefined;
   onZoomIn: () => void;
   onZoomOut: () => void;
-  onOpenGoogleMaps: () => void;
+  onOpenAmap: () => void;
 }
 
-const ControlButtons = ({ position, onZoomIn, onZoomOut, onOpenGoogleMaps }: ControlButtonsProps) => {
+const ControlButtons = ({ position, onZoomIn, onZoomOut, onOpenAmap }: ControlButtonsProps) => {
+  const t = useTranslate();
   return (
     <div className="flex flex-col gap-1.5">
       {position && (
         <GlassButton
           icon={<ExternalLinkIcon size={16} className="text-foreground" />}
-          onClick={onOpenGoogleMaps}
-          ariaLabel="Open location in Google Maps"
-          title="Open in Google Maps"
+          onClick={onOpenAmap}
+          ariaLabel={t("map.open-in-amap-aria")}
+          title={t("map.open-in-amap")}
         />
       )}
-      <GlassButton icon={<PlusIcon size={16} className="text-foreground" />} onClick={onZoomIn} ariaLabel="Zoom in" title="Zoom in" />
-      <GlassButton icon={<MinusIcon size={16} className="text-foreground" />} onClick={onZoomOut} ariaLabel="Zoom out" title="Zoom out" />
+      <GlassButton icon={<PlusIcon size={16} className="text-foreground" />} onClick={onZoomIn} ariaLabel={t("map.zoom-in")} title={t("map.zoom-in")} />
+      <GlassButton icon={<MinusIcon size={16} className="text-foreground" />} onClick={onZoomOut} ariaLabel={t("map.zoom-out")} title={t("map.zoom-out")} />
     </div>
   );
 };
@@ -139,9 +141,11 @@ const MapControls = ({ position }: MapControlsProps) => {
   const controlRef = useRef<MapControlsContainer | null>(null);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
 
-  const handleOpenInGoogleMaps = () => {
+  const handleOpenInAmap = () => {
     if (!position) return;
-    const url = `https://www.google.com/maps?q=${position.lat},${position.lng}`;
+    // Amap URI API: position is lng,lat in GCJ-02. Convert from stored WGS-84.
+    const [gLat, gLng] = wgs84ToGcj02(position.lat, position.lng);
+    const url = `https://uri.amap.com/marker?position=${gLng},${gLat}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
@@ -174,7 +178,7 @@ const MapControls = ({ position }: MapControlsProps) => {
   }
 
   return createPortal(
-    <ControlButtons position={position} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} onOpenGoogleMaps={handleOpenInGoogleMaps} />,
+    <ControlButtons position={position} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} onOpenAmap={handleOpenInAmap} />,
     container,
   );
 };
@@ -211,9 +215,10 @@ const DEFAULT_CENTER: MapPoint = { lat: 39.9042, lng: 116.4074 }; // Beijing
 const noopOnLocationChange = () => {};
 
 const LocationPicker = ({ readonly: readOnly = false, latlng, onChange = noopOnLocationChange, className }: LocationPickerProps) => {
+  const t = useTranslate();
   const mapCenter = useMemo(() => toLatLng(latlng ?? DEFAULT_CENTER), [latlng?.lat, latlng?.lng]);
   const markerPosition = latlng ? mapCenter : undefined;
-  const statusLabel = latlng ? "Selected location" : "Choose a location";
+  const statusLabel = latlng ? t("map.location-selected") : t("map.location-choose");
 
   return (
     <div

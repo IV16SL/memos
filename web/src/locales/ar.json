@@ -945,7 +945,11 @@
     "loading": "جارٍ تحميل المذكرات...",
     "new-here": "اكتب هنا",
     "saved-outside-filter": "تم الحفظ. هذه المذكرة خارج نتائج الخريطة الحالية.",
-    "open-memo": "فتح المذكرة"
+    "open-memo": "فتح المذكرة",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "مذكرة جديدة في هذا اليوم",

@@ -945,7 +945,11 @@
     "loading": "Đang tải ghi chú…",
     "new-here": "Viết tại đây",
     "saved-outside-filter": "Đã lưu. Ghi chú này nằm ngoài kết quả bản đồ hiện tại.",
-    "open-memo": "Mở bản ghi nhớ"
+    "open-memo": "Mở bản ghi nhớ",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Ghi chú mới trong ngày này",

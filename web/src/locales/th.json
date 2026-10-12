@@ -945,7 +945,11 @@
     "loading": "กำลังโหลดบันทึก…",
     "new-here": "เขียนที่นี่",
     "saved-outside-filter": "บันทึกแล้ว บันทึกนี้อยู่นอกเหนือผลลัพธ์แผนที่ปัจจุบัน",
-    "open-memo": "เปิดบันทึกช่วยจำ"
+    "open-memo": "เปิดบันทึกช่วยจำ",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "บันทึกช่วยจำใหม่ในวันนี้",

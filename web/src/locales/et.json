@@ -965,7 +965,11 @@
     "loading": "Memosid laaditakse…",
     "new-here": "Kirjuta siia",
     "saved-outside-filter": "Salvestatud. See memo on väljaspool praeguseid kaarditulemusi.",
-    "open-memo": "Ava memo"
+    "open-memo": "Ava memo",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Uus memo sel päeval",

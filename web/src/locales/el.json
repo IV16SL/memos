@@ -965,7 +965,11 @@
     "loading": "Φόρτωση σημειωμάτων…",
     "new-here": "Γράψτε εδώ",
     "saved-outside-filter": "Αποθηκεύτηκε. Αυτό το σημειώμα βρίσκεται εκτός των τρεχόντων αποτελεσμάτων χάρτη.",
-    "open-memo": "Άνοιγμα σημειώματος"
+    "open-memo": "Άνοιγμα σημειώματος",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Νέο σημείωμα αυτήν την ημέρα",

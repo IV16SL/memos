@@ -945,7 +945,11 @@
     "loading": "Carregando memorandos…",
     "new-here": "Escreva aqui",
     "saved-outside-filter": "Salvo. Este memorando está fora dos resultados atuais do mapa.",
-    "open-memo": "Abrir memorando"
+    "open-memo": "Abrir memorando",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Novo memorando neste dia",

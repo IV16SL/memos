@@ -965,7 +965,11 @@
     "loading": "Načítavajú sa poznámky…",
     "new-here": "Napíšte sem",
     "saved-outside-filter": "Uložené. Táto poznámka sa nachádza mimo aktuálnych výsledkov na mape.",
-    "open-memo": "Otvoriť poznámku"
+    "open-memo": "Otvoriť poznámku",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nová poznámka v tento deň",

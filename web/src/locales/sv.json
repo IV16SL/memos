@@ -965,7 +965,11 @@
     "loading": "Läser in PM…",
     "new-here": "Skriv här",
     "saved-outside-filter": "Sparad. Detta PM ligger utanför de aktuella kartresultaten.",
-    "open-memo": "Öppna PM"
+    "open-memo": "Öppna PM",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nytt PM denna dag",

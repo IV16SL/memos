@@ -965,7 +965,11 @@
     "loading": "טוען תזכירים…",
     "new-here": "כתוב כאן",
     "saved-outside-filter": "נשמר. תזכיר זה מחוץ לתוצאות המפה הנוכחיות.",
-    "open-memo": "פתח תזכיר"
+    "open-memo": "פתח תזכיר",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "תזכיר חדש ביום זה",

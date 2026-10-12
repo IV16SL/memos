@@ -15,7 +15,11 @@
     "loading": "Qeydlər yüklənir…",
     "new-here": "Burada qeyd yaz",
     "saved-outside-filter": "Saxlanıldı. Bu qeyd cari xəritə nəticələrinə daxil deyil.",
-    "open-memo": "Qeydi aç"
+    "open-memo": "Qeydi aç",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "about": {
     "api-docs": "API sənədləri",

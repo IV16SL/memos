@@ -15,7 +15,11 @@
     "loading": "Notlar yükleniyor…",
     "new-here": "Buraya yaz",
     "saved-outside-filter": "Kaydedildi. Bu not geçerli harita sonuçlarının dışında kalıyor.",
-    "open-memo": "Notu aç"
+    "open-memo": "Notu aç",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "about": {
     "api-docs": "API Belgeleri",

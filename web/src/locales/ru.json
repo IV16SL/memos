@@ -950,7 +950,11 @@
     "loading": "Загрузка заметок…",
     "new-here": "Написать здесь",
     "saved-outside-filter": "Сохранено. Эта заметка находится за пределами текущих результатов карты.",
-    "open-memo": "Открыть заметку"
+    "open-memo": "Открыть заметку",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Новая заметка в этот день",

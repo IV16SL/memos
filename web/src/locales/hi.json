@@ -945,7 +945,11 @@
     "loading": "मेमो लोड हो रहे हैं…",
     "new-here": "यहाँ लिखें",
     "saved-outside-filter": "सेव किया गया. यह मेमो अभी के मैप रिज़ल्ट से बाहर है.",
-    "open-memo": "ओपन मेमो"
+    "open-memo": "ओपन मेमो",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "इस दिन नया मेमो",

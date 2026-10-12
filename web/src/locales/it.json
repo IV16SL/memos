@@ -965,7 +965,11 @@
     "loading": "Caricamento note in corso…",
     "new-here": "Scrivi qui",
     "saved-outside-filter": "Salvato. Questa nota si trova al di fuori dei risultati correnti della mappa.",
-    "open-memo": "Apri memo"
+    "open-memo": "Apri memo",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nuovo memo in questo giorno",

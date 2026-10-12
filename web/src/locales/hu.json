@@ -965,7 +965,11 @@
     "loading": "Feljegyzések betöltése…",
     "new-here": "Írjon ide",
     "saved-outside-filter": "Mentve. Ez a feljegyzés kívül esik a jelenlegi térképeredményeken.",
-    "open-memo": "Jegyzet megnyitása"
+    "open-memo": "Jegyzet megnyitása",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Új emlékeztető ezen a napon.",

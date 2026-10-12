@@ -965,7 +965,11 @@
     "loading": "Cargando notas…",
     "new-here": "Escribe aquí",
     "saved-outside-filter": "Guardado. Esta nota está fuera de los resultados actuales del mapa.",
-    "open-memo": "Nota abierta"
+    "open-memo": "Nota abierta",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nuevo memorándum en este día",

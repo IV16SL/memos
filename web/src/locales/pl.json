@@ -965,7 +965,11 @@
     "loading": "Ładowanie notatek…",
     "new-here": "Napisz tutaj",
     "saved-outside-filter": "Zapisano. Ta notatka znajduje się poza bieżącymi wynikami mapy.",
-    "open-memo": "Otwórz notatkę"
+    "open-memo": "Otwórz notatkę",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nowa notatka z tego dnia",

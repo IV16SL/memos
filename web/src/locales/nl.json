@@ -965,7 +965,11 @@
     "loading": "Memo's laden…",
     "new-here": "Hier schrijven",
     "saved-outside-filter": "Opgeslagen. Deze memo valt buiten de huidige kaartresultaten.",
-    "open-memo": "Open memo"
+    "open-memo": "Open memo",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nieuwe memo op deze dag",

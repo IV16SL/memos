@@ -965,7 +965,11 @@
     "loading": "Зареждане на бележки…",
     "new-here": "Пишете тук",
     "saved-outside-filter": "Запазено. Тази бележка е извън текущите резултати на картата.",
-    "open-memo": "Отваряне на бележка"
+    "open-memo": "Отваряне на бележка",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Нова бележка на този ден",

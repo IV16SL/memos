@@ -965,7 +965,11 @@
     "loading": "Учитавање белешки…",
     "new-here": "Пишите овде",
     "saved-outside-filter": "Сачувано. Ова белешка је ван тренутних резултата на мапи.",
-    "open-memo": "Отвори мемо"
+    "open-memo": "Отвори мемо",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Нова белешка на данашњи дан",

@@ -965,7 +965,11 @@
     "loading": "Muistionneja ladataan…",
     "new-here": "Kirjoita tähän.",
     "saved-outside-filter": "Tallennettu. Tämä muistio on nykyisten karttatulosten ulkopuolella.",
-    "open-memo": "Avaa muistio"
+    "open-memo": "Avaa muistio",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Uusi muistio tänä päivänä",

@@ -965,7 +965,11 @@
     "loading": "მემოების ჩატვირთვა…",
     "new-here": "აქ დაწერეთ",
     "saved-outside-filter": "შენახულია. ეს მემო მიმდინარე რუკის შედეგების მიღმაა.",
-    "open-memo": "გახსნის შეტყობინებას"
+    "open-memo": "გახსნის შეტყობინებას",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "ახალი შენიშვნა ამ დღეს",

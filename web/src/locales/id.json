@@ -945,7 +945,11 @@
     "loading": "Memuat memo…",
     "new-here": "Tulis di sini",
     "saved-outside-filter": "Tersimpan. Memo ini berada di luar hasil peta saat ini.",
-    "open-memo": "Buka memo"
+    "open-memo": "Buka memo",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Memo baru pada hari ini",

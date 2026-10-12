@@ -965,7 +965,11 @@
     "loading": "Indlæser notater…",
     "new-here": "Skriv her",
     "saved-outside-filter": "Gemt. Dette notat er uden for de aktuelle kortresultater.",
-    "open-memo": "Åbn notat"
+    "open-memo": "Åbn notat",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nyt notat på denne dag",

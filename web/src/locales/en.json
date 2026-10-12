@@ -15,7 +15,11 @@
     "loading": "Loading memos…",
     "new-here": "Write here",
     "saved-outside-filter": "Saved. This memo is outside the current map results.",
-    "open-memo": "Open memo"
+    "open-memo": "Open memo",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "about": {
     "api-docs": "API Docs",

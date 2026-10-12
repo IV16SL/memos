@@ -965,7 +965,11 @@
     "loading": "S'estan carregant les notes…",
     "new-here": "Escriu aquí",
     "saved-outside-filter": "Desat. Aquesta nota està fora dels resultats actuals del mapa.",
-    "open-memo": "Obre el memoràndum"
+    "open-memo": "Obre el memoràndum",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nova nota en aquest dia",

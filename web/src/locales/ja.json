@@ -965,7 +965,11 @@
     "loading": "メモを読み込んでいます…",
     "new-here": "ここに記入",
     "saved-outside-filter": "保存しました。このメモは現在の地図結果の範囲外です。",
-    "open-memo": "メモを開く"
+    "open-memo": "メモを開く",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "この日に新しいメモが作成",

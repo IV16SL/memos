@@ -965,7 +965,11 @@
     "loading": "Načítání poznámek…",
     "new-here": "Pište sem",
     "saved-outside-filter": "Uloženo. Tato poznámka je mimo aktuální výsledky mapy.",
-    "open-memo": "Otevřít memorandum"
+    "open-memo": "Otevřít memorandum",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nová poznámka z tohoto dne",

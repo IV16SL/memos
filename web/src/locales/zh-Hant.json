@@ -1008,6 +1008,10 @@
     "loading": "正在載入備忘錄…",
     "new-here": "在此記錄",
     "saved-outside-filter": "已儲存。此備忘錄不在目前的地圖結果中。",
-    "open-memo": "開啟備忘錄"
+    "open-memo": "開啟備忘錄",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   }
 }

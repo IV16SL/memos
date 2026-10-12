@@ -965,7 +965,11 @@
     "loading": "Učitavanje zapisa…",
     "new-here": "Pišite ovdje",
     "saved-outside-filter": "Spremljeno. Ovaj zapis je izvan trenutnih rezultata karte.",
-    "open-memo": "Otvori memorandum"
+    "open-memo": "Otvori memorandum",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nova bilješka na današnji dan",

@@ -321,7 +321,11 @@
     "selection": "Valde notat",
     "tile-error": "Kartet kunne diverre ikkje lastast. Notata er framleis tilgjengelege.",
     "zoom-in": "Zoom inn",
-    "zoom-out": "Zoom ut"
+    "zoom-out": "Zoom ut",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "memo": {
     "back-to": "Attende til {{source}}",

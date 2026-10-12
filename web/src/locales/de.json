@@ -965,7 +965,11 @@
     "loading": "Notizen werden geladen…",
     "new-here": "Hier schreiben",
     "saved-outside-filter": "Gespeichert. Diese Notiz liegt außerhalb der aktuellen Kartenergebnisse.",
-    "open-memo": "Memo öffnen"
+    "open-memo": "Memo öffnen",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Neue Notiz an diesem Tag",

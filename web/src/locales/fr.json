@@ -965,7 +965,11 @@
     "loading": "Chargement des mémos…",
     "new-here": "Écrire ici",
     "saved-outside-filter": "Enregistré. Ce mémo se trouve en dehors des résultats de la carte.",
-    "open-memo": "Ouvrir le mémo"
+    "open-memo": "Ouvrir le mémo",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nouvelle note pour aujourd'hui",

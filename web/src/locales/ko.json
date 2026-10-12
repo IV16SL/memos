@@ -945,7 +945,11 @@
     "loading": "메모 로드 중…",
     "new-here": "여기에 입력하세요",
     "saved-outside-filter": "저장되었습니다. 이 메모는 현재 지도 결과 범위 밖에 있습니다.",
-    "open-memo": "메모 열기"
+    "open-memo": "메모 열기",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "오늘 새 메모가 있습니다.",

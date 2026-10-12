@@ -965,7 +965,11 @@
     "loading": "Laster inn notater…",
     "new-here": "Skriv her",
     "saved-outside-filter": "Lagret. Dette notatet er utenfor de nåværende kartresultatene.",
-    "open-memo": "Åpne notat"
+    "open-memo": "Åpne notat",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nytt notat denne dagen",

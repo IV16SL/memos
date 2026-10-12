@@ -965,7 +965,11 @@
     "loading": "Notiek piezīmju ielāde…",
     "new-here": "Rakstīt šeit",
     "saved-outside-filter": "Saglabāts. Šī piezīme atrodas ārpus pašreizējiem kartes rezultātiem.",
-    "open-memo": "Atvērt piezīmi"
+    "open-memo": "Atvērt piezīmi",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Jauna piezīme šajā dienā",

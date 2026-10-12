@@ -965,7 +965,11 @@
     "loading": "Nalaganje zapiskov…",
     "new-here": "Pišite tukaj",
     "saved-outside-filter": "Shranjeno. Ta zapisek je zunaj trenutnih rezultatov zemljevida.",
-    "open-memo": "Odpri opombo"
+    "open-memo": "Odpri opombo",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Nova beležka na ta dan",

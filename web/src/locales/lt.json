@@ -965,7 +965,11 @@
     "loading": "Įkeliami priminimai…",
     "new-here": "Rašyti čia",
     "saved-outside-filter": "Išsaugota. Šis priminimas yra už dabartinių žemėlapio rezultatų ribų.",
-    "open-memo": "Atidaryti atmintinę"
+    "open-memo": "Atidaryti atmintinę",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Naujas priminimas šią dieną",

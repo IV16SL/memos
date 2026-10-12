@@ -965,7 +965,11 @@
     "loading": "Se încarcă memo-urile…",
     "new-here": "Scrieți aici",
     "saved-outside-filter": "Salvat. Acest memo se află în afara rezultatelor actuale ale hărții.",
-    "open-memo": "Deschide memo"
+    "open-memo": "Deschide memo",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "Memo nou în această zi",

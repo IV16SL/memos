@@ -945,7 +945,11 @@
     "loading": "در حال بارگذاری یادداشت‌ها…",
     "new-here": "اینجا بنویسید",
     "saved-outside-filter": "ذخیره شد. این یادداشت خارج از نتایج نقشه فعلی است.",
-    "open-memo": "یادداشت باز"
+    "open-memo": "یادداشت باز",
+    "location-selected": "Selected location",
+    "location-choose": "Choose a location",
+    "open-in-amap": "Open in Amap",
+    "open-in-amap-aria": "Open location in Amap"
   },
   "calendar": {
     "new-memo-on-day": "یادداشت جدید در این روز",
