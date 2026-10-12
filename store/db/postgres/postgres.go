@@ -35,6 +35,10 @@ func NewDB(profile *profile.Profile) (store.Driver, error) {
 	db.SetMaxOpenConns(8)
 	db.SetMaxIdleConns(2)
 	db.SetConnMaxLifetime(time.Minute)
+	// Supavisor (Supabase pooler) closes idle server connections; recycle
+	// ours first so the pool never hands out a dead connection after the
+	// page sits idle (e.g. past the 15-min access token lifetime).
+	db.SetConnMaxIdleTime(30 * time.Second)
 
 	var driver store.Driver = &DB{
 		db:      db,
