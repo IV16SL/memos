@@ -32,8 +32,10 @@ func NewDB(profile *profile.Profile) (store.Driver, error) {
 	}
 	// Serverless-friendly pool: each function instance caps its own
 	// connections; use the pooled (PgBouncer) DSN endpoint in MEMOS_DSN.
-	db.SetMaxOpenConns(8)
-	db.SetMaxIdleConns(2)
+	// Keep low for Supabase session-mode pooler (free tier pool_size=15
+	// shared across all function instances).
+	db.SetMaxOpenConns(3)
+	db.SetMaxIdleConns(1)
 	db.SetConnMaxLifetime(time.Minute)
 	// Supavisor (Supabase pooler) closes idle server connections; recycle
 	// ours first so the pool never hands out a dead connection after the
