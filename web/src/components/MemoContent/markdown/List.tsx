@@ -68,17 +68,37 @@ interface ListProps extends React.HTMLAttributes<HTMLUListElement | HTMLOListEle
 
 /**
  * List component for both regular and task lists (GFM)
- * Detects task lists via the "contains-task-list" class added by remark-gfm
+ * Detects task lists via the "contains-task-list" class added by remark-gfm.
+ * Task lists annotated by rehypeTaskProgress get a progress bar on top.
  */
 export const List = ({ ordered, children, className, node: _node, ...domProps }: ListProps) => {
   const Component = ordered ? "ol" : "ul";
   const isTaskList = className?.includes(TASK_LIST_CLASS);
   const listClass = isTaskList ? markdownStyles.taskList : ordered ? markdownStyles.orderedList : markdownStyles.bulletList;
 
+  const total = Number((domProps as Record<string, unknown>)["data-task-total"] ?? (domProps as Record<string, unknown>)["dataTaskTotal"] ?? 0);
+  const checked = Number(
+    (domProps as Record<string, unknown>)["data-task-checked"] ?? (domProps as Record<string, unknown>)["dataTaskChecked"] ?? 0,
+  );
+  const showProgress = isTaskList && total > 1;
+  const percent = total > 0 ? Math.round((checked / total) * 100) : 0;
+
   return (
-    <Component className={cn(listClass, className)} {...domProps}>
-      {children}
-    </Component>
+    <>
+      {showProgress && (
+        <div className="mb-1 flex items-center gap-2 text-xs text-muted-foreground" aria-hidden>
+          <div className="h-1.5 w-32 overflow-hidden rounded-full bg-muted">
+            <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${percent}%` }} />
+          </div>
+          <span>
+            {checked}/{total} · {percent}%
+          </span>
+        </div>
+      )}
+      <Component className={cn(listClass, className)} {...domProps}>
+        {children}
+      </Component>
+    </>
   );
 };
 
