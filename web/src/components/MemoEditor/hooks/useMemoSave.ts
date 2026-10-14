@@ -10,6 +10,7 @@ import type { Visibility } from "@/types/proto/api/memo_service_pb";
 import { useTranslate } from "@/utils/i18n";
 import { errorService, memoService, validationService } from "../services";
 import { useEditorContext } from "../state";
+import { restampDefaultCreateTime } from "../utils/deriveDefaultCreateTime";
 
 /** How long a closing host shows "Saved" before it unmounts the editor. */
 const SAVED_CONFIRMATION_MS = 900;
@@ -59,7 +60,16 @@ export function useMemoSave({
     dispatch(actions.setLoading("saving", true));
 
     try {
-      const result = await memoService.save(state, { memoName, parentMemoName, space: defaultSpace });
+      // A new memo composed on a selected day keeps the day but is stamped with
+      // the time of saving, so consecutive memos do not share one createTime.
+      const now = new Date();
+      const timestamps = memoName
+        ? state.timestamps
+        : {
+            createTime: restampDefaultCreateTime(state.timestamps.createTime, defaultCreateTime, now),
+            updateTime: restampDefaultCreateTime(state.timestamps.updateTime, defaultCreateTime, now),
+          };
+      const result = await memoService.save({ ...state, timestamps }, { memoName, parentMemoName, space: defaultSpace });
 
       if (!result.hasChanges) {
         toast.error(t("editor.no-changes-detected"));
@@ -108,6 +118,8 @@ export function useMemoSave({
 
       if (!memoName && !parentMemoName) {
         markNewMemo(result.memoName);
+      } else if (memoName) {
+        markNewMemo((currentName) => (currentName === memoName ? null : currentName));
       }
       onConfirm?.(result.memoName);
     } catch (error) {

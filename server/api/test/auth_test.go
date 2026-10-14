@@ -1,10 +1,13 @@
 package test
 
 import (
+	"bytes"
 	"context"
+	"log/slog"
 	"testing"
 	"time"
 
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -32,13 +35,14 @@ func TestAuthenticatorAccessTokenV2(t *testing.T) {
 			user.Username,
 			string(user.Role),
 			string(user.RowStatus),
+			user.PasswordHash,
 			[]byte(ts.Secret),
 		)
 		require.NoError(t, err)
 
 		// Authenticate
 		authenticator := auth.NewAuthenticator(ts.Store, ts.Secret)
-		claims, err := authenticator.AuthenticateByAccessTokenV2(token)
+		claims, err := authenticator.AuthenticateByAccessTokenV2(ctx, token)
 		require.NoError(t, err)
 		assert.NotNil(t, claims)
 		assert.Equal(t, user.ID, claims.UserID)
@@ -52,7 +56,7 @@ func TestAuthenticatorAccessTokenV2(t *testing.T) {
 		defer ts.Cleanup()
 
 		authenticator := auth.NewAuthenticator(ts.Store, ts.Secret)
-		_, err := authenticator.AuthenticateByAccessTokenV2("invalid-token")
+		_, err := authenticator.AuthenticateByAccessTokenV2(ctx, "invalid-token")
 		assert.Error(t, err)
 	})
 
@@ -69,13 +73,14 @@ func TestAuthenticatorAccessTokenV2(t *testing.T) {
 			user.Username,
 			string(user.Role),
 			string(user.RowStatus),
+			user.PasswordHash,
 			[]byte("secret-1"),
 		)
 		require.NoError(t, err)
 
 		// Try to authenticate with different secret
 		authenticator := auth.NewAuthenticator(ts.Store, "secret-2")
-		_, err = authenticator.AuthenticateByAccessTokenV2(token)
+		_, err = authenticator.AuthenticateByAccessTokenV2(ctx, token)
 		assert.Error(t, err)
 	})
 
@@ -90,6 +95,7 @@ func TestAuthenticatorAccessTokenV2(t *testing.T) {
 			user.Username,
 			string(user.Role),
 			string(user.RowStatus),
+			user.PasswordHash,
 			[]byte(ts.Secret),
 		)
 		require.NoError(t, err)
@@ -104,6 +110,41 @@ func TestAuthenticatorAccessTokenV2(t *testing.T) {
 		authenticator := auth.NewAuthenticator(ts.Store, ts.Secret)
 		result := authenticator.Authenticate(ctx, "Bearer "+token)
 		assert.Nil(t, result)
+	})
+
+	t.Run("rejects missing or mismatched password binding", func(t *testing.T) {
+		ts := NewTestService(t)
+		defer ts.Cleanup()
+		user, err := ts.CreateRegularUser(ctx, "password-binding")
+		require.NoError(t, err)
+		token, _, err := auth.GenerateAccessTokenV2(user.ID, user.Username, string(user.Role), string(user.RowStatus), user.PasswordHash, []byte(ts.Secret))
+		require.NoError(t, err)
+		claims, err := auth.ParseAccessTokenV2(token, []byte(ts.Secret))
+		require.NoError(t, err)
+		authenticator := auth.NewAuthenticator(ts.Store, ts.Secret)
+		for _, authHash := range []string{"", "wrong-password-binding"} {
+			claims.AuthHash = authHash
+			jwtToken := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+			jwtToken.Header["kid"] = auth.KeyID
+			unboundToken, err := jwtToken.SignedString([]byte(ts.Secret))
+			require.NoError(t, err)
+			_, err = authenticator.AuthenticateByAccessTokenV2(ctx, unboundToken)
+			require.Error(t, err)
+			require.Nil(t, authenticator.Authenticate(ctx, "Bearer "+unboundToken))
+		}
+	})
+
+	t.Run("profile changes preserve access tokens", func(t *testing.T) {
+		ts := NewTestService(t)
+		defer ts.Cleanup()
+		user, err := ts.CreateRegularUser(ctx, "profile-change")
+		require.NoError(t, err)
+		token, _, err := auth.GenerateAccessTokenV2(user.ID, user.Username, string(user.Role), string(user.RowStatus), user.PasswordHash, []byte(ts.Secret))
+		require.NoError(t, err)
+		nickname := "New display name"
+		_, err = ts.Store.UpdateUser(ctx, &store.UpdateUser{ID: user.ID, Nickname: &nickname})
+		require.NoError(t, err)
+		require.NotNil(t, auth.NewAuthenticator(ts.Store, ts.Secret).Authenticate(ctx, "Bearer "+token))
 	})
 }
 
@@ -296,7 +337,7 @@ func TestAuthenticatorPAT(t *testing.T) {
 
 		authenticator := auth.NewAuthenticator(ts.Store, ts.Secret)
 		_, _, err := authenticator.AuthenticateByPAT(ctx, "invalid-token-without-prefix")
-		assert.Error(t, err)
+		assert.ErrorIs(t, err, auth.ErrInvalidPAT)
 		assert.Contains(t, err.Error(), "invalid PAT format")
 	})
 
@@ -309,7 +350,13 @@ func TestAuthenticatorPAT(t *testing.T) {
 
 		authenticator := auth.NewAuthenticator(ts.Store, ts.Secret)
 		_, _, err := authenticator.AuthenticateByPAT(ctx, token)
-		assert.Error(t, err)
+		assert.ErrorIs(t, err, auth.ErrInvalidPAT)
+
+		// A rejected token is anonymous, not an error, for every entry point.
+		user, err := authenticator.AuthenticateToUser(ctx, "Bearer "+token, "")
+		require.NoError(t, err)
+		assert.Nil(t, user)
+		assert.Nil(t, authenticator.Authenticate(ctx, "Bearer "+token))
 	})
 
 	t.Run("fails with expired PAT", func(t *testing.T) {
@@ -337,7 +384,7 @@ func TestAuthenticatorPAT(t *testing.T) {
 		// Try to authenticate
 		authenticator := auth.NewAuthenticator(ts.Store, ts.Secret)
 		_, _, err = authenticator.AuthenticateByPAT(ctx, token)
-		assert.Error(t, err)
+		assert.ErrorIs(t, err, auth.ErrInvalidPAT)
 		assert.Contains(t, err.Error(), "expired")
 	})
 
@@ -404,8 +451,45 @@ func TestAuthenticatorPAT(t *testing.T) {
 		// Try to authenticate
 		authenticator := auth.NewAuthenticator(ts.Store, ts.Secret)
 		_, _, err = authenticator.AuthenticateByPAT(ctx, token)
-		assert.Error(t, err)
+		assert.ErrorIs(t, err, auth.ErrInvalidPAT)
 		assert.Contains(t, err.Error(), "archived")
+	})
+
+	t.Run("reports a store failure instead of a rejected token", func(t *testing.T) {
+		ts := NewTestService(t)
+		defer ts.Cleanup()
+
+		user, err := ts.CreateRegularUser(ctx, "pat-corrupt")
+		require.NoError(t, err)
+
+		// Store a PAT row the server cannot decode: lastUsedAt is not a timestamp.
+		token := auth.GeneratePersonalAccessToken()
+		tokenHash := auth.HashPersonalAccessToken(token)
+		_, err = ts.Store.GetDriver().UpsertUserSetting(ctx, &store.UserSetting{
+			UserID: user.ID,
+			Key:    storepb.UserSetting_PERSONAL_ACCESS_TOKENS,
+			Value:  `{"tokens":[{"tokenId":"pat-corrupt","tokenHash":"` + tokenHash + `","lastUsedAt":""}]}`,
+		})
+		require.NoError(t, err)
+
+		authenticator := auth.NewAuthenticator(ts.Store, ts.Secret)
+
+		_, _, err = authenticator.AuthenticateByPAT(ctx, token)
+		require.Error(t, err)
+		assert.False(t, errors.Is(err, auth.ErrInvalidPAT), "a store failure must not look like a rejected token: %v", err)
+
+		// AuthenticateToUser propagates the failure to its caller.
+		_, err = authenticator.AuthenticateToUser(ctx, "Bearer "+token, "")
+		require.Error(t, err)
+
+		// Authenticate treats the caller as anonymous but leaves a log entry.
+		var logs bytes.Buffer
+		previous := slog.Default()
+		slog.SetDefault(slog.New(slog.NewTextHandler(&logs, nil)))
+		defer slog.SetDefault(previous)
+
+		assert.Nil(t, authenticator.Authenticate(ctx, "Bearer "+token))
+		assert.Contains(t, logs.String(), "failed to resolve bearer token")
 	})
 }
 
