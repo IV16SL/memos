@@ -24,6 +24,11 @@ Add entries under a `## Unreleased` heading. After the release ships, rename it 
 
 ### Breaking
 
+- Access tokens are now bound to the user's password hash and become invalid immediately after a password change or
+  an administrator password reset. Pre-upgrade access tokens are also rejected; clients must refresh them or sign in
+  again. The browser session that changes its own password can still refresh; other refresh sessions are revoked.
+
+>>>>>>> 6c6c5b7 (fix(auth): invalidate access tokens after password changes)
 - The API no longer carries a `v1` version marker. Every client must update its paths:
   - REST routes move from `/api/v1/...` to `/api/...` (for example `GET /api/memos`). Server-sent events move from
     `/api/v1/sse` to `/api/sse`.
