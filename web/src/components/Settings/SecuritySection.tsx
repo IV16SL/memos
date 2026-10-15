@@ -105,16 +105,11 @@ function PasskeyCard() {
       } finally {
         setRegistering(false);
       }
-      const finish = await authServiceClient.finishPasskeyRegistration({
+      await authServiceClient.finishPasskeyRegistration({
         sessionToken: begin.sessionToken,
         credentialJson: JSON.stringify(attestation),
       });
       toast.success(t("setting.security.passkey-added"));
-      // Pop the rename dialog for the new passkey right away.
-      if (finish.passkey) {
-        setRenameTarget(finish.passkey);
-        setRenameValue(finish.passkey.displayName);
-      }
       reload();
     } catch (error) {
       handleError(error, toast.error, { context: "Register passkey" });
@@ -328,7 +323,7 @@ function TOTPSetupDialog({
           <div className="flex flex-col gap-4">
             <p className="text-sm text-muted-foreground">{t("setting.security.totp-scan-description")}</p>
             {otpauthUrl && (
-              <div className="flex justify-center rounded bg-white p-2">
+              <div className="mx-auto w-fit rounded bg-white p-2">
                 <QRCode value={otpauthUrl} size={180} />
               </div>
             )}
