@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "パスキーでサインイン",
     "sign-up-with-passkey": "パスキーでサインアップ",
     "totp-code-label": "ワンタイムコード",
-    "totp-required-description": "@{username} で二段階認証が有効になっています。認証アプリのコード（またはバックアップコード）を入力してください。",
+    "totp-required-description": "{{username}} で二段階認証が有効になっています。認証アプリのコード（またはバックアップコード）を入力してください。",
     "verify-totp": "確認"
   },
   "common": {

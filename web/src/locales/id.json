@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Masuk dengan kunci sandi",
     "sign-up-with-passkey": "Daftar dengan kunci sandi",
     "totp-code-label": "Kode sekali pakai",
-    "totp-required-description": "Autentikasi dua faktor diaktifkan untuk @{username}. Masukkan kode dari aplikasi autentikator (atau kode cadangan).",
+    "totp-required-description": "Autentikasi dua faktor diaktifkan untuk {{username}}. Masukkan kode dari aplikasi autentikator (atau kode cadangan).",
     "verify-totp": "Verifikasi"
   },
   "common": {

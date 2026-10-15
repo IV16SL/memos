@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "패스키로 로그인",
     "sign-up-with-passkey": "패스키로 가입",
     "totp-code-label": "일회용 코드",
-    "totp-required-description": "@{username}에 이중 인증이 설정되어 있습니다. 인증 앱의 코드(또는 백업 코드)를 입력하세요.",
+    "totp-required-description": "{{username}}에 이중 인증이 설정되어 있습니다. 인증 앱의 코드(또는 백업 코드)를 입력하세요.",
     "verify-totp": "확인"
   },
   "common": {

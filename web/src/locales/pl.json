@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Zaloguj się kluczem dostępu",
     "sign-up-with-passkey": "Zarejestruj się kluczem dostępu",
     "totp-code-label": "Kod jednorazowy",
-    "totp-required-description": "Uwierzytelnianie dwuskładnikowe jest włączone dla @{username}. Wprowadź kod z aplikacji uwierzytelniającej (lub kod zapasowy).",
+    "totp-required-description": "Uwierzytelnianie dwuskładnikowe jest włączone dla {{username}}. Wprowadź kod z aplikacji uwierzytelniającej (lub kod zapasowy).",
     "verify-totp": "Weryfikuj"
   },
   "common": {

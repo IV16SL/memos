@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Mit Passkey anmelden",
     "sign-up-with-passkey": "Mit Passkey registrieren",
     "totp-code-label": "Einmalcode",
-    "totp-required-description": "Für @{username} ist die Zwei-Faktor-Authentifizierung aktiviert. Gib den Code aus deiner Authentifizierungs-App ein (oder einen Wiederherstellungscode).",
+    "totp-required-description": "Für {{username}} ist die Zwei-Faktor-Authentifizierung aktiviert. Gib den Code aus deiner Authentifizierungs-App ein (oder einen Wiederherstellungscode).",
     "verify-totp": "Bestätigen"
   },
   "common": {

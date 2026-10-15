@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "התחברות עם מפתח גישה",
     "sign-up-with-passkey": "הרשמה עם מפתח גישה",
     "totp-code-label": "קוד חד-פעמי",
-    "totp-required-description": "אימות דו-שלבי מופעל עבור @{username}. הזינו את הקוד מאפליקציית האימות (או קוד גיבוי).",
+    "totp-required-description": "אימות דו-שלבי מופעל עבור {{username}}. הזינו את הקוד מאפליקציית האימות (או קוד גיבוי).",
     "verify-totp": "אימות"
   },
   "demo": {

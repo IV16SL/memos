@@ -117,7 +117,7 @@
     "sign-in-with-passkey": "Logg inn med passkey",
     "sign-up-with-passkey": "Registrer deg med passkey",
     "totp-code-label": "Eingongskode",
-    "totp-required-description": "Tofaktorautentisering er aktivert for @{username}. Skriv inn koden frå autentiseringsappen din (eller ein reservekode).",
+    "totp-required-description": "Tofaktorautentisering er aktivert for {{username}}. Skriv inn koden frå autentiseringsappen din (eller ein reservekode).",
     "verify-totp": "Stadfest"
   },
   "calendar": {

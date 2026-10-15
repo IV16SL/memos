@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Se connecter avec une clé d'accès",
     "sign-up-with-passkey": "S'inscrire avec une clé d'accès",
     "totp-code-label": "Code à usage unique",
-    "totp-required-description": "L'authentification à deux facteurs est activée pour @{username}. Saisissez le code de votre application d'authentification (ou un code de secours).",
+    "totp-required-description": "L'authentification à deux facteurs est activée pour {{username}}. Saisissez le code de votre application d'authentification (ou un code de secours).",
     "verify-totp": "Vérifier"
   },
   "common": {

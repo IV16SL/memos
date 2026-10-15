@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "使用通行密鑰登入",
     "sign-up-with-passkey": "使用通行密鑰註冊",
     "totp-code-label": "一次性驗證碼",
-    "totp-required-description": "@{username} 已啟用雙重驗證。請輸入驗證器應用中的驗證碼（或備用恢復碼）。",
+    "totp-required-description": "{{username}} 已啟用雙重驗證。請輸入驗證器應用中的驗證碼（或備用恢復碼）。",
     "verify-totp": "驗證"
   },
   "calendar": {

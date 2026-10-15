@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Inloggen met passkey",
     "sign-up-with-passkey": "Registreren met passkey",
     "totp-code-label": "Eenmalige code",
-    "totp-required-description": "Tweefactorauthenticatie is ingeschakeld voor @{username}. Voer de code uit je authenticator-app in (of een back-upcode).",
+    "totp-required-description": "Tweefactorauthenticatie is ingeschakeld voor {{username}}. Voer de code uit je authenticator-app in (of een back-upcode).",
     "verify-totp": "Verifiëren"
   },
   "common": {

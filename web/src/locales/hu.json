@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Bejelentkezés jelkulccsal",
     "sign-up-with-passkey": "Regisztráció jelkulccsal",
     "totp-code-label": "Egyszeri kód",
-    "totp-required-description": "A(z) @{username} fióknál be van kapcsolva a kétlépcsős hitelesítés. Adja meg a hitelesítő alkalmazás kódját (vagy egy tartalék kódot).",
+    "totp-required-description": "A(z) {{username}} fióknál be van kapcsolva a kétlépcsős hitelesítés. Adja meg a hitelesítő alkalmazás kódját (vagy egy tartalék kódot).",
     "verify-totp": "Ellenőrzés"
   },
   "common": {

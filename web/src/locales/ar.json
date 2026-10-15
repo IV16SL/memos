@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "تسجيل الدخول بمفتاح المرور",
     "sign-up-with-passkey": "إنشاء حساب بمفتاح المرور",
     "totp-code-label": "رمز لمرة واحدة",
-    "totp-required-description": "تم تفعيل المصادقة الثنائية للحساب @{username}. أدخل الرمز من تطبيق المصادقة (أو رمزًا احتياطيًا).",
+    "totp-required-description": "تم تفعيل المصادقة الثنائية للحساب {{username}}. أدخل الرمز من تطبيق المصادقة (أو رمزًا احتياطيًا).",
     "verify-totp": "تحقق"
   },
   "common": {

@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Logi sisse pääsuvõtmega",
     "sign-up-with-passkey": "Registreeru pääsuvõtmega",
     "totp-code-label": "Ühekordne kood",
-    "totp-required-description": "Kasutaja @{username} jaoks on kahefaktoriline autentimine sisse lülitatud. Sisesta kood oma autentimisrakendusest (või varukood).",
+    "totp-required-description": "Kasutaja {{username}} jaoks on kahefaktoriline autentimine sisse lülitatud. Sisesta kood oma autentimisrakendusest (või varukood).",
     "verify-totp": "Kinnita"
   },
   "demo": {

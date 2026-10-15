@@ -73,7 +73,7 @@
     "sign-in-with-passkey": "Geçiş anahtarıyla giriş yap",
     "sign-up-with-passkey": "Geçiş anahtarıyla kaydol",
     "totp-code-label": "Tek kullanımlık kod",
-    "totp-required-description": "@{username} için iki faktörlü kimlik doğrulama etkin. Kimlik doğrulayıcı uygulamanızdaki kodu (veya bir yedek kodu) girin.",
+    "totp-required-description": "{{username}} için iki faktörlü kimlik doğrulama etkin. Kimlik doğrulayıcı uygulamanızdaki kodu (veya bir yedek kodu) girin.",
     "verify-totp": "Doğrula"
   },
   "calendar": {

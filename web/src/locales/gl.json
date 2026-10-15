@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Iniciar sesión coa chave de acceso",
     "sign-up-with-passkey": "Rexistrarse coa chave de acceso",
     "totp-code-label": "Código dun só uso",
-    "totp-required-description": "A autenticación en dous pasos está activada para @{username}. Introduce o código da túa aplicación de autenticación (ou un código de recuperación).",
+    "totp-required-description": "A autenticación en dous pasos está activada para {{username}}. Introduce o código da túa aplicación de autenticación (ou un código de recuperación).",
     "verify-totp": "Verificar"
   },
   "common": {

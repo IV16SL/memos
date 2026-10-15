@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Pieteikties ar piekļuves atslēgu",
     "sign-up-with-passkey": "Reģistrēties ar piekļuves atslēgu",
     "totp-code-label": "Vienreizējais kods",
-    "totp-required-description": "Lietotājam @{username} ir iespējota divfaktoru autentifikācija. Ievadiet kodu no savas autentifikācijas lietotnes (vai rezerves kodu).",
+    "totp-required-description": "Lietotājam {{username}} ir iespējota divfaktoru autentifikācija. Ievadiet kodu no savas autentifikācijas lietotnes (vai rezerves kodu).",
     "verify-totp": "Apstiprināt"
   },
   "demo": {

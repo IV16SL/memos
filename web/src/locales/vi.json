@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Đăng nhập bằng passkey",
     "sign-up-with-passkey": "Đăng ký bằng passkey",
     "totp-code-label": "Mã dùng một lần",
-    "totp-required-description": "Xác thực hai yếu tố đã được bật cho @{username}. Nhập mã từ ứng dụng xác thực (hoặc mã dự phòng).",
+    "totp-required-description": "Xác thực hai yếu tố đã được bật cho {{username}}. Nhập mã từ ứng dụng xác thực (hoặc mã dự phòng).",
     "verify-totp": "Xác minh"
   },
   "common": {

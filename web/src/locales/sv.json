@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Logga in med passkey",
     "sign-up-with-passkey": "Registrera dig med passkey",
     "totp-code-label": "Engångskod",
-    "totp-required-description": "Tvåfaktorsautentisering är aktiverad för @{username}. Ange koden från din autentiseringsapp (eller en reservkod).",
+    "totp-required-description": "Tvåfaktorsautentisering är aktiverad för {{username}}. Ange koden från din autentiseringsapp (eller en reservkod).",
     "verify-totp": "Verifiera"
   },
   "common": {

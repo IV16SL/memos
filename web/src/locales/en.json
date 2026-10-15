@@ -67,7 +67,7 @@
     "signups-closed-title": "Sign-ups are closed",
     "sso-signup-tip": "Sign in with a provider below to create your account.",
     "welcome-back": "Welcome back.",
-    "totp-required-description": "Two-factor authentication is enabled for @{username}. Enter the code from your authenticator app (or a backup code).",
+    "totp-required-description": "Two-factor authentication is enabled for {{username}}. Enter the code from your authenticator app (or a backup code).",
     "totp-code-label": "One-time code",
     "verify-totp": "Verify",
     "sign-in-with-passkey": "Sign in with passkey",

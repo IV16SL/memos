@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "पैसेकी से साइन इन करें",
     "sign-up-with-passkey": "पैसेकी से साइन अप करें",
     "totp-code-label": "वन-टाइम कोड",
-    "totp-required-description": "@{username} के लिए दो-चरणीय प्रमाणीकरण सक्षम है। अपने ऑथेंटिकेटर ऐप का कोड (या बैकअप कोड) दर्ज करें।",
+    "totp-required-description": "{{username}} के लिए दो-चरणीय प्रमाणीकरण सक्षम है। अपने ऑथेंटिकेटर ऐप का कोड (या बैकअप कोड) दर्ज करें।",
     "verify-totp": "सत्यापित करें"
   },
   "common": {

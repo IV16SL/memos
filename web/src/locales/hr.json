@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Prijava pristupnim ključem",
     "sign-up-with-passkey": "Registracija pristupnim ključem",
     "totp-code-label": "Jednokratni kôd",
-    "totp-required-description": "Dvofaktorska autentifikacija uključena je za @{username}. Unesite kôd iz aplikacije za autentifikaciju (ili rezervni kôd).",
+    "totp-required-description": "Dvofaktorska autentifikacija uključena je za {{username}}. Unesite kôd iz aplikacije za autentifikaciju (ili rezervni kôd).",
     "verify-totp": "Potvrdi"
   },
   "common": {

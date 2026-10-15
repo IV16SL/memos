@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Accedi con passkey",
     "sign-up-with-passkey": "Registrati con passkey",
     "totp-code-label": "Codice monouso",
-    "totp-required-description": "L'autenticazione a due fattori è attiva per @{username}. Inserisci il codice dall'app di autenticazione (o un codice di backup).",
+    "totp-required-description": "L'autenticazione a due fattori è attiva per {{username}}. Inserisci il codice dall'app di autenticazione (o un codice di backup).",
     "verify-totp": "Verifica"
   },
   "common": {

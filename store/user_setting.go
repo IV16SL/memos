@@ -58,7 +58,11 @@ func (s *Store) UpsertUserSetting(ctx context.Context, upsert *storepb.UserSetti
 	if userSetting == nil {
 		return nil, errors.New("unexpected nil user setting")
 	}
-	s.userSettingCache.Set(ctx, getUserSettingCacheKey(userSetting.UserId, userSetting.Key.String()), userSetting)
+	// See GetUserSetting: skip the cache for keys that must stay consistent
+	// across serverless instances.
+	if userSetting.Key != storepb.UserSetting_PASSKEYS && userSetting.Key != storepb.UserSetting_TOTP {
+		s.userSettingCache.Set(ctx, getUserSettingCacheKey(userSetting.UserId, userSetting.Key.String()), userSetting)
+	}
 	return userSetting, nil
 }
 
@@ -84,7 +88,13 @@ func (s *Store) ListUserSettings(ctx context.Context, find *FindUserSetting) ([]
 }
 
 func (s *Store) GetUserSetting(ctx context.Context, find *FindUserSetting) (*storepb.UserSetting, error) {
-	if find.UserID != nil {
+	// Passkeys and TOTP settings are read immediately after writes during
+	// management flows (add/rename/delete, enable/disable). On serverless
+	// deployments each instance has its own in-memory cache, so a read on a
+	// different instance would see stale data for up to the cache TTL.
+	// Bypass the cache for these keys to keep them consistent.
+	useCache := find.Key != storepb.UserSetting_PASSKEYS && find.Key != storepb.UserSetting_TOTP
+	if find.UserID != nil && useCache {
 		if cache, ok := s.userSettingCache.Get(ctx, getUserSettingCacheKey(*find.UserID, find.Key.String())); ok {
 			userSetting, ok := cache.(*storepb.UserSetting)
 			if ok {
@@ -105,7 +115,9 @@ func (s *Store) GetUserSetting(ctx context.Context, find *FindUserSetting) (*sto
 	}
 
 	userSetting := list[0]
-	s.userSettingCache.Set(ctx, getUserSettingCacheKey(userSetting.UserId, userSetting.Key.String()), userSetting)
+	if useCache {
+		s.userSettingCache.Set(ctx, getUserSettingCacheKey(userSetting.UserId, userSetting.Key.String()), userSetting)
+	}
 	return userSetting, nil
 }
 

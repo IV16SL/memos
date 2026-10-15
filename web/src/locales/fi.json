@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Kirjaudu pääsyavaimella",
     "sign-up-with-passkey": "Rekisteröidy pääsyavaimella",
     "totp-code-label": "Kertakoodi",
-    "totp-required-description": "Kaksivaiheinen tunnistautuminen on käytössä käyttäjälle @{username}. Syötä todennussovelluksen koodi (tai varakoodi).",
+    "totp-required-description": "Kaksivaiheinen tunnistautuminen on käytössä käyttäjälle {{username}}. Syötä todennussovelluksen koodi (tai varakoodi).",
     "verify-totp": "Vahvista"
   },
   "demo": {

@@ -73,7 +73,7 @@
     "sign-in-with-passkey": "Passkey ilə daxil ol",
     "sign-up-with-passkey": "Passkey ilə qeydiyyatdan keç",
     "totp-code-label": "Birdəfəlik kod",
-    "totp-required-description": "@{username} üçün iki faktorlu autentifikasiya aktivdir. Autentifikator tətbiqindəki kodu (və ya ehtiyat kodu) daxil edin.",
+    "totp-required-description": "{{username}} üçün iki faktorlu autentifikasiya aktivdir. Autentifikator tətbiqindəki kodu (və ya ehtiyat kodu) daxil edin.",
     "verify-totp": "Təsdiqlə"
   },
   "calendar": {

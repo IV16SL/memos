@@ -67,7 +67,7 @@
     "signups-closed-title": "注册已关闭",
     "sso-signup-tip": "使用以下登录方式即可创建账号。",
     "welcome-back": "欢迎回来。",
-    "totp-required-description": "@{username} 已启用双重验证。请输入验证器应用的验证码（或恢复码）。",
+    "totp-required-description": "{{username}} 已启用双重验证。请输入验证器应用的验证码（或恢复码）。",
     "totp-code-label": "一次性验证码",
     "verify-totp": "验证",
     "sign-in-with-passkey": "使用通行密钥登录",

@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Prihlásiť sa prístupovým kľúčom",
     "sign-up-with-passkey": "Registrovať sa prístupovým kľúčom",
     "totp-code-label": "Jednorazový kód",
-    "totp-required-description": "Pre účet @{username} je zapnuté dvojfázové overenie. Zadajte kód z overovacej aplikácie (alebo záložný kód).",
+    "totp-required-description": "Pre účet {{username}} je zapnuté dvojfázové overenie. Zadajte kód z overovacej aplikácie (alebo záložný kód).",
     "verify-totp": "Overiť"
   },
   "demo": {

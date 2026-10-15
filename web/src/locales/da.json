@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Log ind med adgangsnøgle",
     "sign-up-with-passkey": "Opret konto med adgangsnøgle",
     "totp-code-label": "Engangskode",
-    "totp-required-description": "Tofaktorgodkendelse er aktiveret for @{username}. Indtast koden fra din godkendelsesapp (eller en backupkode).",
+    "totp-required-description": "Tofaktorgodkendelse er aktiveret for {{username}}. Indtast koden fra din godkendelsesapp (eller en backupkode).",
     "verify-totp": "Bekræft"
   },
   "demo": {

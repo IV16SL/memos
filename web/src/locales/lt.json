@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Prisijungti prieigos raktu",
     "sign-up-with-passkey": "Registruotis prieigos raktu",
     "totp-code-label": "Vienkartinis kodas",
-    "totp-required-description": "Vartotojui @{username} įjungtas dviejų veiksnių autentifikavimas. Įveskite kodą iš autentifikavimo programėlės (arba atsarginį kodą).",
+    "totp-required-description": "Vartotojui {{username}} įjungtas dviejų veiksnių autentifikavimas. Įveskite kodą iš autentifikavimo programėlės (arba atsarginį kodą).",
     "verify-totp": "Patvirtinti"
   },
   "demo": {

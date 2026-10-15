@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Inicia sessió amb clau d'accés",
     "sign-up-with-passkey": "Registra't amb clau d'accés",
     "totp-code-label": "Codi d'un sol ús",
-    "totp-required-description": "L'autenticació en dos passos està activada per a @{username}. Introdueix el codi de l'aplicació d'autenticació (o un codi de recuperació).",
+    "totp-required-description": "L'autenticació en dos passos està activada per a {{username}}. Introdueix el codi de l'aplicació d'autenticació (o un codi de recuperació).",
     "verify-totp": "Verifica"
   },
   "common": {

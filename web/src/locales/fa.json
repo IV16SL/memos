@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "ورود با کلید عبور",
     "sign-up-with-passkey": "ثبت‌نام با کلید عبور",
     "totp-code-label": "کد یک‌بارمصرف",
-    "totp-required-description": "احراز هویت دومرحله‌ای برای @{username} فعال است. کد برنامه احراز هویت (یا یک کد پشتیبان) را وارد کنید.",
+    "totp-required-description": "احراز هویت دومرحله‌ای برای {{username}} فعال است. کد برنامه احراز هویت (یا یک کد پشتیبان) را وارد کنید.",
     "verify-totp": "تأیید"
   },
   "common": {

@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Autentificare cu cheia de acces",
     "sign-up-with-passkey": "Înregistrare cu cheia de acces",
     "totp-code-label": "Cod de unică folosință",
-    "totp-required-description": "Autentificarea în doi pași este activată pentru @{username}. Introduceți codul din aplicația de autentificare (sau un cod de rezervă).",
+    "totp-required-description": "Autentificarea în doi pași este activată pentru {{username}}. Introduceți codul din aplicația de autentificare (sau un cod de rezervă).",
     "verify-totp": "Verifică"
   },
   "demo": {

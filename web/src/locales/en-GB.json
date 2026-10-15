@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Sign in with passkey",
     "sign-up-with-passkey": "Sign up with passkey",
     "totp-code-label": "One-time code",
-    "totp-required-description": "Two-factor authentication is enabled for @{username}. Enter the code from your authenticator app (or a backup code).",
+    "totp-required-description": "Two-factor authentication is enabled for {{username}}. Enter the code from your authenticator app (or a backup code).",
     "verify-totp": "Verify"
   },
   "common": {

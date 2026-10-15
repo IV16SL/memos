@@ -51,7 +51,7 @@
     "sign-in-with-passkey": "Iniciar sessão com chave de acesso",
     "sign-up-with-passkey": "Registar-se com chave de acesso",
     "totp-code-label": "Código de utilização única",
-    "totp-required-description": "A autenticação de dois fatores está ativada para @{username}. Introduza o código da sua aplicação de autenticação (ou um código de reserva).",
+    "totp-required-description": "A autenticação de dois fatores está ativada para {{username}}. Introduza o código da sua aplicação de autenticação (ou um código de reserva).",
     "verify-totp": "Verificar"
   },
   "common": {
