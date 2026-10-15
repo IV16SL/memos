@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { authServiceClient } from "@/connect";
 import { useDialog } from "@/hooks/useDialog";
 import { handleError } from "@/lib/error";
+import { isWebAuthnNotAllowedError } from "@/lib/webauthn";
 import type { Passkey } from "@/types/proto/api/auth_service_pb";
 import { useTranslate } from "@/utils/i18n";
 import SettingGroup from "./SettingGroup";
@@ -97,7 +98,7 @@ function PasskeyCard() {
       try {
         attestation = await startRegistration({ optionsJSON: JSON.parse(begin.optionsJson) });
       } catch (error) {
-        if (error instanceof Error && error.name === "NotAllowedError") {
+        if (isWebAuthnNotAllowedError(error)) {
           return;
         }
         throw error;
@@ -333,7 +334,7 @@ function TOTPSetupDialog({
                 id="totp-code"
                 inputMode="numeric"
                 autoComplete="one-time-code"
-                placeholder="123456"
+                placeholder="XXXXXX"
                 value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 8))}
               />

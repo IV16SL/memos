@@ -969,7 +969,7 @@
       "totp-title": "验证器应用 (TOTP)",
       "totp-description": "登录时在密码之外再要求输入一次性验证码。",
       "enable-totp": "启用验证器应用",
-      "totp-scan-description": "用验证器应用（如 1Password、Authy、Google Authenticator）扫描二维码，然后在下方输入 6 位验证码完成确认。",
+      "totp-scan-description": "用验证器应用扫描二维码，然后在下方输入 6 位验证码完成确认。",
       "totp-code-label": "一次性验证码",
       "totp-enabled": "双重验证已启用",
       "backup-codes-description": "请把这些恢复码保存在安全的地方。如果无法使用验证器应用，每个恢复码可使用一次。此页面关闭后将不再显示。",

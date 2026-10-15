@@ -12,6 +12,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import useLoading from "@/hooks/useLoading";
 import useNavigateTo from "@/hooks/useNavigateTo";
 import { handleError } from "@/lib/error";
+import { isWebAuthnNotAllowedError } from "@/lib/webauthn";
 import { ROUTES } from "@/router/routes";
 import { useTranslate } from "@/utils/i18n";
 
@@ -47,7 +48,7 @@ function PasskeySignupSection({ redirectPath }: PasskeySignupSectionProps) {
       try {
         attestation = await startRegistration({ optionsJSON: JSON.parse(begin.optionsJson) });
       } catch (error) {
-        if (error instanceof Error && error.name === "NotAllowedError") {
+        if (isWebAuthnNotAllowedError(error)) {
           return;
         }
         throw error;

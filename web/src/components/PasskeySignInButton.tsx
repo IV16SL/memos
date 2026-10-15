@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import useLoading from "@/hooks/useLoading";
 import useNavigateTo from "@/hooks/useNavigateTo";
 import { handleError } from "@/lib/error";
+import { isWebAuthnNotAllowedError } from "@/lib/webauthn";
 import { ROUTES } from "@/router/routes";
 import { useTranslate } from "@/utils/i18n";
 
@@ -38,7 +39,7 @@ function PasskeySignInButton({ redirectPath }: PasskeySignInButtonProps) {
         assertion = await startAuthentication({ optionsJSON: JSON.parse(begin.optionsJson) });
       } catch (error) {
         // User cancelled the browser prompt or no passkey is available.
-        if (error instanceof Error && error.name === "NotAllowedError") {
+        if (isWebAuthnNotAllowedError(error)) {
           return;
         }
         throw error;

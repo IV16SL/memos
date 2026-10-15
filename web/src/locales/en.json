@@ -1055,7 +1055,7 @@
       "totp-title": "Authenticator app (TOTP)",
       "totp-description": "Require a time-based one-time code after your password when signing in.",
       "enable-totp": "Enable authenticator app",
-      "totp-scan-description": "Scan the QR code with your authenticator app (e.g. 1Password, Authy, Google Authenticator), then enter the 6-digit code below to confirm.",
+      "totp-scan-description": "Scan the QR code with your authenticator app, then enter the 6-digit code below to confirm.",
       "totp-code-label": "One-time code",
       "totp-enabled": "Two-factor authentication enabled",
       "backup-codes-description": "Save these backup codes somewhere safe. Each code can be used once if you lose access to your authenticator app. They will not be shown again.",
