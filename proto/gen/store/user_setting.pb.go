@@ -39,18 +39,24 @@ const (
 	UserSetting_PERSONAL_ACCESS_TOKENS UserSetting_Key = 7
 	// Per-user tag metadata.
 	UserSetting_TAGS UserSetting_Key = 8
+	// TOTP two-factor authentication settings.
+	UserSetting_TOTP UserSetting_Key = 9
+	// Passkey (WebAuthn) credentials.
+	UserSetting_PASSKEYS UserSetting_Key = 10
 )
 
 // Enum value maps for UserSetting_Key.
 var (
 	UserSetting_Key_name = map[int32]string{
-		0: "KEY_UNSPECIFIED",
-		1: "GENERAL",
-		4: "MEMO_VIEWS",
-		5: "WEBHOOKS",
-		6: "REFRESH_TOKENS",
-		7: "PERSONAL_ACCESS_TOKENS",
-		8: "TAGS",
+		0:  "KEY_UNSPECIFIED",
+		1:  "GENERAL",
+		4:  "MEMO_VIEWS",
+		5:  "WEBHOOKS",
+		6:  "REFRESH_TOKENS",
+		7:  "PERSONAL_ACCESS_TOKENS",
+		8:  "TAGS",
+		9:  "TOTP",
+		10: "PASSKEYS",
 	}
 	UserSetting_Key_value = map[string]int32{
 		"KEY_UNSPECIFIED":        0,
@@ -60,6 +66,8 @@ var (
 		"REFRESH_TOKENS":         6,
 		"PERSONAL_ACCESS_TOKENS": 7,
 		"TAGS":                   8,
+		"TOTP":                   9,
+		"PASSKEYS":               10,
 	}
 )
 
@@ -102,6 +110,8 @@ type UserSetting struct {
 	//	*UserSetting_RefreshTokens
 	//	*UserSetting_PersonalAccessTokens
 	//	*UserSetting_Tags
+	//	*UserSetting_Totp
+	//	*UserSetting_Passkeys
 	Value         isUserSetting_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -212,6 +222,24 @@ func (x *UserSetting) GetTags() *TagsUserSetting {
 	return nil
 }
 
+func (x *UserSetting) GetTotp() *TotpUserSetting {
+	if x != nil {
+		if x, ok := x.Value.(*UserSetting_Totp); ok {
+			return x.Totp
+		}
+	}
+	return nil
+}
+
+func (x *UserSetting) GetPasskeys() *PasskeysUserSetting {
+	if x != nil {
+		if x, ok := x.Value.(*UserSetting_Passkeys); ok {
+			return x.Passkeys
+		}
+	}
+	return nil
+}
+
 type isUserSetting_Value interface {
 	isUserSetting_Value()
 }
@@ -240,6 +268,14 @@ type UserSetting_Tags struct {
 	Tags *TagsUserSetting `protobuf:"bytes,10,opt,name=tags,proto3,oneof"`
 }
 
+type UserSetting_Totp struct {
+	Totp *TotpUserSetting `protobuf:"bytes,11,opt,name=totp,proto3,oneof"`
+}
+
+type UserSetting_Passkeys struct {
+	Passkeys *PasskeysUserSetting `protobuf:"bytes,12,opt,name=passkeys,proto3,oneof"`
+}
+
 func (*UserSetting_General) isUserSetting_Value() {}
 
 func (*UserSetting_MemoViews) isUserSetting_Value() {}
@@ -251,6 +287,10 @@ func (*UserSetting_RefreshTokens) isUserSetting_Value() {}
 func (*UserSetting_PersonalAccessTokens) isUserSetting_Value() {}
 
 func (*UserSetting_Tags) isUserSetting_Value() {}
+
+func (*UserSetting_Totp) isUserSetting_Value() {}
+
+func (*UserSetting_Passkeys) isUserSetting_Value() {}
 
 type GeneralUserSetting struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -604,6 +644,225 @@ func (x *WebhooksUserSetting) GetWebhooks() []*WebhooksUserSetting_Webhook {
 	return nil
 }
 
+// TotpUserSetting holds the two-factor authentication state of a user.
+// The TOTP secret is AES-GCM encrypted with a server-side key before storage;
+// backup codes are stored as SHA-256 hex digests and are single-use.
+type TotpUserSetting struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// AES-GCM encrypted TOTP secret (base32-encoded plaintext before encryption).
+	EncryptedSecret []byte `protobuf:"bytes,1,opt,name=encrypted_secret,json=encryptedSecret,proto3" json:"encrypted_secret,omitempty"`
+	// SHA-256 hex digests of unused backup codes.
+	BackupCodeHashes []string `protobuf:"bytes,2,rep,name=backup_code_hashes,json=backupCodeHashes,proto3" json:"backup_code_hashes,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *TotpUserSetting) Reset() {
+	*x = TotpUserSetting{}
+	mi := &file_store_user_setting_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TotpUserSetting) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TotpUserSetting) ProtoMessage() {}
+
+func (x *TotpUserSetting) ProtoReflect() protoreflect.Message {
+	mi := &file_store_user_setting_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TotpUserSetting.ProtoReflect.Descriptor instead.
+func (*TotpUserSetting) Descriptor() ([]byte, []int) {
+	return file_store_user_setting_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *TotpUserSetting) GetEncryptedSecret() []byte {
+	if x != nil {
+		return x.EncryptedSecret
+	}
+	return nil
+}
+
+func (x *TotpUserSetting) GetBackupCodeHashes() []string {
+	if x != nil {
+		return x.BackupCodeHashes
+	}
+	return nil
+}
+
+// PasskeyCredential is a single WebAuthn credential registered by a user.
+// The public key is public by design; the credential ID is an opaque handle.
+type PasskeyCredential struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The credential ID (opaque bytes from the authenticator).
+	CredentialId []byte `protobuf:"bytes,1,opt,name=credential_id,json=credentialId,proto3" json:"credential_id,omitempty"`
+	// The COSE-encoded public key.
+	PublicKey []byte `protobuf:"bytes,2,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
+	// The signature counter at last use, for clone detection.
+	SignCount uint32 `protobuf:"varint,3,opt,name=sign_count,json=signCount,proto3" json:"sign_count,omitempty"`
+	// User-supplied label, e.g. "MacBook Touch ID".
+	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	// Transports hinted by the authenticator (e.g. "internal", "hybrid", "usb").
+	Transports []string `protobuf:"bytes,5,rep,name=transports,proto3" json:"transports,omitempty"`
+	// Whether the credential is eligible for backup (multi-device).
+	BackupEligible bool `protobuf:"varint,6,opt,name=backup_eligible,json=backupEligible,proto3" json:"backup_eligible,omitempty"`
+	// Whether the credential is currently backed up.
+	BackedUp      bool                   `protobuf:"varint,7,opt,name=backed_up,json=backedUp,proto3" json:"backed_up,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	LastUsedAt    *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_used_at,json=lastUsedAt,proto3" json:"last_used_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasskeyCredential) Reset() {
+	*x = PasskeyCredential{}
+	mi := &file_store_user_setting_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasskeyCredential) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasskeyCredential) ProtoMessage() {}
+
+func (x *PasskeyCredential) ProtoReflect() protoreflect.Message {
+	mi := &file_store_user_setting_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasskeyCredential.ProtoReflect.Descriptor instead.
+func (*PasskeyCredential) Descriptor() ([]byte, []int) {
+	return file_store_user_setting_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *PasskeyCredential) GetCredentialId() []byte {
+	if x != nil {
+		return x.CredentialId
+	}
+	return nil
+}
+
+func (x *PasskeyCredential) GetPublicKey() []byte {
+	if x != nil {
+		return x.PublicKey
+	}
+	return nil
+}
+
+func (x *PasskeyCredential) GetSignCount() uint32 {
+	if x != nil {
+		return x.SignCount
+	}
+	return 0
+}
+
+func (x *PasskeyCredential) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PasskeyCredential) GetTransports() []string {
+	if x != nil {
+		return x.Transports
+	}
+	return nil
+}
+
+func (x *PasskeyCredential) GetBackupEligible() bool {
+	if x != nil {
+		return x.BackupEligible
+	}
+	return false
+}
+
+func (x *PasskeyCredential) GetBackedUp() bool {
+	if x != nil {
+		return x.BackedUp
+	}
+	return false
+}
+
+func (x *PasskeyCredential) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *PasskeyCredential) GetLastUsedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastUsedAt
+	}
+	return nil
+}
+
+// PasskeysUserSetting holds all WebAuthn credentials of a user.
+type PasskeysUserSetting struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Credentials   []*PasskeyCredential   `protobuf:"bytes,1,rep,name=credentials,proto3" json:"credentials,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PasskeysUserSetting) Reset() {
+	*x = PasskeysUserSetting{}
+	mi := &file_store_user_setting_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PasskeysUserSetting) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasskeysUserSetting) ProtoMessage() {}
+
+func (x *PasskeysUserSetting) ProtoReflect() protoreflect.Message {
+	mi := &file_store_user_setting_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasskeysUserSetting.ProtoReflect.Descriptor instead.
+func (*PasskeysUserSetting) Descriptor() ([]byte, []int) {
+	return file_store_user_setting_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *PasskeysUserSetting) GetCredentials() []*PasskeyCredential {
+	if x != nil {
+		return x.Credentials
+	}
+	return nil
+}
+
 type RefreshTokensUserSetting_RefreshToken struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier (matches 'tid' claim in JWT)
@@ -622,7 +881,7 @@ type RefreshTokensUserSetting_RefreshToken struct {
 
 func (x *RefreshTokensUserSetting_RefreshToken) Reset() {
 	*x = RefreshTokensUserSetting_RefreshToken{}
-	mi := &file_store_user_setting_proto_msgTypes[9]
+	mi := &file_store_user_setting_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -634,7 +893,7 @@ func (x *RefreshTokensUserSetting_RefreshToken) String() string {
 func (*RefreshTokensUserSetting_RefreshToken) ProtoMessage() {}
 
 func (x *RefreshTokensUserSetting_RefreshToken) ProtoReflect() protoreflect.Message {
-	mi := &file_store_user_setting_proto_msgTypes[9]
+	mi := &file_store_user_setting_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -703,7 +962,7 @@ type RefreshTokensUserSetting_ClientInfo struct {
 
 func (x *RefreshTokensUserSetting_ClientInfo) Reset() {
 	*x = RefreshTokensUserSetting_ClientInfo{}
-	mi := &file_store_user_setting_proto_msgTypes[10]
+	mi := &file_store_user_setting_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -715,7 +974,7 @@ func (x *RefreshTokensUserSetting_ClientInfo) String() string {
 func (*RefreshTokensUserSetting_ClientInfo) ProtoMessage() {}
 
 func (x *RefreshTokensUserSetting_ClientInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_store_user_setting_proto_msgTypes[10]
+	mi := &file_store_user_setting_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -786,7 +1045,7 @@ type PersonalAccessTokensUserSetting_PersonalAccessToken struct {
 
 func (x *PersonalAccessTokensUserSetting_PersonalAccessToken) Reset() {
 	*x = PersonalAccessTokensUserSetting_PersonalAccessToken{}
-	mi := &file_store_user_setting_proto_msgTypes[11]
+	mi := &file_store_user_setting_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -798,7 +1057,7 @@ func (x *PersonalAccessTokensUserSetting_PersonalAccessToken) String() string {
 func (*PersonalAccessTokensUserSetting_PersonalAccessToken) ProtoMessage() {}
 
 func (x *PersonalAccessTokensUserSetting_PersonalAccessToken) ProtoReflect() protoreflect.Message {
-	mi := &file_store_user_setting_proto_msgTypes[11]
+	mi := &file_store_user_setting_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -868,7 +1127,7 @@ type MemoViewsUserSetting_MemoView struct {
 
 func (x *MemoViewsUserSetting_MemoView) Reset() {
 	*x = MemoViewsUserSetting_MemoView{}
-	mi := &file_store_user_setting_proto_msgTypes[12]
+	mi := &file_store_user_setting_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -880,7 +1139,7 @@ func (x *MemoViewsUserSetting_MemoView) String() string {
 func (*MemoViewsUserSetting_MemoView) ProtoMessage() {}
 
 func (x *MemoViewsUserSetting_MemoView) ProtoReflect() protoreflect.Message {
-	mi := &file_store_user_setting_proto_msgTypes[12]
+	mi := &file_store_user_setting_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -937,7 +1196,7 @@ type MemoViewsUserSetting_MemoView_Icon struct {
 
 func (x *MemoViewsUserSetting_MemoView_Icon) Reset() {
 	*x = MemoViewsUserSetting_MemoView_Icon{}
-	mi := &file_store_user_setting_proto_msgTypes[13]
+	mi := &file_store_user_setting_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -949,7 +1208,7 @@ func (x *MemoViewsUserSetting_MemoView_Icon) String() string {
 func (*MemoViewsUserSetting_MemoView_Icon) ProtoMessage() {}
 
 func (x *MemoViewsUserSetting_MemoView_Icon) ProtoReflect() protoreflect.Message {
-	mi := &file_store_user_setting_proto_msgTypes[13]
+	mi := &file_store_user_setting_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1024,7 +1283,7 @@ type WebhooksUserSetting_Webhook struct {
 
 func (x *WebhooksUserSetting_Webhook) Reset() {
 	*x = WebhooksUserSetting_Webhook{}
-	mi := &file_store_user_setting_proto_msgTypes[14]
+	mi := &file_store_user_setting_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1036,7 +1295,7 @@ func (x *WebhooksUserSetting_Webhook) String() string {
 func (*WebhooksUserSetting_Webhook) ProtoMessage() {}
 
 func (x *WebhooksUserSetting_Webhook) ProtoReflect() protoreflect.Message {
-	mi := &file_store_user_setting_proto_msgTypes[14]
+	mi := &file_store_user_setting_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1084,7 +1343,7 @@ var File_store_user_setting_proto protoreflect.FileDescriptor
 
 const file_store_user_setting_proto_rawDesc = "" +
 	"\n" +
-	"\x18store/user_setting.proto\x12\vmemos.store\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17google/type/color.proto\"\x8b\x05\n" +
+	"\x18store/user_setting.proto\x12\vmemos.store\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17google/type/color.proto\"\x98\x06\n" +
 	"\vUserSetting\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x05R\x06userId\x12.\n" +
 	"\x03key\x18\x02 \x01(\x0e2\x1c.memos.store.UserSetting.KeyR\x03key\x12;\n" +
@@ -1095,7 +1354,9 @@ const file_store_user_setting_proto_rawDesc = "" +
 	"\x0erefresh_tokens\x18\b \x01(\v2%.memos.store.RefreshTokensUserSettingH\x00R\rrefreshTokens\x12d\n" +
 	"\x16personal_access_tokens\x18\t \x01(\v2,.memos.store.PersonalAccessTokensUserSettingH\x00R\x14personalAccessTokens\x122\n" +
 	"\x04tags\x18\n" +
-	" \x01(\v2\x1c.memos.store.TagsUserSettingH\x00R\x04tags\"\x7f\n" +
+	" \x01(\v2\x1c.memos.store.TagsUserSettingH\x00R\x04tags\x122\n" +
+	"\x04totp\x18\v \x01(\v2\x1c.memos.store.TotpUserSettingH\x00R\x04totp\x12>\n" +
+	"\bpasskeys\x18\f \x01(\v2 .memos.store.PasskeysUserSettingH\x00R\bpasskeys\"\x97\x01\n" +
 	"\x03Key\x12\x13\n" +
 	"\x0fKEY_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aGENERAL\x10\x01\x12\x0e\n" +
@@ -1104,7 +1365,10 @@ const file_store_user_setting_proto_rawDesc = "" +
 	"\bWEBHOOKS\x10\x05\x12\x12\n" +
 	"\x0eREFRESH_TOKENS\x10\x06\x12\x1a\n" +
 	"\x16PERSONAL_ACCESS_TOKENS\x10\a\x12\b\n" +
-	"\x04TAGS\x10\bB\a\n" +
+	"\x04TAGS\x10\b\x12\b\n" +
+	"\x04TOTP\x10\t\x12\f\n" +
+	"\bPASSKEYS\x10\n" +
+	"B\a\n" +
 	"\x05value\"\x9b\x01\n" +
 	"\x12GeneralUserSetting\x12\x16\n" +
 	"\x06locale\x18\x01 \x01(\tR\x06locale\x12'\n" +
@@ -1171,7 +1435,28 @@ const file_store_user_setting_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12%\n" +
-	"\x0esigning_secret\x18\x04 \x01(\tR\rsigningSecretB\x9b\x01\n" +
+	"\x0esigning_secret\x18\x04 \x01(\tR\rsigningSecret\"j\n" +
+	"\x0fTotpUserSetting\x12)\n" +
+	"\x10encrypted_secret\x18\x01 \x01(\fR\x0fencryptedSecret\x12,\n" +
+	"\x12backup_code_hashes\x18\x02 \x03(\tR\x10backupCodeHashes\"\xe9\x02\n" +
+	"\x11PasskeyCredential\x12#\n" +
+	"\rcredential_id\x18\x01 \x01(\fR\fcredentialId\x12\x1d\n" +
+	"\n" +
+	"public_key\x18\x02 \x01(\fR\tpublicKey\x12\x1d\n" +
+	"\n" +
+	"sign_count\x18\x03 \x01(\rR\tsignCount\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x12\x1e\n" +
+	"\n" +
+	"transports\x18\x05 \x03(\tR\n" +
+	"transports\x12'\n" +
+	"\x0fbackup_eligible\x18\x06 \x01(\bR\x0ebackupEligible\x12\x1b\n" +
+	"\tbacked_up\x18\a \x01(\bR\bbackedUp\x129\n" +
+	"\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12<\n" +
+	"\flast_used_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"lastUsedAt\"W\n" +
+	"\x13PasskeysUserSetting\x12@\n" +
+	"\vcredentials\x18\x01 \x03(\v2\x1e.memos.store.PasskeyCredentialR\vcredentialsB\x9b\x01\n" +
 	"\x0fcom.memos.storeB\x10UserSettingProtoP\x01Z)github.com/usememos/memos/proto/gen/store\xa2\x02\x03MSX\xaa\x02\vMemos.Store\xca\x02\vMemos\\Store\xe2\x02\x17Memos\\Store\\GPBMetadata\xea\x02\fMemos::Storeb\x06proto3"
 
 var (
@@ -1187,26 +1472,29 @@ func file_store_user_setting_proto_rawDescGZIP() []byte {
 }
 
 var file_store_user_setting_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_store_user_setting_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_store_user_setting_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_store_user_setting_proto_goTypes = []any{
-	(UserSetting_Key)(0),                          // 0: memos.store.UserSetting.Key
-	(*UserSetting)(nil),                           // 1: memos.store.UserSetting
-	(*GeneralUserSetting)(nil),                    // 2: memos.store.GeneralUserSetting
-	(*UserTagMetadata)(nil),                       // 3: memos.store.UserTagMetadata
-	(*TagsUserSetting)(nil),                       // 4: memos.store.TagsUserSetting
-	(*RefreshTokensUserSetting)(nil),              // 5: memos.store.RefreshTokensUserSetting
-	(*PersonalAccessTokensUserSetting)(nil),       // 6: memos.store.PersonalAccessTokensUserSetting
-	(*MemoViewsUserSetting)(nil),                  // 7: memos.store.MemoViewsUserSetting
-	(*WebhooksUserSetting)(nil),                   // 8: memos.store.WebhooksUserSetting
-	nil,                                           // 9: memos.store.TagsUserSetting.TagsEntry
-	(*RefreshTokensUserSetting_RefreshToken)(nil), // 10: memos.store.RefreshTokensUserSetting.RefreshToken
-	(*RefreshTokensUserSetting_ClientInfo)(nil),   // 11: memos.store.RefreshTokensUserSetting.ClientInfo
-	(*PersonalAccessTokensUserSetting_PersonalAccessToken)(nil), // 12: memos.store.PersonalAccessTokensUserSetting.PersonalAccessToken
-	(*MemoViewsUserSetting_MemoView)(nil),                       // 13: memos.store.MemoViewsUserSetting.MemoView
-	(*MemoViewsUserSetting_MemoView_Icon)(nil),                  // 14: memos.store.MemoViewsUserSetting.MemoView.Icon
-	(*WebhooksUserSetting_Webhook)(nil),                         // 15: memos.store.WebhooksUserSetting.Webhook
-	(*color.Color)(nil),                                         // 16: google.type.Color
-	(*timestamppb.Timestamp)(nil),                               // 17: google.protobuf.Timestamp
+	(UserSetting_Key)(0),                                        // 0: memos.store.UserSetting.Key
+	(*UserSetting)(nil),                                         // 1: memos.store.UserSetting
+	(*GeneralUserSetting)(nil),                                  // 2: memos.store.GeneralUserSetting
+	(*UserTagMetadata)(nil),                                     // 3: memos.store.UserTagMetadata
+	(*TagsUserSetting)(nil),                                     // 4: memos.store.TagsUserSetting
+	(*RefreshTokensUserSetting)(nil),                            // 5: memos.store.RefreshTokensUserSetting
+	(*PersonalAccessTokensUserSetting)(nil),                     // 6: memos.store.PersonalAccessTokensUserSetting
+	(*MemoViewsUserSetting)(nil),                                // 7: memos.store.MemoViewsUserSetting
+	(*WebhooksUserSetting)(nil),                                 // 8: memos.store.WebhooksUserSetting
+	(*TotpUserSetting)(nil),                                     // 9: memos.store.TotpUserSetting
+	(*PasskeyCredential)(nil),                                   // 10: memos.store.PasskeyCredential
+	(*PasskeysUserSetting)(nil),                                 // 11: memos.store.PasskeysUserSetting
+	nil,                                                         // 12: memos.store.TagsUserSetting.TagsEntry
+	(*RefreshTokensUserSetting_RefreshToken)(nil),               // 13: memos.store.RefreshTokensUserSetting.RefreshToken
+	(*RefreshTokensUserSetting_ClientInfo)(nil),                 // 14: memos.store.RefreshTokensUserSetting.ClientInfo
+	(*PersonalAccessTokensUserSetting_PersonalAccessToken)(nil), // 15: memos.store.PersonalAccessTokensUserSetting.PersonalAccessToken
+	(*MemoViewsUserSetting_MemoView)(nil),                       // 16: memos.store.MemoViewsUserSetting.MemoView
+	(*MemoViewsUserSetting_MemoView_Icon)(nil),                  // 17: memos.store.MemoViewsUserSetting.MemoView.Icon
+	(*WebhooksUserSetting_Webhook)(nil),                         // 18: memos.store.WebhooksUserSetting.Webhook
+	(*color.Color)(nil),                                         // 19: google.type.Color
+	(*timestamppb.Timestamp)(nil),                               // 20: google.protobuf.Timestamp
 }
 var file_store_user_setting_proto_depIdxs = []int32{
 	0,  // 0: memos.store.UserSetting.key:type_name -> memos.store.UserSetting.Key
@@ -1216,25 +1504,30 @@ var file_store_user_setting_proto_depIdxs = []int32{
 	5,  // 4: memos.store.UserSetting.refresh_tokens:type_name -> memos.store.RefreshTokensUserSetting
 	6,  // 5: memos.store.UserSetting.personal_access_tokens:type_name -> memos.store.PersonalAccessTokensUserSetting
 	4,  // 6: memos.store.UserSetting.tags:type_name -> memos.store.TagsUserSetting
-	16, // 7: memos.store.UserTagMetadata.background_color:type_name -> google.type.Color
-	9,  // 8: memos.store.TagsUserSetting.tags:type_name -> memos.store.TagsUserSetting.TagsEntry
-	10, // 9: memos.store.RefreshTokensUserSetting.refresh_tokens:type_name -> memos.store.RefreshTokensUserSetting.RefreshToken
-	12, // 10: memos.store.PersonalAccessTokensUserSetting.tokens:type_name -> memos.store.PersonalAccessTokensUserSetting.PersonalAccessToken
-	13, // 11: memos.store.MemoViewsUserSetting.memo_views:type_name -> memos.store.MemoViewsUserSetting.MemoView
-	15, // 12: memos.store.WebhooksUserSetting.webhooks:type_name -> memos.store.WebhooksUserSetting.Webhook
-	3,  // 13: memos.store.TagsUserSetting.TagsEntry.value:type_name -> memos.store.UserTagMetadata
-	17, // 14: memos.store.RefreshTokensUserSetting.RefreshToken.expires_at:type_name -> google.protobuf.Timestamp
-	17, // 15: memos.store.RefreshTokensUserSetting.RefreshToken.created_at:type_name -> google.protobuf.Timestamp
-	11, // 16: memos.store.RefreshTokensUserSetting.RefreshToken.client_info:type_name -> memos.store.RefreshTokensUserSetting.ClientInfo
-	17, // 17: memos.store.PersonalAccessTokensUserSetting.PersonalAccessToken.expires_at:type_name -> google.protobuf.Timestamp
-	17, // 18: memos.store.PersonalAccessTokensUserSetting.PersonalAccessToken.created_at:type_name -> google.protobuf.Timestamp
-	17, // 19: memos.store.PersonalAccessTokensUserSetting.PersonalAccessToken.last_used_at:type_name -> google.protobuf.Timestamp
-	14, // 20: memos.store.MemoViewsUserSetting.MemoView.icon:type_name -> memos.store.MemoViewsUserSetting.MemoView.Icon
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	9,  // 7: memos.store.UserSetting.totp:type_name -> memos.store.TotpUserSetting
+	11, // 8: memos.store.UserSetting.passkeys:type_name -> memos.store.PasskeysUserSetting
+	19, // 9: memos.store.UserTagMetadata.background_color:type_name -> google.type.Color
+	12, // 10: memos.store.TagsUserSetting.tags:type_name -> memos.store.TagsUserSetting.TagsEntry
+	13, // 11: memos.store.RefreshTokensUserSetting.refresh_tokens:type_name -> memos.store.RefreshTokensUserSetting.RefreshToken
+	15, // 12: memos.store.PersonalAccessTokensUserSetting.tokens:type_name -> memos.store.PersonalAccessTokensUserSetting.PersonalAccessToken
+	16, // 13: memos.store.MemoViewsUserSetting.memo_views:type_name -> memos.store.MemoViewsUserSetting.MemoView
+	18, // 14: memos.store.WebhooksUserSetting.webhooks:type_name -> memos.store.WebhooksUserSetting.Webhook
+	20, // 15: memos.store.PasskeyCredential.created_at:type_name -> google.protobuf.Timestamp
+	20, // 16: memos.store.PasskeyCredential.last_used_at:type_name -> google.protobuf.Timestamp
+	10, // 17: memos.store.PasskeysUserSetting.credentials:type_name -> memos.store.PasskeyCredential
+	3,  // 18: memos.store.TagsUserSetting.TagsEntry.value:type_name -> memos.store.UserTagMetadata
+	20, // 19: memos.store.RefreshTokensUserSetting.RefreshToken.expires_at:type_name -> google.protobuf.Timestamp
+	20, // 20: memos.store.RefreshTokensUserSetting.RefreshToken.created_at:type_name -> google.protobuf.Timestamp
+	14, // 21: memos.store.RefreshTokensUserSetting.RefreshToken.client_info:type_name -> memos.store.RefreshTokensUserSetting.ClientInfo
+	20, // 22: memos.store.PersonalAccessTokensUserSetting.PersonalAccessToken.expires_at:type_name -> google.protobuf.Timestamp
+	20, // 23: memos.store.PersonalAccessTokensUserSetting.PersonalAccessToken.created_at:type_name -> google.protobuf.Timestamp
+	20, // 24: memos.store.PersonalAccessTokensUserSetting.PersonalAccessToken.last_used_at:type_name -> google.protobuf.Timestamp
+	17, // 25: memos.store.MemoViewsUserSetting.MemoView.icon:type_name -> memos.store.MemoViewsUserSetting.MemoView.Icon
+	26, // [26:26] is the sub-list for method output_type
+	26, // [26:26] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_store_user_setting_proto_init() }
@@ -1249,8 +1542,10 @@ func file_store_user_setting_proto_init() {
 		(*UserSetting_RefreshTokens)(nil),
 		(*UserSetting_PersonalAccessTokens)(nil),
 		(*UserSetting_Tags)(nil),
+		(*UserSetting_Totp)(nil),
+		(*UserSetting_Passkeys)(nil),
 	}
-	file_store_user_setting_proto_msgTypes[13].OneofWrappers = []any{
+	file_store_user_setting_proto_msgTypes[16].OneofWrappers = []any{
 		(*MemoViewsUserSetting_MemoView_Icon_Emoji)(nil),
 		(*MemoViewsUserSetting_MemoView_Icon_Lucide)(nil),
 	}
@@ -1260,7 +1555,7 @@ func file_store_user_setting_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_store_user_setting_proto_rawDesc), len(file_store_user_setting_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   15,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

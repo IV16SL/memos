@@ -2,6 +2,8 @@ import { ArrowRightIcon, LockIcon } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import AuthPageLayout, { AuthEmptyState, AuthLinkPrompt, AuthOptionsLoading } from "@/components/AuthPageLayout";
 import IdentityProviderButtons from "@/components/IdentityProviderButtons";
+import PasskeySignInButton from "@/components/PasskeySignInButton";
+import PasskeySignupSection from "@/components/PasskeySignupSection";
 import PasswordSignInForm from "@/components/PasswordSignInForm";
 import { Separator } from "@/components/ui/separator";
 import { useInstance } from "@/contexts/InstanceContext";
@@ -49,6 +51,12 @@ const SignIn = () => {
             </div>
           )}
           {passwordAuthAllowed && <PasswordSignInForm redirectPath={redirectTarget} />}
+          <div className="mt-4 flex flex-col gap-3">
+            <PasskeySignInButton redirectPath={redirectTarget} />
+            {passwordAuthAllowed && !instanceGeneralSetting.disallowUserRegistration && (
+              <PasskeySignupSection redirectPath={redirectTarget} />
+            )}
+          </div>
           {passwordAuthAllowed && !instanceGeneralSetting.disallowUserRegistration && (
             <AuthLinkPrompt prompt={t("auth.sign-up-tip")} to={signUpPath} label={t("common.sign-up")} />
           )}

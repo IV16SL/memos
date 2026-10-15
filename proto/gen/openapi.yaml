@@ -281,6 +281,247 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /api/auth/passkey/login/begin:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                BeginPasskeyLogin starts a usernameless WebAuthn login ceremony.
+                 Public. Attempts are rate limited.
+            operationId: AuthService_BeginPasskeyLogin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BeginPasskeyLoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BeginPasskeyLoginResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/passkey/login/finish:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                FinishPasskeyLogin completes the ceremony and signs the user in.
+                 Public. Attempts are rate limited.
+            operationId: AuthService_FinishPasskeyLogin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/FinishPasskeyLoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SignInResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/passkey/register/begin:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                BeginPasskeyRegistration starts a WebAuthn registration ceremony for the
+                 current user, adding a passkey to an existing account.
+                 Authentication: Required (access token).
+            operationId: AuthService_BeginPasskeyRegistration
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BeginPasskeyRegistrationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BeginPasskeyRegistrationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/passkey/register/finish:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                FinishPasskeyRegistration completes the ceremony and stores the credential.
+                 Authentication: Required (access token).
+            operationId: AuthService_FinishPasskeyRegistration
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/FinishPasskeyRegistrationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FinishPasskeyRegistrationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/passkey/signup/begin:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                BeginPasskeySignup starts a "sign up with passkey" ceremony, provisioning
+                 a new local user like first-time SSO login does. Refused when the instance
+                 disallows user registration. Public. Attempts are rate limited.
+            operationId: AuthService_BeginPasskeySignup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BeginPasskeySignupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BeginPasskeySignupResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/passkey/signup/finish:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                FinishPasskeySignup completes the ceremony, stores the credential, and
+                 signs the new user in. Public. Attempts are rate limited.
+            operationId: AuthService_FinishPasskeySignup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/FinishPasskeySignupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SignInResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/passkeys:
+        get:
+            tags:
+                - AuthService
+            description: |-
+                ListPasskeys lists the current user's registered passkeys.
+                 Authentication: Required (access token).
+            operationId: AuthService_ListPasskeys
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListPasskeysResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/passkeys/passkeys/{passkey}:
+        delete:
+            tags:
+                - AuthService
+            description: |-
+                DeletePasskey deletes one of the current user's passkeys.
+                 Authentication: Required (access token).
+            operationId: AuthService_DeletePasskey
+            parameters:
+                - name: passkey
+                  in: path
+                  description: The passkey id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/passkeys/passkeys/{passkey}:rename:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                RenamePasskey changes the label of one of the current user's passkeys.
+                 Authentication: Required (access token).
+            operationId: AuthService_RenamePasskey
+            parameters:
+                - name: passkey
+                  in: path
+                  description: The passkey id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RenamePasskeyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/auth/refresh:
         post:
             tags:
@@ -350,6 +591,135 @@ paths:
                 "200":
                     description: OK
                     content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/totp/disable:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                DisableTOTP disables TOTP for the current user after verifying a current code.
+                 Authentication: Required (access token).
+            operationId: AuthService_DisableTOTP
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DisableTOTPRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/totp/setup/begin:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                BeginTOTPSetup starts TOTP enrollment for the current user.
+                 Returns the otpauth URL (render as QR code) and the raw secret for manual entry.
+                 Authentication: Required (access token).
+            operationId: AuthService_BeginTOTPSetup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BeginTOTPSetupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BeginTOTPSetupResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/totp/setup/confirm:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                ConfirmTOTPSetup verifies the code against the new secret and enables TOTP.
+                 Returns single-use backup codes, shown only once.
+                 Authentication: Required (access token).
+            operationId: AuthService_ConfirmTOTPSetup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ConfirmTOTPSetupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ConfirmTOTPSetupResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/totp/status:
+        get:
+            tags:
+                - AuthService
+            description: |-
+                GetTOTPStatus returns whether TOTP is enabled for the current user.
+                 Authentication: Required (access token).
+            operationId: AuthService_GetTOTPStatus
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetTOTPStatusResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/auth/totp/verify-login:
+        post:
+            tags:
+                - AuthService
+            description: |-
+                VerifyTOTPLogin completes a password login that required TOTP.
+                 Accepts a TOTP code or an unused backup code. Attempts are rate limited.
+                 Public. The pending token is the sealed totp_pending_token from SignIn.
+            operationId: AuthService_VerifyTOTPLogin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/VerifyTOTPLoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SignInResponse'
                 default:
                     description: Default error response
                     content:
@@ -3321,6 +3691,78 @@ components:
                         $ref: '#/components/schemas/User'
                     description: The active users that match the requested names.
             description: Response message for UserService.BatchGetUsers.
+        BeginPasskeyLoginRequest:
+            type: object
+            properties: {}
+            description: BeginPasskeyLoginRequest starts a usernameless WebAuthn login ceremony.
+        BeginPasskeyLoginResponse:
+            type: object
+            properties:
+                optionsJson:
+                    type: string
+                    description: JSON-encoded PublicKeyCredentialRequestOptions for @simplewebauthn/browser.
+                sessionToken:
+                    type: string
+                    description: Sealed session token; pass back to FinishPasskeyLogin.
+            description: |-
+                BeginPasskeyLoginResponse carries the request options for the authenticator
+                 and a sealed session token for FinishPasskeyLogin.
+        BeginPasskeyRegistrationRequest:
+            type: object
+            properties: {}
+            description: |-
+                BeginPasskeyRegistrationRequest starts a WebAuthn registration ceremony for
+                 the current user (adding a passkey to an existing account).
+        BeginPasskeyRegistrationResponse:
+            type: object
+            properties:
+                optionsJson:
+                    type: string
+                    description: JSON-encoded PublicKeyCredentialCreationOptions for @simplewebauthn/browser.
+                sessionToken:
+                    type: string
+                    description: Sealed session token; pass back to FinishPasskeyRegistration.
+            description: |-
+                BeginPasskeyRegistrationResponse carries the creation options for the
+                 authenticator and a sealed session token for FinishPasskeyRegistration.
+        BeginPasskeySignupRequest:
+            required:
+                - username
+            type: object
+            properties:
+                username:
+                    type: string
+                    description: Required. The desired username for the new account.
+            description: |-
+                BeginPasskeySignupRequest starts a "sign up with passkey" ceremony for a new
+                 account. Like first-time SSO login, this provisions a local user; unlike SSO
+                 there is no identity provider, so the username is supplied by the caller.
+        BeginPasskeySignupResponse:
+            type: object
+            properties:
+                optionsJson:
+                    type: string
+                    description: JSON-encoded PublicKeyCredentialCreationOptions for @simplewebauthn/browser.
+                sessionToken:
+                    type: string
+                    description: Sealed session token; pass back to FinishPasskeySignup.
+            description: BeginPasskeySignupResponse carries the creation options and sealed session.
+        BeginTOTPSetupRequest:
+            type: object
+            properties: {}
+            description: |-
+                Request message for AuthService.BeginTOTPSetup.
+                 It has no fields: the user is taken from the access token.
+        BeginTOTPSetupResponse:
+            type: object
+            properties:
+                otpauthUrl:
+                    type: string
+                    description: The otpauth:// URL to render as a QR code.
+                secret:
+                    type: string
+                    description: The raw base32 secret, for manual entry.
+            description: Response message for AuthService.BeginTOTPSetup.
         Color:
             type: object
             properties:
@@ -3476,6 +3918,28 @@ components:
                      };
 
                      // ...
+        ConfirmTOTPSetupRequest:
+            required:
+                - secret
+                - code
+            type: object
+            properties:
+                secret:
+                    type: string
+                    description: Required. The secret returned by BeginTOTPSetup.
+                code:
+                    type: string
+                    description: Required. A current TOTP code generated from the secret.
+            description: Request message for AuthService.ConfirmTOTPSetup.
+        ConfirmTOTPSetupResponse:
+            type: object
+            properties:
+                backupCodes:
+                    type: array
+                    items:
+                        type: string
+                    description: Single-use backup codes. Shown only once; store them securely.
+            description: Response message for AuthService.ConfirmTOTPSetup.
         CreateLinkedIdentityRequest:
             required:
                 - parent
@@ -3546,6 +4010,15 @@ components:
                         Required. The resource name of the invitation.
                          Format: spaces/{space}/invitations/{invitation}
             description: Request message for SpaceService.DeclineSpaceInvitation.
+        DisableTOTPRequest:
+            required:
+                - code
+            type: object
+            properties:
+                code:
+                    type: string
+                    description: Required. A current TOTP code, or an unused backup code.
+            description: Request message for AuthService.DisableTOTP.
         FieldMapping:
             type: object
             properties:
@@ -3564,6 +4037,56 @@ components:
             description: |-
                 FieldMapping maps user info claims of an OAuth2 identity provider to user fields.
                  Each field holds the name of a claim.
+        FinishPasskeyLoginRequest:
+            required:
+                - sessionToken
+                - credentialJson
+            type: object
+            properties:
+                sessionToken:
+                    type: string
+                    description: Required. The sealed session token from BeginPasskeyLogin.
+                credentialJson:
+                    type: string
+                    description: Required. JSON-encoded AuthenticationResponse from @simplewebauthn/browser.
+            description: FinishPasskeyLoginRequest completes a usernameless WebAuthn login ceremony.
+        FinishPasskeyRegistrationRequest:
+            required:
+                - sessionToken
+                - credentialJson
+            type: object
+            properties:
+                sessionToken:
+                    type: string
+                    description: Required. The sealed session token from BeginPasskeyRegistration.
+                credentialJson:
+                    type: string
+                    description: Required. JSON-encoded RegistrationResponse from @simplewebauthn/browser.
+                name:
+                    type: string
+                    description: Optional. A user-supplied label for the new passkey.
+            description: FinishPasskeyRegistrationRequest completes a WebAuthn registration ceremony.
+        FinishPasskeyRegistrationResponse:
+            type: object
+            properties:
+                passkey:
+                    allOf:
+                        - $ref: '#/components/schemas/Passkey'
+                    description: The new passkey credential, in "passkeys/{credential_id}" resource name form.
+            description: FinishPasskeyRegistrationResponse describes the registered passkey.
+        FinishPasskeySignupRequest:
+            required:
+                - sessionToken
+                - credentialJson
+            type: object
+            properties:
+                sessionToken:
+                    type: string
+                    description: Required. The sealed session token from BeginPasskeySignup.
+                credentialJson:
+                    type: string
+                    description: Required. JSON-encoded RegistrationResponse from @simplewebauthn/browser.
+            description: FinishPasskeySignupRequest completes a "sign up with passkey" ceremony.
         GeneralSetting_CustomProfile:
             type: object
             properties:
@@ -3585,6 +4108,13 @@ components:
                         - $ref: '#/components/schemas/User'
                     description: The authenticated user.
             description: Response message for AuthService.GetCurrentUser.
+        GetTOTPStatusResponse:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                    description: Whether TOTP two-factor authentication is enabled.
+            description: Response message for AuthService.GetTOTPStatus.
         GetUserWebhookSigningSecretResponse:
             type: object
             properties:
@@ -4283,6 +4813,14 @@ components:
                     type: string
                     description: A token to retrieve the next page. Empty when there are no more pages.
             description: Response message for MemoService.ListMemos.
+        ListPasskeysResponse:
+            type: object
+            properties:
+                passkeys:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Passkey'
+            description: ListPasskeysResponse lists the current user's passkeys.
         ListPersonalAccessTokensResponse:
             type: object
             properties:
@@ -4794,6 +5332,29 @@ components:
                         - $ref: '#/components/schemas/FieldMapping'
                     description: How user info claims map to user fields.
             description: OAuth2Config is the configuration of an OAuth2 identity provider.
+        Passkey:
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: 'Resource name. Format: passkeys/{credential_id} (base64url-encoded ID).'
+                displayName:
+                    type: string
+                    description: User-supplied label.
+                transports:
+                    type: array
+                    items:
+                        type: string
+                    description: Transports hinted by the authenticator.
+                createTime:
+                    type: string
+                    description: When the passkey was registered.
+                    format: date-time
+                lastUsedTime:
+                    type: string
+                    description: When the passkey was last used to sign in.
+                    format: date-time
+            description: Passkey is a registered WebAuthn credential.
         PersonalAccessToken:
             type: object
             properties:
@@ -4910,6 +5471,19 @@ components:
                     description: When the new access token expires.
                     format: date-time
             description: Response message for AuthService.RefreshToken.
+        RenamePasskeyRequest:
+            required:
+                - name
+                - displayName
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: 'Required. Format: passkeys/{credential_id} (base64url-encoded ID).'
+                displayName:
+                    type: string
+                    description: Required. The new label.
+            description: RenamePasskeyRequest changes the label of one of the current user's passkeys.
         SetMemoAttachmentsRequest:
             required:
                 - name
@@ -5015,6 +5589,17 @@ components:
                         When the access token expires.
                          Call RefreshToken before this time.
                     format: date-time
+                totpRequired:
+                    type: boolean
+                    description: |-
+                        When true, the password was verified but TOTP is required to complete the
+                         login. No tokens are issued yet; user and access_token are unset.
+                         Call VerifyTOTPLogin with totp_pending_token and the TOTP code.
+                totpPendingToken:
+                    type: string
+                    description: |-
+                        Sealed pending-login token for VerifyTOTPLogin. Only set when totp_required
+                         is true. Expires after 5 minutes and is single-purpose.
             description: Response message for AuthService.SignIn.
         Space:
             required:
@@ -5713,6 +6298,19 @@ components:
                     description: Output only. The last update timestamp. Currently never set.
                     format: date-time
             description: UserWebhook is a webhook owned by a user.
+        VerifyTOTPLoginRequest:
+            required:
+                - pendingToken
+                - code
+            type: object
+            properties:
+                pendingToken:
+                    type: string
+                    description: Required. The sealed totp_pending_token from a SignIn response with totp_required.
+                code:
+                    type: string
+                    description: Required. A current TOTP code, or an unused backup code.
+            description: Request message for AuthService.VerifyTOTPLogin.
         VideoMetadata:
             type: object
             properties:

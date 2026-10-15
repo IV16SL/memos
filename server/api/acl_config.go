@@ -10,8 +10,13 @@ package api
 // or info.FullMethod (gRPC interceptor).
 var PublicMethods = map[string]struct{}{
 	// Auth Service - login/token endpoints must be accessible without auth
-	"/memos.api.AuthService/SignIn":       {},
-	"/memos.api.AuthService/RefreshToken": {}, // Token refresh uses cookie, must be accessible when access token expired
+	"/memos.api.AuthService/SignIn":         {},
+	"/memos.api.AuthService/RefreshToken":   {}, // Token refresh uses cookie, must be accessible when access token expired
+	"/memos.api.AuthService/VerifyTOTPLogin": {}, // Completes a pending password login; the sealed pending token is the credential
+	"/memos.api.AuthService/BeginPasskeyLogin":  {},
+	"/memos.api.AuthService/FinishPasskeyLogin": {},
+	"/memos.api.AuthService/BeginPasskeySignup": {},
+	"/memos.api.AuthService/FinishPasskeySignup": {},
 
 	// Instance Service - needed before login to show instance info
 	"/memos.api.InstanceService/GetInstanceProfile":       {},

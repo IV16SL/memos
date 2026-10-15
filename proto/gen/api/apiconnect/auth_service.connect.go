@@ -44,6 +44,47 @@ const (
 	AuthServiceGetCurrentUserProcedure = "/memos.api.AuthService/GetCurrentUser"
 	// AuthServiceSignOutProcedure is the fully-qualified name of the AuthService's SignOut RPC.
 	AuthServiceSignOutProcedure = "/memos.api.AuthService/SignOut"
+	// AuthServiceBeginTOTPSetupProcedure is the fully-qualified name of the AuthService's
+	// BeginTOTPSetup RPC.
+	AuthServiceBeginTOTPSetupProcedure = "/memos.api.AuthService/BeginTOTPSetup"
+	// AuthServiceConfirmTOTPSetupProcedure is the fully-qualified name of the AuthService's
+	// ConfirmTOTPSetup RPC.
+	AuthServiceConfirmTOTPSetupProcedure = "/memos.api.AuthService/ConfirmTOTPSetup"
+	// AuthServiceDisableTOTPProcedure is the fully-qualified name of the AuthService's DisableTOTP RPC.
+	AuthServiceDisableTOTPProcedure = "/memos.api.AuthService/DisableTOTP"
+	// AuthServiceGetTOTPStatusProcedure is the fully-qualified name of the AuthService's GetTOTPStatus
+	// RPC.
+	AuthServiceGetTOTPStatusProcedure = "/memos.api.AuthService/GetTOTPStatus"
+	// AuthServiceVerifyTOTPLoginProcedure is the fully-qualified name of the AuthService's
+	// VerifyTOTPLogin RPC.
+	AuthServiceVerifyTOTPLoginProcedure = "/memos.api.AuthService/VerifyTOTPLogin"
+	// AuthServiceBeginPasskeyRegistrationProcedure is the fully-qualified name of the AuthService's
+	// BeginPasskeyRegistration RPC.
+	AuthServiceBeginPasskeyRegistrationProcedure = "/memos.api.AuthService/BeginPasskeyRegistration"
+	// AuthServiceFinishPasskeyRegistrationProcedure is the fully-qualified name of the AuthService's
+	// FinishPasskeyRegistration RPC.
+	AuthServiceFinishPasskeyRegistrationProcedure = "/memos.api.AuthService/FinishPasskeyRegistration"
+	// AuthServiceListPasskeysProcedure is the fully-qualified name of the AuthService's ListPasskeys
+	// RPC.
+	AuthServiceListPasskeysProcedure = "/memos.api.AuthService/ListPasskeys"
+	// AuthServiceDeletePasskeyProcedure is the fully-qualified name of the AuthService's DeletePasskey
+	// RPC.
+	AuthServiceDeletePasskeyProcedure = "/memos.api.AuthService/DeletePasskey"
+	// AuthServiceRenamePasskeyProcedure is the fully-qualified name of the AuthService's RenamePasskey
+	// RPC.
+	AuthServiceRenamePasskeyProcedure = "/memos.api.AuthService/RenamePasskey"
+	// AuthServiceBeginPasskeyLoginProcedure is the fully-qualified name of the AuthService's
+	// BeginPasskeyLogin RPC.
+	AuthServiceBeginPasskeyLoginProcedure = "/memos.api.AuthService/BeginPasskeyLogin"
+	// AuthServiceFinishPasskeyLoginProcedure is the fully-qualified name of the AuthService's
+	// FinishPasskeyLogin RPC.
+	AuthServiceFinishPasskeyLoginProcedure = "/memos.api.AuthService/FinishPasskeyLogin"
+	// AuthServiceBeginPasskeySignupProcedure is the fully-qualified name of the AuthService's
+	// BeginPasskeySignup RPC.
+	AuthServiceBeginPasskeySignupProcedure = "/memos.api.AuthService/BeginPasskeySignup"
+	// AuthServiceFinishPasskeySignupProcedure is the fully-qualified name of the AuthService's
+	// FinishPasskeySignup RPC.
+	AuthServiceFinishPasskeySignupProcedure = "/memos.api.AuthService/FinishPasskeySignup"
 )
 
 // AuthServiceClient is a client for the memos.api.AuthService service.
@@ -64,6 +105,53 @@ type AuthServiceClient interface {
 	// SignOut ends the current session.
 	// Revokes the refresh token from the cookie and clears the cookie.
 	SignOut(context.Context, *connect.Request[api.SignOutRequest]) (*connect.Response[emptypb.Empty], error)
+	// BeginTOTPSetup starts TOTP enrollment for the current user.
+	// Returns the otpauth URL (render as QR code) and the raw secret for manual entry.
+	// Authentication: Required (access token).
+	BeginTOTPSetup(context.Context, *connect.Request[api.BeginTOTPSetupRequest]) (*connect.Response[api.BeginTOTPSetupResponse], error)
+	// ConfirmTOTPSetup verifies the code against the new secret and enables TOTP.
+	// Returns single-use backup codes, shown only once.
+	// Authentication: Required (access token).
+	ConfirmTOTPSetup(context.Context, *connect.Request[api.ConfirmTOTPSetupRequest]) (*connect.Response[api.ConfirmTOTPSetupResponse], error)
+	// DisableTOTP disables TOTP for the current user after verifying a current code.
+	// Authentication: Required (access token).
+	DisableTOTP(context.Context, *connect.Request[api.DisableTOTPRequest]) (*connect.Response[emptypb.Empty], error)
+	// GetTOTPStatus returns whether TOTP is enabled for the current user.
+	// Authentication: Required (access token).
+	GetTOTPStatus(context.Context, *connect.Request[api.GetTOTPStatusRequest]) (*connect.Response[api.GetTOTPStatusResponse], error)
+	// VerifyTOTPLogin completes a password login that required TOTP.
+	// Accepts a TOTP code or an unused backup code. Attempts are rate limited.
+	// Public. The pending token is the sealed totp_pending_token from SignIn.
+	VerifyTOTPLogin(context.Context, *connect.Request[api.VerifyTOTPLoginRequest]) (*connect.Response[api.SignInResponse], error)
+	// BeginPasskeyRegistration starts a WebAuthn registration ceremony for the
+	// current user, adding a passkey to an existing account.
+	// Authentication: Required (access token).
+	BeginPasskeyRegistration(context.Context, *connect.Request[api.BeginPasskeyRegistrationRequest]) (*connect.Response[api.BeginPasskeyRegistrationResponse], error)
+	// FinishPasskeyRegistration completes the ceremony and stores the credential.
+	// Authentication: Required (access token).
+	FinishPasskeyRegistration(context.Context, *connect.Request[api.FinishPasskeyRegistrationRequest]) (*connect.Response[api.FinishPasskeyRegistrationResponse], error)
+	// ListPasskeys lists the current user's registered passkeys.
+	// Authentication: Required (access token).
+	ListPasskeys(context.Context, *connect.Request[api.ListPasskeysRequest]) (*connect.Response[api.ListPasskeysResponse], error)
+	// DeletePasskey deletes one of the current user's passkeys.
+	// Authentication: Required (access token).
+	DeletePasskey(context.Context, *connect.Request[api.DeletePasskeyRequest]) (*connect.Response[emptypb.Empty], error)
+	// RenamePasskey changes the label of one of the current user's passkeys.
+	// Authentication: Required (access token).
+	RenamePasskey(context.Context, *connect.Request[api.RenamePasskeyRequest]) (*connect.Response[emptypb.Empty], error)
+	// BeginPasskeyLogin starts a usernameless WebAuthn login ceremony.
+	// Public. Attempts are rate limited.
+	BeginPasskeyLogin(context.Context, *connect.Request[api.BeginPasskeyLoginRequest]) (*connect.Response[api.BeginPasskeyLoginResponse], error)
+	// FinishPasskeyLogin completes the ceremony and signs the user in.
+	// Public. Attempts are rate limited.
+	FinishPasskeyLogin(context.Context, *connect.Request[api.FinishPasskeyLoginRequest]) (*connect.Response[api.SignInResponse], error)
+	// BeginPasskeySignup starts a "sign up with passkey" ceremony, provisioning
+	// a new local user like first-time SSO login does. Refused when the instance
+	// disallows user registration. Public. Attempts are rate limited.
+	BeginPasskeySignup(context.Context, *connect.Request[api.BeginPasskeySignupRequest]) (*connect.Response[api.BeginPasskeySignupResponse], error)
+	// FinishPasskeySignup completes the ceremony, stores the credential, and
+	// signs the new user in. Public. Attempts are rate limited.
+	FinishPasskeySignup(context.Context, *connect.Request[api.FinishPasskeySignupRequest]) (*connect.Response[api.SignInResponse], error)
 }
 
 // NewAuthServiceClient constructs a client for the memos.api.AuthService service. By default, it
@@ -101,15 +189,113 @@ func NewAuthServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(authServiceMethods.ByName("SignOut")),
 			connect.WithClientOptions(opts...),
 		),
+		beginTOTPSetup: connect.NewClient[api.BeginTOTPSetupRequest, api.BeginTOTPSetupResponse](
+			httpClient,
+			baseURL+AuthServiceBeginTOTPSetupProcedure,
+			connect.WithSchema(authServiceMethods.ByName("BeginTOTPSetup")),
+			connect.WithClientOptions(opts...),
+		),
+		confirmTOTPSetup: connect.NewClient[api.ConfirmTOTPSetupRequest, api.ConfirmTOTPSetupResponse](
+			httpClient,
+			baseURL+AuthServiceConfirmTOTPSetupProcedure,
+			connect.WithSchema(authServiceMethods.ByName("ConfirmTOTPSetup")),
+			connect.WithClientOptions(opts...),
+		),
+		disableTOTP: connect.NewClient[api.DisableTOTPRequest, emptypb.Empty](
+			httpClient,
+			baseURL+AuthServiceDisableTOTPProcedure,
+			connect.WithSchema(authServiceMethods.ByName("DisableTOTP")),
+			connect.WithClientOptions(opts...),
+		),
+		getTOTPStatus: connect.NewClient[api.GetTOTPStatusRequest, api.GetTOTPStatusResponse](
+			httpClient,
+			baseURL+AuthServiceGetTOTPStatusProcedure,
+			connect.WithSchema(authServiceMethods.ByName("GetTOTPStatus")),
+			connect.WithClientOptions(opts...),
+		),
+		verifyTOTPLogin: connect.NewClient[api.VerifyTOTPLoginRequest, api.SignInResponse](
+			httpClient,
+			baseURL+AuthServiceVerifyTOTPLoginProcedure,
+			connect.WithSchema(authServiceMethods.ByName("VerifyTOTPLogin")),
+			connect.WithClientOptions(opts...),
+		),
+		beginPasskeyRegistration: connect.NewClient[api.BeginPasskeyRegistrationRequest, api.BeginPasskeyRegistrationResponse](
+			httpClient,
+			baseURL+AuthServiceBeginPasskeyRegistrationProcedure,
+			connect.WithSchema(authServiceMethods.ByName("BeginPasskeyRegistration")),
+			connect.WithClientOptions(opts...),
+		),
+		finishPasskeyRegistration: connect.NewClient[api.FinishPasskeyRegistrationRequest, api.FinishPasskeyRegistrationResponse](
+			httpClient,
+			baseURL+AuthServiceFinishPasskeyRegistrationProcedure,
+			connect.WithSchema(authServiceMethods.ByName("FinishPasskeyRegistration")),
+			connect.WithClientOptions(opts...),
+		),
+		listPasskeys: connect.NewClient[api.ListPasskeysRequest, api.ListPasskeysResponse](
+			httpClient,
+			baseURL+AuthServiceListPasskeysProcedure,
+			connect.WithSchema(authServiceMethods.ByName("ListPasskeys")),
+			connect.WithClientOptions(opts...),
+		),
+		deletePasskey: connect.NewClient[api.DeletePasskeyRequest, emptypb.Empty](
+			httpClient,
+			baseURL+AuthServiceDeletePasskeyProcedure,
+			connect.WithSchema(authServiceMethods.ByName("DeletePasskey")),
+			connect.WithClientOptions(opts...),
+		),
+		renamePasskey: connect.NewClient[api.RenamePasskeyRequest, emptypb.Empty](
+			httpClient,
+			baseURL+AuthServiceRenamePasskeyProcedure,
+			connect.WithSchema(authServiceMethods.ByName("RenamePasskey")),
+			connect.WithClientOptions(opts...),
+		),
+		beginPasskeyLogin: connect.NewClient[api.BeginPasskeyLoginRequest, api.BeginPasskeyLoginResponse](
+			httpClient,
+			baseURL+AuthServiceBeginPasskeyLoginProcedure,
+			connect.WithSchema(authServiceMethods.ByName("BeginPasskeyLogin")),
+			connect.WithClientOptions(opts...),
+		),
+		finishPasskeyLogin: connect.NewClient[api.FinishPasskeyLoginRequest, api.SignInResponse](
+			httpClient,
+			baseURL+AuthServiceFinishPasskeyLoginProcedure,
+			connect.WithSchema(authServiceMethods.ByName("FinishPasskeyLogin")),
+			connect.WithClientOptions(opts...),
+		),
+		beginPasskeySignup: connect.NewClient[api.BeginPasskeySignupRequest, api.BeginPasskeySignupResponse](
+			httpClient,
+			baseURL+AuthServiceBeginPasskeySignupProcedure,
+			connect.WithSchema(authServiceMethods.ByName("BeginPasskeySignup")),
+			connect.WithClientOptions(opts...),
+		),
+		finishPasskeySignup: connect.NewClient[api.FinishPasskeySignupRequest, api.SignInResponse](
+			httpClient,
+			baseURL+AuthServiceFinishPasskeySignupProcedure,
+			connect.WithSchema(authServiceMethods.ByName("FinishPasskeySignup")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // authServiceClient implements AuthServiceClient.
 type authServiceClient struct {
-	signIn         *connect.Client[api.SignInRequest, api.SignInResponse]
-	refreshToken   *connect.Client[api.RefreshTokenRequest, api.RefreshTokenResponse]
-	getCurrentUser *connect.Client[api.GetCurrentUserRequest, api.GetCurrentUserResponse]
-	signOut        *connect.Client[api.SignOutRequest, emptypb.Empty]
+	signIn                    *connect.Client[api.SignInRequest, api.SignInResponse]
+	refreshToken              *connect.Client[api.RefreshTokenRequest, api.RefreshTokenResponse]
+	getCurrentUser            *connect.Client[api.GetCurrentUserRequest, api.GetCurrentUserResponse]
+	signOut                   *connect.Client[api.SignOutRequest, emptypb.Empty]
+	beginTOTPSetup            *connect.Client[api.BeginTOTPSetupRequest, api.BeginTOTPSetupResponse]
+	confirmTOTPSetup          *connect.Client[api.ConfirmTOTPSetupRequest, api.ConfirmTOTPSetupResponse]
+	disableTOTP               *connect.Client[api.DisableTOTPRequest, emptypb.Empty]
+	getTOTPStatus             *connect.Client[api.GetTOTPStatusRequest, api.GetTOTPStatusResponse]
+	verifyTOTPLogin           *connect.Client[api.VerifyTOTPLoginRequest, api.SignInResponse]
+	beginPasskeyRegistration  *connect.Client[api.BeginPasskeyRegistrationRequest, api.BeginPasskeyRegistrationResponse]
+	finishPasskeyRegistration *connect.Client[api.FinishPasskeyRegistrationRequest, api.FinishPasskeyRegistrationResponse]
+	listPasskeys              *connect.Client[api.ListPasskeysRequest, api.ListPasskeysResponse]
+	deletePasskey             *connect.Client[api.DeletePasskeyRequest, emptypb.Empty]
+	renamePasskey             *connect.Client[api.RenamePasskeyRequest, emptypb.Empty]
+	beginPasskeyLogin         *connect.Client[api.BeginPasskeyLoginRequest, api.BeginPasskeyLoginResponse]
+	finishPasskeyLogin        *connect.Client[api.FinishPasskeyLoginRequest, api.SignInResponse]
+	beginPasskeySignup        *connect.Client[api.BeginPasskeySignupRequest, api.BeginPasskeySignupResponse]
+	finishPasskeySignup       *connect.Client[api.FinishPasskeySignupRequest, api.SignInResponse]
 }
 
 // SignIn calls memos.api.AuthService.SignIn.
@@ -132,6 +318,76 @@ func (c *authServiceClient) SignOut(ctx context.Context, req *connect.Request[ap
 	return c.signOut.CallUnary(ctx, req)
 }
 
+// BeginTOTPSetup calls memos.api.AuthService.BeginTOTPSetup.
+func (c *authServiceClient) BeginTOTPSetup(ctx context.Context, req *connect.Request[api.BeginTOTPSetupRequest]) (*connect.Response[api.BeginTOTPSetupResponse], error) {
+	return c.beginTOTPSetup.CallUnary(ctx, req)
+}
+
+// ConfirmTOTPSetup calls memos.api.AuthService.ConfirmTOTPSetup.
+func (c *authServiceClient) ConfirmTOTPSetup(ctx context.Context, req *connect.Request[api.ConfirmTOTPSetupRequest]) (*connect.Response[api.ConfirmTOTPSetupResponse], error) {
+	return c.confirmTOTPSetup.CallUnary(ctx, req)
+}
+
+// DisableTOTP calls memos.api.AuthService.DisableTOTP.
+func (c *authServiceClient) DisableTOTP(ctx context.Context, req *connect.Request[api.DisableTOTPRequest]) (*connect.Response[emptypb.Empty], error) {
+	return c.disableTOTP.CallUnary(ctx, req)
+}
+
+// GetTOTPStatus calls memos.api.AuthService.GetTOTPStatus.
+func (c *authServiceClient) GetTOTPStatus(ctx context.Context, req *connect.Request[api.GetTOTPStatusRequest]) (*connect.Response[api.GetTOTPStatusResponse], error) {
+	return c.getTOTPStatus.CallUnary(ctx, req)
+}
+
+// VerifyTOTPLogin calls memos.api.AuthService.VerifyTOTPLogin.
+func (c *authServiceClient) VerifyTOTPLogin(ctx context.Context, req *connect.Request[api.VerifyTOTPLoginRequest]) (*connect.Response[api.SignInResponse], error) {
+	return c.verifyTOTPLogin.CallUnary(ctx, req)
+}
+
+// BeginPasskeyRegistration calls memos.api.AuthService.BeginPasskeyRegistration.
+func (c *authServiceClient) BeginPasskeyRegistration(ctx context.Context, req *connect.Request[api.BeginPasskeyRegistrationRequest]) (*connect.Response[api.BeginPasskeyRegistrationResponse], error) {
+	return c.beginPasskeyRegistration.CallUnary(ctx, req)
+}
+
+// FinishPasskeyRegistration calls memos.api.AuthService.FinishPasskeyRegistration.
+func (c *authServiceClient) FinishPasskeyRegistration(ctx context.Context, req *connect.Request[api.FinishPasskeyRegistrationRequest]) (*connect.Response[api.FinishPasskeyRegistrationResponse], error) {
+	return c.finishPasskeyRegistration.CallUnary(ctx, req)
+}
+
+// ListPasskeys calls memos.api.AuthService.ListPasskeys.
+func (c *authServiceClient) ListPasskeys(ctx context.Context, req *connect.Request[api.ListPasskeysRequest]) (*connect.Response[api.ListPasskeysResponse], error) {
+	return c.listPasskeys.CallUnary(ctx, req)
+}
+
+// DeletePasskey calls memos.api.AuthService.DeletePasskey.
+func (c *authServiceClient) DeletePasskey(ctx context.Context, req *connect.Request[api.DeletePasskeyRequest]) (*connect.Response[emptypb.Empty], error) {
+	return c.deletePasskey.CallUnary(ctx, req)
+}
+
+// RenamePasskey calls memos.api.AuthService.RenamePasskey.
+func (c *authServiceClient) RenamePasskey(ctx context.Context, req *connect.Request[api.RenamePasskeyRequest]) (*connect.Response[emptypb.Empty], error) {
+	return c.renamePasskey.CallUnary(ctx, req)
+}
+
+// BeginPasskeyLogin calls memos.api.AuthService.BeginPasskeyLogin.
+func (c *authServiceClient) BeginPasskeyLogin(ctx context.Context, req *connect.Request[api.BeginPasskeyLoginRequest]) (*connect.Response[api.BeginPasskeyLoginResponse], error) {
+	return c.beginPasskeyLogin.CallUnary(ctx, req)
+}
+
+// FinishPasskeyLogin calls memos.api.AuthService.FinishPasskeyLogin.
+func (c *authServiceClient) FinishPasskeyLogin(ctx context.Context, req *connect.Request[api.FinishPasskeyLoginRequest]) (*connect.Response[api.SignInResponse], error) {
+	return c.finishPasskeyLogin.CallUnary(ctx, req)
+}
+
+// BeginPasskeySignup calls memos.api.AuthService.BeginPasskeySignup.
+func (c *authServiceClient) BeginPasskeySignup(ctx context.Context, req *connect.Request[api.BeginPasskeySignupRequest]) (*connect.Response[api.BeginPasskeySignupResponse], error) {
+	return c.beginPasskeySignup.CallUnary(ctx, req)
+}
+
+// FinishPasskeySignup calls memos.api.AuthService.FinishPasskeySignup.
+func (c *authServiceClient) FinishPasskeySignup(ctx context.Context, req *connect.Request[api.FinishPasskeySignupRequest]) (*connect.Response[api.SignInResponse], error) {
+	return c.finishPasskeySignup.CallUnary(ctx, req)
+}
+
 // AuthServiceHandler is an implementation of the memos.api.AuthService service.
 type AuthServiceHandler interface {
 	// SignIn authenticates a user with password or SSO credentials.
@@ -150,6 +406,53 @@ type AuthServiceHandler interface {
 	// SignOut ends the current session.
 	// Revokes the refresh token from the cookie and clears the cookie.
 	SignOut(context.Context, *connect.Request[api.SignOutRequest]) (*connect.Response[emptypb.Empty], error)
+	// BeginTOTPSetup starts TOTP enrollment for the current user.
+	// Returns the otpauth URL (render as QR code) and the raw secret for manual entry.
+	// Authentication: Required (access token).
+	BeginTOTPSetup(context.Context, *connect.Request[api.BeginTOTPSetupRequest]) (*connect.Response[api.BeginTOTPSetupResponse], error)
+	// ConfirmTOTPSetup verifies the code against the new secret and enables TOTP.
+	// Returns single-use backup codes, shown only once.
+	// Authentication: Required (access token).
+	ConfirmTOTPSetup(context.Context, *connect.Request[api.ConfirmTOTPSetupRequest]) (*connect.Response[api.ConfirmTOTPSetupResponse], error)
+	// DisableTOTP disables TOTP for the current user after verifying a current code.
+	// Authentication: Required (access token).
+	DisableTOTP(context.Context, *connect.Request[api.DisableTOTPRequest]) (*connect.Response[emptypb.Empty], error)
+	// GetTOTPStatus returns whether TOTP is enabled for the current user.
+	// Authentication: Required (access token).
+	GetTOTPStatus(context.Context, *connect.Request[api.GetTOTPStatusRequest]) (*connect.Response[api.GetTOTPStatusResponse], error)
+	// VerifyTOTPLogin completes a password login that required TOTP.
+	// Accepts a TOTP code or an unused backup code. Attempts are rate limited.
+	// Public. The pending token is the sealed totp_pending_token from SignIn.
+	VerifyTOTPLogin(context.Context, *connect.Request[api.VerifyTOTPLoginRequest]) (*connect.Response[api.SignInResponse], error)
+	// BeginPasskeyRegistration starts a WebAuthn registration ceremony for the
+	// current user, adding a passkey to an existing account.
+	// Authentication: Required (access token).
+	BeginPasskeyRegistration(context.Context, *connect.Request[api.BeginPasskeyRegistrationRequest]) (*connect.Response[api.BeginPasskeyRegistrationResponse], error)
+	// FinishPasskeyRegistration completes the ceremony and stores the credential.
+	// Authentication: Required (access token).
+	FinishPasskeyRegistration(context.Context, *connect.Request[api.FinishPasskeyRegistrationRequest]) (*connect.Response[api.FinishPasskeyRegistrationResponse], error)
+	// ListPasskeys lists the current user's registered passkeys.
+	// Authentication: Required (access token).
+	ListPasskeys(context.Context, *connect.Request[api.ListPasskeysRequest]) (*connect.Response[api.ListPasskeysResponse], error)
+	// DeletePasskey deletes one of the current user's passkeys.
+	// Authentication: Required (access token).
+	DeletePasskey(context.Context, *connect.Request[api.DeletePasskeyRequest]) (*connect.Response[emptypb.Empty], error)
+	// RenamePasskey changes the label of one of the current user's passkeys.
+	// Authentication: Required (access token).
+	RenamePasskey(context.Context, *connect.Request[api.RenamePasskeyRequest]) (*connect.Response[emptypb.Empty], error)
+	// BeginPasskeyLogin starts a usernameless WebAuthn login ceremony.
+	// Public. Attempts are rate limited.
+	BeginPasskeyLogin(context.Context, *connect.Request[api.BeginPasskeyLoginRequest]) (*connect.Response[api.BeginPasskeyLoginResponse], error)
+	// FinishPasskeyLogin completes the ceremony and signs the user in.
+	// Public. Attempts are rate limited.
+	FinishPasskeyLogin(context.Context, *connect.Request[api.FinishPasskeyLoginRequest]) (*connect.Response[api.SignInResponse], error)
+	// BeginPasskeySignup starts a "sign up with passkey" ceremony, provisioning
+	// a new local user like first-time SSO login does. Refused when the instance
+	// disallows user registration. Public. Attempts are rate limited.
+	BeginPasskeySignup(context.Context, *connect.Request[api.BeginPasskeySignupRequest]) (*connect.Response[api.BeginPasskeySignupResponse], error)
+	// FinishPasskeySignup completes the ceremony, stores the credential, and
+	// signs the new user in. Public. Attempts are rate limited.
+	FinishPasskeySignup(context.Context, *connect.Request[api.FinishPasskeySignupRequest]) (*connect.Response[api.SignInResponse], error)
 }
 
 // NewAuthServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -183,6 +486,90 @@ func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(authServiceMethods.ByName("SignOut")),
 		connect.WithHandlerOptions(opts...),
 	)
+	authServiceBeginTOTPSetupHandler := connect.NewUnaryHandler(
+		AuthServiceBeginTOTPSetupProcedure,
+		svc.BeginTOTPSetup,
+		connect.WithSchema(authServiceMethods.ByName("BeginTOTPSetup")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceConfirmTOTPSetupHandler := connect.NewUnaryHandler(
+		AuthServiceConfirmTOTPSetupProcedure,
+		svc.ConfirmTOTPSetup,
+		connect.WithSchema(authServiceMethods.ByName("ConfirmTOTPSetup")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceDisableTOTPHandler := connect.NewUnaryHandler(
+		AuthServiceDisableTOTPProcedure,
+		svc.DisableTOTP,
+		connect.WithSchema(authServiceMethods.ByName("DisableTOTP")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceGetTOTPStatusHandler := connect.NewUnaryHandler(
+		AuthServiceGetTOTPStatusProcedure,
+		svc.GetTOTPStatus,
+		connect.WithSchema(authServiceMethods.ByName("GetTOTPStatus")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceVerifyTOTPLoginHandler := connect.NewUnaryHandler(
+		AuthServiceVerifyTOTPLoginProcedure,
+		svc.VerifyTOTPLogin,
+		connect.WithSchema(authServiceMethods.ByName("VerifyTOTPLogin")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceBeginPasskeyRegistrationHandler := connect.NewUnaryHandler(
+		AuthServiceBeginPasskeyRegistrationProcedure,
+		svc.BeginPasskeyRegistration,
+		connect.WithSchema(authServiceMethods.ByName("BeginPasskeyRegistration")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceFinishPasskeyRegistrationHandler := connect.NewUnaryHandler(
+		AuthServiceFinishPasskeyRegistrationProcedure,
+		svc.FinishPasskeyRegistration,
+		connect.WithSchema(authServiceMethods.ByName("FinishPasskeyRegistration")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceListPasskeysHandler := connect.NewUnaryHandler(
+		AuthServiceListPasskeysProcedure,
+		svc.ListPasskeys,
+		connect.WithSchema(authServiceMethods.ByName("ListPasskeys")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceDeletePasskeyHandler := connect.NewUnaryHandler(
+		AuthServiceDeletePasskeyProcedure,
+		svc.DeletePasskey,
+		connect.WithSchema(authServiceMethods.ByName("DeletePasskey")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceRenamePasskeyHandler := connect.NewUnaryHandler(
+		AuthServiceRenamePasskeyProcedure,
+		svc.RenamePasskey,
+		connect.WithSchema(authServiceMethods.ByName("RenamePasskey")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceBeginPasskeyLoginHandler := connect.NewUnaryHandler(
+		AuthServiceBeginPasskeyLoginProcedure,
+		svc.BeginPasskeyLogin,
+		connect.WithSchema(authServiceMethods.ByName("BeginPasskeyLogin")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceFinishPasskeyLoginHandler := connect.NewUnaryHandler(
+		AuthServiceFinishPasskeyLoginProcedure,
+		svc.FinishPasskeyLogin,
+		connect.WithSchema(authServiceMethods.ByName("FinishPasskeyLogin")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceBeginPasskeySignupHandler := connect.NewUnaryHandler(
+		AuthServiceBeginPasskeySignupProcedure,
+		svc.BeginPasskeySignup,
+		connect.WithSchema(authServiceMethods.ByName("BeginPasskeySignup")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceFinishPasskeySignupHandler := connect.NewUnaryHandler(
+		AuthServiceFinishPasskeySignupProcedure,
+		svc.FinishPasskeySignup,
+		connect.WithSchema(authServiceMethods.ByName("FinishPasskeySignup")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/memos.api.AuthService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AuthServiceSignInProcedure:
@@ -193,6 +580,34 @@ func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption
 			authServiceGetCurrentUserHandler.ServeHTTP(w, r)
 		case AuthServiceSignOutProcedure:
 			authServiceSignOutHandler.ServeHTTP(w, r)
+		case AuthServiceBeginTOTPSetupProcedure:
+			authServiceBeginTOTPSetupHandler.ServeHTTP(w, r)
+		case AuthServiceConfirmTOTPSetupProcedure:
+			authServiceConfirmTOTPSetupHandler.ServeHTTP(w, r)
+		case AuthServiceDisableTOTPProcedure:
+			authServiceDisableTOTPHandler.ServeHTTP(w, r)
+		case AuthServiceGetTOTPStatusProcedure:
+			authServiceGetTOTPStatusHandler.ServeHTTP(w, r)
+		case AuthServiceVerifyTOTPLoginProcedure:
+			authServiceVerifyTOTPLoginHandler.ServeHTTP(w, r)
+		case AuthServiceBeginPasskeyRegistrationProcedure:
+			authServiceBeginPasskeyRegistrationHandler.ServeHTTP(w, r)
+		case AuthServiceFinishPasskeyRegistrationProcedure:
+			authServiceFinishPasskeyRegistrationHandler.ServeHTTP(w, r)
+		case AuthServiceListPasskeysProcedure:
+			authServiceListPasskeysHandler.ServeHTTP(w, r)
+		case AuthServiceDeletePasskeyProcedure:
+			authServiceDeletePasskeyHandler.ServeHTTP(w, r)
+		case AuthServiceRenamePasskeyProcedure:
+			authServiceRenamePasskeyHandler.ServeHTTP(w, r)
+		case AuthServiceBeginPasskeyLoginProcedure:
+			authServiceBeginPasskeyLoginHandler.ServeHTTP(w, r)
+		case AuthServiceFinishPasskeyLoginProcedure:
+			authServiceFinishPasskeyLoginHandler.ServeHTTP(w, r)
+		case AuthServiceBeginPasskeySignupProcedure:
+			authServiceBeginPasskeySignupHandler.ServeHTTP(w, r)
+		case AuthServiceFinishPasskeySignupProcedure:
+			authServiceFinishPasskeySignupHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -216,4 +631,60 @@ func (UnimplementedAuthServiceHandler) GetCurrentUser(context.Context, *connect.
 
 func (UnimplementedAuthServiceHandler) SignOut(context.Context, *connect.Request[api.SignOutRequest]) (*connect.Response[emptypb.Empty], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.SignOut is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) BeginTOTPSetup(context.Context, *connect.Request[api.BeginTOTPSetupRequest]) (*connect.Response[api.BeginTOTPSetupResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.BeginTOTPSetup is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) ConfirmTOTPSetup(context.Context, *connect.Request[api.ConfirmTOTPSetupRequest]) (*connect.Response[api.ConfirmTOTPSetupResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.ConfirmTOTPSetup is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) DisableTOTP(context.Context, *connect.Request[api.DisableTOTPRequest]) (*connect.Response[emptypb.Empty], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.DisableTOTP is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) GetTOTPStatus(context.Context, *connect.Request[api.GetTOTPStatusRequest]) (*connect.Response[api.GetTOTPStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.GetTOTPStatus is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) VerifyTOTPLogin(context.Context, *connect.Request[api.VerifyTOTPLoginRequest]) (*connect.Response[api.SignInResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.VerifyTOTPLogin is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) BeginPasskeyRegistration(context.Context, *connect.Request[api.BeginPasskeyRegistrationRequest]) (*connect.Response[api.BeginPasskeyRegistrationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.BeginPasskeyRegistration is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) FinishPasskeyRegistration(context.Context, *connect.Request[api.FinishPasskeyRegistrationRequest]) (*connect.Response[api.FinishPasskeyRegistrationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.FinishPasskeyRegistration is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) ListPasskeys(context.Context, *connect.Request[api.ListPasskeysRequest]) (*connect.Response[api.ListPasskeysResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.ListPasskeys is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) DeletePasskey(context.Context, *connect.Request[api.DeletePasskeyRequest]) (*connect.Response[emptypb.Empty], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.DeletePasskey is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) RenamePasskey(context.Context, *connect.Request[api.RenamePasskeyRequest]) (*connect.Response[emptypb.Empty], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.RenamePasskey is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) BeginPasskeyLogin(context.Context, *connect.Request[api.BeginPasskeyLoginRequest]) (*connect.Response[api.BeginPasskeyLoginResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.BeginPasskeyLogin is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) FinishPasskeyLogin(context.Context, *connect.Request[api.FinishPasskeyLoginRequest]) (*connect.Response[api.SignInResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.FinishPasskeyLogin is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) BeginPasskeySignup(context.Context, *connect.Request[api.BeginPasskeySignupRequest]) (*connect.Response[api.BeginPasskeySignupResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.BeginPasskeySignup is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) FinishPasskeySignup(context.Context, *connect.Request[api.FinishPasskeySignupRequest]) (*connect.Response[api.SignInResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.AuthService.FinishPasskeySignup is not implemented"))
 }

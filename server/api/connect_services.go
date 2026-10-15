@@ -94,6 +94,118 @@ func (s *ConnectServiceHandler) RefreshToken(ctx context.Context, req *connect.R
 	})
 }
 
+func (s *ConnectServiceHandler) BeginTOTPSetup(ctx context.Context, req *connect.Request[apipb.BeginTOTPSetupRequest]) (*connect.Response[apipb.BeginTOTPSetupResponse], error) {
+	resp, err := s.APIService.BeginTOTPSetup(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) ConfirmTOTPSetup(ctx context.Context, req *connect.Request[apipb.ConfirmTOTPSetupRequest]) (*connect.Response[apipb.ConfirmTOTPSetupResponse], error) {
+	resp, err := s.APIService.ConfirmTOTPSetup(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) DisableTOTP(ctx context.Context, req *connect.Request[apipb.DisableTOTPRequest]) (*connect.Response[emptypb.Empty], error) {
+	resp, err := s.APIService.DisableTOTP(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) GetTOTPStatus(ctx context.Context, req *connect.Request[apipb.GetTOTPStatusRequest]) (*connect.Response[apipb.GetTOTPStatusResponse], error) {
+	resp, err := s.APIService.GetTOTPStatus(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) VerifyTOTPLogin(ctx context.Context, req *connect.Request[apipb.VerifyTOTPLoginRequest]) (*connect.Response[apipb.SignInResponse], error) {
+	// Uses the header carrier like SignIn: a successful verification issues
+	// tokens and sets the refresh token cookie.
+	return connectWithHeaderCarrier(ctx, func(ctx context.Context) (*apipb.SignInResponse, error) {
+		return s.APIService.VerifyTOTPLogin(ctx, req.Msg)
+	})
+}
+
+func (s *ConnectServiceHandler) BeginPasskeyRegistration(ctx context.Context, req *connect.Request[apipb.BeginPasskeyRegistrationRequest]) (*connect.Response[apipb.BeginPasskeyRegistrationResponse], error) {
+	resp, err := s.APIService.BeginPasskeyRegistration(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) FinishPasskeyRegistration(ctx context.Context, req *connect.Request[apipb.FinishPasskeyRegistrationRequest]) (*connect.Response[apipb.FinishPasskeyRegistrationResponse], error) {
+	resp, err := s.APIService.FinishPasskeyRegistration(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) ListPasskeys(ctx context.Context, req *connect.Request[apipb.ListPasskeysRequest]) (*connect.Response[apipb.ListPasskeysResponse], error) {
+	resp, err := s.APIService.ListPasskeys(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) DeletePasskey(ctx context.Context, req *connect.Request[apipb.DeletePasskeyRequest]) (*connect.Response[emptypb.Empty], error) {
+	resp, err := s.APIService.DeletePasskey(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) RenamePasskey(ctx context.Context, req *connect.Request[apipb.RenamePasskeyRequest]) (*connect.Response[emptypb.Empty], error) {
+	resp, err := s.APIService.RenamePasskey(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) BeginPasskeyLogin(ctx context.Context, req *connect.Request[apipb.BeginPasskeyLoginRequest]) (*connect.Response[apipb.BeginPasskeyLoginResponse], error) {
+	resp, err := s.APIService.BeginPasskeyLogin(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) FinishPasskeyLogin(ctx context.Context, req *connect.Request[apipb.FinishPasskeyLoginRequest]) (*connect.Response[apipb.SignInResponse], error) {
+	// Uses the header carrier like SignIn: a successful login issues tokens
+	// and sets the refresh token cookie.
+	return connectWithHeaderCarrier(ctx, func(ctx context.Context) (*apipb.SignInResponse, error) {
+		return s.APIService.FinishPasskeyLogin(ctx, req.Msg)
+	})
+}
+
+func (s *ConnectServiceHandler) BeginPasskeySignup(ctx context.Context, req *connect.Request[apipb.BeginPasskeySignupRequest]) (*connect.Response[apipb.BeginPasskeySignupResponse], error) {
+	resp, err := s.APIService.BeginPasskeySignup(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+func (s *ConnectServiceHandler) FinishPasskeySignup(ctx context.Context, req *connect.Request[apipb.FinishPasskeySignupRequest]) (*connect.Response[apipb.SignInResponse], error) {
+	// Uses the header carrier like SignIn: a successful signup issues tokens
+	// and sets the refresh token cookie.
+	return connectWithHeaderCarrier(ctx, func(ctx context.Context) (*apipb.SignInResponse, error) {
+		return s.APIService.FinishPasskeySignup(ctx, req.Msg)
+	})
+}
+
 // UserService
 
 func (s *ConnectServiceHandler) ListUsers(ctx context.Context, req *connect.Request[apipb.ListUsersRequest]) (*connect.Response[apipb.ListUsersResponse], error) {

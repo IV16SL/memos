@@ -20,10 +20,24 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_SignIn_FullMethodName         = "/memos.api.AuthService/SignIn"
-	AuthService_RefreshToken_FullMethodName   = "/memos.api.AuthService/RefreshToken"
-	AuthService_GetCurrentUser_FullMethodName = "/memos.api.AuthService/GetCurrentUser"
-	AuthService_SignOut_FullMethodName        = "/memos.api.AuthService/SignOut"
+	AuthService_SignIn_FullMethodName                    = "/memos.api.AuthService/SignIn"
+	AuthService_RefreshToken_FullMethodName              = "/memos.api.AuthService/RefreshToken"
+	AuthService_GetCurrentUser_FullMethodName            = "/memos.api.AuthService/GetCurrentUser"
+	AuthService_SignOut_FullMethodName                   = "/memos.api.AuthService/SignOut"
+	AuthService_BeginTOTPSetup_FullMethodName            = "/memos.api.AuthService/BeginTOTPSetup"
+	AuthService_ConfirmTOTPSetup_FullMethodName          = "/memos.api.AuthService/ConfirmTOTPSetup"
+	AuthService_DisableTOTP_FullMethodName               = "/memos.api.AuthService/DisableTOTP"
+	AuthService_GetTOTPStatus_FullMethodName             = "/memos.api.AuthService/GetTOTPStatus"
+	AuthService_VerifyTOTPLogin_FullMethodName           = "/memos.api.AuthService/VerifyTOTPLogin"
+	AuthService_BeginPasskeyRegistration_FullMethodName  = "/memos.api.AuthService/BeginPasskeyRegistration"
+	AuthService_FinishPasskeyRegistration_FullMethodName = "/memos.api.AuthService/FinishPasskeyRegistration"
+	AuthService_ListPasskeys_FullMethodName              = "/memos.api.AuthService/ListPasskeys"
+	AuthService_DeletePasskey_FullMethodName             = "/memos.api.AuthService/DeletePasskey"
+	AuthService_RenamePasskey_FullMethodName             = "/memos.api.AuthService/RenamePasskey"
+	AuthService_BeginPasskeyLogin_FullMethodName         = "/memos.api.AuthService/BeginPasskeyLogin"
+	AuthService_FinishPasskeyLogin_FullMethodName        = "/memos.api.AuthService/FinishPasskeyLogin"
+	AuthService_BeginPasskeySignup_FullMethodName        = "/memos.api.AuthService/BeginPasskeySignup"
+	AuthService_FinishPasskeySignup_FullMethodName       = "/memos.api.AuthService/FinishPasskeySignup"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -48,6 +62,53 @@ type AuthServiceClient interface {
 	// SignOut ends the current session.
 	// Revokes the refresh token from the cookie and clears the cookie.
 	SignOut(ctx context.Context, in *SignOutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// BeginTOTPSetup starts TOTP enrollment for the current user.
+	// Returns the otpauth URL (render as QR code) and the raw secret for manual entry.
+	// Authentication: Required (access token).
+	BeginTOTPSetup(ctx context.Context, in *BeginTOTPSetupRequest, opts ...grpc.CallOption) (*BeginTOTPSetupResponse, error)
+	// ConfirmTOTPSetup verifies the code against the new secret and enables TOTP.
+	// Returns single-use backup codes, shown only once.
+	// Authentication: Required (access token).
+	ConfirmTOTPSetup(ctx context.Context, in *ConfirmTOTPSetupRequest, opts ...grpc.CallOption) (*ConfirmTOTPSetupResponse, error)
+	// DisableTOTP disables TOTP for the current user after verifying a current code.
+	// Authentication: Required (access token).
+	DisableTOTP(ctx context.Context, in *DisableTOTPRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// GetTOTPStatus returns whether TOTP is enabled for the current user.
+	// Authentication: Required (access token).
+	GetTOTPStatus(ctx context.Context, in *GetTOTPStatusRequest, opts ...grpc.CallOption) (*GetTOTPStatusResponse, error)
+	// VerifyTOTPLogin completes a password login that required TOTP.
+	// Accepts a TOTP code or an unused backup code. Attempts are rate limited.
+	// Public. The pending token is the sealed totp_pending_token from SignIn.
+	VerifyTOTPLogin(ctx context.Context, in *VerifyTOTPLoginRequest, opts ...grpc.CallOption) (*SignInResponse, error)
+	// BeginPasskeyRegistration starts a WebAuthn registration ceremony for the
+	// current user, adding a passkey to an existing account.
+	// Authentication: Required (access token).
+	BeginPasskeyRegistration(ctx context.Context, in *BeginPasskeyRegistrationRequest, opts ...grpc.CallOption) (*BeginPasskeyRegistrationResponse, error)
+	// FinishPasskeyRegistration completes the ceremony and stores the credential.
+	// Authentication: Required (access token).
+	FinishPasskeyRegistration(ctx context.Context, in *FinishPasskeyRegistrationRequest, opts ...grpc.CallOption) (*FinishPasskeyRegistrationResponse, error)
+	// ListPasskeys lists the current user's registered passkeys.
+	// Authentication: Required (access token).
+	ListPasskeys(ctx context.Context, in *ListPasskeysRequest, opts ...grpc.CallOption) (*ListPasskeysResponse, error)
+	// DeletePasskey deletes one of the current user's passkeys.
+	// Authentication: Required (access token).
+	DeletePasskey(ctx context.Context, in *DeletePasskeyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// RenamePasskey changes the label of one of the current user's passkeys.
+	// Authentication: Required (access token).
+	RenamePasskey(ctx context.Context, in *RenamePasskeyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// BeginPasskeyLogin starts a usernameless WebAuthn login ceremony.
+	// Public. Attempts are rate limited.
+	BeginPasskeyLogin(ctx context.Context, in *BeginPasskeyLoginRequest, opts ...grpc.CallOption) (*BeginPasskeyLoginResponse, error)
+	// FinishPasskeyLogin completes the ceremony and signs the user in.
+	// Public. Attempts are rate limited.
+	FinishPasskeyLogin(ctx context.Context, in *FinishPasskeyLoginRequest, opts ...grpc.CallOption) (*SignInResponse, error)
+	// BeginPasskeySignup starts a "sign up with passkey" ceremony, provisioning
+	// a new local user like first-time SSO login does. Refused when the instance
+	// disallows user registration. Public. Attempts are rate limited.
+	BeginPasskeySignup(ctx context.Context, in *BeginPasskeySignupRequest, opts ...grpc.CallOption) (*BeginPasskeySignupResponse, error)
+	// FinishPasskeySignup completes the ceremony, stores the credential, and
+	// signs the new user in. Public. Attempts are rate limited.
+	FinishPasskeySignup(ctx context.Context, in *FinishPasskeySignupRequest, opts ...grpc.CallOption) (*SignInResponse, error)
 }
 
 type authServiceClient struct {
@@ -98,6 +159,146 @@ func (c *authServiceClient) SignOut(ctx context.Context, in *SignOutRequest, opt
 	return out, nil
 }
 
+func (c *authServiceClient) BeginTOTPSetup(ctx context.Context, in *BeginTOTPSetupRequest, opts ...grpc.CallOption) (*BeginTOTPSetupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BeginTOTPSetupResponse)
+	err := c.cc.Invoke(ctx, AuthService_BeginTOTPSetup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) ConfirmTOTPSetup(ctx context.Context, in *ConfirmTOTPSetupRequest, opts ...grpc.CallOption) (*ConfirmTOTPSetupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfirmTOTPSetupResponse)
+	err := c.cc.Invoke(ctx, AuthService_ConfirmTOTPSetup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) DisableTOTP(ctx context.Context, in *DisableTOTPRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, AuthService_DisableTOTP_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) GetTOTPStatus(ctx context.Context, in *GetTOTPStatusRequest, opts ...grpc.CallOption) (*GetTOTPStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTOTPStatusResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetTOTPStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) VerifyTOTPLogin(ctx context.Context, in *VerifyTOTPLoginRequest, opts ...grpc.CallOption) (*SignInResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SignInResponse)
+	err := c.cc.Invoke(ctx, AuthService_VerifyTOTPLogin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) BeginPasskeyRegistration(ctx context.Context, in *BeginPasskeyRegistrationRequest, opts ...grpc.CallOption) (*BeginPasskeyRegistrationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BeginPasskeyRegistrationResponse)
+	err := c.cc.Invoke(ctx, AuthService_BeginPasskeyRegistration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) FinishPasskeyRegistration(ctx context.Context, in *FinishPasskeyRegistrationRequest, opts ...grpc.CallOption) (*FinishPasskeyRegistrationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FinishPasskeyRegistrationResponse)
+	err := c.cc.Invoke(ctx, AuthService_FinishPasskeyRegistration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) ListPasskeys(ctx context.Context, in *ListPasskeysRequest, opts ...grpc.CallOption) (*ListPasskeysResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPasskeysResponse)
+	err := c.cc.Invoke(ctx, AuthService_ListPasskeys_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) DeletePasskey(ctx context.Context, in *DeletePasskeyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, AuthService_DeletePasskey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) RenamePasskey(ctx context.Context, in *RenamePasskeyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, AuthService_RenamePasskey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) BeginPasskeyLogin(ctx context.Context, in *BeginPasskeyLoginRequest, opts ...grpc.CallOption) (*BeginPasskeyLoginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BeginPasskeyLoginResponse)
+	err := c.cc.Invoke(ctx, AuthService_BeginPasskeyLogin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) FinishPasskeyLogin(ctx context.Context, in *FinishPasskeyLoginRequest, opts ...grpc.CallOption) (*SignInResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SignInResponse)
+	err := c.cc.Invoke(ctx, AuthService_FinishPasskeyLogin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) BeginPasskeySignup(ctx context.Context, in *BeginPasskeySignupRequest, opts ...grpc.CallOption) (*BeginPasskeySignupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BeginPasskeySignupResponse)
+	err := c.cc.Invoke(ctx, AuthService_BeginPasskeySignup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) FinishPasskeySignup(ctx context.Context, in *FinishPasskeySignupRequest, opts ...grpc.CallOption) (*SignInResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SignInResponse)
+	err := c.cc.Invoke(ctx, AuthService_FinishPasskeySignup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServiceServer is the server API for AuthService service.
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
@@ -120,6 +321,53 @@ type AuthServiceServer interface {
 	// SignOut ends the current session.
 	// Revokes the refresh token from the cookie and clears the cookie.
 	SignOut(context.Context, *SignOutRequest) (*emptypb.Empty, error)
+	// BeginTOTPSetup starts TOTP enrollment for the current user.
+	// Returns the otpauth URL (render as QR code) and the raw secret for manual entry.
+	// Authentication: Required (access token).
+	BeginTOTPSetup(context.Context, *BeginTOTPSetupRequest) (*BeginTOTPSetupResponse, error)
+	// ConfirmTOTPSetup verifies the code against the new secret and enables TOTP.
+	// Returns single-use backup codes, shown only once.
+	// Authentication: Required (access token).
+	ConfirmTOTPSetup(context.Context, *ConfirmTOTPSetupRequest) (*ConfirmTOTPSetupResponse, error)
+	// DisableTOTP disables TOTP for the current user after verifying a current code.
+	// Authentication: Required (access token).
+	DisableTOTP(context.Context, *DisableTOTPRequest) (*emptypb.Empty, error)
+	// GetTOTPStatus returns whether TOTP is enabled for the current user.
+	// Authentication: Required (access token).
+	GetTOTPStatus(context.Context, *GetTOTPStatusRequest) (*GetTOTPStatusResponse, error)
+	// VerifyTOTPLogin completes a password login that required TOTP.
+	// Accepts a TOTP code or an unused backup code. Attempts are rate limited.
+	// Public. The pending token is the sealed totp_pending_token from SignIn.
+	VerifyTOTPLogin(context.Context, *VerifyTOTPLoginRequest) (*SignInResponse, error)
+	// BeginPasskeyRegistration starts a WebAuthn registration ceremony for the
+	// current user, adding a passkey to an existing account.
+	// Authentication: Required (access token).
+	BeginPasskeyRegistration(context.Context, *BeginPasskeyRegistrationRequest) (*BeginPasskeyRegistrationResponse, error)
+	// FinishPasskeyRegistration completes the ceremony and stores the credential.
+	// Authentication: Required (access token).
+	FinishPasskeyRegistration(context.Context, *FinishPasskeyRegistrationRequest) (*FinishPasskeyRegistrationResponse, error)
+	// ListPasskeys lists the current user's registered passkeys.
+	// Authentication: Required (access token).
+	ListPasskeys(context.Context, *ListPasskeysRequest) (*ListPasskeysResponse, error)
+	// DeletePasskey deletes one of the current user's passkeys.
+	// Authentication: Required (access token).
+	DeletePasskey(context.Context, *DeletePasskeyRequest) (*emptypb.Empty, error)
+	// RenamePasskey changes the label of one of the current user's passkeys.
+	// Authentication: Required (access token).
+	RenamePasskey(context.Context, *RenamePasskeyRequest) (*emptypb.Empty, error)
+	// BeginPasskeyLogin starts a usernameless WebAuthn login ceremony.
+	// Public. Attempts are rate limited.
+	BeginPasskeyLogin(context.Context, *BeginPasskeyLoginRequest) (*BeginPasskeyLoginResponse, error)
+	// FinishPasskeyLogin completes the ceremony and signs the user in.
+	// Public. Attempts are rate limited.
+	FinishPasskeyLogin(context.Context, *FinishPasskeyLoginRequest) (*SignInResponse, error)
+	// BeginPasskeySignup starts a "sign up with passkey" ceremony, provisioning
+	// a new local user like first-time SSO login does. Refused when the instance
+	// disallows user registration. Public. Attempts are rate limited.
+	BeginPasskeySignup(context.Context, *BeginPasskeySignupRequest) (*BeginPasskeySignupResponse, error)
+	// FinishPasskeySignup completes the ceremony, stores the credential, and
+	// signs the new user in. Public. Attempts are rate limited.
+	FinishPasskeySignup(context.Context, *FinishPasskeySignupRequest) (*SignInResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -141,6 +389,48 @@ func (UnimplementedAuthServiceServer) GetCurrentUser(context.Context, *GetCurren
 }
 func (UnimplementedAuthServiceServer) SignOut(context.Context, *SignOutRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method SignOut not implemented")
+}
+func (UnimplementedAuthServiceServer) BeginTOTPSetup(context.Context, *BeginTOTPSetupRequest) (*BeginTOTPSetupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BeginTOTPSetup not implemented")
+}
+func (UnimplementedAuthServiceServer) ConfirmTOTPSetup(context.Context, *ConfirmTOTPSetupRequest) (*ConfirmTOTPSetupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfirmTOTPSetup not implemented")
+}
+func (UnimplementedAuthServiceServer) DisableTOTP(context.Context, *DisableTOTPRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DisableTOTP not implemented")
+}
+func (UnimplementedAuthServiceServer) GetTOTPStatus(context.Context, *GetTOTPStatusRequest) (*GetTOTPStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTOTPStatus not implemented")
+}
+func (UnimplementedAuthServiceServer) VerifyTOTPLogin(context.Context, *VerifyTOTPLoginRequest) (*SignInResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method VerifyTOTPLogin not implemented")
+}
+func (UnimplementedAuthServiceServer) BeginPasskeyRegistration(context.Context, *BeginPasskeyRegistrationRequest) (*BeginPasskeyRegistrationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BeginPasskeyRegistration not implemented")
+}
+func (UnimplementedAuthServiceServer) FinishPasskeyRegistration(context.Context, *FinishPasskeyRegistrationRequest) (*FinishPasskeyRegistrationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FinishPasskeyRegistration not implemented")
+}
+func (UnimplementedAuthServiceServer) ListPasskeys(context.Context, *ListPasskeysRequest) (*ListPasskeysResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPasskeys not implemented")
+}
+func (UnimplementedAuthServiceServer) DeletePasskey(context.Context, *DeletePasskeyRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeletePasskey not implemented")
+}
+func (UnimplementedAuthServiceServer) RenamePasskey(context.Context, *RenamePasskeyRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method RenamePasskey not implemented")
+}
+func (UnimplementedAuthServiceServer) BeginPasskeyLogin(context.Context, *BeginPasskeyLoginRequest) (*BeginPasskeyLoginResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BeginPasskeyLogin not implemented")
+}
+func (UnimplementedAuthServiceServer) FinishPasskeyLogin(context.Context, *FinishPasskeyLoginRequest) (*SignInResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FinishPasskeyLogin not implemented")
+}
+func (UnimplementedAuthServiceServer) BeginPasskeySignup(context.Context, *BeginPasskeySignupRequest) (*BeginPasskeySignupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BeginPasskeySignup not implemented")
+}
+func (UnimplementedAuthServiceServer) FinishPasskeySignup(context.Context, *FinishPasskeySignupRequest) (*SignInResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FinishPasskeySignup not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
@@ -235,6 +525,258 @@ func _AuthService_SignOut_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_BeginTOTPSetup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BeginTOTPSetupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).BeginTOTPSetup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_BeginTOTPSetup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).BeginTOTPSetup(ctx, req.(*BeginTOTPSetupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_ConfirmTOTPSetup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfirmTOTPSetupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ConfirmTOTPSetup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ConfirmTOTPSetup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ConfirmTOTPSetup(ctx, req.(*ConfirmTOTPSetupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_DisableTOTP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DisableTOTPRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).DisableTOTP(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_DisableTOTP_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).DisableTOTP(ctx, req.(*DisableTOTPRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_GetTOTPStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTOTPStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetTOTPStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetTOTPStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetTOTPStatus(ctx, req.(*GetTOTPStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_VerifyTOTPLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyTOTPLoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).VerifyTOTPLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_VerifyTOTPLogin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).VerifyTOTPLogin(ctx, req.(*VerifyTOTPLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_BeginPasskeyRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BeginPasskeyRegistrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).BeginPasskeyRegistration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_BeginPasskeyRegistration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).BeginPasskeyRegistration(ctx, req.(*BeginPasskeyRegistrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_FinishPasskeyRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FinishPasskeyRegistrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).FinishPasskeyRegistration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_FinishPasskeyRegistration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).FinishPasskeyRegistration(ctx, req.(*FinishPasskeyRegistrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_ListPasskeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPasskeysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ListPasskeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ListPasskeys_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ListPasskeys(ctx, req.(*ListPasskeysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_DeletePasskey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePasskeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).DeletePasskey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_DeletePasskey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).DeletePasskey(ctx, req.(*DeletePasskeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_RenamePasskey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RenamePasskeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).RenamePasskey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_RenamePasskey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).RenamePasskey(ctx, req.(*RenamePasskeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_BeginPasskeyLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BeginPasskeyLoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).BeginPasskeyLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_BeginPasskeyLogin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).BeginPasskeyLogin(ctx, req.(*BeginPasskeyLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_FinishPasskeyLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FinishPasskeyLoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).FinishPasskeyLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_FinishPasskeyLogin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).FinishPasskeyLogin(ctx, req.(*FinishPasskeyLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_BeginPasskeySignup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BeginPasskeySignupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).BeginPasskeySignup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_BeginPasskeySignup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).BeginPasskeySignup(ctx, req.(*BeginPasskeySignupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_FinishPasskeySignup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FinishPasskeySignupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).FinishPasskeySignup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_FinishPasskeySignup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).FinishPasskeySignup(ctx, req.(*FinishPasskeySignupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -257,6 +799,62 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SignOut",
 			Handler:    _AuthService_SignOut_Handler,
+		},
+		{
+			MethodName: "BeginTOTPSetup",
+			Handler:    _AuthService_BeginTOTPSetup_Handler,
+		},
+		{
+			MethodName: "ConfirmTOTPSetup",
+			Handler:    _AuthService_ConfirmTOTPSetup_Handler,
+		},
+		{
+			MethodName: "DisableTOTP",
+			Handler:    _AuthService_DisableTOTP_Handler,
+		},
+		{
+			MethodName: "GetTOTPStatus",
+			Handler:    _AuthService_GetTOTPStatus_Handler,
+		},
+		{
+			MethodName: "VerifyTOTPLogin",
+			Handler:    _AuthService_VerifyTOTPLogin_Handler,
+		},
+		{
+			MethodName: "BeginPasskeyRegistration",
+			Handler:    _AuthService_BeginPasskeyRegistration_Handler,
+		},
+		{
+			MethodName: "FinishPasskeyRegistration",
+			Handler:    _AuthService_FinishPasskeyRegistration_Handler,
+		},
+		{
+			MethodName: "ListPasskeys",
+			Handler:    _AuthService_ListPasskeys_Handler,
+		},
+		{
+			MethodName: "DeletePasskey",
+			Handler:    _AuthService_DeletePasskey_Handler,
+		},
+		{
+			MethodName: "RenamePasskey",
+			Handler:    _AuthService_RenamePasskey_Handler,
+		},
+		{
+			MethodName: "BeginPasskeyLogin",
+			Handler:    _AuthService_BeginPasskeyLogin_Handler,
+		},
+		{
+			MethodName: "FinishPasskeyLogin",
+			Handler:    _AuthService_FinishPasskeyLogin_Handler,
+		},
+		{
+			MethodName: "BeginPasskeySignup",
+			Handler:    _AuthService_BeginPasskeySignup_Handler,
+		},
+		{
+			MethodName: "FinishPasskeySignup",
+			Handler:    _AuthService_FinishPasskeySignup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

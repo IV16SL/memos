@@ -15,6 +15,7 @@ import ChangeMemberPasswordDialog from "../ChangeMemberPasswordDialog";
 import UpdateAccountDialog from "../UpdateAccountDialog";
 import UserAvatar from "../UserAvatar";
 import LinkedIdentitySection from "./LinkedIdentitySection";
+import SecuritySection from "./SecuritySection";
 import SettingGroup from "./SettingGroup";
 import SettingSection from "./SettingSection";
 import UserStatsSection from "./UserStatsSection";
@@ -69,6 +70,8 @@ const MyAccountSection = () => {
       </SettingGroup>
 
       <UserStatsSection />
+
+      <SecuritySection />
 
       <LinkedIdentitySection />
 

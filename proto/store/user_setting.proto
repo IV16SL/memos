@@ -22,6 +22,10 @@ message UserSetting {
     PERSONAL_ACCESS_TOKENS = 7;
     // Per-user tag metadata.
     TAGS = 8;
+    // TOTP two-factor authentication settings.
+    TOTP = 9;
+    // Passkey (WebAuthn) credentials.
+    PASSKEYS = 10;
   }
 
   int32 user_id = 1;
@@ -34,6 +38,8 @@ message UserSetting {
     RefreshTokensUserSetting refresh_tokens = 8;
     PersonalAccessTokensUserSetting personal_access_tokens = 9;
     TagsUserSetting tags = 10;
+    TotpUserSetting totp = 11;
+    PasskeysUserSetting passkeys = 12;
   }
 }
 
@@ -144,4 +150,40 @@ message WebhooksUserSetting {
     string signing_secret = 4;
   }
   repeated Webhook webhooks = 1;
+}
+
+// TotpUserSetting holds the two-factor authentication state of a user.
+// The TOTP secret is AES-GCM encrypted with a server-side key before storage;
+// backup codes are stored as SHA-256 hex digests and are single-use.
+message TotpUserSetting {
+  // AES-GCM encrypted TOTP secret (base32-encoded plaintext before encryption).
+  bytes encrypted_secret = 1;
+  // SHA-256 hex digests of unused backup codes.
+  repeated string backup_code_hashes = 2;
+}
+
+// PasskeyCredential is a single WebAuthn credential registered by a user.
+// The public key is public by design; the credential ID is an opaque handle.
+message PasskeyCredential {
+  // The credential ID (opaque bytes from the authenticator).
+  bytes credential_id = 1;
+  // The COSE-encoded public key.
+  bytes public_key = 2;
+  // The signature counter at last use, for clone detection.
+  uint32 sign_count = 3;
+  // User-supplied label, e.g. "MacBook Touch ID".
+  string name = 4;
+  // Transports hinted by the authenticator (e.g. "internal", "hybrid", "usb").
+  repeated string transports = 5;
+  // Whether the credential is eligible for backup (multi-device).
+  bool backup_eligible = 6;
+  // Whether the credential is currently backed up.
+  bool backed_up = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp last_used_at = 9;
+}
+
+// PasskeysUserSetting holds all WebAuthn credentials of a user.
+message PasskeysUserSetting {
+  repeated PasskeyCredential credentials = 1;
 }

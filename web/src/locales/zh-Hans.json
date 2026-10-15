@@ -66,7 +66,15 @@
     "signups-closed-description": "此实例已禁用新账号注册。如需访问，请联系管理员。",
     "signups-closed-title": "注册已关闭",
     "sso-signup-tip": "使用以下登录方式即可创建账号。",
-    "welcome-back": "欢迎回来。"
+    "welcome-back": "欢迎回来。",
+    "totp-required-description": "@{username} 已启用双重验证。请输入验证器应用的验证码（或恢复码）。",
+    "totp-code-label": "一次性验证码",
+    "verify-totp": "验证",
+    "sign-in-with-passkey": "使用通行密钥登录",
+    "sign-up-with-passkey": "使用通行密钥注册",
+    "passkey-signup-description": "用通行密钥创建账号。之后用设备的生物识别或安全密钥登录，不需要密码。",
+    "passkey-signin-failed": "通行密钥登录失败。",
+    "passkey-signup-failed": "通行密钥注册失败。"
   },
   "calendar": {
     "new-memo-on-day": "在这一天新建备忘录",
@@ -174,7 +182,9 @@
     "views": "视图",
     "yourself": "您自己",
     "resize-sidebar": "调整侧边栏大小",
-    "view-all": "查看全部"
+    "view-all": "查看全部",
+    "back": "返回",
+    "copied": "已复制"
   },
   "locale-picker": {
     "no-language-feedback": "未找到语言？ 提交反馈"
@@ -950,6 +960,36 @@
       "you": "您",
       "your-access": "您的访问权限",
       "your-spaces": "您的空间"
+    },
+    "security": {
+      "title": "安全设置",
+      "description": "双重验证和通行密钥可以保护你的账号。",
+      "enabled": "已启用",
+      "disable": "停用",
+      "totp-title": "验证器应用 (TOTP)",
+      "totp-description": "登录时在密码之外再要求输入一次性验证码。",
+      "enable-totp": "启用验证器应用",
+      "totp-scan-description": "用验证器应用（如 1Password、Authy、Google Authenticator）扫描二维码，然后在下方输入 6 位验证码完成确认。",
+      "totp-code-label": "一次性验证码",
+      "totp-enabled": "双重验证已启用",
+      "backup-codes-description": "请把这些恢复码保存在安全的地方。如果无法使用验证器应用，每个恢复码可使用一次。此页面关闭后将不再显示。",
+      "backup-codes-saved": "我已保存恢复码",
+      "disable-totp-title": "停用双重验证",
+      "disable-totp-description": "输入验证器应用的当前验证码（或未使用过的恢复码）以停用双重验证。",
+      "totp-disabled": "双重验证已停用",
+      "passkey-title": "通行密钥",
+      "passkey-description": "使用设备的生物识别或安全密钥免密登录。",
+      "add-passkey": "添加通行密钥",
+      "passkey-empty": "还没有注册通行密钥。",
+      "passkey-default-name": "通行密钥",
+      "passkey-last-used": "上次使用",
+      "passkey-added": "通行密钥已添加",
+      "passkey-deleted": "通行密钥已删除",
+      "passkey-renamed": "通行密钥已重命名",
+      "passkey-delete-title": "删除通行密钥",
+      "passkey-delete-description": "删除通行密钥“{name}”？你仍可以用密码登录。",
+      "passkey-rename-title": "重命名通行密钥",
+      "passkey-name-label": "名称"
     }
   },
   "tooltip": {

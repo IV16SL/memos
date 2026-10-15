@@ -46,6 +46,128 @@ service AuthService {
   rpc SignOut(SignOutRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {post: "/api/auth/signout"};
   }
+
+  // BeginTOTPSetup starts TOTP enrollment for the current user.
+  // Returns the otpauth URL (render as QR code) and the raw secret for manual entry.
+  // Authentication: Required (access token).
+  rpc BeginTOTPSetup(BeginTOTPSetupRequest) returns (BeginTOTPSetupResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/totp/setup/begin"
+      body: "*"
+    };
+  }
+
+  // ConfirmTOTPSetup verifies the code against the new secret and enables TOTP.
+  // Returns single-use backup codes, shown only once.
+  // Authentication: Required (access token).
+  rpc ConfirmTOTPSetup(ConfirmTOTPSetupRequest) returns (ConfirmTOTPSetupResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/totp/setup/confirm"
+      body: "*"
+    };
+  }
+
+  // DisableTOTP disables TOTP for the current user after verifying a current code.
+  // Authentication: Required (access token).
+  rpc DisableTOTP(DisableTOTPRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/auth/totp/disable"
+      body: "*"
+    };
+  }
+
+  // GetTOTPStatus returns whether TOTP is enabled for the current user.
+  // Authentication: Required (access token).
+  rpc GetTOTPStatus(GetTOTPStatusRequest) returns (GetTOTPStatusResponse) {
+    option (google.api.http) = {get: "/api/auth/totp/status"};
+  }
+
+  // VerifyTOTPLogin completes a password login that required TOTP.
+  // Accepts a TOTP code or an unused backup code. Attempts are rate limited.
+  // Public. The pending token is the sealed totp_pending_token from SignIn.
+  rpc VerifyTOTPLogin(VerifyTOTPLoginRequest) returns (SignInResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/totp/verify-login"
+      body: "*"
+    };
+  }
+
+  // BeginPasskeyRegistration starts a WebAuthn registration ceremony for the
+  // current user, adding a passkey to an existing account.
+  // Authentication: Required (access token).
+  rpc BeginPasskeyRegistration(BeginPasskeyRegistrationRequest) returns (BeginPasskeyRegistrationResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/passkey/register/begin"
+      body: "*"
+    };
+  }
+
+  // FinishPasskeyRegistration completes the ceremony and stores the credential.
+  // Authentication: Required (access token).
+  rpc FinishPasskeyRegistration(FinishPasskeyRegistrationRequest) returns (FinishPasskeyRegistrationResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/passkey/register/finish"
+      body: "*"
+    };
+  }
+
+  // ListPasskeys lists the current user's registered passkeys.
+  // Authentication: Required (access token).
+  rpc ListPasskeys(ListPasskeysRequest) returns (ListPasskeysResponse) {
+    option (google.api.http) = {get: "/api/auth/passkeys"};
+  }
+
+  // DeletePasskey deletes one of the current user's passkeys.
+  // Authentication: Required (access token).
+  rpc DeletePasskey(DeletePasskeyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {delete: "/api/auth/passkeys/{name=passkeys/*}"};
+  }
+
+  // RenamePasskey changes the label of one of the current user's passkeys.
+  // Authentication: Required (access token).
+  rpc RenamePasskey(RenamePasskeyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/auth/passkeys/{name=passkeys/*}:rename"
+      body: "*"
+    };
+  }
+
+  // BeginPasskeyLogin starts a usernameless WebAuthn login ceremony.
+  // Public. Attempts are rate limited.
+  rpc BeginPasskeyLogin(BeginPasskeyLoginRequest) returns (BeginPasskeyLoginResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/passkey/login/begin"
+      body: "*"
+    };
+  }
+
+  // FinishPasskeyLogin completes the ceremony and signs the user in.
+  // Public. Attempts are rate limited.
+  rpc FinishPasskeyLogin(FinishPasskeyLoginRequest) returns (SignInResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/passkey/login/finish"
+      body: "*"
+    };
+  }
+
+  // BeginPasskeySignup starts a "sign up with passkey" ceremony, provisioning
+  // a new local user like first-time SSO login does. Refused when the instance
+  // disallows user registration. Public. Attempts are rate limited.
+  rpc BeginPasskeySignup(BeginPasskeySignupRequest) returns (BeginPasskeySignupResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/passkey/signup/begin"
+      body: "*"
+    };
+  }
+
+  // FinishPasskeySignup completes the ceremony, stores the credential, and
+  // signs the new user in. Public. Attempts are rate limited.
+  rpc FinishPasskeySignup(FinishPasskeySignupRequest) returns (SignInResponse) {
+    option (google.api.http) = {
+      post: "/api/auth/passkey/signup/finish"
+      body: "*"
+    };
+  }
 }
 
 // Request message for AuthService.SignIn.
@@ -102,6 +224,15 @@ message SignInResponse {
   // When the access token expires.
   // Call RefreshToken before this time.
   google.protobuf.Timestamp access_token_expire_time = 3;
+
+  // When true, the password was verified but TOTP is required to complete the
+  // login. No tokens are issued yet; user and access_token are unset.
+  // Call VerifyTOTPLogin with totp_pending_token and the TOTP code.
+  bool totp_required = 4;
+
+  // Sealed pending-login token for VerifyTOTPLogin. Only set when totp_required
+  // is true. Expires after 5 minutes and is single-purpose.
+  string totp_pending_token = 5;
 }
 
 // Request message for AuthService.RefreshToken.
@@ -128,3 +259,165 @@ message GetCurrentUserResponse {
 
 // Request message for AuthService.SignOut.
 message SignOutRequest {}
+
+// Request message for AuthService.BeginTOTPSetup.
+// It has no fields: the user is taken from the access token.
+message BeginTOTPSetupRequest {}
+
+// Response message for AuthService.BeginTOTPSetup.
+message BeginTOTPSetupResponse {
+  // The otpauth:// URL to render as a QR code.
+  string otpauth_url = 1;
+
+  // The raw base32 secret, for manual entry.
+  string secret = 2;
+}
+
+// Request message for AuthService.ConfirmTOTPSetup.
+message ConfirmTOTPSetupRequest {
+  // Required. The secret returned by BeginTOTPSetup.
+  string secret = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. A current TOTP code generated from the secret.
+  string code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response message for AuthService.ConfirmTOTPSetup.
+message ConfirmTOTPSetupResponse {
+  // Single-use backup codes. Shown only once; store them securely.
+  repeated string backup_codes = 1;
+}
+
+// Request message for AuthService.DisableTOTP.
+message DisableTOTPRequest {
+  // Required. A current TOTP code, or an unused backup code.
+  string code = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Request message for AuthService.GetTOTPStatus.
+// It has no fields: the user is taken from the access token.
+message GetTOTPStatusRequest {}
+
+// Response message for AuthService.GetTOTPStatus.
+message GetTOTPStatusResponse {
+  // Whether TOTP two-factor authentication is enabled.
+  bool enabled = 1;
+}
+
+// Request message for AuthService.VerifyTOTPLogin.
+message VerifyTOTPLoginRequest {
+  // Required. The sealed totp_pending_token from a SignIn response with totp_required.
+  string pending_token = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. A current TOTP code, or an unused backup code.
+  string code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// BeginPasskeyRegistrationRequest starts a WebAuthn registration ceremony for
+// the current user (adding a passkey to an existing account).
+message BeginPasskeyRegistrationRequest {}
+
+// BeginPasskeyRegistrationResponse carries the creation options for the
+// authenticator and a sealed session token for FinishPasskeyRegistration.
+message BeginPasskeyRegistrationResponse {
+  // JSON-encoded PublicKeyCredentialCreationOptions for @simplewebauthn/browser.
+  string options_json = 1;
+  // Sealed session token; pass back to FinishPasskeyRegistration.
+  string session_token = 2;
+}
+
+// FinishPasskeyRegistrationRequest completes a WebAuthn registration ceremony.
+message FinishPasskeyRegistrationRequest {
+  // Required. The sealed session token from BeginPasskeyRegistration.
+  string session_token = 1 [(google.api.field_behavior) = REQUIRED];
+  // Required. JSON-encoded RegistrationResponse from @simplewebauthn/browser.
+  string credential_json = 2 [(google.api.field_behavior) = REQUIRED];
+  // Optional. A user-supplied label for the new passkey.
+  string name = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// FinishPasskeyRegistrationResponse describes the registered passkey.
+message FinishPasskeyRegistrationResponse {
+  // The new passkey credential, in "passkeys/{credential_id}" resource name form.
+  Passkey passkey = 1;
+}
+
+// Passkey is a registered WebAuthn credential.
+message Passkey {
+  // Resource name. Format: passkeys/{credential_id} (base64url-encoded ID).
+  string name = 1;
+  // User-supplied label.
+  string display_name = 2;
+  // Transports hinted by the authenticator.
+  repeated string transports = 3;
+  // When the passkey was registered.
+  google.protobuf.Timestamp create_time = 4;
+  // When the passkey was last used to sign in.
+  google.protobuf.Timestamp last_used_time = 5;
+}
+
+// ListPasskeysRequest lists the current user's passkeys.
+message ListPasskeysRequest {}
+
+// ListPasskeysResponse lists the current user's passkeys.
+message ListPasskeysResponse {
+  repeated Passkey passkeys = 1;
+}
+
+// DeletePasskeyRequest deletes one of the current user's passkeys.
+message DeletePasskeyRequest {
+  // Required. Format: passkeys/{credential_id} (base64url-encoded ID).
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// RenamePasskeyRequest changes the label of one of the current user's passkeys.
+message RenamePasskeyRequest {
+  // Required. Format: passkeys/{credential_id} (base64url-encoded ID).
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
+  // Required. The new label.
+  string display_name = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// BeginPasskeyLoginRequest starts a usernameless WebAuthn login ceremony.
+message BeginPasskeyLoginRequest {}
+
+// BeginPasskeyLoginResponse carries the request options for the authenticator
+// and a sealed session token for FinishPasskeyLogin.
+message BeginPasskeyLoginResponse {
+  // JSON-encoded PublicKeyCredentialRequestOptions for @simplewebauthn/browser.
+  string options_json = 1;
+  // Sealed session token; pass back to FinishPasskeyLogin.
+  string session_token = 2;
+}
+
+// FinishPasskeyLoginRequest completes a usernameless WebAuthn login ceremony.
+message FinishPasskeyLoginRequest {
+  // Required. The sealed session token from BeginPasskeyLogin.
+  string session_token = 1 [(google.api.field_behavior) = REQUIRED];
+  // Required. JSON-encoded AuthenticationResponse from @simplewebauthn/browser.
+  string credential_json = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// BeginPasskeySignupRequest starts a "sign up with passkey" ceremony for a new
+// account. Like first-time SSO login, this provisions a local user; unlike SSO
+// there is no identity provider, so the username is supplied by the caller.
+message BeginPasskeySignupRequest {
+  // Required. The desired username for the new account.
+  string username = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// BeginPasskeySignupResponse carries the creation options and sealed session.
+message BeginPasskeySignupResponse {
+  // JSON-encoded PublicKeyCredentialCreationOptions for @simplewebauthn/browser.
+  string options_json = 1;
+  // Sealed session token; pass back to FinishPasskeySignup.
+  string session_token = 2;
+}
+
+// FinishPasskeySignupRequest completes a "sign up with passkey" ceremony.
+message FinishPasskeySignupRequest {
+  // Required. The sealed session token from BeginPasskeySignup.
+  string session_token = 1 [(google.api.field_behavior) = REQUIRED];
+  // Required. JSON-encoded RegistrationResponse from @simplewebauthn/browser.
+  string credential_json = 2 [(google.api.field_behavior) = REQUIRED];
+}

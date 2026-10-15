@@ -17,7 +17,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file api/auth_service.proto.
  */
 export const file_api_auth_service: GenFile = /*@__PURE__*/
-  fileDesc("ChZhcGkvYXV0aF9zZXJ2aWNlLnByb3RvEgltZW1vcy5hcGkikQMKDVNpZ25JblJlcXVlc3QSTAoUcGFzc3dvcmRfY3JlZGVudGlhbHMYASABKAsyLC5tZW1vcy5hcGkuU2lnbkluUmVxdWVzdC5QYXNzd29yZENyZWRlbnRpYWxzSAASQgoPc3NvX2NyZWRlbnRpYWxzGAIgASgLMicubWVtb3MuYXBpLlNpZ25JblJlcXVlc3QuU3NvQ3JlZGVudGlhbHNIABpDChNQYXNzd29yZENyZWRlbnRpYWxzEhUKCHVzZXJuYW1lGAEgASgJQgPgQQISFQoIcGFzc3dvcmQYAiABKAlCA+BBAhqZAQoOU3NvQ3JlZGVudGlhbHMSPQoRaWRlbnRpdHlfcHJvdmlkZXIYASABKAlCIuBBAvpBHAoabWVtb3MuYXBpL0lkZW50aXR5UHJvdmlkZXISEQoEY29kZRgCIAEoCUID4EECEhkKDHJlZGlyZWN0X3VyaRgDIAEoCUID4EECEhoKDWNvZGVfdmVyaWZpZXIYBCABKAlCA+BBAUINCgtjcmVkZW50aWFscyKDAQoOU2lnbkluUmVzcG9uc2USHQoEdXNlchgBIAEoCzIPLm1lbW9zLmFwaS5Vc2VyEhQKDGFjY2Vzc190b2tlbhgCIAEoCRI8ChhhY2Nlc3NfdG9rZW5fZXhwaXJlX3RpbWUYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIhUKE1JlZnJlc2hUb2tlblJlcXVlc3QiagoUUmVmcmVzaFRva2VuUmVzcG9uc2USFAoMYWNjZXNzX3Rva2VuGAEgASgJEjwKGGFjY2Vzc190b2tlbl9leHBpcmVfdGltZRgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFwoVR2V0Q3VycmVudFVzZXJSZXF1ZXN0IjcKFkdldEN1cnJlbnRVc2VyUmVzcG9uc2USHQoEdXNlchgBIAEoCzIPLm1lbW9zLmFwaS5Vc2VyIhAKDlNpZ25PdXRSZXF1ZXN0Mp4DCgtBdXRoU2VydmljZRJaCgZTaWduSW4SGC5tZW1vcy5hcGkuU2lnbkluUmVxdWVzdBoZLm1lbW9zLmFwaS5TaWduSW5SZXNwb25zZSIbgtPkkwIVOgEqIhAvYXBpL2F1dGgvc2lnbmluEm0KDFJlZnJlc2hUb2tlbhIeLm1lbW9zLmFwaS5SZWZyZXNoVG9rZW5SZXF1ZXN0Gh8ubWVtb3MuYXBpLlJlZnJlc2hUb2tlblJlc3BvbnNlIhyC0+STAhY6ASoiES9hcGkvYXV0aC9yZWZyZXNoEmsKDkdldEN1cnJlbnRVc2VyEiAubWVtb3MuYXBpLkdldEN1cnJlbnRVc2VyUmVxdWVzdBohLm1lbW9zLmFwaS5HZXRDdXJyZW50VXNlclJlc3BvbnNlIhSC0+STAg4SDC9hcGkvYXV0aC9tZRJXCgdTaWduT3V0EhkubWVtb3MuYXBpLlNpZ25PdXRSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IhmC0+STAhMiES9hcGkvYXV0aC9zaWdub3V0Qo8BCg1jb20ubWVtb3MuYXBpQhBBdXRoU2VydmljZVByb3RvUAFaJ2dpdGh1Yi5jb20vdXNlbWVtb3MvbWVtb3MvcHJvdG8vZ2VuL2FwaaICA01BWKoCCU1lbW9zLkFwacoCCU1lbW9zXEFwaeICFU1lbW9zXEFwaVxHUEJNZXRhZGF0YeoCCk1lbW9zOjpBcGliBnByb3RvMw", [file_api_user_service, file_google_api_annotations, file_google_api_field_behavior, file_google_api_resource, file_google_protobuf_empty, file_google_protobuf_timestamp]);
+  fileDesc("ChZhcGkvYXV0aF9zZXJ2aWNlLnByb3RvEgltZW1vcy5hcGkikQMKDVNpZ25JblJlcXVlc3QSTAoUcGFzc3dvcmRfY3JlZGVudGlhbHMYASABKAsyLC5tZW1vcy5hcGkuU2lnbkluUmVxdWVzdC5QYXNzd29yZENyZWRlbnRpYWxzSAASQgoPc3NvX2NyZWRlbnRpYWxzGAIgASgLMicubWVtb3MuYXBpLlNpZ25JblJlcXVlc3QuU3NvQ3JlZGVudGlhbHNIABpDChNQYXNzd29yZENyZWRlbnRpYWxzEhUKCHVzZXJuYW1lGAEgASgJQgPgQQISFQoIcGFzc3dvcmQYAiABKAlCA+BBAhqZAQoOU3NvQ3JlZGVudGlhbHMSPQoRaWRlbnRpdHlfcHJvdmlkZXIYASABKAlCIuBBAvpBHAoabWVtb3MuYXBpL0lkZW50aXR5UHJvdmlkZXISEQoEY29kZRgCIAEoCUID4EECEhkKDHJlZGlyZWN0X3VyaRgDIAEoCUID4EECEhoKDWNvZGVfdmVyaWZpZXIYBCABKAlCA+BBAUINCgtjcmVkZW50aWFscyK2AQoOU2lnbkluUmVzcG9uc2USHQoEdXNlchgBIAEoCzIPLm1lbW9zLmFwaS5Vc2VyEhQKDGFjY2Vzc190b2tlbhgCIAEoCRI8ChhhY2Nlc3NfdG9rZW5fZXhwaXJlX3RpbWUYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhUKDXRvdHBfcmVxdWlyZWQYBCABKAgSGgoSdG90cF9wZW5kaW5nX3Rva2VuGAUgASgJIhUKE1JlZnJlc2hUb2tlblJlcXVlc3QiagoUUmVmcmVzaFRva2VuUmVzcG9uc2USFAoMYWNjZXNzX3Rva2VuGAEgASgJEjwKGGFjY2Vzc190b2tlbl9leHBpcmVfdGltZRgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFwoVR2V0Q3VycmVudFVzZXJSZXF1ZXN0IjcKFkdldEN1cnJlbnRVc2VyUmVzcG9uc2USHQoEdXNlchgBIAEoCzIPLm1lbW9zLmFwaS5Vc2VyIhAKDlNpZ25PdXRSZXF1ZXN0IhcKFUJlZ2luVE9UUFNldHVwUmVxdWVzdCI9ChZCZWdpblRPVFBTZXR1cFJlc3BvbnNlEhMKC290cGF1dGhfdXJsGAEgASgJEg4KBnNlY3JldBgCIAEoCSJBChdDb25maXJtVE9UUFNldHVwUmVxdWVzdBITCgZzZWNyZXQYASABKAlCA+BBAhIRCgRjb2RlGAIgASgJQgPgQQIiMAoYQ29uZmlybVRPVFBTZXR1cFJlc3BvbnNlEhQKDGJhY2t1cF9jb2RlcxgBIAMoCSInChJEaXNhYmxlVE9UUFJlcXVlc3QSEQoEY29kZRgBIAEoCUID4EECIhYKFEdldFRPVFBTdGF0dXNSZXF1ZXN0IigKFUdldFRPVFBTdGF0dXNSZXNwb25zZRIPCgdlbmFibGVkGAEgASgIIkcKFlZlcmlmeVRPVFBMb2dpblJlcXVlc3QSGgoNcGVuZGluZ190b2tlbhgBIAEoCUID4EECEhEKBGNvZGUYAiABKAlCA+BBAiIhCh9CZWdpblBhc3NrZXlSZWdpc3RyYXRpb25SZXF1ZXN0Ik8KIEJlZ2luUGFzc2tleVJlZ2lzdHJhdGlvblJlc3BvbnNlEhQKDG9wdGlvbnNfanNvbhgBIAEoCRIVCg1zZXNzaW9uX3Rva2VuGAIgASgJIm8KIEZpbmlzaFBhc3NrZXlSZWdpc3RyYXRpb25SZXF1ZXN0EhoKDXNlc3Npb25fdG9rZW4YASABKAlCA+BBAhIcCg9jcmVkZW50aWFsX2pzb24YAiABKAlCA+BBAhIRCgRuYW1lGAMgASgJQgPgQQEiSAohRmluaXNoUGFzc2tleVJlZ2lzdHJhdGlvblJlc3BvbnNlEiMKB3Bhc3NrZXkYASABKAsyEi5tZW1vcy5hcGkuUGFzc2tleSKmAQoHUGFzc2tleRIMCgRuYW1lGAEgASgJEhQKDGRpc3BsYXlfbmFtZRgCIAEoCRISCgp0cmFuc3BvcnRzGAMgAygJEi8KC2NyZWF0ZV90aW1lGAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIyCg5sYXN0X3VzZWRfdGltZRgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFQoTTGlzdFBhc3NrZXlzUmVxdWVzdCI8ChRMaXN0UGFzc2tleXNSZXNwb25zZRIkCghwYXNza2V5cxgBIAMoCzISLm1lbW9zLmFwaS5QYXNza2V5IikKFERlbGV0ZVBhc3NrZXlSZXF1ZXN0EhEKBG5hbWUYASABKAlCA+BBAiJEChRSZW5hbWVQYXNza2V5UmVxdWVzdBIRCgRuYW1lGAEgASgJQgPgQQISGQoMZGlzcGxheV9uYW1lGAIgASgJQgPgQQIiGgoYQmVnaW5QYXNza2V5TG9naW5SZXF1ZXN0IkgKGUJlZ2luUGFzc2tleUxvZ2luUmVzcG9uc2USFAoMb3B0aW9uc19qc29uGAEgASgJEhUKDXNlc3Npb25fdG9rZW4YAiABKAkiVQoZRmluaXNoUGFzc2tleUxvZ2luUmVxdWVzdBIaCg1zZXNzaW9uX3Rva2VuGAEgASgJQgPgQQISHAoPY3JlZGVudGlhbF9qc29uGAIgASgJQgPgQQIiMgoZQmVnaW5QYXNza2V5U2lnbnVwUmVxdWVzdBIVCgh1c2VybmFtZRgBIAEoCUID4EECIkkKGkJlZ2luUGFzc2tleVNpZ251cFJlc3BvbnNlEhQKDG9wdGlvbnNfanNvbhgBIAEoCRIVCg1zZXNzaW9uX3Rva2VuGAIgASgJIlYKGkZpbmlzaFBhc3NrZXlTaWdudXBSZXF1ZXN0EhoKDXNlc3Npb25fdG9rZW4YASABKAlCA+BBAhIcCg9jcmVkZW50aWFsX2pzb24YAiABKAlCA+BBAjLNEQoLQXV0aFNlcnZpY2USWgoGU2lnbkluEhgubWVtb3MuYXBpLlNpZ25JblJlcXVlc3QaGS5tZW1vcy5hcGkuU2lnbkluUmVzcG9uc2UiG4LT5JMCFToBKiIQL2FwaS9hdXRoL3NpZ25pbhJtCgxSZWZyZXNoVG9rZW4SHi5tZW1vcy5hcGkuUmVmcmVzaFRva2VuUmVxdWVzdBofLm1lbW9zLmFwaS5SZWZyZXNoVG9rZW5SZXNwb25zZSIcgtPkkwIWOgEqIhEvYXBpL2F1dGgvcmVmcmVzaBJrCg5HZXRDdXJyZW50VXNlchIgLm1lbW9zLmFwaS5HZXRDdXJyZW50VXNlclJlcXVlc3QaIS5tZW1vcy5hcGkuR2V0Q3VycmVudFVzZXJSZXNwb25zZSIUgtPkkwIOEgwvYXBpL2F1dGgvbWUSVwoHU2lnbk91dBIZLm1lbW9zLmFwaS5TaWduT3V0UmVxdWVzdBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eSIZgtPkkwITIhEvYXBpL2F1dGgvc2lnbm91dBJ8Cg5CZWdpblRPVFBTZXR1cBIgLm1lbW9zLmFwaS5CZWdpblRPVFBTZXR1cFJlcXVlc3QaIS5tZW1vcy5hcGkuQmVnaW5UT1RQU2V0dXBSZXNwb25zZSIlgtPkkwIfOgEqIhovYXBpL2F1dGgvdG90cC9zZXR1cC9iZWdpbhKEAQoQQ29uZmlybVRPVFBTZXR1cBIiLm1lbW9zLmFwaS5Db25maXJtVE9UUFNldHVwUmVxdWVzdBojLm1lbW9zLmFwaS5Db25maXJtVE9UUFNldHVwUmVzcG9uc2UiJ4LT5JMCIToBKiIcL2FwaS9hdXRoL3RvdHAvc2V0dXAvY29uZmlybRJnCgtEaXNhYmxlVE9UUBIdLm1lbW9zLmFwaS5EaXNhYmxlVE9UUFJlcXVlc3QaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiIYLT5JMCGzoBKiIWL2FwaS9hdXRoL3RvdHAvZGlzYWJsZRJxCg1HZXRUT1RQU3RhdHVzEh8ubWVtb3MuYXBpLkdldFRPVFBTdGF0dXNSZXF1ZXN0GiAubWVtb3MuYXBpLkdldFRPVFBTdGF0dXNSZXNwb25zZSIdgtPkkwIXEhUvYXBpL2F1dGgvdG90cC9zdGF0dXMSdwoPVmVyaWZ5VE9UUExvZ2luEiEubWVtb3MuYXBpLlZlcmlmeVRPVFBMb2dpblJlcXVlc3QaGS5tZW1vcy5hcGkuU2lnbkluUmVzcG9uc2UiJoLT5JMCIDoBKiIbL2FwaS9hdXRoL3RvdHAvdmVyaWZ5LWxvZ2luEqABChhCZWdpblBhc3NrZXlSZWdpc3RyYXRpb24SKi5tZW1vcy5hcGkuQmVnaW5QYXNza2V5UmVnaXN0cmF0aW9uUmVxdWVzdBorLm1lbW9zLmFwaS5CZWdpblBhc3NrZXlSZWdpc3RyYXRpb25SZXNwb25zZSIrgtPkkwIlOgEqIiAvYXBpL2F1dGgvcGFzc2tleS9yZWdpc3Rlci9iZWdpbhKkAQoZRmluaXNoUGFzc2tleVJlZ2lzdHJhdGlvbhIrLm1lbW9zLmFwaS5GaW5pc2hQYXNza2V5UmVnaXN0cmF0aW9uUmVxdWVzdBosLm1lbW9zLmFwaS5GaW5pc2hQYXNza2V5UmVnaXN0cmF0aW9uUmVzcG9uc2UiLILT5JMCJjoBKiIhL2FwaS9hdXRoL3Bhc3NrZXkvcmVnaXN0ZXIvZmluaXNoEmsKDExpc3RQYXNza2V5cxIeLm1lbW9zLmFwaS5MaXN0UGFzc2tleXNSZXF1ZXN0Gh8ubWVtb3MuYXBpLkxpc3RQYXNza2V5c1Jlc3BvbnNlIhqC0+STAhQSEi9hcGkvYXV0aC9wYXNza2V5cxJ2Cg1EZWxldGVQYXNza2V5Eh8ubWVtb3MuYXBpLkRlbGV0ZVBhc3NrZXlSZXF1ZXN0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IiyC0+STAiYqJC9hcGkvYXV0aC9wYXNza2V5cy97bmFtZT1wYXNza2V5cy8qfRKAAQoNUmVuYW1lUGFzc2tleRIfLm1lbW9zLmFwaS5SZW5hbWVQYXNza2V5UmVxdWVzdBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eSI2gtPkkwIwOgEqIisvYXBpL2F1dGgvcGFzc2tleXMve25hbWU9cGFzc2tleXMvKn06cmVuYW1lEogBChFCZWdpblBhc3NrZXlMb2dpbhIjLm1lbW9zLmFwaS5CZWdpblBhc3NrZXlMb2dpblJlcXVlc3QaJC5tZW1vcy5hcGkuQmVnaW5QYXNza2V5TG9naW5SZXNwb25zZSIogtPkkwIiOgEqIh0vYXBpL2F1dGgvcGFzc2tleS9sb2dpbi9iZWdpbhKAAQoSRmluaXNoUGFzc2tleUxvZ2luEiQubWVtb3MuYXBpLkZpbmlzaFBhc3NrZXlMb2dpblJlcXVlc3QaGS5tZW1vcy5hcGkuU2lnbkluUmVzcG9uc2UiKYLT5JMCIzoBKiIeL2FwaS9hdXRoL3Bhc3NrZXkvbG9naW4vZmluaXNoEowBChJCZWdpblBhc3NrZXlTaWdudXASJC5tZW1vcy5hcGkuQmVnaW5QYXNza2V5U2lnbnVwUmVxdWVzdBolLm1lbW9zLmFwaS5CZWdpblBhc3NrZXlTaWdudXBSZXNwb25zZSIpgtPkkwIjOgEqIh4vYXBpL2F1dGgvcGFzc2tleS9zaWdudXAvYmVnaW4SgwEKE0ZpbmlzaFBhc3NrZXlTaWdudXASJS5tZW1vcy5hcGkuRmluaXNoUGFzc2tleVNpZ251cFJlcXVlc3QaGS5tZW1vcy5hcGkuU2lnbkluUmVzcG9uc2UiKoLT5JMCJDoBKiIfL2FwaS9hdXRoL3Bhc3NrZXkvc2lnbnVwL2ZpbmlzaEKPAQoNY29tLm1lbW9zLmFwaUIQQXV0aFNlcnZpY2VQcm90b1ABWidnaXRodWIuY29tL3VzZW1lbW9zL21lbW9zL3Byb3RvL2dlbi9hcGmiAgNNQViqAglNZW1vcy5BcGnKAglNZW1vc1xBcGniAhVNZW1vc1xBcGlcR1BCTWV0YWRhdGHqAgpNZW1vczo6QXBpYgZwcm90bzM", [file_api_user_service, file_google_api_annotations, file_google_api_field_behavior, file_google_api_resource, file_google_protobuf_empty, file_google_protobuf_timestamp]);
 
 /**
  * Request message for AuthService.SignIn.
@@ -157,6 +157,23 @@ export type SignInResponse = Message<"memos.api.SignInResponse"> & {
    * @generated from field: google.protobuf.Timestamp access_token_expire_time = 3;
    */
   accessTokenExpireTime?: Timestamp | undefined;
+
+  /**
+   * When true, the password was verified but TOTP is required to complete the
+   * login. No tokens are issued yet; user and access_token are unset.
+   * Call VerifyTOTPLogin with totp_pending_token and the TOTP code.
+   *
+   * @generated from field: bool totp_required = 4;
+   */
+  totpRequired: boolean;
+
+  /**
+   * Sealed pending-login token for VerifyTOTPLogin. Only set when totp_required
+   * is true. Expires after 5 minutes and is single-purpose.
+   *
+   * @generated from field: string totp_pending_token = 5;
+   */
+  totpPendingToken: string;
 };
 
 /**
@@ -262,6 +279,569 @@ export const SignOutRequestSchema: GenMessage<SignOutRequest> = /*@__PURE__*/
   messageDesc(file_api_auth_service, 6);
 
 /**
+ * Request message for AuthService.BeginTOTPSetup.
+ * It has no fields: the user is taken from the access token.
+ *
+ * @generated from message memos.api.BeginTOTPSetupRequest
+ */
+export type BeginTOTPSetupRequest = Message<"memos.api.BeginTOTPSetupRequest"> & {
+};
+
+/**
+ * Describes the message memos.api.BeginTOTPSetupRequest.
+ * Use `create(BeginTOTPSetupRequestSchema)` to create a new message.
+ */
+export const BeginTOTPSetupRequestSchema: GenMessage<BeginTOTPSetupRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 7);
+
+/**
+ * Response message for AuthService.BeginTOTPSetup.
+ *
+ * @generated from message memos.api.BeginTOTPSetupResponse
+ */
+export type BeginTOTPSetupResponse = Message<"memos.api.BeginTOTPSetupResponse"> & {
+  /**
+   * The otpauth:// URL to render as a QR code.
+   *
+   * @generated from field: string otpauth_url = 1;
+   */
+  otpauthUrl: string;
+
+  /**
+   * The raw base32 secret, for manual entry.
+   *
+   * @generated from field: string secret = 2;
+   */
+  secret: string;
+};
+
+/**
+ * Describes the message memos.api.BeginTOTPSetupResponse.
+ * Use `create(BeginTOTPSetupResponseSchema)` to create a new message.
+ */
+export const BeginTOTPSetupResponseSchema: GenMessage<BeginTOTPSetupResponse> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 8);
+
+/**
+ * Request message for AuthService.ConfirmTOTPSetup.
+ *
+ * @generated from message memos.api.ConfirmTOTPSetupRequest
+ */
+export type ConfirmTOTPSetupRequest = Message<"memos.api.ConfirmTOTPSetupRequest"> & {
+  /**
+   * Required. The secret returned by BeginTOTPSetup.
+   *
+   * @generated from field: string secret = 1;
+   */
+  secret: string;
+
+  /**
+   * Required. A current TOTP code generated from the secret.
+   *
+   * @generated from field: string code = 2;
+   */
+  code: string;
+};
+
+/**
+ * Describes the message memos.api.ConfirmTOTPSetupRequest.
+ * Use `create(ConfirmTOTPSetupRequestSchema)` to create a new message.
+ */
+export const ConfirmTOTPSetupRequestSchema: GenMessage<ConfirmTOTPSetupRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 9);
+
+/**
+ * Response message for AuthService.ConfirmTOTPSetup.
+ *
+ * @generated from message memos.api.ConfirmTOTPSetupResponse
+ */
+export type ConfirmTOTPSetupResponse = Message<"memos.api.ConfirmTOTPSetupResponse"> & {
+  /**
+   * Single-use backup codes. Shown only once; store them securely.
+   *
+   * @generated from field: repeated string backup_codes = 1;
+   */
+  backupCodes: string[];
+};
+
+/**
+ * Describes the message memos.api.ConfirmTOTPSetupResponse.
+ * Use `create(ConfirmTOTPSetupResponseSchema)` to create a new message.
+ */
+export const ConfirmTOTPSetupResponseSchema: GenMessage<ConfirmTOTPSetupResponse> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 10);
+
+/**
+ * Request message for AuthService.DisableTOTP.
+ *
+ * @generated from message memos.api.DisableTOTPRequest
+ */
+export type DisableTOTPRequest = Message<"memos.api.DisableTOTPRequest"> & {
+  /**
+   * Required. A current TOTP code, or an unused backup code.
+   *
+   * @generated from field: string code = 1;
+   */
+  code: string;
+};
+
+/**
+ * Describes the message memos.api.DisableTOTPRequest.
+ * Use `create(DisableTOTPRequestSchema)` to create a new message.
+ */
+export const DisableTOTPRequestSchema: GenMessage<DisableTOTPRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 11);
+
+/**
+ * Request message for AuthService.GetTOTPStatus.
+ * It has no fields: the user is taken from the access token.
+ *
+ * @generated from message memos.api.GetTOTPStatusRequest
+ */
+export type GetTOTPStatusRequest = Message<"memos.api.GetTOTPStatusRequest"> & {
+};
+
+/**
+ * Describes the message memos.api.GetTOTPStatusRequest.
+ * Use `create(GetTOTPStatusRequestSchema)` to create a new message.
+ */
+export const GetTOTPStatusRequestSchema: GenMessage<GetTOTPStatusRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 12);
+
+/**
+ * Response message for AuthService.GetTOTPStatus.
+ *
+ * @generated from message memos.api.GetTOTPStatusResponse
+ */
+export type GetTOTPStatusResponse = Message<"memos.api.GetTOTPStatusResponse"> & {
+  /**
+   * Whether TOTP two-factor authentication is enabled.
+   *
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+};
+
+/**
+ * Describes the message memos.api.GetTOTPStatusResponse.
+ * Use `create(GetTOTPStatusResponseSchema)` to create a new message.
+ */
+export const GetTOTPStatusResponseSchema: GenMessage<GetTOTPStatusResponse> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 13);
+
+/**
+ * Request message for AuthService.VerifyTOTPLogin.
+ *
+ * @generated from message memos.api.VerifyTOTPLoginRequest
+ */
+export type VerifyTOTPLoginRequest = Message<"memos.api.VerifyTOTPLoginRequest"> & {
+  /**
+   * Required. The sealed totp_pending_token from a SignIn response with totp_required.
+   *
+   * @generated from field: string pending_token = 1;
+   */
+  pendingToken: string;
+
+  /**
+   * Required. A current TOTP code, or an unused backup code.
+   *
+   * @generated from field: string code = 2;
+   */
+  code: string;
+};
+
+/**
+ * Describes the message memos.api.VerifyTOTPLoginRequest.
+ * Use `create(VerifyTOTPLoginRequestSchema)` to create a new message.
+ */
+export const VerifyTOTPLoginRequestSchema: GenMessage<VerifyTOTPLoginRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 14);
+
+/**
+ * BeginPasskeyRegistrationRequest starts a WebAuthn registration ceremony for
+ * the current user (adding a passkey to an existing account).
+ *
+ * @generated from message memos.api.BeginPasskeyRegistrationRequest
+ */
+export type BeginPasskeyRegistrationRequest = Message<"memos.api.BeginPasskeyRegistrationRequest"> & {
+};
+
+/**
+ * Describes the message memos.api.BeginPasskeyRegistrationRequest.
+ * Use `create(BeginPasskeyRegistrationRequestSchema)` to create a new message.
+ */
+export const BeginPasskeyRegistrationRequestSchema: GenMessage<BeginPasskeyRegistrationRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 15);
+
+/**
+ * BeginPasskeyRegistrationResponse carries the creation options for the
+ * authenticator and a sealed session token for FinishPasskeyRegistration.
+ *
+ * @generated from message memos.api.BeginPasskeyRegistrationResponse
+ */
+export type BeginPasskeyRegistrationResponse = Message<"memos.api.BeginPasskeyRegistrationResponse"> & {
+  /**
+   * JSON-encoded PublicKeyCredentialCreationOptions for @simplewebauthn/browser.
+   *
+   * @generated from field: string options_json = 1;
+   */
+  optionsJson: string;
+
+  /**
+   * Sealed session token; pass back to FinishPasskeyRegistration.
+   *
+   * @generated from field: string session_token = 2;
+   */
+  sessionToken: string;
+};
+
+/**
+ * Describes the message memos.api.BeginPasskeyRegistrationResponse.
+ * Use `create(BeginPasskeyRegistrationResponseSchema)` to create a new message.
+ */
+export const BeginPasskeyRegistrationResponseSchema: GenMessage<BeginPasskeyRegistrationResponse> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 16);
+
+/**
+ * FinishPasskeyRegistrationRequest completes a WebAuthn registration ceremony.
+ *
+ * @generated from message memos.api.FinishPasskeyRegistrationRequest
+ */
+export type FinishPasskeyRegistrationRequest = Message<"memos.api.FinishPasskeyRegistrationRequest"> & {
+  /**
+   * Required. The sealed session token from BeginPasskeyRegistration.
+   *
+   * @generated from field: string session_token = 1;
+   */
+  sessionToken: string;
+
+  /**
+   * Required. JSON-encoded RegistrationResponse from @simplewebauthn/browser.
+   *
+   * @generated from field: string credential_json = 2;
+   */
+  credentialJson: string;
+
+  /**
+   * Optional. A user-supplied label for the new passkey.
+   *
+   * @generated from field: string name = 3;
+   */
+  name: string;
+};
+
+/**
+ * Describes the message memos.api.FinishPasskeyRegistrationRequest.
+ * Use `create(FinishPasskeyRegistrationRequestSchema)` to create a new message.
+ */
+export const FinishPasskeyRegistrationRequestSchema: GenMessage<FinishPasskeyRegistrationRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 17);
+
+/**
+ * FinishPasskeyRegistrationResponse describes the registered passkey.
+ *
+ * @generated from message memos.api.FinishPasskeyRegistrationResponse
+ */
+export type FinishPasskeyRegistrationResponse = Message<"memos.api.FinishPasskeyRegistrationResponse"> & {
+  /**
+   * The new passkey credential, in "passkeys/{credential_id}" resource name form.
+   *
+   * @generated from field: memos.api.Passkey passkey = 1;
+   */
+  passkey?: Passkey | undefined;
+};
+
+/**
+ * Describes the message memos.api.FinishPasskeyRegistrationResponse.
+ * Use `create(FinishPasskeyRegistrationResponseSchema)` to create a new message.
+ */
+export const FinishPasskeyRegistrationResponseSchema: GenMessage<FinishPasskeyRegistrationResponse> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 18);
+
+/**
+ * Passkey is a registered WebAuthn credential.
+ *
+ * @generated from message memos.api.Passkey
+ */
+export type Passkey = Message<"memos.api.Passkey"> & {
+  /**
+   * Resource name. Format: passkeys/{credential_id} (base64url-encoded ID).
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * User-supplied label.
+   *
+   * @generated from field: string display_name = 2;
+   */
+  displayName: string;
+
+  /**
+   * Transports hinted by the authenticator.
+   *
+   * @generated from field: repeated string transports = 3;
+   */
+  transports: string[];
+
+  /**
+   * When the passkey was registered.
+   *
+   * @generated from field: google.protobuf.Timestamp create_time = 4;
+   */
+  createTime?: Timestamp | undefined;
+
+  /**
+   * When the passkey was last used to sign in.
+   *
+   * @generated from field: google.protobuf.Timestamp last_used_time = 5;
+   */
+  lastUsedTime?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message memos.api.Passkey.
+ * Use `create(PasskeySchema)` to create a new message.
+ */
+export const PasskeySchema: GenMessage<Passkey> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 19);
+
+/**
+ * ListPasskeysRequest lists the current user's passkeys.
+ *
+ * @generated from message memos.api.ListPasskeysRequest
+ */
+export type ListPasskeysRequest = Message<"memos.api.ListPasskeysRequest"> & {
+};
+
+/**
+ * Describes the message memos.api.ListPasskeysRequest.
+ * Use `create(ListPasskeysRequestSchema)` to create a new message.
+ */
+export const ListPasskeysRequestSchema: GenMessage<ListPasskeysRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 20);
+
+/**
+ * ListPasskeysResponse lists the current user's passkeys.
+ *
+ * @generated from message memos.api.ListPasskeysResponse
+ */
+export type ListPasskeysResponse = Message<"memos.api.ListPasskeysResponse"> & {
+  /**
+   * @generated from field: repeated memos.api.Passkey passkeys = 1;
+   */
+  passkeys: Passkey[];
+};
+
+/**
+ * Describes the message memos.api.ListPasskeysResponse.
+ * Use `create(ListPasskeysResponseSchema)` to create a new message.
+ */
+export const ListPasskeysResponseSchema: GenMessage<ListPasskeysResponse> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 21);
+
+/**
+ * DeletePasskeyRequest deletes one of the current user's passkeys.
+ *
+ * @generated from message memos.api.DeletePasskeyRequest
+ */
+export type DeletePasskeyRequest = Message<"memos.api.DeletePasskeyRequest"> & {
+  /**
+   * Required. Format: passkeys/{credential_id} (base64url-encoded ID).
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+};
+
+/**
+ * Describes the message memos.api.DeletePasskeyRequest.
+ * Use `create(DeletePasskeyRequestSchema)` to create a new message.
+ */
+export const DeletePasskeyRequestSchema: GenMessage<DeletePasskeyRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 22);
+
+/**
+ * RenamePasskeyRequest changes the label of one of the current user's passkeys.
+ *
+ * @generated from message memos.api.RenamePasskeyRequest
+ */
+export type RenamePasskeyRequest = Message<"memos.api.RenamePasskeyRequest"> & {
+  /**
+   * Required. Format: passkeys/{credential_id} (base64url-encoded ID).
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * Required. The new label.
+   *
+   * @generated from field: string display_name = 2;
+   */
+  displayName: string;
+};
+
+/**
+ * Describes the message memos.api.RenamePasskeyRequest.
+ * Use `create(RenamePasskeyRequestSchema)` to create a new message.
+ */
+export const RenamePasskeyRequestSchema: GenMessage<RenamePasskeyRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 23);
+
+/**
+ * BeginPasskeyLoginRequest starts a usernameless WebAuthn login ceremony.
+ *
+ * @generated from message memos.api.BeginPasskeyLoginRequest
+ */
+export type BeginPasskeyLoginRequest = Message<"memos.api.BeginPasskeyLoginRequest"> & {
+};
+
+/**
+ * Describes the message memos.api.BeginPasskeyLoginRequest.
+ * Use `create(BeginPasskeyLoginRequestSchema)` to create a new message.
+ */
+export const BeginPasskeyLoginRequestSchema: GenMessage<BeginPasskeyLoginRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 24);
+
+/**
+ * BeginPasskeyLoginResponse carries the request options for the authenticator
+ * and a sealed session token for FinishPasskeyLogin.
+ *
+ * @generated from message memos.api.BeginPasskeyLoginResponse
+ */
+export type BeginPasskeyLoginResponse = Message<"memos.api.BeginPasskeyLoginResponse"> & {
+  /**
+   * JSON-encoded PublicKeyCredentialRequestOptions for @simplewebauthn/browser.
+   *
+   * @generated from field: string options_json = 1;
+   */
+  optionsJson: string;
+
+  /**
+   * Sealed session token; pass back to FinishPasskeyLogin.
+   *
+   * @generated from field: string session_token = 2;
+   */
+  sessionToken: string;
+};
+
+/**
+ * Describes the message memos.api.BeginPasskeyLoginResponse.
+ * Use `create(BeginPasskeyLoginResponseSchema)` to create a new message.
+ */
+export const BeginPasskeyLoginResponseSchema: GenMessage<BeginPasskeyLoginResponse> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 25);
+
+/**
+ * FinishPasskeyLoginRequest completes a usernameless WebAuthn login ceremony.
+ *
+ * @generated from message memos.api.FinishPasskeyLoginRequest
+ */
+export type FinishPasskeyLoginRequest = Message<"memos.api.FinishPasskeyLoginRequest"> & {
+  /**
+   * Required. The sealed session token from BeginPasskeyLogin.
+   *
+   * @generated from field: string session_token = 1;
+   */
+  sessionToken: string;
+
+  /**
+   * Required. JSON-encoded AuthenticationResponse from @simplewebauthn/browser.
+   *
+   * @generated from field: string credential_json = 2;
+   */
+  credentialJson: string;
+};
+
+/**
+ * Describes the message memos.api.FinishPasskeyLoginRequest.
+ * Use `create(FinishPasskeyLoginRequestSchema)` to create a new message.
+ */
+export const FinishPasskeyLoginRequestSchema: GenMessage<FinishPasskeyLoginRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 26);
+
+/**
+ * BeginPasskeySignupRequest starts a "sign up with passkey" ceremony for a new
+ * account. Like first-time SSO login, this provisions a local user; unlike SSO
+ * there is no identity provider, so the username is supplied by the caller.
+ *
+ * @generated from message memos.api.BeginPasskeySignupRequest
+ */
+export type BeginPasskeySignupRequest = Message<"memos.api.BeginPasskeySignupRequest"> & {
+  /**
+   * Required. The desired username for the new account.
+   *
+   * @generated from field: string username = 1;
+   */
+  username: string;
+};
+
+/**
+ * Describes the message memos.api.BeginPasskeySignupRequest.
+ * Use `create(BeginPasskeySignupRequestSchema)` to create a new message.
+ */
+export const BeginPasskeySignupRequestSchema: GenMessage<BeginPasskeySignupRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 27);
+
+/**
+ * BeginPasskeySignupResponse carries the creation options and sealed session.
+ *
+ * @generated from message memos.api.BeginPasskeySignupResponse
+ */
+export type BeginPasskeySignupResponse = Message<"memos.api.BeginPasskeySignupResponse"> & {
+  /**
+   * JSON-encoded PublicKeyCredentialCreationOptions for @simplewebauthn/browser.
+   *
+   * @generated from field: string options_json = 1;
+   */
+  optionsJson: string;
+
+  /**
+   * Sealed session token; pass back to FinishPasskeySignup.
+   *
+   * @generated from field: string session_token = 2;
+   */
+  sessionToken: string;
+};
+
+/**
+ * Describes the message memos.api.BeginPasskeySignupResponse.
+ * Use `create(BeginPasskeySignupResponseSchema)` to create a new message.
+ */
+export const BeginPasskeySignupResponseSchema: GenMessage<BeginPasskeySignupResponse> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 28);
+
+/**
+ * FinishPasskeySignupRequest completes a "sign up with passkey" ceremony.
+ *
+ * @generated from message memos.api.FinishPasskeySignupRequest
+ */
+export type FinishPasskeySignupRequest = Message<"memos.api.FinishPasskeySignupRequest"> & {
+  /**
+   * Required. The sealed session token from BeginPasskeySignup.
+   *
+   * @generated from field: string session_token = 1;
+   */
+  sessionToken: string;
+
+  /**
+   * Required. JSON-encoded RegistrationResponse from @simplewebauthn/browser.
+   *
+   * @generated from field: string credential_json = 2;
+   */
+  credentialJson: string;
+};
+
+/**
+ * Describes the message memos.api.FinishPasskeySignupRequest.
+ * Use `create(FinishPasskeySignupRequestSchema)` to create a new message.
+ */
+export const FinishPasskeySignupRequestSchema: GenMessage<FinishPasskeySignupRequest> = /*@__PURE__*/
+  messageDesc(file_api_auth_service, 29);
+
+/**
  * AuthService manages sign-in sessions: it issues, refreshes, and revokes the tokens that authenticate API calls.
  *
  * @generated from service memos.api.AuthService
@@ -314,6 +894,165 @@ export const AuthService: GenService<{
     methodKind: "unary";
     input: typeof SignOutRequestSchema;
     output: typeof EmptySchema;
+  },
+  /**
+   * BeginTOTPSetup starts TOTP enrollment for the current user.
+   * Returns the otpauth URL (render as QR code) and the raw secret for manual entry.
+   * Authentication: Required (access token).
+   *
+   * @generated from rpc memos.api.AuthService.BeginTOTPSetup
+   */
+  beginTOTPSetup: {
+    methodKind: "unary";
+    input: typeof BeginTOTPSetupRequestSchema;
+    output: typeof BeginTOTPSetupResponseSchema;
+  },
+  /**
+   * ConfirmTOTPSetup verifies the code against the new secret and enables TOTP.
+   * Returns single-use backup codes, shown only once.
+   * Authentication: Required (access token).
+   *
+   * @generated from rpc memos.api.AuthService.ConfirmTOTPSetup
+   */
+  confirmTOTPSetup: {
+    methodKind: "unary";
+    input: typeof ConfirmTOTPSetupRequestSchema;
+    output: typeof ConfirmTOTPSetupResponseSchema;
+  },
+  /**
+   * DisableTOTP disables TOTP for the current user after verifying a current code.
+   * Authentication: Required (access token).
+   *
+   * @generated from rpc memos.api.AuthService.DisableTOTP
+   */
+  disableTOTP: {
+    methodKind: "unary";
+    input: typeof DisableTOTPRequestSchema;
+    output: typeof EmptySchema;
+  },
+  /**
+   * GetTOTPStatus returns whether TOTP is enabled for the current user.
+   * Authentication: Required (access token).
+   *
+   * @generated from rpc memos.api.AuthService.GetTOTPStatus
+   */
+  getTOTPStatus: {
+    methodKind: "unary";
+    input: typeof GetTOTPStatusRequestSchema;
+    output: typeof GetTOTPStatusResponseSchema;
+  },
+  /**
+   * VerifyTOTPLogin completes a password login that required TOTP.
+   * Accepts a TOTP code or an unused backup code. Attempts are rate limited.
+   * Public. The pending token is the sealed totp_pending_token from SignIn.
+   *
+   * @generated from rpc memos.api.AuthService.VerifyTOTPLogin
+   */
+  verifyTOTPLogin: {
+    methodKind: "unary";
+    input: typeof VerifyTOTPLoginRequestSchema;
+    output: typeof SignInResponseSchema;
+  },
+  /**
+   * BeginPasskeyRegistration starts a WebAuthn registration ceremony for the
+   * current user, adding a passkey to an existing account.
+   * Authentication: Required (access token).
+   *
+   * @generated from rpc memos.api.AuthService.BeginPasskeyRegistration
+   */
+  beginPasskeyRegistration: {
+    methodKind: "unary";
+    input: typeof BeginPasskeyRegistrationRequestSchema;
+    output: typeof BeginPasskeyRegistrationResponseSchema;
+  },
+  /**
+   * FinishPasskeyRegistration completes the ceremony and stores the credential.
+   * Authentication: Required (access token).
+   *
+   * @generated from rpc memos.api.AuthService.FinishPasskeyRegistration
+   */
+  finishPasskeyRegistration: {
+    methodKind: "unary";
+    input: typeof FinishPasskeyRegistrationRequestSchema;
+    output: typeof FinishPasskeyRegistrationResponseSchema;
+  },
+  /**
+   * ListPasskeys lists the current user's registered passkeys.
+   * Authentication: Required (access token).
+   *
+   * @generated from rpc memos.api.AuthService.ListPasskeys
+   */
+  listPasskeys: {
+    methodKind: "unary";
+    input: typeof ListPasskeysRequestSchema;
+    output: typeof ListPasskeysResponseSchema;
+  },
+  /**
+   * DeletePasskey deletes one of the current user's passkeys.
+   * Authentication: Required (access token).
+   *
+   * @generated from rpc memos.api.AuthService.DeletePasskey
+   */
+  deletePasskey: {
+    methodKind: "unary";
+    input: typeof DeletePasskeyRequestSchema;
+    output: typeof EmptySchema;
+  },
+  /**
+   * RenamePasskey changes the label of one of the current user's passkeys.
+   * Authentication: Required (access token).
+   *
+   * @generated from rpc memos.api.AuthService.RenamePasskey
+   */
+  renamePasskey: {
+    methodKind: "unary";
+    input: typeof RenamePasskeyRequestSchema;
+    output: typeof EmptySchema;
+  },
+  /**
+   * BeginPasskeyLogin starts a usernameless WebAuthn login ceremony.
+   * Public. Attempts are rate limited.
+   *
+   * @generated from rpc memos.api.AuthService.BeginPasskeyLogin
+   */
+  beginPasskeyLogin: {
+    methodKind: "unary";
+    input: typeof BeginPasskeyLoginRequestSchema;
+    output: typeof BeginPasskeyLoginResponseSchema;
+  },
+  /**
+   * FinishPasskeyLogin completes the ceremony and signs the user in.
+   * Public. Attempts are rate limited.
+   *
+   * @generated from rpc memos.api.AuthService.FinishPasskeyLogin
+   */
+  finishPasskeyLogin: {
+    methodKind: "unary";
+    input: typeof FinishPasskeyLoginRequestSchema;
+    output: typeof SignInResponseSchema;
+  },
+  /**
+   * BeginPasskeySignup starts a "sign up with passkey" ceremony, provisioning
+   * a new local user like first-time SSO login does. Refused when the instance
+   * disallows user registration. Public. Attempts are rate limited.
+   *
+   * @generated from rpc memos.api.AuthService.BeginPasskeySignup
+   */
+  beginPasskeySignup: {
+    methodKind: "unary";
+    input: typeof BeginPasskeySignupRequestSchema;
+    output: typeof BeginPasskeySignupResponseSchema;
+  },
+  /**
+   * FinishPasskeySignup completes the ceremony, stores the credential, and
+   * signs the new user in. Public. Attempts are rate limited.
+   *
+   * @generated from rpc memos.api.AuthService.FinishPasskeySignup
+   */
+  finishPasskeySignup: {
+    methodKind: "unary";
+    input: typeof FinishPasskeySignupRequestSchema;
+    output: typeof SignInResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_api_auth_service, 0);

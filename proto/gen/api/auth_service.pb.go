@@ -122,8 +122,15 @@ type SignInResponse struct {
 	// When the access token expires.
 	// Call RefreshToken before this time.
 	AccessTokenExpireTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=access_token_expire_time,json=accessTokenExpireTime,proto3" json:"access_token_expire_time,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// When true, the password was verified but TOTP is required to complete the
+	// login. No tokens are issued yet; user and access_token are unset.
+	// Call VerifyTOTPLogin with totp_pending_token and the TOTP code.
+	TotpRequired bool `protobuf:"varint,4,opt,name=totp_required,json=totpRequired,proto3" json:"totp_required,omitempty"`
+	// Sealed pending-login token for VerifyTOTPLogin. Only set when totp_required
+	// is true. Expires after 5 minutes and is single-purpose.
+	TotpPendingToken string `protobuf:"bytes,5,opt,name=totp_pending_token,json=totpPendingToken,proto3" json:"totp_pending_token,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *SignInResponse) Reset() {
@@ -175,6 +182,20 @@ func (x *SignInResponse) GetAccessTokenExpireTime() *timestamppb.Timestamp {
 		return x.AccessTokenExpireTime
 	}
 	return nil
+}
+
+func (x *SignInResponse) GetTotpRequired() bool {
+	if x != nil {
+		return x.TotpRequired
+	}
+	return false
+}
+
+func (x *SignInResponse) GetTotpPendingToken() string {
+	if x != nil {
+		return x.TotpPendingToken
+	}
+	return ""
 }
 
 // Request message for AuthService.RefreshToken.
@@ -390,6 +411,1160 @@ func (*SignOutRequest) Descriptor() ([]byte, []int) {
 	return file_api_auth_service_proto_rawDescGZIP(), []int{6}
 }
 
+// Request message for AuthService.BeginTOTPSetup.
+// It has no fields: the user is taken from the access token.
+type BeginTOTPSetupRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BeginTOTPSetupRequest) Reset() {
+	*x = BeginTOTPSetupRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BeginTOTPSetupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BeginTOTPSetupRequest) ProtoMessage() {}
+
+func (x *BeginTOTPSetupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BeginTOTPSetupRequest.ProtoReflect.Descriptor instead.
+func (*BeginTOTPSetupRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{7}
+}
+
+// Response message for AuthService.BeginTOTPSetup.
+type BeginTOTPSetupResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The otpauth:// URL to render as a QR code.
+	OtpauthUrl string `protobuf:"bytes,1,opt,name=otpauth_url,json=otpauthUrl,proto3" json:"otpauth_url,omitempty"`
+	// The raw base32 secret, for manual entry.
+	Secret        string `protobuf:"bytes,2,opt,name=secret,proto3" json:"secret,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BeginTOTPSetupResponse) Reset() {
+	*x = BeginTOTPSetupResponse{}
+	mi := &file_api_auth_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BeginTOTPSetupResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BeginTOTPSetupResponse) ProtoMessage() {}
+
+func (x *BeginTOTPSetupResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BeginTOTPSetupResponse.ProtoReflect.Descriptor instead.
+func (*BeginTOTPSetupResponse) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *BeginTOTPSetupResponse) GetOtpauthUrl() string {
+	if x != nil {
+		return x.OtpauthUrl
+	}
+	return ""
+}
+
+func (x *BeginTOTPSetupResponse) GetSecret() string {
+	if x != nil {
+		return x.Secret
+	}
+	return ""
+}
+
+// Request message for AuthService.ConfirmTOTPSetup.
+type ConfirmTOTPSetupRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The secret returned by BeginTOTPSetup.
+	Secret string `protobuf:"bytes,1,opt,name=secret,proto3" json:"secret,omitempty"`
+	// Required. A current TOTP code generated from the secret.
+	Code          string `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfirmTOTPSetupRequest) Reset() {
+	*x = ConfirmTOTPSetupRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfirmTOTPSetupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfirmTOTPSetupRequest) ProtoMessage() {}
+
+func (x *ConfirmTOTPSetupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfirmTOTPSetupRequest.ProtoReflect.Descriptor instead.
+func (*ConfirmTOTPSetupRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ConfirmTOTPSetupRequest) GetSecret() string {
+	if x != nil {
+		return x.Secret
+	}
+	return ""
+}
+
+func (x *ConfirmTOTPSetupRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+// Response message for AuthService.ConfirmTOTPSetup.
+type ConfirmTOTPSetupResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Single-use backup codes. Shown only once; store them securely.
+	BackupCodes   []string `protobuf:"bytes,1,rep,name=backup_codes,json=backupCodes,proto3" json:"backup_codes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfirmTOTPSetupResponse) Reset() {
+	*x = ConfirmTOTPSetupResponse{}
+	mi := &file_api_auth_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfirmTOTPSetupResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfirmTOTPSetupResponse) ProtoMessage() {}
+
+func (x *ConfirmTOTPSetupResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfirmTOTPSetupResponse.ProtoReflect.Descriptor instead.
+func (*ConfirmTOTPSetupResponse) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ConfirmTOTPSetupResponse) GetBackupCodes() []string {
+	if x != nil {
+		return x.BackupCodes
+	}
+	return nil
+}
+
+// Request message for AuthService.DisableTOTP.
+type DisableTOTPRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. A current TOTP code, or an unused backup code.
+	Code          string `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableTOTPRequest) Reset() {
+	*x = DisableTOTPRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableTOTPRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableTOTPRequest) ProtoMessage() {}
+
+func (x *DisableTOTPRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableTOTPRequest.ProtoReflect.Descriptor instead.
+func (*DisableTOTPRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *DisableTOTPRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+// Request message for AuthService.GetTOTPStatus.
+// It has no fields: the user is taken from the access token.
+type GetTOTPStatusRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTOTPStatusRequest) Reset() {
+	*x = GetTOTPStatusRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTOTPStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTOTPStatusRequest) ProtoMessage() {}
+
+func (x *GetTOTPStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTOTPStatusRequest.ProtoReflect.Descriptor instead.
+func (*GetTOTPStatusRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{12}
+}
+
+// Response message for AuthService.GetTOTPStatus.
+type GetTOTPStatusResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Whether TOTP two-factor authentication is enabled.
+	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTOTPStatusResponse) Reset() {
+	*x = GetTOTPStatusResponse{}
+	mi := &file_api_auth_service_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTOTPStatusResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTOTPStatusResponse) ProtoMessage() {}
+
+func (x *GetTOTPStatusResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTOTPStatusResponse.ProtoReflect.Descriptor instead.
+func (*GetTOTPStatusResponse) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetTOTPStatusResponse) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+// Request message for AuthService.VerifyTOTPLogin.
+type VerifyTOTPLoginRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The sealed totp_pending_token from a SignIn response with totp_required.
+	PendingToken string `protobuf:"bytes,1,opt,name=pending_token,json=pendingToken,proto3" json:"pending_token,omitempty"`
+	// Required. A current TOTP code, or an unused backup code.
+	Code          string `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VerifyTOTPLoginRequest) Reset() {
+	*x = VerifyTOTPLoginRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VerifyTOTPLoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VerifyTOTPLoginRequest) ProtoMessage() {}
+
+func (x *VerifyTOTPLoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VerifyTOTPLoginRequest.ProtoReflect.Descriptor instead.
+func (*VerifyTOTPLoginRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *VerifyTOTPLoginRequest) GetPendingToken() string {
+	if x != nil {
+		return x.PendingToken
+	}
+	return ""
+}
+
+func (x *VerifyTOTPLoginRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+// BeginPasskeyRegistrationRequest starts a WebAuthn registration ceremony for
+// the current user (adding a passkey to an existing account).
+type BeginPasskeyRegistrationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BeginPasskeyRegistrationRequest) Reset() {
+	*x = BeginPasskeyRegistrationRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BeginPasskeyRegistrationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BeginPasskeyRegistrationRequest) ProtoMessage() {}
+
+func (x *BeginPasskeyRegistrationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BeginPasskeyRegistrationRequest.ProtoReflect.Descriptor instead.
+func (*BeginPasskeyRegistrationRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{15}
+}
+
+// BeginPasskeyRegistrationResponse carries the creation options for the
+// authenticator and a sealed session token for FinishPasskeyRegistration.
+type BeginPasskeyRegistrationResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// JSON-encoded PublicKeyCredentialCreationOptions for @simplewebauthn/browser.
+	OptionsJson string `protobuf:"bytes,1,opt,name=options_json,json=optionsJson,proto3" json:"options_json,omitempty"`
+	// Sealed session token; pass back to FinishPasskeyRegistration.
+	SessionToken  string `protobuf:"bytes,2,opt,name=session_token,json=sessionToken,proto3" json:"session_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BeginPasskeyRegistrationResponse) Reset() {
+	*x = BeginPasskeyRegistrationResponse{}
+	mi := &file_api_auth_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BeginPasskeyRegistrationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BeginPasskeyRegistrationResponse) ProtoMessage() {}
+
+func (x *BeginPasskeyRegistrationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BeginPasskeyRegistrationResponse.ProtoReflect.Descriptor instead.
+func (*BeginPasskeyRegistrationResponse) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *BeginPasskeyRegistrationResponse) GetOptionsJson() string {
+	if x != nil {
+		return x.OptionsJson
+	}
+	return ""
+}
+
+func (x *BeginPasskeyRegistrationResponse) GetSessionToken() string {
+	if x != nil {
+		return x.SessionToken
+	}
+	return ""
+}
+
+// FinishPasskeyRegistrationRequest completes a WebAuthn registration ceremony.
+type FinishPasskeyRegistrationRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The sealed session token from BeginPasskeyRegistration.
+	SessionToken string `protobuf:"bytes,1,opt,name=session_token,json=sessionToken,proto3" json:"session_token,omitempty"`
+	// Required. JSON-encoded RegistrationResponse from @simplewebauthn/browser.
+	CredentialJson string `protobuf:"bytes,2,opt,name=credential_json,json=credentialJson,proto3" json:"credential_json,omitempty"`
+	// Optional. A user-supplied label for the new passkey.
+	Name          string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FinishPasskeyRegistrationRequest) Reset() {
+	*x = FinishPasskeyRegistrationRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FinishPasskeyRegistrationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FinishPasskeyRegistrationRequest) ProtoMessage() {}
+
+func (x *FinishPasskeyRegistrationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FinishPasskeyRegistrationRequest.ProtoReflect.Descriptor instead.
+func (*FinishPasskeyRegistrationRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *FinishPasskeyRegistrationRequest) GetSessionToken() string {
+	if x != nil {
+		return x.SessionToken
+	}
+	return ""
+}
+
+func (x *FinishPasskeyRegistrationRequest) GetCredentialJson() string {
+	if x != nil {
+		return x.CredentialJson
+	}
+	return ""
+}
+
+func (x *FinishPasskeyRegistrationRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+// FinishPasskeyRegistrationResponse describes the registered passkey.
+type FinishPasskeyRegistrationResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The new passkey credential, in "passkeys/{credential_id}" resource name form.
+	Passkey       *Passkey `protobuf:"bytes,1,opt,name=passkey,proto3" json:"passkey,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FinishPasskeyRegistrationResponse) Reset() {
+	*x = FinishPasskeyRegistrationResponse{}
+	mi := &file_api_auth_service_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FinishPasskeyRegistrationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FinishPasskeyRegistrationResponse) ProtoMessage() {}
+
+func (x *FinishPasskeyRegistrationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FinishPasskeyRegistrationResponse.ProtoReflect.Descriptor instead.
+func (*FinishPasskeyRegistrationResponse) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *FinishPasskeyRegistrationResponse) GetPasskey() *Passkey {
+	if x != nil {
+		return x.Passkey
+	}
+	return nil
+}
+
+// Passkey is a registered WebAuthn credential.
+type Passkey struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Resource name. Format: passkeys/{credential_id} (base64url-encoded ID).
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// User-supplied label.
+	DisplayName string `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	// Transports hinted by the authenticator.
+	Transports []string `protobuf:"bytes,3,rep,name=transports,proto3" json:"transports,omitempty"`
+	// When the passkey was registered.
+	CreateTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	// When the passkey was last used to sign in.
+	LastUsedTime  *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_used_time,json=lastUsedTime,proto3" json:"last_used_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Passkey) Reset() {
+	*x = Passkey{}
+	mi := &file_api_auth_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Passkey) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Passkey) ProtoMessage() {}
+
+func (x *Passkey) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Passkey.ProtoReflect.Descriptor instead.
+func (*Passkey) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *Passkey) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Passkey) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *Passkey) GetTransports() []string {
+	if x != nil {
+		return x.Transports
+	}
+	return nil
+}
+
+func (x *Passkey) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateTime
+	}
+	return nil
+}
+
+func (x *Passkey) GetLastUsedTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastUsedTime
+	}
+	return nil
+}
+
+// ListPasskeysRequest lists the current user's passkeys.
+type ListPasskeysRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPasskeysRequest) Reset() {
+	*x = ListPasskeysRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPasskeysRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPasskeysRequest) ProtoMessage() {}
+
+func (x *ListPasskeysRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPasskeysRequest.ProtoReflect.Descriptor instead.
+func (*ListPasskeysRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{20}
+}
+
+// ListPasskeysResponse lists the current user's passkeys.
+type ListPasskeysResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Passkeys      []*Passkey             `protobuf:"bytes,1,rep,name=passkeys,proto3" json:"passkeys,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPasskeysResponse) Reset() {
+	*x = ListPasskeysResponse{}
+	mi := &file_api_auth_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPasskeysResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPasskeysResponse) ProtoMessage() {}
+
+func (x *ListPasskeysResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPasskeysResponse.ProtoReflect.Descriptor instead.
+func (*ListPasskeysResponse) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ListPasskeysResponse) GetPasskeys() []*Passkey {
+	if x != nil {
+		return x.Passkeys
+	}
+	return nil
+}
+
+// DeletePasskeyRequest deletes one of the current user's passkeys.
+type DeletePasskeyRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. Format: passkeys/{credential_id} (base64url-encoded ID).
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeletePasskeyRequest) Reset() {
+	*x = DeletePasskeyRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeletePasskeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePasskeyRequest) ProtoMessage() {}
+
+func (x *DeletePasskeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePasskeyRequest.ProtoReflect.Descriptor instead.
+func (*DeletePasskeyRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *DeletePasskeyRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+// RenamePasskeyRequest changes the label of one of the current user's passkeys.
+type RenamePasskeyRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. Format: passkeys/{credential_id} (base64url-encoded ID).
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Required. The new label.
+	DisplayName   string `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RenamePasskeyRequest) Reset() {
+	*x = RenamePasskeyRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RenamePasskeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RenamePasskeyRequest) ProtoMessage() {}
+
+func (x *RenamePasskeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RenamePasskeyRequest.ProtoReflect.Descriptor instead.
+func (*RenamePasskeyRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *RenamePasskeyRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *RenamePasskeyRequest) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+// BeginPasskeyLoginRequest starts a usernameless WebAuthn login ceremony.
+type BeginPasskeyLoginRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BeginPasskeyLoginRequest) Reset() {
+	*x = BeginPasskeyLoginRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BeginPasskeyLoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BeginPasskeyLoginRequest) ProtoMessage() {}
+
+func (x *BeginPasskeyLoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BeginPasskeyLoginRequest.ProtoReflect.Descriptor instead.
+func (*BeginPasskeyLoginRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{24}
+}
+
+// BeginPasskeyLoginResponse carries the request options for the authenticator
+// and a sealed session token for FinishPasskeyLogin.
+type BeginPasskeyLoginResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// JSON-encoded PublicKeyCredentialRequestOptions for @simplewebauthn/browser.
+	OptionsJson string `protobuf:"bytes,1,opt,name=options_json,json=optionsJson,proto3" json:"options_json,omitempty"`
+	// Sealed session token; pass back to FinishPasskeyLogin.
+	SessionToken  string `protobuf:"bytes,2,opt,name=session_token,json=sessionToken,proto3" json:"session_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BeginPasskeyLoginResponse) Reset() {
+	*x = BeginPasskeyLoginResponse{}
+	mi := &file_api_auth_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BeginPasskeyLoginResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BeginPasskeyLoginResponse) ProtoMessage() {}
+
+func (x *BeginPasskeyLoginResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BeginPasskeyLoginResponse.ProtoReflect.Descriptor instead.
+func (*BeginPasskeyLoginResponse) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *BeginPasskeyLoginResponse) GetOptionsJson() string {
+	if x != nil {
+		return x.OptionsJson
+	}
+	return ""
+}
+
+func (x *BeginPasskeyLoginResponse) GetSessionToken() string {
+	if x != nil {
+		return x.SessionToken
+	}
+	return ""
+}
+
+// FinishPasskeyLoginRequest completes a usernameless WebAuthn login ceremony.
+type FinishPasskeyLoginRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The sealed session token from BeginPasskeyLogin.
+	SessionToken string `protobuf:"bytes,1,opt,name=session_token,json=sessionToken,proto3" json:"session_token,omitempty"`
+	// Required. JSON-encoded AuthenticationResponse from @simplewebauthn/browser.
+	CredentialJson string `protobuf:"bytes,2,opt,name=credential_json,json=credentialJson,proto3" json:"credential_json,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *FinishPasskeyLoginRequest) Reset() {
+	*x = FinishPasskeyLoginRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FinishPasskeyLoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FinishPasskeyLoginRequest) ProtoMessage() {}
+
+func (x *FinishPasskeyLoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FinishPasskeyLoginRequest.ProtoReflect.Descriptor instead.
+func (*FinishPasskeyLoginRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *FinishPasskeyLoginRequest) GetSessionToken() string {
+	if x != nil {
+		return x.SessionToken
+	}
+	return ""
+}
+
+func (x *FinishPasskeyLoginRequest) GetCredentialJson() string {
+	if x != nil {
+		return x.CredentialJson
+	}
+	return ""
+}
+
+// BeginPasskeySignupRequest starts a "sign up with passkey" ceremony for a new
+// account. Like first-time SSO login, this provisions a local user; unlike SSO
+// there is no identity provider, so the username is supplied by the caller.
+type BeginPasskeySignupRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The desired username for the new account.
+	Username      string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BeginPasskeySignupRequest) Reset() {
+	*x = BeginPasskeySignupRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BeginPasskeySignupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BeginPasskeySignupRequest) ProtoMessage() {}
+
+func (x *BeginPasskeySignupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BeginPasskeySignupRequest.ProtoReflect.Descriptor instead.
+func (*BeginPasskeySignupRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *BeginPasskeySignupRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+// BeginPasskeySignupResponse carries the creation options and sealed session.
+type BeginPasskeySignupResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// JSON-encoded PublicKeyCredentialCreationOptions for @simplewebauthn/browser.
+	OptionsJson string `protobuf:"bytes,1,opt,name=options_json,json=optionsJson,proto3" json:"options_json,omitempty"`
+	// Sealed session token; pass back to FinishPasskeySignup.
+	SessionToken  string `protobuf:"bytes,2,opt,name=session_token,json=sessionToken,proto3" json:"session_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BeginPasskeySignupResponse) Reset() {
+	*x = BeginPasskeySignupResponse{}
+	mi := &file_api_auth_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BeginPasskeySignupResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BeginPasskeySignupResponse) ProtoMessage() {}
+
+func (x *BeginPasskeySignupResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BeginPasskeySignupResponse.ProtoReflect.Descriptor instead.
+func (*BeginPasskeySignupResponse) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *BeginPasskeySignupResponse) GetOptionsJson() string {
+	if x != nil {
+		return x.OptionsJson
+	}
+	return ""
+}
+
+func (x *BeginPasskeySignupResponse) GetSessionToken() string {
+	if x != nil {
+		return x.SessionToken
+	}
+	return ""
+}
+
+// FinishPasskeySignupRequest completes a "sign up with passkey" ceremony.
+type FinishPasskeySignupRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. The sealed session token from BeginPasskeySignup.
+	SessionToken string `protobuf:"bytes,1,opt,name=session_token,json=sessionToken,proto3" json:"session_token,omitempty"`
+	// Required. JSON-encoded RegistrationResponse from @simplewebauthn/browser.
+	CredentialJson string `protobuf:"bytes,2,opt,name=credential_json,json=credentialJson,proto3" json:"credential_json,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *FinishPasskeySignupRequest) Reset() {
+	*x = FinishPasskeySignupRequest{}
+	mi := &file_api_auth_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FinishPasskeySignupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FinishPasskeySignupRequest) ProtoMessage() {}
+
+func (x *FinishPasskeySignupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_auth_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FinishPasskeySignupRequest.ProtoReflect.Descriptor instead.
+func (*FinishPasskeySignupRequest) Descriptor() ([]byte, []int) {
+	return file_api_auth_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *FinishPasskeySignupRequest) GetSessionToken() string {
+	if x != nil {
+		return x.SessionToken
+	}
+	return ""
+}
+
+func (x *FinishPasskeySignupRequest) GetCredentialJson() string {
+	if x != nil {
+		return x.CredentialJson
+	}
+	return ""
+}
+
 // PasswordCredentials are a username and password.
 // Regular users cannot use them when the instance disallows password sign-in.
 type SignInRequest_PasswordCredentials struct {
@@ -404,7 +1579,7 @@ type SignInRequest_PasswordCredentials struct {
 
 func (x *SignInRequest_PasswordCredentials) Reset() {
 	*x = SignInRequest_PasswordCredentials{}
-	mi := &file_api_auth_service_proto_msgTypes[7]
+	mi := &file_api_auth_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -416,7 +1591,7 @@ func (x *SignInRequest_PasswordCredentials) String() string {
 func (*SignInRequest_PasswordCredentials) ProtoMessage() {}
 
 func (x *SignInRequest_PasswordCredentials) ProtoReflect() protoreflect.Message {
-	mi := &file_api_auth_service_proto_msgTypes[7]
+	mi := &file_api_auth_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -465,7 +1640,7 @@ type SignInRequest_SsoCredentials struct {
 
 func (x *SignInRequest_SsoCredentials) Reset() {
 	*x = SignInRequest_SsoCredentials{}
-	mi := &file_api_auth_service_proto_msgTypes[8]
+	mi := &file_api_auth_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -477,7 +1652,7 @@ func (x *SignInRequest_SsoCredentials) String() string {
 func (*SignInRequest_SsoCredentials) ProtoMessage() {}
 
 func (x *SignInRequest_SsoCredentials) ProtoReflect() protoreflect.Message {
-	mi := &file_api_auth_service_proto_msgTypes[8]
+	mi := &file_api_auth_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -538,11 +1713,13 @@ const file_api_auth_service_proto_rawDesc = "" +
 	"\x04code\x18\x02 \x01(\tB\x03\xe0A\x02R\x04code\x12&\n" +
 	"\fredirect_uri\x18\x03 \x01(\tB\x03\xe0A\x02R\vredirectUri\x12(\n" +
 	"\rcode_verifier\x18\x04 \x01(\tB\x03\xe0A\x01R\fcodeVerifierB\r\n" +
-	"\vcredentials\"\xad\x01\n" +
+	"\vcredentials\"\x80\x02\n" +
 	"\x0eSignInResponse\x12#\n" +
 	"\x04user\x18\x01 \x01(\v2\x0f.memos.api.UserR\x04user\x12!\n" +
 	"\faccess_token\x18\x02 \x01(\tR\vaccessToken\x12S\n" +
-	"\x18access_token_expire_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x15accessTokenExpireTime\"\x15\n" +
+	"\x18access_token_expire_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x15accessTokenExpireTime\x12#\n" +
+	"\rtotp_required\x18\x04 \x01(\bR\ftotpRequired\x12,\n" +
+	"\x12totp_pending_token\x18\x05 \x01(\tR\x10totpPendingToken\"\x15\n" +
 	"\x13RefreshTokenRequest\"\x8e\x01\n" +
 	"\x14RefreshTokenResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12S\n" +
@@ -550,12 +1727,86 @@ const file_api_auth_service_proto_rawDesc = "" +
 	"\x15GetCurrentUserRequest\"=\n" +
 	"\x16GetCurrentUserResponse\x12#\n" +
 	"\x04user\x18\x01 \x01(\v2\x0f.memos.api.UserR\x04user\"\x10\n" +
-	"\x0eSignOutRequest2\x9e\x03\n" +
+	"\x0eSignOutRequest\"\x17\n" +
+	"\x15BeginTOTPSetupRequest\"Q\n" +
+	"\x16BeginTOTPSetupResponse\x12\x1f\n" +
+	"\votpauth_url\x18\x01 \x01(\tR\n" +
+	"otpauthUrl\x12\x16\n" +
+	"\x06secret\x18\x02 \x01(\tR\x06secret\"O\n" +
+	"\x17ConfirmTOTPSetupRequest\x12\x1b\n" +
+	"\x06secret\x18\x01 \x01(\tB\x03\xe0A\x02R\x06secret\x12\x17\n" +
+	"\x04code\x18\x02 \x01(\tB\x03\xe0A\x02R\x04code\"=\n" +
+	"\x18ConfirmTOTPSetupResponse\x12!\n" +
+	"\fbackup_codes\x18\x01 \x03(\tR\vbackupCodes\"-\n" +
+	"\x12DisableTOTPRequest\x12\x17\n" +
+	"\x04code\x18\x01 \x01(\tB\x03\xe0A\x02R\x04code\"\x16\n" +
+	"\x14GetTOTPStatusRequest\"1\n" +
+	"\x15GetTOTPStatusResponse\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\"[\n" +
+	"\x16VerifyTOTPLoginRequest\x12(\n" +
+	"\rpending_token\x18\x01 \x01(\tB\x03\xe0A\x02R\fpendingToken\x12\x17\n" +
+	"\x04code\x18\x02 \x01(\tB\x03\xe0A\x02R\x04code\"!\n" +
+	"\x1fBeginPasskeyRegistrationRequest\"j\n" +
+	" BeginPasskeyRegistrationResponse\x12!\n" +
+	"\foptions_json\x18\x01 \x01(\tR\voptionsJson\x12#\n" +
+	"\rsession_token\x18\x02 \x01(\tR\fsessionToken\"\x93\x01\n" +
+	" FinishPasskeyRegistrationRequest\x12(\n" +
+	"\rsession_token\x18\x01 \x01(\tB\x03\xe0A\x02R\fsessionToken\x12,\n" +
+	"\x0fcredential_json\x18\x02 \x01(\tB\x03\xe0A\x02R\x0ecredentialJson\x12\x17\n" +
+	"\x04name\x18\x03 \x01(\tB\x03\xe0A\x01R\x04name\"Q\n" +
+	"!FinishPasskeyRegistrationResponse\x12,\n" +
+	"\apasskey\x18\x01 \x01(\v2\x12.memos.api.PasskeyR\apasskey\"\xdf\x01\n" +
+	"\aPasskey\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
+	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\x1e\n" +
+	"\n" +
+	"transports\x18\x03 \x03(\tR\n" +
+	"transports\x12;\n" +
+	"\vcreate_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"createTime\x12@\n" +
+	"\x0elast_used_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\flastUsedTime\"\x15\n" +
+	"\x13ListPasskeysRequest\"F\n" +
+	"\x14ListPasskeysResponse\x12.\n" +
+	"\bpasskeys\x18\x01 \x03(\v2\x12.memos.api.PasskeyR\bpasskeys\"/\n" +
+	"\x14DeletePasskeyRequest\x12\x17\n" +
+	"\x04name\x18\x01 \x01(\tB\x03\xe0A\x02R\x04name\"W\n" +
+	"\x14RenamePasskeyRequest\x12\x17\n" +
+	"\x04name\x18\x01 \x01(\tB\x03\xe0A\x02R\x04name\x12&\n" +
+	"\fdisplay_name\x18\x02 \x01(\tB\x03\xe0A\x02R\vdisplayName\"\x1a\n" +
+	"\x18BeginPasskeyLoginRequest\"c\n" +
+	"\x19BeginPasskeyLoginResponse\x12!\n" +
+	"\foptions_json\x18\x01 \x01(\tR\voptionsJson\x12#\n" +
+	"\rsession_token\x18\x02 \x01(\tR\fsessionToken\"s\n" +
+	"\x19FinishPasskeyLoginRequest\x12(\n" +
+	"\rsession_token\x18\x01 \x01(\tB\x03\xe0A\x02R\fsessionToken\x12,\n" +
+	"\x0fcredential_json\x18\x02 \x01(\tB\x03\xe0A\x02R\x0ecredentialJson\"<\n" +
+	"\x19BeginPasskeySignupRequest\x12\x1f\n" +
+	"\busername\x18\x01 \x01(\tB\x03\xe0A\x02R\busername\"d\n" +
+	"\x1aBeginPasskeySignupResponse\x12!\n" +
+	"\foptions_json\x18\x01 \x01(\tR\voptionsJson\x12#\n" +
+	"\rsession_token\x18\x02 \x01(\tR\fsessionToken\"t\n" +
+	"\x1aFinishPasskeySignupRequest\x12(\n" +
+	"\rsession_token\x18\x01 \x01(\tB\x03\xe0A\x02R\fsessionToken\x12,\n" +
+	"\x0fcredential_json\x18\x02 \x01(\tB\x03\xe0A\x02R\x0ecredentialJson2\xcd\x11\n" +
 	"\vAuthService\x12Z\n" +
 	"\x06SignIn\x12\x18.memos.api.SignInRequest\x1a\x19.memos.api.SignInResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/auth/signin\x12m\n" +
 	"\fRefreshToken\x12\x1e.memos.api.RefreshTokenRequest\x1a\x1f.memos.api.RefreshTokenResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/auth/refresh\x12k\n" +
 	"\x0eGetCurrentUser\x12 .memos.api.GetCurrentUserRequest\x1a!.memos.api.GetCurrentUserResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/api/auth/me\x12W\n" +
-	"\aSignOut\x12\x19.memos.api.SignOutRequest\x1a\x16.google.protobuf.Empty\"\x19\x82\xd3\xe4\x93\x02\x13\"\x11/api/auth/signoutB\x8f\x01\n" +
+	"\aSignOut\x12\x19.memos.api.SignOutRequest\x1a\x16.google.protobuf.Empty\"\x19\x82\xd3\xe4\x93\x02\x13\"\x11/api/auth/signout\x12|\n" +
+	"\x0eBeginTOTPSetup\x12 .memos.api.BeginTOTPSetupRequest\x1a!.memos.api.BeginTOTPSetupResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/api/auth/totp/setup/begin\x12\x84\x01\n" +
+	"\x10ConfirmTOTPSetup\x12\".memos.api.ConfirmTOTPSetupRequest\x1a#.memos.api.ConfirmTOTPSetupResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/api/auth/totp/setup/confirm\x12g\n" +
+	"\vDisableTOTP\x12\x1d.memos.api.DisableTOTPRequest\x1a\x16.google.protobuf.Empty\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/auth/totp/disable\x12q\n" +
+	"\rGetTOTPStatus\x12\x1f.memos.api.GetTOTPStatusRequest\x1a .memos.api.GetTOTPStatusResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/api/auth/totp/status\x12w\n" +
+	"\x0fVerifyTOTPLogin\x12!.memos.api.VerifyTOTPLoginRequest\x1a\x19.memos.api.SignInResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/api/auth/totp/verify-login\x12\xa0\x01\n" +
+	"\x18BeginPasskeyRegistration\x12*.memos.api.BeginPasskeyRegistrationRequest\x1a+.memos.api.BeginPasskeyRegistrationResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /api/auth/passkey/register/begin\x12\xa4\x01\n" +
+	"\x19FinishPasskeyRegistration\x12+.memos.api.FinishPasskeyRegistrationRequest\x1a,.memos.api.FinishPasskeyRegistrationResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/api/auth/passkey/register/finish\x12k\n" +
+	"\fListPasskeys\x12\x1e.memos.api.ListPasskeysRequest\x1a\x1f.memos.api.ListPasskeysResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/api/auth/passkeys\x12v\n" +
+	"\rDeletePasskey\x12\x1f.memos.api.DeletePasskeyRequest\x1a\x16.google.protobuf.Empty\",\x82\xd3\xe4\x93\x02&*$/api/auth/passkeys/{name=passkeys/*}\x12\x80\x01\n" +
+	"\rRenamePasskey\x12\x1f.memos.api.RenamePasskeyRequest\x1a\x16.google.protobuf.Empty\"6\x82\xd3\xe4\x93\x020:\x01*\"+/api/auth/passkeys/{name=passkeys/*}:rename\x12\x88\x01\n" +
+	"\x11BeginPasskeyLogin\x12#.memos.api.BeginPasskeyLoginRequest\x1a$.memos.api.BeginPasskeyLoginResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/auth/passkey/login/begin\x12\x80\x01\n" +
+	"\x12FinishPasskeyLogin\x12$.memos.api.FinishPasskeyLoginRequest\x1a\x19.memos.api.SignInResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/auth/passkey/login/finish\x12\x8c\x01\n" +
+	"\x12BeginPasskeySignup\x12$.memos.api.BeginPasskeySignupRequest\x1a%.memos.api.BeginPasskeySignupResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/auth/passkey/signup/begin\x12\x83\x01\n" +
+	"\x13FinishPasskeySignup\x12%.memos.api.FinishPasskeySignupRequest\x1a\x19.memos.api.SignInResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/auth/passkey/signup/finishB\x8f\x01\n" +
 	"\rcom.memos.apiB\x10AuthServiceProtoP\x01Z'github.com/usememos/memos/proto/gen/api\xa2\x02\x03MAX\xaa\x02\tMemos.Api\xca\x02\tMemos\\Api\xe2\x02\x15Memos\\Api\\GPBMetadata\xea\x02\n" +
 	"Memos::Apib\x06proto3"
 
@@ -571,7 +1822,7 @@ func file_api_auth_service_proto_rawDescGZIP() []byte {
 	return file_api_auth_service_proto_rawDescData
 }
 
-var file_api_auth_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_api_auth_service_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_api_auth_service_proto_goTypes = []any{
 	(*SignInRequest)(nil),                     // 0: memos.api.SignInRequest
 	(*SignInResponse)(nil),                    // 1: memos.api.SignInResponse
@@ -580,32 +1831,87 @@ var file_api_auth_service_proto_goTypes = []any{
 	(*GetCurrentUserRequest)(nil),             // 4: memos.api.GetCurrentUserRequest
 	(*GetCurrentUserResponse)(nil),            // 5: memos.api.GetCurrentUserResponse
 	(*SignOutRequest)(nil),                    // 6: memos.api.SignOutRequest
-	(*SignInRequest_PasswordCredentials)(nil), // 7: memos.api.SignInRequest.PasswordCredentials
-	(*SignInRequest_SsoCredentials)(nil),      // 8: memos.api.SignInRequest.SsoCredentials
-	(*User)(nil),                              // 9: memos.api.User
-	(*timestamppb.Timestamp)(nil),             // 10: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),                     // 11: google.protobuf.Empty
+	(*BeginTOTPSetupRequest)(nil),             // 7: memos.api.BeginTOTPSetupRequest
+	(*BeginTOTPSetupResponse)(nil),            // 8: memos.api.BeginTOTPSetupResponse
+	(*ConfirmTOTPSetupRequest)(nil),           // 9: memos.api.ConfirmTOTPSetupRequest
+	(*ConfirmTOTPSetupResponse)(nil),          // 10: memos.api.ConfirmTOTPSetupResponse
+	(*DisableTOTPRequest)(nil),                // 11: memos.api.DisableTOTPRequest
+	(*GetTOTPStatusRequest)(nil),              // 12: memos.api.GetTOTPStatusRequest
+	(*GetTOTPStatusResponse)(nil),             // 13: memos.api.GetTOTPStatusResponse
+	(*VerifyTOTPLoginRequest)(nil),            // 14: memos.api.VerifyTOTPLoginRequest
+	(*BeginPasskeyRegistrationRequest)(nil),   // 15: memos.api.BeginPasskeyRegistrationRequest
+	(*BeginPasskeyRegistrationResponse)(nil),  // 16: memos.api.BeginPasskeyRegistrationResponse
+	(*FinishPasskeyRegistrationRequest)(nil),  // 17: memos.api.FinishPasskeyRegistrationRequest
+	(*FinishPasskeyRegistrationResponse)(nil), // 18: memos.api.FinishPasskeyRegistrationResponse
+	(*Passkey)(nil),                           // 19: memos.api.Passkey
+	(*ListPasskeysRequest)(nil),               // 20: memos.api.ListPasskeysRequest
+	(*ListPasskeysResponse)(nil),              // 21: memos.api.ListPasskeysResponse
+	(*DeletePasskeyRequest)(nil),              // 22: memos.api.DeletePasskeyRequest
+	(*RenamePasskeyRequest)(nil),              // 23: memos.api.RenamePasskeyRequest
+	(*BeginPasskeyLoginRequest)(nil),          // 24: memos.api.BeginPasskeyLoginRequest
+	(*BeginPasskeyLoginResponse)(nil),         // 25: memos.api.BeginPasskeyLoginResponse
+	(*FinishPasskeyLoginRequest)(nil),         // 26: memos.api.FinishPasskeyLoginRequest
+	(*BeginPasskeySignupRequest)(nil),         // 27: memos.api.BeginPasskeySignupRequest
+	(*BeginPasskeySignupResponse)(nil),        // 28: memos.api.BeginPasskeySignupResponse
+	(*FinishPasskeySignupRequest)(nil),        // 29: memos.api.FinishPasskeySignupRequest
+	(*SignInRequest_PasswordCredentials)(nil), // 30: memos.api.SignInRequest.PasswordCredentials
+	(*SignInRequest_SsoCredentials)(nil),      // 31: memos.api.SignInRequest.SsoCredentials
+	(*User)(nil),                              // 32: memos.api.User
+	(*timestamppb.Timestamp)(nil),             // 33: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                     // 34: google.protobuf.Empty
 }
 var file_api_auth_service_proto_depIdxs = []int32{
-	7,  // 0: memos.api.SignInRequest.password_credentials:type_name -> memos.api.SignInRequest.PasswordCredentials
-	8,  // 1: memos.api.SignInRequest.sso_credentials:type_name -> memos.api.SignInRequest.SsoCredentials
-	9,  // 2: memos.api.SignInResponse.user:type_name -> memos.api.User
-	10, // 3: memos.api.SignInResponse.access_token_expire_time:type_name -> google.protobuf.Timestamp
-	10, // 4: memos.api.RefreshTokenResponse.access_token_expire_time:type_name -> google.protobuf.Timestamp
-	9,  // 5: memos.api.GetCurrentUserResponse.user:type_name -> memos.api.User
-	0,  // 6: memos.api.AuthService.SignIn:input_type -> memos.api.SignInRequest
-	2,  // 7: memos.api.AuthService.RefreshToken:input_type -> memos.api.RefreshTokenRequest
-	4,  // 8: memos.api.AuthService.GetCurrentUser:input_type -> memos.api.GetCurrentUserRequest
-	6,  // 9: memos.api.AuthService.SignOut:input_type -> memos.api.SignOutRequest
-	1,  // 10: memos.api.AuthService.SignIn:output_type -> memos.api.SignInResponse
-	3,  // 11: memos.api.AuthService.RefreshToken:output_type -> memos.api.RefreshTokenResponse
-	5,  // 12: memos.api.AuthService.GetCurrentUser:output_type -> memos.api.GetCurrentUserResponse
-	11, // 13: memos.api.AuthService.SignOut:output_type -> google.protobuf.Empty
-	10, // [10:14] is the sub-list for method output_type
-	6,  // [6:10] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	30, // 0: memos.api.SignInRequest.password_credentials:type_name -> memos.api.SignInRequest.PasswordCredentials
+	31, // 1: memos.api.SignInRequest.sso_credentials:type_name -> memos.api.SignInRequest.SsoCredentials
+	32, // 2: memos.api.SignInResponse.user:type_name -> memos.api.User
+	33, // 3: memos.api.SignInResponse.access_token_expire_time:type_name -> google.protobuf.Timestamp
+	33, // 4: memos.api.RefreshTokenResponse.access_token_expire_time:type_name -> google.protobuf.Timestamp
+	32, // 5: memos.api.GetCurrentUserResponse.user:type_name -> memos.api.User
+	19, // 6: memos.api.FinishPasskeyRegistrationResponse.passkey:type_name -> memos.api.Passkey
+	33, // 7: memos.api.Passkey.create_time:type_name -> google.protobuf.Timestamp
+	33, // 8: memos.api.Passkey.last_used_time:type_name -> google.protobuf.Timestamp
+	19, // 9: memos.api.ListPasskeysResponse.passkeys:type_name -> memos.api.Passkey
+	0,  // 10: memos.api.AuthService.SignIn:input_type -> memos.api.SignInRequest
+	2,  // 11: memos.api.AuthService.RefreshToken:input_type -> memos.api.RefreshTokenRequest
+	4,  // 12: memos.api.AuthService.GetCurrentUser:input_type -> memos.api.GetCurrentUserRequest
+	6,  // 13: memos.api.AuthService.SignOut:input_type -> memos.api.SignOutRequest
+	7,  // 14: memos.api.AuthService.BeginTOTPSetup:input_type -> memos.api.BeginTOTPSetupRequest
+	9,  // 15: memos.api.AuthService.ConfirmTOTPSetup:input_type -> memos.api.ConfirmTOTPSetupRequest
+	11, // 16: memos.api.AuthService.DisableTOTP:input_type -> memos.api.DisableTOTPRequest
+	12, // 17: memos.api.AuthService.GetTOTPStatus:input_type -> memos.api.GetTOTPStatusRequest
+	14, // 18: memos.api.AuthService.VerifyTOTPLogin:input_type -> memos.api.VerifyTOTPLoginRequest
+	15, // 19: memos.api.AuthService.BeginPasskeyRegistration:input_type -> memos.api.BeginPasskeyRegistrationRequest
+	17, // 20: memos.api.AuthService.FinishPasskeyRegistration:input_type -> memos.api.FinishPasskeyRegistrationRequest
+	20, // 21: memos.api.AuthService.ListPasskeys:input_type -> memos.api.ListPasskeysRequest
+	22, // 22: memos.api.AuthService.DeletePasskey:input_type -> memos.api.DeletePasskeyRequest
+	23, // 23: memos.api.AuthService.RenamePasskey:input_type -> memos.api.RenamePasskeyRequest
+	24, // 24: memos.api.AuthService.BeginPasskeyLogin:input_type -> memos.api.BeginPasskeyLoginRequest
+	26, // 25: memos.api.AuthService.FinishPasskeyLogin:input_type -> memos.api.FinishPasskeyLoginRequest
+	27, // 26: memos.api.AuthService.BeginPasskeySignup:input_type -> memos.api.BeginPasskeySignupRequest
+	29, // 27: memos.api.AuthService.FinishPasskeySignup:input_type -> memos.api.FinishPasskeySignupRequest
+	1,  // 28: memos.api.AuthService.SignIn:output_type -> memos.api.SignInResponse
+	3,  // 29: memos.api.AuthService.RefreshToken:output_type -> memos.api.RefreshTokenResponse
+	5,  // 30: memos.api.AuthService.GetCurrentUser:output_type -> memos.api.GetCurrentUserResponse
+	34, // 31: memos.api.AuthService.SignOut:output_type -> google.protobuf.Empty
+	8,  // 32: memos.api.AuthService.BeginTOTPSetup:output_type -> memos.api.BeginTOTPSetupResponse
+	10, // 33: memos.api.AuthService.ConfirmTOTPSetup:output_type -> memos.api.ConfirmTOTPSetupResponse
+	34, // 34: memos.api.AuthService.DisableTOTP:output_type -> google.protobuf.Empty
+	13, // 35: memos.api.AuthService.GetTOTPStatus:output_type -> memos.api.GetTOTPStatusResponse
+	1,  // 36: memos.api.AuthService.VerifyTOTPLogin:output_type -> memos.api.SignInResponse
+	16, // 37: memos.api.AuthService.BeginPasskeyRegistration:output_type -> memos.api.BeginPasskeyRegistrationResponse
+	18, // 38: memos.api.AuthService.FinishPasskeyRegistration:output_type -> memos.api.FinishPasskeyRegistrationResponse
+	21, // 39: memos.api.AuthService.ListPasskeys:output_type -> memos.api.ListPasskeysResponse
+	34, // 40: memos.api.AuthService.DeletePasskey:output_type -> google.protobuf.Empty
+	34, // 41: memos.api.AuthService.RenamePasskey:output_type -> google.protobuf.Empty
+	25, // 42: memos.api.AuthService.BeginPasskeyLogin:output_type -> memos.api.BeginPasskeyLoginResponse
+	1,  // 43: memos.api.AuthService.FinishPasskeyLogin:output_type -> memos.api.SignInResponse
+	28, // 44: memos.api.AuthService.BeginPasskeySignup:output_type -> memos.api.BeginPasskeySignupResponse
+	1,  // 45: memos.api.AuthService.FinishPasskeySignup:output_type -> memos.api.SignInResponse
+	28, // [28:46] is the sub-list for method output_type
+	10, // [10:28] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_api_auth_service_proto_init() }
@@ -624,7 +1930,7 @@ func file_api_auth_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_auth_service_proto_rawDesc), len(file_api_auth_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

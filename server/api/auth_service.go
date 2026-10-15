@@ -122,6 +122,24 @@ func (s *APIService) SignIn(ctx context.Context, request *apipb.SignInRequest) (
 		return nil, status.Errorf(codes.PermissionDenied, "user has been archived with username %s", existingUser.Username)
 	}
 
+	// TOTP second factor: when enabled, the password/SSO credential alone is
+	// not enough. Return a sealed pending token instead of issuing tokens.
+	totpSetting, err := s.getUserTOTPSetting(ctx, existingUser.ID)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to get TOTP setting: %v", err)
+	}
+	if totpSetting != nil {
+		pendingToken, err := s.sealTOTPLogin(existingUser.ID)
+		if err != nil {
+			return nil, status.Errorf(codes.Internal, "failed to seal pending login: %v", err)
+		}
+		return &apipb.SignInResponse{
+			User:             convertUserFromStore(existingUser, existingUser),
+			TotpRequired:     true,
+			TotpPendingToken: pendingToken,
+		}, nil
+	}
+
 	accessToken, accessExpiresAt, err := s.doSignIn(ctx, existingUser)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to sign in: %v", err)
