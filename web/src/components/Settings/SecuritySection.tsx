@@ -323,7 +323,7 @@ function TOTPSetupDialog({
           <div className="flex flex-col gap-4">
             <p className="text-sm text-muted-foreground">{t("setting.security.totp-scan-description")}</p>
             {otpauthUrl && (
-              <div className="flex justify-center rounded-lg bg-white p-4">
+              <div className="flex justify-center rounded-lg bg-white p-6">
                 <QRCode value={otpauthUrl} size={180} />
               </div>
             )}
