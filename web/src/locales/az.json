@@ -66,7 +66,15 @@
     "signups-closed-description": "Bu instansda yeni hesablar deaktiv edilib. Giriş lazımdırsa, administratorunuzla əlaqə saxlayın.",
     "signups-closed-title": "Qeydiyyat bağlıdır",
     "sso-signup-tip": "Hesabınızı yaratmaq üçün aşağıdakı provayderlərdən biri ilə daxil olun.",
-    "welcome-back": "Yenidən xoş gəlmisiniz."
+    "welcome-back": "Yenidən xoş gəlmisiniz.",
+    "passkey-signin-failed": "Passkey ilə giriş uğursuz oldu.",
+    "passkey-signup-description": "Passkey ilə hesabınızı yaradın. Şifrə əvəzinə cihazınızın biometrik məlumatları və ya təhlükəsizlik açarı ilə daxil olacaqsınız.",
+    "passkey-signup-failed": "Passkey ilə qeydiyyat uğursuz oldu.",
+    "sign-in-with-passkey": "Passkey ilə daxil ol",
+    "sign-up-with-passkey": "Passkey ilə qeydiyyatdan keç",
+    "totp-code-label": "Birdəfəlik kod",
+    "totp-required-description": "@{username} üçün iki faktorlu autentifikasiya aktivdir. Autentifikator tətbiqindəki kodu (və ya ehtiyat kodu) daxil edin.",
+    "verify-totp": "Təsdiqlə"
   },
   "calendar": {
     "new-memo-on-day": "Bu gün üçün yeni qeyd",
@@ -1036,6 +1044,36 @@
       "last-updated": "Son yenilənmə {{ago}}",
       "refresh": "Yenilə",
       "load-error": "Statistikanı yükləmək alınmadı"
+    },
+    "security": {
+      "title": "Təhlükəsizlik",
+      "description": "İki faktorlu autentifikasiya və passkey-lər hesabınızı qoruyur.",
+      "enabled": "Aktivdir",
+      "disable": "Söndür",
+      "totp-title": "Autentifikator tətbiqi (TOTP)",
+      "totp-description": "Daxil olarkən şifrədən sonra vaxta əsaslanan birdəfəlik kod tələb et.",
+      "enable-totp": "Autentifikator tətbiqini aktivləşdir",
+      "totp-scan-description": "QR kodu autentifikator tətbiqi ilə skan edin, sonra təsdiqləmək üçün aşağıya 6 rəqəmli kodu daxil edin.",
+      "totp-code-label": "Birdəfəlik kod",
+      "totp-enabled": "İki faktorlu autentifikasiya aktivləşdirildi",
+      "backup-codes-description": "Bu ehtiyat kodları təhlükəsiz yerdə saxlayın. Autentifikator tətbiqinə girişinizi itirsəniz, hər kod bir dəfə istifadə edilə bilər. Onlar bir daha göstərilməyəcək.",
+      "backup-codes-saved": "Kodları saxladım",
+      "disable-totp-title": "İki faktorlu autentifikasiyanı söndür",
+      "disable-totp-description": "İki faktorlu autentifikasiyanı söndürmək üçün autentifikator tətbiqindəki cari kodu (və ya istifadə olunmamış ehtiyat kodu) daxil edin.",
+      "totp-disabled": "İki faktorlu autentifikasiya söndürüldü",
+      "passkey-title": "Passkey-lər",
+      "passkey-description": "Cihazınızın biometrik məlumatları və ya təhlükəsizlik açarı ilə şifrəsiz daxil olun.",
+      "add-passkey": "Passkey əlavə et",
+      "passkey-empty": "Hələ qeydiyyatdan keçmiş passkey yoxdur.",
+      "passkey-default-name": "Passkey",
+      "passkey-last-used": "son istifadə",
+      "passkey-added": "Passkey əlavə edildi",
+      "passkey-deleted": "Passkey silindi",
+      "passkey-renamed": "Passkey-in adı dəyişdirildi",
+      "passkey-delete-title": "Passkey-i sil",
+      "passkey-delete-description": "\"{name}\" passkey-i silinsin? Şifrənizlə daxil olmağa davam edə bilərsiniz.",
+      "passkey-rename-title": "Passkey-in adını dəyiş",
+      "passkey-name-label": "Ad"
     }
   },
   "space": {

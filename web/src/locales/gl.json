@@ -44,7 +44,15 @@
     "signups-closed-description": "As novas contas están desactivadas nesta instancia. Ponte en contacto co teu administrador se necesitas acceso.",
     "signups-closed-title": "Os rexistros están pechados",
     "sso-signup-tip": "Inicia sesión cun provedor a continuación para crear a túa conta.",
-    "welcome-back": "Benvido/a de novo."
+    "welcome-back": "Benvido/a de novo.",
+    "passkey-signin-failed": "Fallou o inicio de sesión coa chave de acceso.",
+    "passkey-signup-description": "Crea a túa conta cunha chave de acceso. Iniciarás sesión coa biometría do teu dispositivo ou unha chave de seguridade no canto dun contrasinal.",
+    "passkey-signup-failed": "Fallou o rexistro coa chave de acceso.",
+    "sign-in-with-passkey": "Iniciar sesión coa chave de acceso",
+    "sign-up-with-passkey": "Rexistrarse coa chave de acceso",
+    "totp-code-label": "Código dun só uso",
+    "totp-required-description": "A autenticación en dous pasos está activada para @{username}. Introduce o código da túa aplicación de autenticación (ou un código de recuperación).",
+    "verify-totp": "Verificar"
   },
   "common": {
     "about": "Sobre",
@@ -920,6 +928,36 @@
       "you": "Ti",
       "your-access": "O teu acceso",
       "your-spaces": "Os teus espazos"
+    },
+    "security": {
+      "title": "Seguridade",
+      "description": "A autenticación en dous pasos e as chaves de acceso protexen a túa conta.",
+      "enabled": "Activado",
+      "disable": "Desactivar",
+      "totp-title": "Aplicación de autenticación (TOTP)",
+      "totp-description": "Requirir un código dun só uso baseado no tempo despois do contrasinal ao iniciar sesión.",
+      "enable-totp": "Activar a aplicación de autenticación",
+      "totp-scan-description": "Escanea o código QR coa túa aplicación de autenticación e introduce o código de 6 díxitos seguinte para confirmar.",
+      "totp-code-label": "Código dun só uso",
+      "totp-enabled": "Autenticación en dous pasos activada",
+      "backup-codes-description": "Garda estes códigos de recuperación nun lugar seguro. Cada código pódese usar unha vez se perdes o acceso á túa aplicación de autenticación. Non se volverán amosar.",
+      "backup-codes-saved": "Gardei os códigos",
+      "disable-totp-title": "Desactivar a autenticación en dous pasos",
+      "disable-totp-description": "Introduce un código actual da túa aplicación de autenticación (ou un código de recuperación sen usar) para desactivar a autenticación en dous pasos.",
+      "totp-disabled": "Autenticación en dous pasos desactivada",
+      "passkey-title": "Chaves de acceso",
+      "passkey-description": "Inicia sesión sen contrasinal coa biometría do teu dispositivo ou unha chave de seguridade.",
+      "add-passkey": "Engadir chave de acceso",
+      "passkey-empty": "Aínda non hai chaves de acceso rexistradas.",
+      "passkey-default-name": "Chave de acceso",
+      "passkey-last-used": "último uso",
+      "passkey-added": "Chave de acceso engadida",
+      "passkey-deleted": "Chave de acceso eliminada",
+      "passkey-renamed": "Chave de acceso renomeada",
+      "passkey-delete-title": "Eliminar chave de acceso",
+      "passkey-delete-description": "Eliminar a chave de acceso \"{name}\"? Aínda poderás iniciar sesión co teu contrasinal.",
+      "passkey-rename-title": "Renomear chave de acceso",
+      "passkey-name-label": "Nome"
     }
   },
   "tooltip": {

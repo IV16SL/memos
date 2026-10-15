@@ -44,7 +44,15 @@
     "signups-closed-description": "La création de nouveaux comptes est désactivée sur cette instance. Contactez votre administrateur si vous avez besoin d'y accéder.",
     "signups-closed-title": "Les inscriptions sont fermées.",
     "sso-signup-tip": "Connectez-vous avec un fournisseur ci-dessous pour créer votre compte.",
-    "welcome-back": "Bienvenue."
+    "welcome-back": "Bienvenue.",
+    "passkey-signin-failed": "Échec de la connexion avec la clé d'accès.",
+    "passkey-signup-description": "Créez votre compte avec une clé d'accès. Vous vous connecterez avec la biométrie de votre appareil ou une clé de sécurité au lieu d'un mot de passe.",
+    "passkey-signup-failed": "Échec de l'inscription avec la clé d'accès.",
+    "sign-in-with-passkey": "Se connecter avec une clé d'accès",
+    "sign-up-with-passkey": "S'inscrire avec une clé d'accès",
+    "totp-code-label": "Code à usage unique",
+    "totp-required-description": "L'authentification à deux facteurs est activée pour @{username}. Saisissez le code de votre application d'authentification (ou un code de secours).",
+    "verify-totp": "Vérifier"
   },
   "common": {
     "about": "À propos",
@@ -920,6 +928,36 @@
       "you": "Vous",
       "your-access": "Votre accès",
       "your-spaces": "Vos espaces"
+    },
+    "security": {
+      "title": "Sécurité",
+      "description": "L'authentification à deux facteurs et les clés d'accès protègent votre compte.",
+      "enabled": "Activé",
+      "disable": "Désactiver",
+      "totp-title": "Application d'authentification (TOTP)",
+      "totp-description": "Exiger un code à usage unique basé sur le temps après votre mot de passe lors de la connexion.",
+      "enable-totp": "Activer l'application d'authentification",
+      "totp-scan-description": "Scannez le code QR avec votre application d'authentification, puis saisissez le code à 6 chiffres ci-dessous pour confirmer.",
+      "totp-code-label": "Code à usage unique",
+      "totp-enabled": "Authentification à deux facteurs activée",
+      "backup-codes-description": "Conservez ces codes de secours dans un endroit sûr. Chaque code peut être utilisé une fois si vous perdez l'accès à votre application d'authentification. Ils ne seront plus affichés.",
+      "backup-codes-saved": "J'ai enregistré les codes",
+      "disable-totp-title": "Désactiver l'authentification à deux facteurs",
+      "disable-totp-description": "Saisissez un code actuel de votre application d'authentification (ou un code de secours inutilisé) pour désactiver l'authentification à deux facteurs.",
+      "totp-disabled": "Authentification à deux facteurs désactivée",
+      "passkey-title": "Clés d'accès",
+      "passkey-description": "Connectez-vous sans mot de passe grâce à la biométrie de votre appareil ou à une clé de sécurité.",
+      "add-passkey": "Ajouter une clé d'accès",
+      "passkey-empty": "Aucune clé d'accès enregistrée pour le moment.",
+      "passkey-default-name": "Clé d'accès",
+      "passkey-last-used": "dernière utilisation",
+      "passkey-added": "Clé d'accès ajoutée",
+      "passkey-deleted": "Clé d'accès supprimée",
+      "passkey-renamed": "Clé d'accès renommée",
+      "passkey-delete-title": "Supprimer la clé d'accès",
+      "passkey-delete-description": "Supprimer la clé d'accès « {name} » ? Vous pourrez toujours vous connecter avec votre mot de passe.",
+      "passkey-rename-title": "Renommer la clé d'accès",
+      "passkey-name-label": "Nom"
     }
   },
   "tooltip": {

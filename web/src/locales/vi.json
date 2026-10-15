@@ -44,7 +44,15 @@
     "signups-closed-description": "Tài khoản mới bị vô hiệu hóa trên phiên bản này. Liên hệ với quản trị viên của bạn nếu bạn cần quyền truy cập.",
     "signups-closed-title": "Đăng ký đã đóng",
     "sso-signup-tip": "Đăng nhập bằng nhà cung cấp bên dưới để tạo tài khoản của bạn.",
-    "welcome-back": "Chào mừng bạn trở lại."
+    "welcome-back": "Chào mừng bạn trở lại.",
+    "passkey-signin-failed": "Đăng nhập bằng passkey thất bại.",
+    "passkey-signup-description": "Tạo tài khoản của bạn bằng passkey. Bạn sẽ đăng nhập bằng sinh trắc học của thiết bị hoặc khóa bảo mật thay vì mật khẩu.",
+    "passkey-signup-failed": "Đăng ký bằng passkey thất bại.",
+    "sign-in-with-passkey": "Đăng nhập bằng passkey",
+    "sign-up-with-passkey": "Đăng ký bằng passkey",
+    "totp-code-label": "Mã dùng một lần",
+    "totp-required-description": "Xác thực hai yếu tố đã được bật cho @{username}. Nhập mã từ ứng dụng xác thực (hoặc mã dự phòng).",
+    "verify-totp": "Xác minh"
   },
   "common": {
     "about": "Giới thiệu",
@@ -915,6 +923,36 @@
       "last-updated": "Cập nhật lần cuối {{ago}}",
       "refresh": "Làm mới",
       "load-error": "Không thể tải số liệu thống kê"
+    },
+    "security": {
+      "title": "Bảo mật",
+      "description": "Xác thực hai yếu tố và passkey bảo vệ tài khoản của bạn.",
+      "enabled": "Đã bật",
+      "disable": "Tắt",
+      "totp-title": "Ứng dụng xác thực (TOTP)",
+      "totp-description": "Yêu cầu mã dùng một lần dựa trên thời gian sau mật khẩu khi đăng nhập.",
+      "enable-totp": "Bật ứng dụng xác thực",
+      "totp-scan-description": "Quét mã QR bằng ứng dụng xác thực của bạn, sau đó nhập mã 6 chữ số bên dưới để xác nhận.",
+      "totp-code-label": "Mã dùng một lần",
+      "totp-enabled": "Đã bật xác thực hai yếu tố",
+      "backup-codes-description": "Lưu các mã dự phòng này ở nơi an toàn. Mỗi mã có thể dùng một lần nếu bạn mất quyền truy cập vào ứng dụng xác thực. Chúng sẽ không hiển thị lại.",
+      "backup-codes-saved": "Tôi đã lưu các mã",
+      "disable-totp-title": "Tắt xác thực hai yếu tố",
+      "disable-totp-description": "Nhập mã hiện tại từ ứng dụng xác thực (hoặc mã dự phòng chưa dùng) để tắt xác thực hai yếu tố.",
+      "totp-disabled": "Đã tắt xác thực hai yếu tố",
+      "passkey-title": "Passkey",
+      "passkey-description": "Đăng nhập không cần mật khẩu bằng sinh trắc học của thiết bị hoặc khóa bảo mật.",
+      "add-passkey": "Thêm passkey",
+      "passkey-empty": "Chưa có passkey nào được đăng ký.",
+      "passkey-default-name": "Passkey",
+      "passkey-last-used": "dùng lần cuối",
+      "passkey-added": "Đã thêm passkey",
+      "passkey-deleted": "Đã xóa passkey",
+      "passkey-renamed": "Đã đổi tên passkey",
+      "passkey-delete-title": "Xóa passkey",
+      "passkey-delete-description": "Xóa passkey \"{name}\"? Bạn vẫn có thể đăng nhập bằng mật khẩu.",
+      "passkey-rename-title": "Đổi tên passkey",
+      "passkey-name-label": "Tên"
     }
   },
   "tooltip": {

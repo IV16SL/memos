@@ -44,7 +44,15 @@
     "signups-closed-description": "Novi računi su onemogućeni na ovoj instanci. Obratite se administratoru ako vam je potreban pristup.",
     "signups-closed-title": "Prijave su zatvorene",
     "sso-signup-tip": "Prijavite se s davateljem usluga u nastavku kako biste stvorili svoj račun.",
-    "welcome-back": "Dobrodošli natrag."
+    "welcome-back": "Dobrodošli natrag.",
+    "passkey-signin-failed": "Prijava pristupnim ključem nije uspjela.",
+    "passkey-signup-description": "Stvorite svoj račun pristupnim ključem. Prijavljivat ćete se biometrijom svog uređaja ili sigurnosnim ključem umjesto lozinkom.",
+    "passkey-signup-failed": "Registracija pristupnim ključem nije uspjela.",
+    "sign-in-with-passkey": "Prijava pristupnim ključem",
+    "sign-up-with-passkey": "Registracija pristupnim ključem",
+    "totp-code-label": "Jednokratni kôd",
+    "totp-required-description": "Dvofaktorska autentifikacija uključena je za @{username}. Unesite kôd iz aplikacije za autentifikaciju (ili rezervni kôd).",
+    "verify-totp": "Potvrdi"
   },
   "common": {
     "about": "O aplikaciji",
@@ -920,6 +928,36 @@
       "you": "Vi",
       "your-access": "Vaš pristup",
       "your-spaces": "Vaši prostori"
+    },
+    "security": {
+      "title": "Sigurnost",
+      "description": "Dvofaktorska autentifikacija i pristupni ključevi štite vaš račun.",
+      "enabled": "Uključeno",
+      "disable": "Isključi",
+      "totp-title": "Aplikacija za autentifikaciju (TOTP)",
+      "totp-description": "Pri prijavi zahtijevaj vremenski jednokratni kôd nakon lozinke.",
+      "enable-totp": "Uključi aplikaciju za autentifikaciju",
+      "totp-scan-description": "Skenirajte QR kôd aplikacijom za autentifikaciju, a zatim unesite 6-znamenkasti kôd u nastavku za potvrdu.",
+      "totp-code-label": "Jednokratni kôd",
+      "totp-enabled": "Dvofaktorska autentifikacija uključena",
+      "backup-codes-description": "Spremite ove rezervne kodove na sigurno mjesto. Svaki kôd može se iskoristiti jednom ako izgubite pristup aplikaciji za autentifikaciju. Neće se ponovno prikazati.",
+      "backup-codes-saved": "Spremio sam kodove",
+      "disable-totp-title": "Isključi dvofaktorsku autentifikaciju",
+      "disable-totp-description": "Unesite trenutni kôd iz aplikacije za autentifikaciju (ili neiskorišteni rezervni kôd) da biste isključili dvofaktorsku autentifikaciju.",
+      "totp-disabled": "Dvofaktorska autentifikacija isključena",
+      "passkey-title": "Pristupni ključevi",
+      "passkey-description": "Prijavite se bez lozinke biometrijom svog uređaja ili sigurnosnim ključem.",
+      "add-passkey": "Dodaj pristupni ključ",
+      "passkey-empty": "Još nema registriranih pristupnih ključeva.",
+      "passkey-default-name": "Pristupni ključ",
+      "passkey-last-used": "zadnje korišten",
+      "passkey-added": "Pristupni ključ dodan",
+      "passkey-deleted": "Pristupni ključ obrisan",
+      "passkey-renamed": "Pristupni ključ preimenovan",
+      "passkey-delete-title": "Obriši pristupni ključ",
+      "passkey-delete-description": "Obrisati pristupni ključ \"{name}\"? I dalje se možete prijaviti lozinkom.",
+      "passkey-rename-title": "Preimenuj pristupni ključ",
+      "passkey-name-label": "Naziv"
     }
   },
   "tooltip": {

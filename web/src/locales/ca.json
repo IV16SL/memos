@@ -44,7 +44,15 @@
     "signups-closed-description": "Els comptes nous estan desactivats en aquesta instància. Contacta amb el teu administrador si necessites accés.",
     "signups-closed-title": "Els registres estan tancats",
     "sso-signup-tip": "Inicia la sessió amb un proveïdor a continuació per crear el teu compte.",
-    "welcome-back": "Benvingut/da de nou."
+    "welcome-back": "Benvingut/da de nou.",
+    "passkey-signin-failed": "L'inici de sessió amb clau d'accés ha fallat.",
+    "passkey-signup-description": "Crea el teu compte amb una clau d'accés. Iniciaràs sessió amb les dades biomètriques del dispositiu o una clau de seguretat en lloc d'una contrasenya.",
+    "passkey-signup-failed": "El registre amb clau d'accés ha fallat.",
+    "sign-in-with-passkey": "Inicia sessió amb clau d'accés",
+    "sign-up-with-passkey": "Registra't amb clau d'accés",
+    "totp-code-label": "Codi d'un sol ús",
+    "totp-required-description": "L'autenticació en dos passos està activada per a @{username}. Introdueix el codi de l'aplicació d'autenticació (o un codi de recuperació).",
+    "verify-totp": "Verifica"
   },
   "common": {
     "about": "Quant a",
@@ -920,6 +928,36 @@
       "you": "Tu",
       "your-access": "El teu accés",
       "your-spaces": "Els teus espais"
+    },
+    "security": {
+      "title": "Seguretat",
+      "description": "L'autenticació en dos passos i les claus d'accés protegeixen el teu compte.",
+      "enabled": "Activat",
+      "disable": "Desactiva",
+      "totp-title": "Aplicació d'autenticació (TOTP)",
+      "totp-description": "Requereix un codi d'un sol ús basat en el temps després de la contrasenya en iniciar sessió.",
+      "enable-totp": "Activa l'aplicació d'autenticació",
+      "totp-scan-description": "Escaneja el codi QR amb l'aplicació d'autenticació i introdueix el codi de 6 dígits següent per confirmar.",
+      "totp-code-label": "Codi d'un sol ús",
+      "totp-enabled": "Autenticació en dos passos activada",
+      "backup-codes-description": "Desa aquests codis de recuperació en un lloc segur. Cada codi es pot utilitzar una vegada si perds l'accés a l'aplicació d'autenticació. No es tornaran a mostrar.",
+      "backup-codes-saved": "He desat els codis",
+      "disable-totp-title": "Desactiva l'autenticació en dos passos",
+      "disable-totp-description": "Introdueix un codi actual de l'aplicació d'autenticació (o un codi de recuperació no utilitzat) per desactivar l'autenticació en dos passos.",
+      "totp-disabled": "Autenticació en dos passos desactivada",
+      "passkey-title": "Claus d'accés",
+      "passkey-description": "Inicia sessió sense contrasenya amb les dades biomètriques del dispositiu o una clau de seguretat.",
+      "add-passkey": "Afegeix una clau d'accés",
+      "passkey-empty": "Encara no hi ha claus d'accés registrades.",
+      "passkey-default-name": "Clau d'accés",
+      "passkey-last-used": "darrer ús",
+      "passkey-added": "Clau d'accés afegida",
+      "passkey-deleted": "Clau d'accés suprimida",
+      "passkey-renamed": "S'ha canviat el nom de la clau d'accés",
+      "passkey-delete-title": "Suprimeix la clau d'accés",
+      "passkey-delete-description": "Vols suprimir la clau d'accés \"{name}\"? Encara podràs iniciar sessió amb la contrasenya.",
+      "passkey-rename-title": "Canvia el nom de la clau d'accés",
+      "passkey-name-label": "Nom"
     }
   },
   "tooltip": {

@@ -44,7 +44,15 @@
     "signups-closed-description": "Neue Konten sind auf dieser Instanz deaktiviert. Wenden Sie sich an Ihren Administrator, wenn Sie Zugriff benötigen.",
     "signups-closed-title": "Anmeldungen sind geschlossen.",
     "sso-signup-tip": "Melden Sie sich unten mit einem Anbieter an, um Ihr Konto zu erstellen.",
-    "welcome-back": "Willkommen zurück."
+    "welcome-back": "Willkommen zurück.",
+    "passkey-signin-failed": "Anmeldung mit Passkey fehlgeschlagen.",
+    "passkey-signup-description": "Erstelle dein Konto mit einem Passkey. Du meldest dich dann mit der Biometrie deines Geräts oder einem Sicherheitsschlüssel statt mit einem Passwort an.",
+    "passkey-signup-failed": "Registrierung mit Passkey fehlgeschlagen.",
+    "sign-in-with-passkey": "Mit Passkey anmelden",
+    "sign-up-with-passkey": "Mit Passkey registrieren",
+    "totp-code-label": "Einmalcode",
+    "totp-required-description": "Für @{username} ist die Zwei-Faktor-Authentifizierung aktiviert. Gib den Code aus deiner Authentifizierungs-App ein (oder einen Wiederherstellungscode).",
+    "verify-totp": "Bestätigen"
   },
   "common": {
     "about": "Über",
@@ -920,6 +928,36 @@
       "you": "Sie",
       "your-access": "Ihr Zugriff",
       "your-spaces": "Ihre Bereiche"
+    },
+    "security": {
+      "title": "Sicherheit",
+      "description": "Zwei-Faktor-Authentifizierung und Passkeys schützen dein Konto.",
+      "enabled": "Aktiviert",
+      "disable": "Deaktivieren",
+      "totp-title": "Authentifizierungs-App (TOTP)",
+      "totp-description": "Nach dem Passwort einen zeitbasierten Einmalcode bei der Anmeldung verlangen.",
+      "enable-totp": "Authentifizierungs-App aktivieren",
+      "totp-scan-description": "Scanne den QR-Code mit deiner Authentifizierungs-App und gib dann den 6-stelligen Code unten zur Bestätigung ein.",
+      "totp-code-label": "Einmalcode",
+      "totp-enabled": "Zwei-Faktor-Authentifizierung aktiviert",
+      "backup-codes-description": "Bewahre diese Wiederherstellungscodes an einem sicheren Ort auf. Jeder Code kann einmal verwendet werden, falls du den Zugriff auf deine Authentifizierungs-App verlierst. Sie werden nicht erneut angezeigt.",
+      "backup-codes-saved": "Ich habe die Codes gespeichert",
+      "disable-totp-title": "Zwei-Faktor-Authentifizierung deaktivieren",
+      "disable-totp-description": "Gib einen aktuellen Code aus deiner Authentifizierungs-App ein (oder einen ungenutzten Wiederherstellungscode), um die Zwei-Faktor-Authentifizierung zu deaktivieren.",
+      "totp-disabled": "Zwei-Faktor-Authentifizierung deaktiviert",
+      "passkey-title": "Passkeys",
+      "passkey-description": "Melde dich ohne Passwort mit der Biometrie deines Geräts oder einem Sicherheitsschlüssel an.",
+      "add-passkey": "Passkey hinzufügen",
+      "passkey-empty": "Noch keine Passkeys registriert.",
+      "passkey-default-name": "Passkey",
+      "passkey-last-used": "zuletzt verwendet",
+      "passkey-added": "Passkey hinzugefügt",
+      "passkey-deleted": "Passkey gelöscht",
+      "passkey-renamed": "Passkey umbenannt",
+      "passkey-delete-title": "Passkey löschen",
+      "passkey-delete-description": "Passkey \"{name}\" löschen? Du kannst dich weiterhin mit deinem Passwort anmelden.",
+      "passkey-rename-title": "Passkey umbenennen",
+      "passkey-name-label": "Name"
     }
   },
   "tooltip": {

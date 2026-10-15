@@ -44,7 +44,15 @@
     "signups-closed-description": "Uudet tilit on poistettu käytöstä tässä instanssissa. Ota yhteyttä järjestelmänvalvojaasi, jos tarvitset käyttöoikeutta.",
     "signups-closed-title": "Rekisteröitymiset ovat päättyneet",
     "sso-signup-tip": "Kirjaudu sisään alla olevalla palveluntarjoajalla luodaksesi tilisi.",
-    "welcome-back": "Tervetuloa takaisin."
+    "welcome-back": "Tervetuloa takaisin.",
+    "passkey-signin-failed": "Kirjautuminen pääsyavaimella epäonnistui.",
+    "passkey-signup-description": "Luo tilisi pääsyavaimella. Kirjaudut sisään laitteesi biometriikalla tai turva-avaimella salasanan sijaan.",
+    "passkey-signup-failed": "Rekisteröityminen pääsyavaimella epäonnistui.",
+    "sign-in-with-passkey": "Kirjaudu pääsyavaimella",
+    "sign-up-with-passkey": "Rekisteröidy pääsyavaimella",
+    "totp-code-label": "Kertakoodi",
+    "totp-required-description": "Kaksivaiheinen tunnistautuminen on käytössä käyttäjälle @{username}. Syötä todennussovelluksen koodi (tai varakoodi).",
+    "verify-totp": "Vahvista"
   },
   "demo": {
     "banner-description": "Muutokset ovat väliaikaisia ​​ja ne voidaan nollata.",
@@ -958,6 +966,36 @@
       "your-spaces": "Tilasi",
       "delete-confirm-description": "Tämä poistaa pysyvästi tilan ja siihen sijoitetut muistiot. Toimintoa ei voi kumota.",
       "delete-confirm-title": "Poistetaanko {{space}}?"
+    },
+    "security": {
+      "title": "Tietoturva",
+      "description": "Kaksivaiheinen tunnistautuminen ja pääsyavaimet suojaavat tiliäsi.",
+      "enabled": "Käytössä",
+      "disable": "Poista käytöstä",
+      "totp-title": "Todennussovellus (TOTP)",
+      "totp-description": "Vaadi kirjautuessa salasanan jälkeen aikaperusteinen kertakoodi.",
+      "enable-totp": "Ota todennussovellus käyttöön",
+      "totp-scan-description": "Skannaa QR-koodi todennussovelluksellasi ja syötä sitten 6-numeroinen koodi alle vahvistaaksesi.",
+      "totp-code-label": "Kertakoodi",
+      "totp-enabled": "Kaksivaiheinen tunnistautuminen käytössä",
+      "backup-codes-description": "Tallenna nämä varakoodit turvalliseen paikkaan. Kukin koodi voidaan käyttää kerran, jos menetät pääsyn todennussovellukseesi. Niitä ei näytetä uudelleen.",
+      "backup-codes-saved": "Olen tallentanut koodit",
+      "disable-totp-title": "Poista kaksivaiheinen tunnistautuminen käytöstä",
+      "disable-totp-description": "Syötä todennussovelluksesi ajantasainen koodi (tai käyttämätön varakoodi) poistaaksesi kaksivaiheisen tunnistautumisen käytöstä.",
+      "totp-disabled": "Kaksivaiheinen tunnistautuminen poistettu käytöstä",
+      "passkey-title": "Pääsyavaimet",
+      "passkey-description": "Kirjaudu sisään ilman salasanaa laitteesi biometriikalla tai turva-avaimella.",
+      "add-passkey": "Lisää pääsyavain",
+      "passkey-empty": "Pääsyavaimia ei ole vielä rekisteröity.",
+      "passkey-default-name": "Pääsyavain",
+      "passkey-last-used": "viimeksi käytetty",
+      "passkey-added": "Pääsyavain lisätty",
+      "passkey-deleted": "Pääsyavain poistettu",
+      "passkey-renamed": "Pääsyavain nimetty uudelleen",
+      "passkey-delete-title": "Poista pääsyavain",
+      "passkey-delete-description": "Poistetaanko pääsyavain \"{name}\"? Voit silti kirjautua sisään salasanallasi.",
+      "passkey-rename-title": "Nimeä pääsyavain uudelleen",
+      "passkey-name-label": "Nimi"
     }
   },
   "tooltip": {

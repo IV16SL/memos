@@ -44,7 +44,15 @@
     "signups-closed-description": "Naujos paskyros šioje instancijoje išjungtos. Jei reikia prieigos, susisiekite su administratoriumi.",
     "signups-closed-title": "Registracija baigta",
     "sso-signup-tip": "Prisijunkite naudodami toliau nurodytą tiekėją, kad sukurtumėte paskyrą.",
-    "welcome-back": "Sveiki sugrįžę."
+    "welcome-back": "Sveiki sugrįžę.",
+    "passkey-signin-failed": "Prisijungimas prieigos raktu nepavyko.",
+    "passkey-signup-description": "Sukurkite paskyrą naudodami prieigos raktą. Prisijungsite įrenginio biometrija arba saugos raktu, o ne slaptažodžiu.",
+    "passkey-signup-failed": "Registracija prieigos raktu nepavyko.",
+    "sign-in-with-passkey": "Prisijungti prieigos raktu",
+    "sign-up-with-passkey": "Registruotis prieigos raktu",
+    "totp-code-label": "Vienkartinis kodas",
+    "totp-required-description": "Vartotojui @{username} įjungtas dviejų veiksnių autentifikavimas. Įveskite kodą iš autentifikavimo programėlės (arba atsarginį kodą).",
+    "verify-totp": "Patvirtinti"
   },
   "demo": {
     "banner-description": "Pakeitimai yra laikini ir gali būti nustatyti iš naujo.",
@@ -958,6 +966,36 @@
       "your-spaces": "Jūsų erdvės",
       "delete-confirm-description": "Erdvė ir visi joje esantys užrašai bus visam laikui ištrinti. Šio veiksmo negalima atšaukti.",
       "delete-confirm-title": "Ištrinti {{space}}?"
+    },
+    "security": {
+      "title": "Saugumas",
+      "description": "Dviejų veiksnių autentifikavimas ir prieigos raktai saugo jūsų paskyrą.",
+      "enabled": "Įjungta",
+      "disable": "Išjungti",
+      "totp-title": "Autentifikavimo programėlė (TOTP)",
+      "totp-description": "Prisijungiant po slaptažodžio reikalauti laiko pagrįsto vienkartinio kodo.",
+      "enable-totp": "Įjungti autentifikavimo programėlę",
+      "totp-scan-description": "Nuskenuokite QR kodą autentifikavimo programėle, tada patvirtinimui įveskite 6 skaitmenų kodą žemiau.",
+      "totp-code-label": "Vienkartinis kodas",
+      "totp-enabled": "Dviejų veiksnių autentifikavimas įjungtas",
+      "backup-codes-description": "Išsaugokite šiuos atsarginius kodus saugioje vietoje. Kiekvienas kodas gali būti panaudotas vieną kartą, jei prarastumėte prieigą prie autentifikavimo programėlės. Jie daugiau nebus rodomi.",
+      "backup-codes-saved": "Išsaugojau kodus",
+      "disable-totp-title": "Išjungti dviejų veiksnių autentifikavimą",
+      "disable-totp-description": "Norėdami išjungti dviejų veiksnių autentifikavimą, įveskite dabartinį kodą iš autentifikavimo programėlės (arba nepanaudotą atsarginį kodą).",
+      "totp-disabled": "Dviejų veiksnių autentifikavimas išjungtas",
+      "passkey-title": "Prieigos raktai",
+      "passkey-description": "Prisijunkite be slaptažodžio naudodami įrenginio biometriją arba saugos raktą.",
+      "add-passkey": "Pridėti prieigos raktą",
+      "passkey-empty": "Prieigos raktų dar neužregistruota.",
+      "passkey-default-name": "Prieigos raktas",
+      "passkey-last-used": "paskutinį kartą naudotas",
+      "passkey-added": "Prieigos raktas pridėtas",
+      "passkey-deleted": "Prieigos raktas ištrintas",
+      "passkey-renamed": "Prieigos raktas pervadintas",
+      "passkey-delete-title": "Ištrinti prieigos raktą",
+      "passkey-delete-description": "Ištrinti prieigos raktą \"{name}\"? Vis tiek galėsite prisijungti slaptažodžiu.",
+      "passkey-rename-title": "Pervadinti prieigos raktą",
+      "passkey-name-label": "Pavadinimas"
     }
   },
   "tooltip": {

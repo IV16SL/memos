@@ -44,7 +44,15 @@
     "signups-closed-description": "As novas contas estão desativadas nesta instância. Contacte o seu administrador se precisar de acesso.",
     "signups-closed-title": "Os registos estão encerrados",
     "sso-signup-tip": "Inicie sessão com um fornecedor abaixo para criar a sua conta.",
-    "welcome-back": "Bem-vindo(a) de volta."
+    "welcome-back": "Bem-vindo(a) de volta.",
+    "passkey-signin-failed": "Falha ao iniciar sessão com a chave de acesso.",
+    "passkey-signup-description": "Crie a sua conta com uma chave de acesso. Irá iniciar sessão com a biometria do seu dispositivo ou uma chave de segurança em vez de uma palavra-passe.",
+    "passkey-signup-failed": "Falha ao registar-se com a chave de acesso.",
+    "sign-in-with-passkey": "Iniciar sessão com chave de acesso",
+    "sign-up-with-passkey": "Registar-se com chave de acesso",
+    "totp-code-label": "Código de utilização única",
+    "totp-required-description": "A autenticação de dois fatores está ativada para @{username}. Introduza o código da sua aplicação de autenticação (ou um código de reserva).",
+    "verify-totp": "Verificar"
   },
   "common": {
     "about": "Sobre",
@@ -920,6 +928,36 @@
       "you": "Você",
       "your-access": "O seu acesso",
       "your-spaces": "Os seus espaços"
+    },
+    "security": {
+      "title": "Segurança",
+      "description": "A autenticação de dois fatores e as chaves de acesso protegem a sua conta.",
+      "enabled": "Ativado",
+      "disable": "Desativar",
+      "totp-title": "Aplicação de autenticação (TOTP)",
+      "totp-description": "Exigir um código de utilização única baseado em tempo após a palavra-passe ao iniciar sessão.",
+      "enable-totp": "Ativar aplicação de autenticação",
+      "totp-scan-description": "Digitalize o código QR com a sua aplicação de autenticação e introduza o código de 6 dígitos abaixo para confirmar.",
+      "totp-code-label": "Código de utilização única",
+      "totp-enabled": "Autenticação de dois fatores ativada",
+      "backup-codes-description": "Guarde estes códigos de reserva num local seguro. Cada código pode ser utilizado uma vez se perder o acesso à sua aplicação de autenticação. Não serão apresentados novamente.",
+      "backup-codes-saved": "Guardei os códigos",
+      "disable-totp-title": "Desativar a autenticação de dois fatores",
+      "disable-totp-description": "Introduza um código atual da sua aplicação de autenticação (ou um código de reserva não utilizado) para desativar a autenticação de dois fatores.",
+      "totp-disabled": "Autenticação de dois fatores desativada",
+      "passkey-title": "Chaves de acesso",
+      "passkey-description": "Inicie sessão sem palavra-passe com a biometria do seu dispositivo ou uma chave de segurança.",
+      "add-passkey": "Adicionar chave de acesso",
+      "passkey-empty": "Ainda não existem chaves de acesso registadas.",
+      "passkey-default-name": "Chave de acesso",
+      "passkey-last-used": "utilizada pela última vez em",
+      "passkey-added": "Chave de acesso adicionada",
+      "passkey-deleted": "Chave de acesso eliminada",
+      "passkey-renamed": "Chave de acesso com novo nome",
+      "passkey-delete-title": "Eliminar chave de acesso",
+      "passkey-delete-description": "Eliminar a chave de acesso \"{name}\"? Poderá continuar a iniciar sessão com a sua palavra-passe.",
+      "passkey-rename-title": "Mudar o nome da chave de acesso",
+      "passkey-name-label": "Nome"
     }
   },
   "tooltip": {

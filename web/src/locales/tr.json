@@ -66,7 +66,15 @@
     "signups-closed-description": "Bu sunucuda yeni hesap oluşturma devre dışı. Erişime ihtiyacınız varsa yöneticinizle iletişime geçin.",
     "signups-closed-title": "Kayıtlar kapalı",
     "sso-signup-tip": "Hesabınızı oluşturmak için aşağıdaki sağlayıcılardan biriyle giriş yapın.",
-    "welcome-back": "Tekrar hoş geldiniz."
+    "welcome-back": "Tekrar hoş geldiniz.",
+    "passkey-signin-failed": "Geçiş anahtarıyla giriş başarısız oldu.",
+    "passkey-signup-description": "Hesabınızı bir geçiş anahtarıyla oluşturun. Şifre yerine cihazınızın biyometrisi veya bir güvenlik anahtarıyla giriş yapacaksınız.",
+    "passkey-signup-failed": "Geçiş anahtarıyla kayıt başarısız oldu.",
+    "sign-in-with-passkey": "Geçiş anahtarıyla giriş yap",
+    "sign-up-with-passkey": "Geçiş anahtarıyla kaydol",
+    "totp-code-label": "Tek kullanımlık kod",
+    "totp-required-description": "@{username} için iki faktörlü kimlik doğrulama etkin. Kimlik doğrulayıcı uygulamanızdaki kodu (veya bir yedek kodu) girin.",
+    "verify-totp": "Doğrula"
   },
   "calendar": {
     "new-memo-on-day": "Bu güne yeni not",
@@ -965,6 +973,36 @@
       "last-updated": "Son güncelleme {{ago}}",
       "refresh": "Yenile",
       "load-error": "İstatistikler yüklenemedi"
+    },
+    "security": {
+      "title": "Güvenlik",
+      "description": "İki faktörlü kimlik doğrulama ve geçiş anahtarları hesabınızı korur.",
+      "enabled": "Etkin",
+      "disable": "Devre dışı bırak",
+      "totp-title": "Kimlik doğrulayıcı uygulaması (TOTP)",
+      "totp-description": "Giriş yaparken şifrenizden sonra zamana dayalı tek kullanımlık kod iste.",
+      "enable-totp": "Kimlik doğrulayıcı uygulamasını etkinleştir",
+      "totp-scan-description": "QR kodu kimlik doğrulayıcı uygulamanızla tarayın, ardından onaylamak için aşağıya 6 haneli kodu girin.",
+      "totp-code-label": "Tek kullanımlık kod",
+      "totp-enabled": "İki faktörlü kimlik doğrulama etkinleştirildi",
+      "backup-codes-description": "Bu yedek kodları güvenli bir yerde saklayın. Kimlik doğrulayıcı uygulamanıza erişimi kaybederseniz her kod bir kez kullanılabilir. Tekrar gösterilmeyecekler.",
+      "backup-codes-saved": "Kodları kaydettim",
+      "disable-totp-title": "İki faktörlü kimlik doğrulamayı devre dışı bırak",
+      "disable-totp-description": "İki faktörlü kimlik doğrulamayı devre dışı bırakmak için kimlik doğrulayıcı uygulamanızdaki güncel kodu (veya kullanılmamış bir yedek kodu) girin.",
+      "totp-disabled": "İki faktörlü kimlik doğrulama devre dışı bırakıldı",
+      "passkey-title": "Geçiş anahtarları",
+      "passkey-description": "Cihazınızın biyometrisi veya bir güvenlik anahtarıyla şifresiz giriş yapın.",
+      "add-passkey": "Geçiş anahtarı ekle",
+      "passkey-empty": "Henüz kayıtlı geçiş anahtarı yok.",
+      "passkey-default-name": "Geçiş anahtarı",
+      "passkey-last-used": "son kullanım",
+      "passkey-added": "Geçiş anahtarı eklendi",
+      "passkey-deleted": "Geçiş anahtarı silindi",
+      "passkey-renamed": "Geçiş anahtarı yeniden adlandırıldı",
+      "passkey-delete-title": "Geçiş anahtarını sil",
+      "passkey-delete-description": "\"{name}\" geçiş anahtarı silinsin mi? Şifrenizle giriş yapmaya devam edebilirsiniz.",
+      "passkey-rename-title": "Geçiş anahtarını yeniden adlandır",
+      "passkey-name-label": "Ad"
     }
   },
   "space": {

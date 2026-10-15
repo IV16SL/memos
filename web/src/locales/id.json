@@ -44,7 +44,15 @@
     "signups-closed-description": "Akun baru dinonaktifkan pada instance ini. Hubungi administrator Anda jika Anda memerlukan akses.",
     "signups-closed-title": "Pendaftaran ditutup",
     "sso-signup-tip": "Masuk dengan penyedia di bawah ini untuk membuat akun Anda.",
-    "welcome-back": "Selamat datang kembali."
+    "welcome-back": "Selamat datang kembali.",
+    "passkey-signin-failed": "Masuk dengan kunci sandi gagal.",
+    "passkey-signup-description": "Buat akun Anda dengan kunci sandi. Anda akan masuk dengan biometrik perangkat atau kunci keamanan, bukan kata sandi.",
+    "passkey-signup-failed": "Pendaftaran dengan kunci sandi gagal.",
+    "sign-in-with-passkey": "Masuk dengan kunci sandi",
+    "sign-up-with-passkey": "Daftar dengan kunci sandi",
+    "totp-code-label": "Kode sekali pakai",
+    "totp-required-description": "Autentikasi dua faktor diaktifkan untuk @{username}. Masukkan kode dari aplikasi autentikator (atau kode cadangan).",
+    "verify-totp": "Verifikasi"
   },
   "common": {
     "about": "Tentang",
@@ -915,6 +923,36 @@
       "last-updated": "Terakhir diperbarui {{ago}}",
       "refresh": "Segarkan",
       "load-error": "Gagal memuat statistik"
+    },
+    "security": {
+      "title": "Keamanan",
+      "description": "Autentikasi dua faktor dan kunci sandi melindungi akun Anda.",
+      "enabled": "Diaktifkan",
+      "disable": "Nonaktifkan",
+      "totp-title": "Aplikasi autentikator (TOTP)",
+      "totp-description": "Wajibkan kode sekali pakai berbasis waktu setelah kata sandi saat masuk.",
+      "enable-totp": "Aktifkan aplikasi autentikator",
+      "totp-scan-description": "Pindai kode QR dengan aplikasi autentikator Anda, lalu masukkan kode 6 digit di bawah untuk konfirmasi.",
+      "totp-code-label": "Kode sekali pakai",
+      "totp-enabled": "Autentikasi dua faktor diaktifkan",
+      "backup-codes-description": "Simpan kode cadangan ini di tempat yang aman. Setiap kode dapat digunakan sekali jika Anda kehilangan akses ke aplikasi autentikator. Kode tidak akan ditampilkan lagi.",
+      "backup-codes-saved": "Saya sudah menyimpan kode",
+      "disable-totp-title": "Nonaktifkan autentikasi dua faktor",
+      "disable-totp-description": "Masukkan kode terkini dari aplikasi autentikator (atau kode cadangan yang belum digunakan) untuk menonaktifkan autentikasi dua faktor.",
+      "totp-disabled": "Autentikasi dua faktor dinonaktifkan",
+      "passkey-title": "Kunci sandi",
+      "passkey-description": "Masuk tanpa kata sandi menggunakan biometrik perangkat atau kunci keamanan Anda.",
+      "add-passkey": "Tambah kunci sandi",
+      "passkey-empty": "Belum ada kunci sandi yang terdaftar.",
+      "passkey-default-name": "Kunci sandi",
+      "passkey-last-used": "terakhir digunakan",
+      "passkey-added": "Kunci sandi ditambahkan",
+      "passkey-deleted": "Kunci sandi dihapus",
+      "passkey-renamed": "Kunci sandi diganti namanya",
+      "passkey-delete-title": "Hapus kunci sandi",
+      "passkey-delete-description": "Hapus kunci sandi \"{name}\"? Anda tetap dapat masuk dengan kata sandi.",
+      "passkey-rename-title": "Ganti nama kunci sandi",
+      "passkey-name-label": "Nama"
     }
   },
   "tooltip": {

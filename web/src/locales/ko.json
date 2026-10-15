@@ -44,7 +44,15 @@
     "signups-closed-description": "이 인스턴스에서 새 계정이 비활성화되어 있습니다. 액세스가 필요한 경우 관리자에게 문의하십시오.",
     "signups-closed-title": "가입이 마감되었습니다.",
     "sso-signup-tip": "아래 제공업체로 로그인하여 계정을 만드세요.",
-    "welcome-back": "다시 오신 것을 환영합니다."
+    "welcome-back": "다시 오신 것을 환영합니다.",
+    "passkey-signin-failed": "패스키 로그인에 실패했습니다.",
+    "passkey-signup-description": "패스키로 계정을 만드세요. 비밀번호 대신 기기의 생체 인증이나 보안 키로 로그인합니다.",
+    "passkey-signup-failed": "패스키 가입에 실패했습니다.",
+    "sign-in-with-passkey": "패스키로 로그인",
+    "sign-up-with-passkey": "패스키로 가입",
+    "totp-code-label": "일회용 코드",
+    "totp-required-description": "@{username}에 이중 인증이 설정되어 있습니다. 인증 앱의 코드(또는 백업 코드)를 입력하세요.",
+    "verify-totp": "확인"
   },
   "common": {
     "about": "정보",
@@ -915,6 +923,36 @@
       "last-updated": "마지막 업데이트 {{ago}}",
       "refresh": "새로 고침",
       "load-error": "통계 불러오기 실패"
+    },
+    "security": {
+      "title": "보안",
+      "description": "이중 인증과 패스키가 계정을 보호합니다.",
+      "enabled": "사용",
+      "disable": "사용 안 함",
+      "totp-title": "인증 앱 (TOTP)",
+      "totp-description": "로그인 시 비밀번호 입력 후 시간 기반 일회용 코드를 요구합니다.",
+      "enable-totp": "인증 앱 사용",
+      "totp-scan-description": "인증 앱으로 QR 코드를 스캔한 뒤 아래에 6자리 코드를 입력하여 확인하세요.",
+      "totp-code-label": "일회용 코드",
+      "totp-enabled": "이중 인증이 설정되었습니다",
+      "backup-codes-description": "이 백업 코드를 안전한 곳에 보관하세요. 인증 앱에 접근할 수 없게 되면 각 코드는 한 번씩 사용할 수 있습니다. 다시 표시되지 않습니다.",
+      "backup-codes-saved": "코드를 저장했습니다",
+      "disable-totp-title": "이중 인증 해제",
+      "disable-totp-description": "이중 인증을 해제하려면 인증 앱의 현재 코드(또는 사용하지 않은 백업 코드)를 입력하세요.",
+      "totp-disabled": "이중 인증이 해제되었습니다",
+      "passkey-title": "패스키",
+      "passkey-description": "기기의 생체 인증이나 보안 키로 비밀번호 없이 로그인합니다.",
+      "add-passkey": "패스키 추가",
+      "passkey-empty": "등록된 패스키가 없습니다.",
+      "passkey-default-name": "패스키",
+      "passkey-last-used": "마지막 사용",
+      "passkey-added": "패스키가 추가되었습니다",
+      "passkey-deleted": "패스키가 삭제되었습니다",
+      "passkey-renamed": "패스키 이름이 변경되었습니다",
+      "passkey-delete-title": "패스키 삭제",
+      "passkey-delete-description": "패스키 \"{name}\"을(를) 삭제할까요? 비밀번호로는 계속 로그인할 수 있습니다.",
+      "passkey-rename-title": "패스키 이름 변경",
+      "passkey-name-label": "이름"
     }
   },
   "tooltip": {

@@ -44,7 +44,15 @@
     "signups-closed-description": "Novas contas estão desativadas nesta instância. Entre em contato com seu administrador se precisar de acesso.",
     "signups-closed-title": "Os cadastros estão encerrados",
     "sso-signup-tip": "Faça login com um provedor abaixo para criar sua conta.",
-    "welcome-back": "Bem-vindo(a) de volta."
+    "welcome-back": "Bem-vindo(a) de volta.",
+    "passkey-signin-failed": "Falha ao entrar com a chave de acesso.",
+    "passkey-signup-description": "Crie sua conta com uma chave de acesso. Você entrará com a biometria do seu dispositivo ou uma chave de segurança em vez de uma senha.",
+    "passkey-signup-failed": "Falha ao cadastrar-se com a chave de acesso.",
+    "sign-in-with-passkey": "Entrar com chave de acesso",
+    "sign-up-with-passkey": "Cadastrar-se com chave de acesso",
+    "totp-code-label": "Código de uso único",
+    "totp-required-description": "A autenticação em dois fatores está ativada para @{username}. Digite o código do seu aplicativo autenticador (ou um código reserva).",
+    "verify-totp": "Verificar"
   },
   "common": {
     "about": "Sobre",
@@ -915,6 +923,36 @@
       "last-updated": "Última atualização {{ago}}",
       "refresh": "Atualizar",
       "load-error": "Falha ao carregar estatísticas"
+    },
+    "security": {
+      "title": "Segurança",
+      "description": "A autenticação em dois fatores e as chaves de acesso protegem sua conta.",
+      "enabled": "Ativado",
+      "disable": "Desativar",
+      "totp-title": "Aplicativo autenticador (TOTP)",
+      "totp-description": "Exigir um código de uso único baseado em tempo após a senha ao entrar.",
+      "enable-totp": "Ativar aplicativo autenticador",
+      "totp-scan-description": "Escaneie o código QR com seu aplicativo autenticador e digite o código de 6 dígitos abaixo para confirmar.",
+      "totp-code-label": "Código de uso único",
+      "totp-enabled": "Autenticação em dois fatores ativada",
+      "backup-codes-description": "Salve estes códigos reserva em um local seguro. Cada código pode ser usado uma vez se você perder o acesso ao seu aplicativo autenticador. Eles não serão exibidos novamente.",
+      "backup-codes-saved": "Salvei os códigos",
+      "disable-totp-title": "Desativar a autenticação em dois fatores",
+      "disable-totp-description": "Digite um código atual do seu aplicativo autenticador (ou um código reserva não utilizado) para desativar a autenticação em dois fatores.",
+      "totp-disabled": "Autenticação em dois fatores desativada",
+      "passkey-title": "Chaves de acesso",
+      "passkey-description": "Entre sem senha usando a biometria do seu dispositivo ou uma chave de segurança.",
+      "add-passkey": "Adicionar chave de acesso",
+      "passkey-empty": "Nenhuma chave de acesso registrada ainda.",
+      "passkey-default-name": "Chave de acesso",
+      "passkey-last-used": "usada pela última vez em",
+      "passkey-added": "Chave de acesso adicionada",
+      "passkey-deleted": "Chave de acesso excluída",
+      "passkey-renamed": "Chave de acesso renomeada",
+      "passkey-delete-title": "Excluir chave de acesso",
+      "passkey-delete-description": "Excluir a chave de acesso \"{name}\"? Você ainda poderá entrar com sua senha.",
+      "passkey-rename-title": "Renomear chave de acesso",
+      "passkey-name-label": "Nome"
     }
   },
   "tooltip": {

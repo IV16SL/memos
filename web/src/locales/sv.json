@@ -44,7 +44,15 @@
     "signups-closed-description": "Nya konton är inaktiverade på den här instansen. Kontakta administratören om du behöver åtkomst.",
     "signups-closed-title": "Registreringar är stängda",
     "sso-signup-tip": "Logga in med en leverantör nedan för att skapa ditt konto.",
-    "welcome-back": "Välkommen tillbaka."
+    "welcome-back": "Välkommen tillbaka.",
+    "passkey-signin-failed": "Inloggning med passkey misslyckades.",
+    "passkey-signup-description": "Skapa ditt konto med en passkey. Du loggar in med enhetens biometri eller en säkerhetsnyckel istället för ett lösenord.",
+    "passkey-signup-failed": "Registrering med passkey misslyckades.",
+    "sign-in-with-passkey": "Logga in med passkey",
+    "sign-up-with-passkey": "Registrera dig med passkey",
+    "totp-code-label": "Engångskod",
+    "totp-required-description": "Tvåfaktorsautentisering är aktiverad för @{username}. Ange koden från din autentiseringsapp (eller en reservkod).",
+    "verify-totp": "Verifiera"
   },
   "common": {
     "about": "Om",
@@ -920,6 +928,36 @@
       "you": "Du",
       "your-access": "Din åtkomst",
       "your-spaces": "Dina utrymmen"
+    },
+    "security": {
+      "title": "Säkerhet",
+      "description": "Tvåfaktorsautentisering och passkeys skyddar ditt konto.",
+      "enabled": "Aktiverad",
+      "disable": "Inaktivera",
+      "totp-title": "Autentiseringsapp (TOTP)",
+      "totp-description": "Kräv en tidsbaserad engångskod efter ditt lösenord vid inloggning.",
+      "enable-totp": "Aktivera autentiseringsapp",
+      "totp-scan-description": "Skanna QR-koden med din autentiseringsapp och ange sedan den 6-siffriga koden nedan för att bekräfta.",
+      "totp-code-label": "Engångskod",
+      "totp-enabled": "Tvåfaktorsautentisering aktiverad",
+      "backup-codes-description": "Spara dessa reservkoder på en säker plats. Varje kod kan användas en gång om du förlorar åtkomsten till din autentiseringsapp. De visas inte igen.",
+      "backup-codes-saved": "Jag har sparat koderna",
+      "disable-totp-title": "Inaktivera tvåfaktorsautentisering",
+      "disable-totp-description": "Ange en aktuell kod från din autentiseringsapp (eller en oanvänd reservkod) för att inaktivera tvåfaktorsautentisering.",
+      "totp-disabled": "Tvåfaktorsautentisering inaktiverad",
+      "passkey-title": "Passkeys",
+      "passkey-description": "Logga in utan lösenord med enhetens biometri eller en säkerhetsnyckel.",
+      "add-passkey": "Lägg till passkey",
+      "passkey-empty": "Inga passkeys registrerade ännu.",
+      "passkey-default-name": "Passkey",
+      "passkey-last-used": "senast använd",
+      "passkey-added": "Passkey tillagd",
+      "passkey-deleted": "Passkey borttagen",
+      "passkey-renamed": "Passkey bytte namn",
+      "passkey-delete-title": "Ta bort passkey",
+      "passkey-delete-description": "Ta bort passkeyn \"{name}\"? Du kan fortfarande logga in med ditt lösenord.",
+      "passkey-rename-title": "Byt namn på passkey",
+      "passkey-name-label": "Namn"
     }
   },
   "tooltip": {

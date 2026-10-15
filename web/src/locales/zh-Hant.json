@@ -44,7 +44,15 @@
     "signups-closed-description": "此實例已停用新帳號註冊。如需存取權限，請聯絡管理員。",
     "signups-closed-title": "已關閉註冊",
     "sso-signup-tip": "使用下方提供者登入以建立帳號。",
-    "welcome-back": "歡迎回來。"
+    "welcome-back": "歡迎回來。",
+    "passkey-signin-failed": "通行密鑰登入失敗。",
+    "passkey-signup-description": "用通行密鑰建立帳戶。之後用裝置的生物辨識或安全金鑰登入，不需要密碼。",
+    "passkey-signup-failed": "通行密鑰註冊失敗。",
+    "sign-in-with-passkey": "使用通行密鑰登入",
+    "sign-up-with-passkey": "使用通行密鑰註冊",
+    "totp-code-label": "一次性驗證碼",
+    "totp-required-description": "@{username} 已啟用雙重驗證。請輸入驗證器應用中的驗證碼（或備用恢復碼）。",
+    "verify-totp": "驗證"
   },
   "calendar": {
     "new-memo-on-day": "在這一天新增備忘錄",
@@ -999,6 +1007,36 @@
       "review-exported": "匯出者",
       "review-memos": "檔案中的備忘錄",
       "review-new": "將建立"
+    },
+    "security": {
+      "title": "安全設定",
+      "description": "雙重驗證和通行密鑰可以保護你的帳號。",
+      "enabled": "已啟用",
+      "disable": "停用",
+      "totp-title": "驗證器應用 (TOTP)",
+      "totp-description": "登入時在密碼之外再要求輸入基於時間的一次性驗證碼。",
+      "enable-totp": "啟用驗證器應用",
+      "totp-scan-description": "用驗證器應用掃描 QR 碼，然後在下方輸入 6 位驗證碼完成確認。",
+      "totp-code-label": "一次性驗證碼",
+      "totp-enabled": "雙重驗證已啟用",
+      "backup-codes-description": "請把這些備用恢復碼保存在安全的地方。如果無法使用驗證器應用，每個恢復碼可使用一次。此頁面關閉後將不再顯示。",
+      "backup-codes-saved": "我已儲存恢復碼",
+      "disable-totp-title": "停用雙重驗證",
+      "disable-totp-description": "輸入驗證器應用中的目前驗證碼（或未使用過的備用恢復碼）以停用雙重驗證。",
+      "totp-disabled": "雙重驗證已停用",
+      "passkey-title": "通行密鑰",
+      "passkey-description": "使用裝置的生物辨識或安全金鑰免密登入。",
+      "add-passkey": "新增通行密鑰",
+      "passkey-empty": "還沒有註冊通行密鑰。",
+      "passkey-default-name": "通行密鑰",
+      "passkey-last-used": "上次使用",
+      "passkey-added": "通行密鑰已新增",
+      "passkey-deleted": "通行密鑰已刪除",
+      "passkey-renamed": "通行密鑰已重新命名",
+      "passkey-delete-title": "刪除通行密鑰",
+      "passkey-delete-description": "刪除通行密鑰「{name}」？你仍可用密碼登入。",
+      "passkey-rename-title": "重新命名通行密鑰",
+      "passkey-name-label": "名稱"
     }
   },
   "space": {

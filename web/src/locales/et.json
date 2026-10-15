@@ -44,7 +44,15 @@
     "signups-closed-description": "Uued kontod on selles eksemplaris keelatud. Kui vajate juurdepääsu, võtke ühendust administraatoriga.",
     "signups-closed-title": "Registreerumine on suletud",
     "sso-signup-tip": "Konto loomiseks logige sisse alloleva teenusepakkujaga.",
-    "welcome-back": "Tere tulemast tagasi."
+    "welcome-back": "Tere tulemast tagasi.",
+    "passkey-signin-failed": "Pääsuvõtmega sisselogimine ebaõnnestus.",
+    "passkey-signup-description": "Loo oma konto pääsuvõtmega. Logid sisse oma seadme biomeetria või turvavõtmega parooli asemel.",
+    "passkey-signup-failed": "Pääsuvõtmega registreerimine ebaõnnestus.",
+    "sign-in-with-passkey": "Logi sisse pääsuvõtmega",
+    "sign-up-with-passkey": "Registreeru pääsuvõtmega",
+    "totp-code-label": "Ühekordne kood",
+    "totp-required-description": "Kasutaja @{username} jaoks on kahefaktoriline autentimine sisse lülitatud. Sisesta kood oma autentimisrakendusest (või varukood).",
+    "verify-totp": "Kinnita"
   },
   "demo": {
     "banner-description": "Muudatused on ajutised ja neid võidakse lähtestada.",
@@ -958,6 +966,36 @@
       "you": "Sina",
       "your-access": "Sinu juurdepääs",
       "your-spaces": "Sinu ruumid"
+    },
+    "security": {
+      "title": "Turvalisus",
+      "description": "Kahefaktoriline autentimine ja pääsuvõtmed kaitsevad sinu kontot.",
+      "enabled": "Lubatud",
+      "disable": "Keela",
+      "totp-title": "Autentimisrakendus (TOTP)",
+      "totp-description": "Nõua sisselogimisel pärast parooli ajapõhist ühekordset koodi.",
+      "enable-totp": "Luba autentimisrakendus",
+      "totp-scan-description": "Skanni QR-kood oma autentimisrakendusega ja kinnitamiseks sisesta alla 6-kohaline kood.",
+      "totp-code-label": "Ühekordne kood",
+      "totp-enabled": "Kahefaktoriline autentimine lubatud",
+      "backup-codes-description": "Salvesta need varukoodid kindlasse kohta. Iga koodi saab kasutada ühe korra, kui kaotad juurdepääsu oma autentimisrakendusele. Neid enam ei näidata.",
+      "backup-codes-saved": "Salvestasin koodid",
+      "disable-totp-title": "Keela kahefaktoriline autentimine",
+      "disable-totp-description": "Kahefaktorilise autentimise keelamiseks sisesta oma autentimisrakendusest praegune kood (või kasutamata varukood).",
+      "totp-disabled": "Kahefaktoriline autentimine keelatud",
+      "passkey-title": "Pääsuvõtmed",
+      "passkey-description": "Logi sisse ilma paroolita oma seadme biomeetria või turvavõtmega.",
+      "add-passkey": "Lisa pääsuvõti",
+      "passkey-empty": "Pääsuvõtmeid pole veel registreeritud.",
+      "passkey-default-name": "Pääsuvõti",
+      "passkey-last-used": "viimati kasutatud",
+      "passkey-added": "Pääsuvõti lisatud",
+      "passkey-deleted": "Pääsuvõti kustutatud",
+      "passkey-renamed": "Pääsuvõti ümber nimetatud",
+      "passkey-delete-title": "Kustuta pääsuvõti",
+      "passkey-delete-description": "Kustuta pääsuvõti \"{name}\"? Saad siiski oma parooliga sisse logida.",
+      "passkey-rename-title": "Nimeta pääsuvõti ümber",
+      "passkey-name-label": "Nimi"
     }
   },
   "tooltip": {

@@ -44,7 +44,15 @@
     "signups-closed-description": "Nye konti er deaktiveret på denne instans. Kontakt din administrator, hvis du har brug for adgang.",
     "signups-closed-title": "Tilmeldinger er lukket",
     "sso-signup-tip": "Log ind med en udbyder nedenfor for at oprette din konto.",
-    "welcome-back": "Velkommen tilbage."
+    "welcome-back": "Velkommen tilbage.",
+    "passkey-signin-failed": "Login med adgangsnøgle mislykkedes.",
+    "passkey-signup-description": "Opret din konto med en adgangsnøgle. Du logger ind med din enheds biometri eller en sikkerhedsnøgle i stedet for en adgangskode.",
+    "passkey-signup-failed": "Oprettelse af konto med adgangsnøgle mislykkedes.",
+    "sign-in-with-passkey": "Log ind med adgangsnøgle",
+    "sign-up-with-passkey": "Opret konto med adgangsnøgle",
+    "totp-code-label": "Engangskode",
+    "totp-required-description": "Tofaktorgodkendelse er aktiveret for @{username}. Indtast koden fra din godkendelsesapp (eller en backupkode).",
+    "verify-totp": "Bekræft"
   },
   "demo": {
     "banner-description": "Ændringer er midlertidige og kan blive nulstillet.",
@@ -958,6 +966,36 @@
       "you": "Dig",
       "your-access": "Din adgang",
       "your-spaces": "Dine rum"
+    },
+    "security": {
+      "title": "Sikkerhed",
+      "description": "Tofaktorgodkendelse og adgangsnøgler beskytter din konto.",
+      "enabled": "Aktiveret",
+      "disable": "Deaktiver",
+      "totp-title": "Godkendelsesapp (TOTP)",
+      "totp-description": "Kræv en tidsbaseret engangskode efter din adgangskode ved login.",
+      "enable-totp": "Aktiver godkendelsesapp",
+      "totp-scan-description": "Scan QR-koden med din godkendelsesapp, og indtast derefter den 6-cifrede kode nedenfor for at bekræfte.",
+      "totp-code-label": "Engangskode",
+      "totp-enabled": "Tofaktorgodkendelse aktiveret",
+      "backup-codes-description": "Gem disse backupkoder et sikkert sted. Hver kode kan bruges én gang, hvis du mister adgangen til din godkendelsesapp. De vises ikke igen.",
+      "backup-codes-saved": "Jeg har gemt koderne",
+      "disable-totp-title": "Deaktiver tofaktorgodkendelse",
+      "disable-totp-description": "Indtast en aktuel kode fra din godkendelsesapp (eller en ubrugt backupkode) for at deaktivere tofaktorgodkendelse.",
+      "totp-disabled": "Tofaktorgodkendelse deaktiveret",
+      "passkey-title": "Adgangsnøgler",
+      "passkey-description": "Log ind uden adgangskode med din enheds biometri eller en sikkerhedsnøgle.",
+      "add-passkey": "Tilføj adgangsnøgle",
+      "passkey-empty": "Ingen adgangsnøgler registreret endnu.",
+      "passkey-default-name": "Adgangsnøgle",
+      "passkey-last-used": "sidst brugt",
+      "passkey-added": "Adgangsnøgle tilføjet",
+      "passkey-deleted": "Adgangsnøgle slettet",
+      "passkey-renamed": "Adgangsnøgle omdøbt",
+      "passkey-delete-title": "Slet adgangsnøgle",
+      "passkey-delete-description": "Slet adgangsnøglen \"{name}\"? Du kan stadig logge ind med din adgangskode.",
+      "passkey-rename-title": "Omdøb adgangsnøgle",
+      "passkey-name-label": "Navn"
     }
   },
   "tooltip": {

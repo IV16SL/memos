@@ -44,7 +44,15 @@
     "signups-closed-description": "New accounts are disabled on this instance. Contact your administrator if you need access.",
     "signups-closed-title": "Sign-ups are closed",
     "sso-signup-tip": "Sign in with a provider below to create your account.",
-    "welcome-back": "Welcome back."
+    "welcome-back": "Welcome back.",
+    "passkey-signin-failed": "Passkey sign-in failed.",
+    "passkey-signup-description": "Create your account with a passkey. You'll sign in with your device's biometrics or security key instead of a password.",
+    "passkey-signup-failed": "Passkey sign-up failed.",
+    "sign-in-with-passkey": "Sign in with passkey",
+    "sign-up-with-passkey": "Sign up with passkey",
+    "totp-code-label": "One-time code",
+    "totp-required-description": "Two-factor authentication is enabled for @{username}. Enter the code from your authenticator app (or a backup code).",
+    "verify-totp": "Verify"
   },
   "common": {
     "about": "About",
@@ -920,6 +928,36 @@
       "you": "You",
       "your-access": "Your access",
       "your-spaces": "Your spaces"
+    },
+    "security": {
+      "title": "Security",
+      "description": "Two-factor authentication and passkeys protect your account.",
+      "enabled": "Enabled",
+      "disable": "Disable",
+      "totp-title": "Authenticator app (TOTP)",
+      "totp-description": "Require a time-based one-time code after your password when signing in.",
+      "enable-totp": "Enable authenticator app",
+      "totp-scan-description": "Scan the QR code with your authenticator app, then enter the 6-digit code below to confirm.",
+      "totp-code-label": "One-time code",
+      "totp-enabled": "Two-factor authentication enabled",
+      "backup-codes-description": "Save these backup codes somewhere safe. Each code can be used once if you lose access to your authenticator app. They will not be shown again.",
+      "backup-codes-saved": "I've saved the codes",
+      "disable-totp-title": "Disable two-factor authentication",
+      "disable-totp-description": "Enter a current code from your authenticator app (or an unused backup code) to disable two-factor authentication.",
+      "totp-disabled": "Two-factor authentication disabled",
+      "passkey-title": "Passkeys",
+      "passkey-description": "Sign in without a password using your device's biometrics or security key.",
+      "add-passkey": "Add passkey",
+      "passkey-empty": "No passkeys registered yet.",
+      "passkey-default-name": "Passkey",
+      "passkey-last-used": "last used",
+      "passkey-added": "Passkey added",
+      "passkey-deleted": "Passkey deleted",
+      "passkey-renamed": "Passkey renamed",
+      "passkey-delete-title": "Delete passkey",
+      "passkey-delete-description": "Delete passkey \"{name}\"? You can still sign in with your password.",
+      "passkey-rename-title": "Rename passkey",
+      "passkey-name-label": "Name"
     }
   },
   "tooltip": {

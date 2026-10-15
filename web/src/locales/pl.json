@@ -44,7 +44,15 @@
     "signups-closed-description": "Nowe konta są wyłączone w tej instancji. Skontaktuj się z administratorem, jeśli potrzebujesz dostępu.",
     "signups-closed-title": "Rejestracja zamknięta",
     "sso-signup-tip": "Zaloguj się u dostawcy poniżej, aby utworzyć konto.",
-    "welcome-back": "Witamy ponownie."
+    "welcome-back": "Witamy ponownie.",
+    "passkey-signin-failed": "Logowanie przy użyciu klucza dostępu nie powiodło się.",
+    "passkey-signup-description": "Utwórz konto przy użyciu klucza dostępu. Będziesz logować się przy użyciu biometrii urządzenia lub klucza bezpieczeństwa zamiast hasła.",
+    "passkey-signup-failed": "Rejestracja przy użyciu klucza dostępu nie powiodła się.",
+    "sign-in-with-passkey": "Zaloguj się kluczem dostępu",
+    "sign-up-with-passkey": "Zarejestruj się kluczem dostępu",
+    "totp-code-label": "Kod jednorazowy",
+    "totp-required-description": "Uwierzytelnianie dwuskładnikowe jest włączone dla @{username}. Wprowadź kod z aplikacji uwierzytelniającej (lub kod zapasowy).",
+    "verify-totp": "Weryfikuj"
   },
   "common": {
     "about": "O nas",
@@ -920,6 +928,36 @@
       "you": "Ty",
       "your-access": "Twój dostęp",
       "your-spaces": "Twoje przestrzenie"
+    },
+    "security": {
+      "title": "Bezpieczeństwo",
+      "description": "Uwierzytelnianie dwuskładnikowe i klucze dostępu chronią Twoje konto.",
+      "enabled": "Włączone",
+      "disable": "Wyłącz",
+      "totp-title": "Aplikacja uwierzytelniająca (TOTP)",
+      "totp-description": "Wymagaj jednorazowego kodu opartego na czasie po haśle podczas logowania.",
+      "enable-totp": "Włącz aplikację uwierzytelniającą",
+      "totp-scan-description": "Zeskanuj kod QR aplikacją uwierzytelniającą, a następnie wprowadź poniżej 6-cyfrowy kod, aby potwierdzić.",
+      "totp-code-label": "Kod jednorazowy",
+      "totp-enabled": "Uwierzytelnianie dwuskładnikowe włączone",
+      "backup-codes-description": "Zapisz te kody zapasowe w bezpiecznym miejscu. Każdy kod może zostać użyty raz, jeśli utracisz dostęp do aplikacji uwierzytelniającej. Nie zostaną wyświetlone ponownie.",
+      "backup-codes-saved": "Zapisałem kody",
+      "disable-totp-title": "Wyłącz uwierzytelnianie dwuskładnikowe",
+      "disable-totp-description": "Wprowadź aktualny kod z aplikacji uwierzytelniającej (lub nieużyty kod zapasowy), aby wyłączyć uwierzytelnianie dwuskładnikowe.",
+      "totp-disabled": "Uwierzytelnianie dwuskładnikowe wyłączone",
+      "passkey-title": "Klucze dostępu",
+      "passkey-description": "Loguj się bez hasła przy użyciu biometrii urządzenia lub klucza bezpieczeństwa.",
+      "add-passkey": "Dodaj klucz dostępu",
+      "passkey-empty": "Nie zarejestrowano jeszcze żadnych kluczy dostępu.",
+      "passkey-default-name": "Klucz dostępu",
+      "passkey-last-used": "ostatnio użyty",
+      "passkey-added": "Klucz dostępu dodany",
+      "passkey-deleted": "Klucz dostępu usunięty",
+      "passkey-renamed": "Zmieniono nazwę klucza dostępu",
+      "passkey-delete-title": "Usuń klucz dostępu",
+      "passkey-delete-description": "Usunąć klucz dostępu \"{name}\"? Nadal będziesz mógł logować się przy użyciu hasła.",
+      "passkey-rename-title": "Zmień nazwę klucza dostępu",
+      "passkey-name-label": "Nazwa"
     }
   },
   "tooltip": {

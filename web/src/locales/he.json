@@ -44,7 +44,15 @@
     "signups-closed-description": "חשבונות חדשים מושבתים במופע הזה. פנו למנהל אם אתם זקוקים לגישה.",
     "signups-closed-title": "ההרשמה סגורה",
     "sso-signup-tip": "התחברו באמצעות ספק למטה כדי ליצור את החשבון שלכם.",
-    "welcome-back": "ברוכים הבאים."
+    "welcome-back": "ברוכים הבאים.",
+    "passkey-signin-failed": "ההתחברות עם מפתח הגישה נכשלה.",
+    "passkey-signup-description": "צרו את החשבון שלכם עם מפתח גישה. תתחברו עם הביומטריה של המכשיר או מפתח אבטחה במקום סיסמה.",
+    "passkey-signup-failed": "ההרשמה עם מפתח הגישה נכשלה.",
+    "sign-in-with-passkey": "התחברות עם מפתח גישה",
+    "sign-up-with-passkey": "הרשמה עם מפתח גישה",
+    "totp-code-label": "קוד חד-פעמי",
+    "totp-required-description": "אימות דו-שלבי מופעל עבור @{username}. הזינו את הקוד מאפליקציית האימות (או קוד גיבוי).",
+    "verify-totp": "אימות"
   },
   "demo": {
     "banner-description": "אתם מוזמנים לסייר! ההדגמה מתאפסת מעת לעת.",
@@ -991,6 +999,36 @@
       "you": "אתה",
       "your-access": "הגישה שלך",
       "your-spaces": "המרחבים שלך"
+    },
+    "security": {
+      "title": "אבטחה",
+      "description": "אימות דו-שלבי ומפתחות גישה מגנים על החשבון שלכם.",
+      "enabled": "מופעל",
+      "disable": "השבתה",
+      "totp-title": "אפליקציית אימות (TOTP)",
+      "totp-description": "דרישת קוד חד-פעמי מבוסס זמן לאחר הסיסמה בעת ההתחברות.",
+      "enable-totp": "הפעלת אפליקציית אימות",
+      "totp-scan-description": "סרקו את קוד ה-QR עם אפליקציית האימות והזינו למטה את הקוד בן 6 הספרות לאישור.",
+      "totp-code-label": "קוד חד-פעמי",
+      "totp-enabled": "אימות דו-שלבי הופעל",
+      "backup-codes-description": "שמרו את קודי הגיבוי האלה במקום בטוח. ניתן להשתמש בכל קוד פעם אחת אם תאבדו גישה לאפליקציית האימות. הם לא יוצגו שוב.",
+      "backup-codes-saved": "שמרתי את הקודים",
+      "disable-totp-title": "השבתת אימות דו-שלבי",
+      "disable-totp-description": "הזינו קוד עדכני מאפליקציית האימות (או קוד גיבוי שלא נעשה בו שימוש) כדי להשבית את האימות הדו-שלבי.",
+      "totp-disabled": "אימות דו-שלבי הושבת",
+      "passkey-title": "מפתחות גישה",
+      "passkey-description": "התחברו ללא סיסמה באמצעות הביומטריה של המכשיר או מפתח אבטחה.",
+      "add-passkey": "הוספת מפתח גישה",
+      "passkey-empty": "עדיין לא נרשמו מפתחות גישה.",
+      "passkey-default-name": "מפתח גישה",
+      "passkey-last-used": "בשימוש אחרון",
+      "passkey-added": "מפתח הגישה נוסף",
+      "passkey-deleted": "מפתח הגישה נמחק",
+      "passkey-renamed": "שם מפתח הגישה שונה",
+      "passkey-delete-title": "מחיקת מפתח גישה",
+      "passkey-delete-description": "למחוק את מפתח הגישה \"{name}\"? עדיין תוכלו להתחבר עם הסיסמה.",
+      "passkey-rename-title": "שינוי שם מפתח הגישה",
+      "passkey-name-label": "שם"
     }
   },
   "tooltip": {

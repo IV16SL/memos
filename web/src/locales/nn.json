@@ -110,7 +110,15 @@
     "signups-closed-description": "Nye kontoar er ikkje tillatne på denne instansen. Ta kontakt med administratoren din dersom du treng åtgang.",
     "signups-closed-title": "Registreringa er stengd",
     "sso-signup-tip": "Logg inn med ein tilbydar nedanfor for å opprette kontoen din.",
-    "welcome-back": "Velkomen attende."
+    "welcome-back": "Velkomen attende.",
+    "passkey-signin-failed": "Innlogging med passkey feila.",
+    "passkey-signup-description": "Opprett kontoen din med ein passkey. Du loggar inn med biometrien til eininga di eller ein tryggingsnøkkel i staden for eit passord.",
+    "passkey-signup-failed": "Registrering med passkey feila.",
+    "sign-in-with-passkey": "Logg inn med passkey",
+    "sign-up-with-passkey": "Registrer deg med passkey",
+    "totp-code-label": "Eingongskode",
+    "totp-required-description": "Tofaktorautentisering er aktivert for @{username}. Skriv inn koden frå autentiseringsappen din (eller ein reservekode).",
+    "verify-totp": "Stadfest"
   },
   "calendar": {
     "new-memo-on-day": "Nytt notat på denne dagen",
@@ -1036,6 +1044,36 @@
       "no-webhooks-found": "Ingen vevkrokar funne.",
       "title": "Vevkrokar",
       "url": "Adresse"
+    },
+    "security": {
+      "title": "Tryggleik",
+      "description": "Tofaktorautentisering og passkeys vernar kontoen din.",
+      "enabled": "Aktivert",
+      "disable": "Deaktiver",
+      "totp-title": "Autentiseringsapp (TOTP)",
+      "totp-description": "Krev ein tidsbasert eingongskode etter passordet ved innlogging.",
+      "enable-totp": "Aktiver autentiseringsapp",
+      "totp-scan-description": "Skann QR-koden med autentiseringsappen din, og skriv deretter inn den 6-sifra koden nedanfor for å stadfeste.",
+      "totp-code-label": "Eingongskode",
+      "totp-enabled": "Tofaktorautentisering aktivert",
+      "backup-codes-description": "Lagre desse reservekodane ein trygg stad. Kvar kode kan brukast éin gong om du mistar tilgangen til autentiseringsappen din. Dei blir ikkje viste igjen.",
+      "backup-codes-saved": "Eg har lagra kodane",
+      "disable-totp-title": "Deaktiver tofaktorautentisering",
+      "disable-totp-description": "Skriv inn ein gjeldande kode frå autentiseringsappen din (eller ein ubrukt reservekode) for å deaktivere tofaktorautentisering.",
+      "totp-disabled": "Tofaktorautentisering deaktivert",
+      "passkey-title": "Passkeys",
+      "passkey-description": "Logg inn utan passord med biometrien til eininga di eller ein tryggingsnøkkel.",
+      "add-passkey": "Legg til passkey",
+      "passkey-empty": "Ingen passkeys registrerte enno.",
+      "passkey-default-name": "Passkey",
+      "passkey-last-used": "sist brukt",
+      "passkey-added": "Passkey lagt til",
+      "passkey-deleted": "Passkey sletta",
+      "passkey-renamed": "Passkey fekk nytt namn",
+      "passkey-delete-title": "Slett passkey",
+      "passkey-delete-description": "Slette passkeyen \"{name}\"? Du kan framleis logge inn med passordet ditt.",
+      "passkey-rename-title": "Gje passkey nytt namn",
+      "passkey-name-label": "Namn"
     }
   },
   "space": {

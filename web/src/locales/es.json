@@ -44,7 +44,15 @@
     "signups-closed-description": "Las nuevas cuentas están deshabilitadas en esta instancia. Póngase en contacto con su administrador si necesita acceso.",
     "signups-closed-title": "Las inscripciones están cerradas",
     "sso-signup-tip": "Inicie sesión con un proveedor a continuación para crear su cuenta.",
-    "welcome-back": "Bienvenido de nuevo."
+    "welcome-back": "Bienvenido de nuevo.",
+    "passkey-signin-failed": "Error al iniciar sesión con clave de acceso.",
+    "passkey-signup-description": "Crea tu cuenta con una clave de acceso. Iniciarás sesión con la biometría de tu dispositivo o una llave de seguridad en lugar de una contraseña.",
+    "passkey-signup-failed": "Error al registrarse con clave de acceso.",
+    "sign-in-with-passkey": "Iniciar sesión con clave de acceso",
+    "sign-up-with-passkey": "Registrarse con clave de acceso",
+    "totp-code-label": "Código de un solo uso",
+    "totp-required-description": "La autenticación en dos pasos está activada para @{username}. Introduce el código de tu aplicación de autenticación (o un código de recuperación).",
+    "verify-totp": "Verificar"
   },
   "common": {
     "about": "Acerca de",
@@ -920,6 +928,36 @@
       "you": "Usted",
       "your-access": "Su acceso",
       "your-spaces": "Sus espacios"
+    },
+    "security": {
+      "title": "Seguridad",
+      "description": "La autenticación en dos pasos y las claves de acceso protegen tu cuenta.",
+      "enabled": "Activado",
+      "disable": "Desactivar",
+      "totp-title": "Aplicación de autenticación (TOTP)",
+      "totp-description": "Requerir un código de un solo uso basado en tiempo después de la contraseña al iniciar sesión.",
+      "enable-totp": "Activar aplicación de autenticación",
+      "totp-scan-description": "Escanea el código QR con tu aplicación de autenticación e introduce el código de 6 dígitos a continuación para confirmar.",
+      "totp-code-label": "Código de un solo uso",
+      "totp-enabled": "Autenticación en dos pasos activada",
+      "backup-codes-description": "Guarda estos códigos de recuperación en un lugar seguro. Cada código se puede usar una vez si pierdes el acceso a tu aplicación de autenticación. No se volverán a mostrar.",
+      "backup-codes-saved": "He guardado los códigos",
+      "disable-totp-title": "Desactivar la autenticación en dos pasos",
+      "disable-totp-description": "Introduce un código actual de tu aplicación de autenticación (o un código de recuperación sin usar) para desactivar la autenticación en dos pasos.",
+      "totp-disabled": "Autenticación en dos pasos desactivada",
+      "passkey-title": "Claves de acceso",
+      "passkey-description": "Inicia sesión sin contraseña con la biometría de tu dispositivo o una llave de seguridad.",
+      "add-passkey": "Añadir clave de acceso",
+      "passkey-empty": "Aún no hay claves de acceso registradas.",
+      "passkey-default-name": "Clave de acceso",
+      "passkey-last-used": "último uso",
+      "passkey-added": "Clave de acceso añadida",
+      "passkey-deleted": "Clave de acceso eliminada",
+      "passkey-renamed": "Clave de acceso renombrada",
+      "passkey-delete-title": "Eliminar clave de acceso",
+      "passkey-delete-description": "¿Eliminar la clave de acceso \"{name}\"? Aún podrás iniciar sesión con tu contraseña.",
+      "passkey-rename-title": "Renombrar clave de acceso",
+      "passkey-name-label": "Nombre"
     }
   },
   "tooltip": {

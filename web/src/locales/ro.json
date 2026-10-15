@@ -44,7 +44,15 @@
     "signups-closed-description": "Conturile noi sunt dezactivate pe această instanță. Contactați administratorul dacă aveți nevoie de acces.",
     "signups-closed-title": "Înscrierile sunt închise",
     "sso-signup-tip": "Conectați-vă cu un furnizor de mai jos pentru a vă crea contul.",
-    "welcome-back": "Bine ați revenit."
+    "welcome-back": "Bine ați revenit.",
+    "passkey-signin-failed": "Autentificarea cu cheia de acces a eșuat.",
+    "passkey-signup-description": "Creați-vă contul cu o cheie de acces. Vă veți autentifica cu datele biometrice ale dispozitivului sau cu o cheie de securitate în locul unei parole.",
+    "passkey-signup-failed": "Înregistrarea cu cheia de acces a eșuat.",
+    "sign-in-with-passkey": "Autentificare cu cheia de acces",
+    "sign-up-with-passkey": "Înregistrare cu cheia de acces",
+    "totp-code-label": "Cod de unică folosință",
+    "totp-required-description": "Autentificarea în doi pași este activată pentru @{username}. Introduceți codul din aplicația de autentificare (sau un cod de rezervă).",
+    "verify-totp": "Verifică"
   },
   "demo": {
     "banner-description": "Modificările sunt temporare și pot fi resetate.",
@@ -958,6 +966,36 @@
       "you": "Dvs.",
       "your-access": "Accesul dvs.",
       "your-spaces": "Spațiile dvs."
+    },
+    "security": {
+      "title": "Securitate",
+      "description": "Autentificarea în doi pași și cheile de acces vă protejează contul.",
+      "enabled": "Activat",
+      "disable": "Dezactivează",
+      "totp-title": "Aplicație de autentificare (TOTP)",
+      "totp-description": "Solicită un cod de unică folosință bazat pe timp după parolă la autentificare.",
+      "enable-totp": "Activează aplicația de autentificare",
+      "totp-scan-description": "Scanați codul QR cu aplicația de autentificare, apoi introduceți codul din 6 cifre de mai jos pentru confirmare.",
+      "totp-code-label": "Cod de unică folosință",
+      "totp-enabled": "Autentificarea în doi pași activată",
+      "backup-codes-description": "Salvați aceste coduri de rezervă într-un loc sigur. Fiecare cod poate fi folosit o dată dacă pierdeți accesul la aplicația de autentificare. Nu vor mai fi afișate.",
+      "backup-codes-saved": "Am salvat codurile",
+      "disable-totp-title": "Dezactivează autentificarea în doi pași",
+      "disable-totp-description": "Introduceți un cod actual din aplicația de autentificare (sau un cod de rezervă neutilizat) pentru a dezactiva autentificarea în doi pași.",
+      "totp-disabled": "Autentificarea în doi pași dezactivată",
+      "passkey-title": "Chei de acces",
+      "passkey-description": "Autentificați-vă fără parolă folosind datele biometrice ale dispozitivului sau o cheie de securitate.",
+      "add-passkey": "Adaugă cheie de acces",
+      "passkey-empty": "Nu există încă chei de acces înregistrate.",
+      "passkey-default-name": "Cheie de acces",
+      "passkey-last-used": "utilizată ultima dată",
+      "passkey-added": "Cheie de acces adăugată",
+      "passkey-deleted": "Cheie de acces ștearsă",
+      "passkey-renamed": "Cheie de acces redenumită",
+      "passkey-delete-title": "Șterge cheia de acces",
+      "passkey-delete-description": "Ștergeți cheia de acces \"{name}\"? Vă puteți autentifica în continuare cu parola.",
+      "passkey-rename-title": "Redenumește cheia de acces",
+      "passkey-name-label": "Nume"
     }
   },
   "tooltip": {

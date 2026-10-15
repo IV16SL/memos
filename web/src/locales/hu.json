@@ -44,7 +44,15 @@
     "signups-closed-description": "Az új fiókok le vannak tiltva ezen a példányon. Hozzáférés esetén forduljon a rendszergazdához.",
     "signups-closed-title": "A regisztráció lezárult.",
     "sso-signup-tip": "Jelentkezzen be az alábbi szolgáltatóval a fiók létrehozásához.",
-    "welcome-back": "Üdvözöljük ismét."
+    "welcome-back": "Üdvözöljük ismét.",
+    "passkey-signin-failed": "A belépés jelkulccsal sikertelen volt.",
+    "passkey-signup-description": "Hozza létre fiókját jelkulccsal. Jelszó helyett eszköze biometrikus azonosításával vagy biztonsági kulccsal fog bejelentkezni.",
+    "passkey-signup-failed": "A regisztráció jelkulccsal sikertelen volt.",
+    "sign-in-with-passkey": "Bejelentkezés jelkulccsal",
+    "sign-up-with-passkey": "Regisztráció jelkulccsal",
+    "totp-code-label": "Egyszeri kód",
+    "totp-required-description": "A(z) @{username} fióknál be van kapcsolva a kétlépcsős hitelesítés. Adja meg a hitelesítő alkalmazás kódját (vagy egy tartalék kódot).",
+    "verify-totp": "Ellenőrzés"
   },
   "common": {
     "about": "Névjegy",
@@ -920,6 +928,36 @@
       "your-spaces": "A terei",
       "delete-confirm-description": "Ez véglegesen törli a teret és a benne elhelyezett jegyzeteket. Ez a művelet nem vonható vissza.",
       "delete-confirm-title": "Törlöd ezt a teret: {{space}}?"
+    },
+    "security": {
+      "title": "Biztonság",
+      "description": "A kétlépcsős hitelesítés és a jelkulcsok védik fiókját.",
+      "enabled": "Bekapcsolva",
+      "disable": "Kikapcsolás",
+      "totp-title": "Hitelesítő alkalmazás (TOTP)",
+      "totp-description": "Bejelentkezéskor a jelszó után időkódos egyszeri kód megkövetelése.",
+      "enable-totp": "Hitelesítő alkalmazás bekapcsolása",
+      "totp-scan-description": "Olvassa be a QR-kódot a hitelesítő alkalmazással, majd a megerősítéshez adja meg alább a 6 jegyű kódot.",
+      "totp-code-label": "Egyszeri kód",
+      "totp-enabled": "Kétlépcsős hitelesítés bekapcsolva",
+      "backup-codes-description": "Mentse ezeket a tartalék kódokat biztonságos helyre. Minden kód egyszer használható fel, ha elveszíti a hozzáférést a hitelesítő alkalmazáshoz. Többé nem jelennek meg.",
+      "backup-codes-saved": "Elmentettem a kódokat",
+      "disable-totp-title": "Kétlépcsős hitelesítés kikapcsolása",
+      "disable-totp-description": "A kétlépcsős hitelesítés kikapcsolásához adja meg a hitelesítő alkalmazás aktuális kódját (vagy egy fel nem használt tartalék kódot).",
+      "totp-disabled": "Kétlépcsős hitelesítés kikapcsolva",
+      "passkey-title": "Jelkulcsok",
+      "passkey-description": "Jelentkezzen be jelszó nélkül eszköze biometrikus azonosításával vagy biztonsági kulccsal.",
+      "add-passkey": "Jelkulcs hozzáadása",
+      "passkey-empty": "Még nincsenek regisztrált jelkulcsok.",
+      "passkey-default-name": "Jelkulcs",
+      "passkey-last-used": "utoljára használva",
+      "passkey-added": "Jelkulcs hozzáadva",
+      "passkey-deleted": "Jelkulcs törölve",
+      "passkey-renamed": "Jelkulcs átnevezve",
+      "passkey-delete-title": "Jelkulcs törlése",
+      "passkey-delete-description": "Törli a(z) \"{name}\" jelkulcsot? Továbbra is bejelentkezhet jelszavával.",
+      "passkey-rename-title": "Jelkulcs átnevezése",
+      "passkey-name-label": "Név"
     }
   },
   "tooltip": {

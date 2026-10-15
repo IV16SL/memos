@@ -44,7 +44,15 @@
     "signups-closed-description": "Nové účty sú v tejto inštancii zakázané. Ak potrebujete prístup, kontaktujte svojho administrátora.",
     "signups-closed-title": "Registrácie sú uzavreté",
     "sso-signup-tip": "Prihláste sa pomocou poskytovateľa nižšie a vytvorte si účet.",
-    "welcome-back": "Vitajte späť."
+    "welcome-back": "Vitajte späť.",
+    "passkey-signin-failed": "Prihlásenie pomocou prístupového kľúča zlyhalo.",
+    "passkey-signup-description": "Vytvorte si účet pomocou prístupového kľúča. Budete sa prihlasovať pomocou biometrických údajov zariadenia alebo bezpečnostného kľúča namiesto hesla.",
+    "passkey-signup-failed": "Registrácia pomocou prístupového kľúča zlyhala.",
+    "sign-in-with-passkey": "Prihlásiť sa prístupovým kľúčom",
+    "sign-up-with-passkey": "Registrovať sa prístupovým kľúčom",
+    "totp-code-label": "Jednorazový kód",
+    "totp-required-description": "Pre účet @{username} je zapnuté dvojfázové overenie. Zadajte kód z overovacej aplikácie (alebo záložný kód).",
+    "verify-totp": "Overiť"
   },
   "demo": {
     "banner-description": "Zmeny sú dočasné a možno ich resetovať.",
@@ -958,6 +966,36 @@
       "you": "Vy",
       "your-access": "Váš prístup",
       "your-spaces": "Vaše priestory"
+    },
+    "security": {
+      "title": "Zabezpečenie",
+      "description": "Dvojfázové overenie a prístupové kľúče chránia váš účet.",
+      "enabled": "Zapnuté",
+      "disable": "Vypnúť",
+      "totp-title": "Overovacia aplikácia (TOTP)",
+      "totp-description": "Pri prihlásení vyžadovať po hesle časovo obmedzený jednorazový kód.",
+      "enable-totp": "Zapnúť overovaciu aplikáciu",
+      "totp-scan-description": "Naskenujte QR kód overovacou aplikáciou a na potvrdenie zadajte nižšie 6-miestny kód.",
+      "totp-code-label": "Jednorazový kód",
+      "totp-enabled": "Dvojfázové overenie zapnuté",
+      "backup-codes-description": "Uložte si tieto záložné kódy na bezpečné miesto. Každý kód možno použiť raz, ak stratíte prístup k overovacej aplikácii. Znova sa už nezobrazia.",
+      "backup-codes-saved": "Kódy som si uložil",
+      "disable-totp-title": "Vypnúť dvojfázové overenie",
+      "disable-totp-description": "Zadajte aktuálny kód z overovacej aplikácie (alebo nepoužitý záložný kód) na vypnutie dvojfázového overenia.",
+      "totp-disabled": "Dvojfázové overenie vypnuté",
+      "passkey-title": "Prístupové kľúče",
+      "passkey-description": "Prihlasujte sa bez hesla pomocou biometrických údajov zariadenia alebo bezpečnostného kľúča.",
+      "add-passkey": "Pridať prístupový kľúč",
+      "passkey-empty": "Zatiaľ nie sú zaregistrované žiadne prístupové kľúče.",
+      "passkey-default-name": "Prístupový kľúč",
+      "passkey-last-used": "naposledy použitý",
+      "passkey-added": "Prístupový kľúč pridaný",
+      "passkey-deleted": "Prístupový kľúč odstránený",
+      "passkey-renamed": "Prístupový kľúč premenovaný",
+      "passkey-delete-title": "Odstrániť prístupový kľúč",
+      "passkey-delete-description": "Odstrániť prístupový kľúč \"{name}\"? Stále sa budete môcť prihlasovať heslom.",
+      "passkey-rename-title": "Premenovať prístupový kľúč",
+      "passkey-name-label": "Názov"
     }
   },
   "tooltip": {

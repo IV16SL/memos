@@ -9,6 +9,7 @@ import AuthPageLayout, { AuthChip, AuthEmptyState, AuthLinkPrompt, AuthOptionsLo
 import ChallengeWidget, { CHALLENGE_TOKEN_HEADER } from "@/components/ChallengeWidget";
 import CredentialFields from "@/components/CredentialFields";
 import IdentityProviderButtons from "@/components/IdentityProviderButtons";
+import PasskeySignupButton from "@/components/PasskeySignupButton";
 import { Button } from "@/components/ui/button";
 import { authServiceClient, userServiceClient } from "@/connect";
 import { useAuth } from "@/contexts/AuthContext";
@@ -186,6 +187,9 @@ const SignUp = () => {
   return (
     <AuthPageLayout title={t("auth.create-your-account")}>
       {signUpForm}
+      <div className="mt-4">
+        <PasskeySignupButton username={username} redirectPath={redirectTarget} />
+      </div>
       {signInPrompt}
     </AuthPageLayout>
   );

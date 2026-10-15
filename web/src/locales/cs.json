@@ -44,7 +44,15 @@
     "signups-closed-description": "Nové účty jsou v této instanci zakázány. Pokud potřebujete přístup, obraťte se na administrátora.",
     "signups-closed-title": "Registrace jsou uzavřeny",
     "sso-signup-tip": "Přihlaste se k níže uvedenému poskytovateli a vytvořte si účet.",
-    "welcome-back": "Vítejte zpět."
+    "welcome-back": "Vítejte zpět.",
+    "passkey-signin-failed": "Přihlášení pomocí přístupového klíče se nezdařilo.",
+    "passkey-signup-description": "Vytvořte si účet pomocí přístupového klíče. Budete se přihlašovat pomocí biometrických údajů zařízení nebo bezpečnostního klíče místo hesla.",
+    "passkey-signup-failed": "Registrace pomocí přístupového klíče se nezdařila.",
+    "sign-in-with-passkey": "Přihlásit se přístupovým klíčem",
+    "sign-up-with-passkey": "Registrovat se přístupovým klíčem",
+    "totp-code-label": "Jednorázový kód",
+    "totp-required-description": "Pro účet @{username} je zapnuto dvoufázové ověření. Zadejte kód z ověřovací aplikace (nebo záložní kód).",
+    "verify-totp": "Ověřit"
   },
   "common": {
     "about": "O aplikaci",
@@ -920,6 +928,36 @@
       "you": "Vy",
       "your-access": "Váš přístup",
       "your-spaces": "Vaše prostory"
+    },
+    "security": {
+      "title": "Zabezpečení",
+      "description": "Dvoufázové ověření a přístupové klíče chrání váš účet.",
+      "enabled": "Zapnuto",
+      "disable": "Vypnout",
+      "totp-title": "Ověřovací aplikace (TOTP)",
+      "totp-description": "Při přihlášení vyžadovat po hesle časově omezený jednorázový kód.",
+      "enable-totp": "Zapnout ověřovací aplikaci",
+      "totp-scan-description": "Naskenujte QR kód ověřovací aplikací a pro potvrzení zadejte níže 6místný kód.",
+      "totp-code-label": "Jednorázový kód",
+      "totp-enabled": "Dvoufázové ověření zapnuto",
+      "backup-codes-description": "Uložte si tyto záložní kódy na bezpečné místo. Každý kód lze použít jednou, pokud ztratíte přístup k ověřovací aplikaci. Znovu se již nezobrazí.",
+      "backup-codes-saved": "Kódy jsem si uložil",
+      "disable-totp-title": "Vypnout dvoufázové ověření",
+      "disable-totp-description": "Zadejte aktuální kód z ověřovací aplikace (nebo nepoužitý záložní kód) pro vypnutí dvoufázového ověření.",
+      "totp-disabled": "Dvoufázové ověření vypnuto",
+      "passkey-title": "Přístupové klíče",
+      "passkey-description": "Přihlašujte se bez hesla pomocí biometrických údajů zařízení nebo bezpečnostního klíče.",
+      "add-passkey": "Přidat přístupový klíč",
+      "passkey-empty": "Zatím nejsou registrovány žádné přístupové klíče.",
+      "passkey-default-name": "Přístupový klíč",
+      "passkey-last-used": "naposledy použit",
+      "passkey-added": "Přístupový klíč přidán",
+      "passkey-deleted": "Přístupový klíč odstraněn",
+      "passkey-renamed": "Přístupový klíč přejmenován",
+      "passkey-delete-title": "Odstranit přístupový klíč",
+      "passkey-delete-description": "Odstranit přístupový klíč \"{name}\"? Stále se budete moci přihlašovat heslem.",
+      "passkey-rename-title": "Přejmenovat přístupový klíč",
+      "passkey-name-label": "Název"
     }
   },
   "tooltip": {

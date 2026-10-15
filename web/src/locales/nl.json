@@ -44,7 +44,15 @@
     "signups-closed-description": "Nieuwe accounts zijn uitgeschakeld op deze instantie. Neem contact op met uw beheerder als u toegang nodig hebt.",
     "signups-closed-title": "Aanmelden is gesloten",
     "sso-signup-tip": "Meld u hieronder aan met een provider om uw account aan te maken.",
-    "welcome-back": "Welkom terug."
+    "welcome-back": "Welkom terug.",
+    "passkey-signin-failed": "Inloggen met passkey mislukt.",
+    "passkey-signup-description": "Maak je account aan met een passkey. Je logt in met de biometrie van je apparaat of een beveiligingssleutel in plaats van een wachtwoord.",
+    "passkey-signup-failed": "Registreren met passkey mislukt.",
+    "sign-in-with-passkey": "Inloggen met passkey",
+    "sign-up-with-passkey": "Registreren met passkey",
+    "totp-code-label": "Eenmalige code",
+    "totp-required-description": "Tweefactorauthenticatie is ingeschakeld voor @{username}. Voer de code uit je authenticator-app in (of een back-upcode).",
+    "verify-totp": "Verifiëren"
   },
   "common": {
     "about": "Over",
@@ -920,6 +928,36 @@
       "you": "Jij",
       "your-access": "Jouw toegang",
       "your-spaces": "Jouw ruimtes"
+    },
+    "security": {
+      "title": "Beveiliging",
+      "description": "Tweefactorauthenticatie en passkeys beschermen je account.",
+      "enabled": "Ingeschakeld",
+      "disable": "Uitschakelen",
+      "totp-title": "Authenticator-app (TOTP)",
+      "totp-description": "Vereis bij het inloggen na je wachtwoord een tijdgebaseerde eenmalige code.",
+      "enable-totp": "Authenticator-app inschakelen",
+      "totp-scan-description": "Scan de QR-code met je authenticator-app en voer hieronder de 6-cijferige code in ter bevestiging.",
+      "totp-code-label": "Eenmalige code",
+      "totp-enabled": "Tweefactorauthenticatie ingeschakeld",
+      "backup-codes-description": "Bewaar deze back-upcodes op een veilige plek. Elke code kan één keer worden gebruikt als je de toegang tot je authenticator-app verliest. Ze worden niet opnieuw getoond.",
+      "backup-codes-saved": "Ik heb de codes opgeslagen",
+      "disable-totp-title": "Tweefactorauthenticatie uitschakelen",
+      "disable-totp-description": "Voer een actuele code uit je authenticator-app in (of een ongebruikte back-upcode) om tweefactorauthenticatie uit te schakelen.",
+      "totp-disabled": "Tweefactorauthenticatie uitgeschakeld",
+      "passkey-title": "Passkeys",
+      "passkey-description": "Log in zonder wachtwoord met de biometrie van je apparaat of een beveiligingssleutel.",
+      "add-passkey": "Passkey toevoegen",
+      "passkey-empty": "Nog geen passkeys geregistreerd.",
+      "passkey-default-name": "Passkey",
+      "passkey-last-used": "laatst gebruikt",
+      "passkey-added": "Passkey toegevoegd",
+      "passkey-deleted": "Passkey verwijderd",
+      "passkey-renamed": "Passkey hernoemd",
+      "passkey-delete-title": "Passkey verwijderen",
+      "passkey-delete-description": "Passkey \"{name}\" verwijderen? Je kunt nog steeds inloggen met je wachtwoord.",
+      "passkey-rename-title": "Passkey hernoemen",
+      "passkey-name-label": "Naam"
     }
   },
   "tooltip": {

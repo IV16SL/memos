@@ -44,7 +44,15 @@
     "signups-closed-description": "Šajā instancē ir atspējoti jauni konti. Ja nepieciešama piekļuve, sazinieties ar administratoru.",
     "signups-closed-title": "Reģistrācija ir slēgta",
     "sso-signup-tip": "Pierakstieties, izmantojot tālāk norādīto pakalpojumu sniedzēju, lai izveidotu savu kontu.",
-    "welcome-back": "Laipni lūdzam atpakaļ."
+    "welcome-back": "Laipni lūdzam atpakaļ.",
+    "passkey-signin-failed": "Pieteikšanās ar piekļuves atslēgu neizdevās.",
+    "passkey-signup-description": "Izveidojiet savu kontu ar piekļuves atslēgu. Pieteiksieties ar savas ierīces biometriju vai drošības atslēgu, nevis paroli.",
+    "passkey-signup-failed": "Reģistrēšanās ar piekļuves atslēgu neizdevās.",
+    "sign-in-with-passkey": "Pieteikties ar piekļuves atslēgu",
+    "sign-up-with-passkey": "Reģistrēties ar piekļuves atslēgu",
+    "totp-code-label": "Vienreizējais kods",
+    "totp-required-description": "Lietotājam @{username} ir iespējota divfaktoru autentifikācija. Ievadiet kodu no savas autentifikācijas lietotnes (vai rezerves kodu).",
+    "verify-totp": "Apstiprināt"
   },
   "demo": {
     "banner-description": "Izmaiņas ir īslaicīgas un var tikt atiestatītas.",
@@ -958,6 +966,36 @@
       "you": "Jūs",
       "your-access": "Jūsu piekļuve",
       "your-spaces": "Jūsu telpas"
+    },
+    "security": {
+      "title": "Drošība",
+      "description": "Divfaktoru autentifikācija un piekļuves atslēgas aizsargā jūsu kontu.",
+      "enabled": "Iespējots",
+      "disable": "Atspējot",
+      "totp-title": "Autentifikācijas lietotne (TOTP)",
+      "totp-description": "Piesakoties pēc paroles pieprasīt uz laiku balstītu vienreizējo kodu.",
+      "enable-totp": "Iespējot autentifikācijas lietotni",
+      "totp-scan-description": "Skenējiet QR kodu ar savu autentifikācijas lietotni, pēc tam apstiprināšanai ievadiet 6 ciparu kodu zemāk.",
+      "totp-code-label": "Vienreizējais kods",
+      "totp-enabled": "Divfaktoru autentifikācija iespējota",
+      "backup-codes-description": "Saglabājiet šos rezerves kodus drošā vietā. Katru kodu var izmantot vienu reizi, ja zaudējat piekļuvi savai autentifikācijas lietotnei. Tie vairs netiks rādīti.",
+      "backup-codes-saved": "Esmu saglabājis kodus",
+      "disable-totp-title": "Atspējot divfaktoru autentifikāciju",
+      "disable-totp-description": "Ievadiet pašreizējo kodu no savas autentifikācijas lietotnes (vai neizmantotu rezerves kodu), lai atspējotu divfaktoru autentifikāciju.",
+      "totp-disabled": "Divfaktoru autentifikācija atspējota",
+      "passkey-title": "Piekļuves atslēgas",
+      "passkey-description": "Piesakieties bez paroles, izmantojot savas ierīces biometriju vai drošības atslēgu.",
+      "add-passkey": "Pievienot piekļuves atslēgu",
+      "passkey-empty": "Pagaidām nav reģistrētu piekļuves atslēgu.",
+      "passkey-default-name": "Piekļuves atslēga",
+      "passkey-last-used": "pēdējo reizi izmantota",
+      "passkey-added": "Piekļuves atslēga pievienota",
+      "passkey-deleted": "Piekļuves atslēga dzēsta",
+      "passkey-renamed": "Piekļuves atslēga pārdēvēta",
+      "passkey-delete-title": "Dzēst piekļuves atslēgu",
+      "passkey-delete-description": "Dzēst piekļuves atslēgu \"{name}\"? Jūs joprojām varēsiet pieteikties ar savu paroli.",
+      "passkey-rename-title": "Pārdēvēt piekļuves atslēgu",
+      "passkey-name-label": "Nosaukums"
     }
   },
   "tooltip": {
