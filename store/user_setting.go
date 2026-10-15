@@ -674,6 +674,18 @@ func convertUserSettingFromRaw(raw *UserSetting) (*storepb.UserSetting, error) {
 			return nil, err
 		}
 		userSetting.Value = &storepb.UserSetting_Webhooks{Webhooks: webhooksUserSetting}
+	case storepb.UserSetting_TOTP:
+		totpUserSetting := &storepb.TotpUserSetting{}
+		if err := protojsonUnmarshaler.Unmarshal([]byte(raw.Value), totpUserSetting); err != nil {
+			return nil, err
+		}
+		userSetting.Value = &storepb.UserSetting_Totp{Totp: totpUserSetting}
+	case storepb.UserSetting_PASSKEYS:
+		passkeysUserSetting := &storepb.PasskeysUserSetting{}
+		if err := protojsonUnmarshaler.Unmarshal([]byte(raw.Value), passkeysUserSetting); err != nil {
+			return nil, err
+		}
+		userSetting.Value = &storepb.UserSetting_Passkeys{Passkeys: passkeysUserSetting}
 	default:
 		return nil, nil
 	}
@@ -725,6 +737,20 @@ func convertUserSettingToRaw(userSetting *storepb.UserSetting) (*UserSetting, er
 	case storepb.UserSetting_WEBHOOKS:
 		webhooksUserSetting := userSetting.GetWebhooks()
 		value, err := protojson.Marshal(webhooksUserSetting)
+		if err != nil {
+			return nil, err
+		}
+		raw.Value = string(value)
+	case storepb.UserSetting_TOTP:
+		totpUserSetting := userSetting.GetTotp()
+		value, err := protojson.Marshal(totpUserSetting)
+		if err != nil {
+			return nil, err
+		}
+		raw.Value = string(value)
+	case storepb.UserSetting_PASSKEYS:
+		passkeysUserSetting := userSetting.GetPasskeys()
+		value, err := protojson.Marshal(passkeysUserSetting)
 		if err != nil {
 			return nil, err
 		}
