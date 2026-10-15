@@ -52,6 +52,7 @@ func (s *APIService) GetCurrentUser(ctx context.Context, _ *apipb.GetCurrentUser
 // Returns: User info, access token, and token expiry.
 func (s *APIService) SignIn(ctx context.Context, request *apipb.SignInRequest) (*apipb.SignInResponse, error) {
 	var existingUser *store.User
+	usedPasswordAuth := false
 
 	// Rate limits run before any lookup or hashing so a flood costs nothing.
 	// Each attempt reserves its units up front, so concurrent attempts cannot
@@ -65,8 +66,7 @@ func (s *APIService) SignIn(ctx context.Context, request *apipb.SignInRequest) (
 	}
 
 	// Authentication Method 1: Password-based authentication
-	if passwordCredentials := request.GetPasswordCredentials(); passwordCredentials != nil {
-		if err := s.requireChallenge(ctx, ratelimit.ScopeSignInIP); err != nil {
+	if passwordCredentials := request.GetPasswordCredentials(); passwordCredentials != nil {		if err := s.requireChallenge(ctx, ratelimit.ScopeSignInIP); err != nil {
 			attempt.succeeded()
 			return nil, err
 		}
@@ -95,6 +95,7 @@ func (s *APIService) SignIn(ctx context.Context, request *apipb.SignInRequest) (
 			return nil, status.Errorf(codes.PermissionDenied, "password signin is not allowed")
 		}
 		existingUser = user
+		usedPasswordAuth = true
 	} else if ssoCredentials := request.GetSsoCredentials(); ssoCredentials != nil {
 		// Authentication Method 2: SSO (OAuth2) authentication
 		identityProvider, userInfo, err := s.resolveSSOIdentity(ctx, ssoCredentials.IdentityProvider, ssoCredentials.Code, ssoCredentials.RedirectUri, ssoCredentials.CodeVerifier)
@@ -122,22 +123,25 @@ func (s *APIService) SignIn(ctx context.Context, request *apipb.SignInRequest) (
 		return nil, status.Errorf(codes.PermissionDenied, "user has been archived with username %s", existingUser.Username)
 	}
 
-	// TOTP second factor: when enabled, the password/SSO credential alone is
-	// not enough. Return a sealed pending token instead of issuing tokens.
-	totpSetting, err := s.getUserTOTPSetting(ctx, existingUser.ID)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "failed to get TOTP setting: %v", err)
-	}
-	if totpSetting != nil {
-		pendingToken, err := s.sealTOTPLogin(existingUser.ID)
+	// TOTP second factor: only password sign-in is gated. SSO already
+	// delegated authentication to the identity provider, so a TOTP step
+	// would only add friction on top of whatever MFA the provider enforces.
+	if usedPasswordAuth {
+		totpSetting, err := s.getUserTOTPSetting(ctx, existingUser.ID)
 		if err != nil {
-			return nil, status.Errorf(codes.Internal, "failed to seal pending login: %v", err)
+			return nil, status.Errorf(codes.Internal, "failed to get TOTP setting: %v", err)
 		}
-		return &apipb.SignInResponse{
-			User:             convertUserFromStore(existingUser, existingUser),
-			TotpRequired:     true,
-			TotpPendingToken: pendingToken,
-		}, nil
+		if totpSetting != nil {
+			pendingToken, err := s.sealTOTPLogin(existingUser.ID)
+			if err != nil {
+				return nil, status.Errorf(codes.Internal, "failed to seal pending login: %v", err)
+			}
+			return &apipb.SignInResponse{
+				User:             convertUserFromStore(existingUser, existingUser),
+				TotpRequired:     true,
+				TotpPendingToken: pendingToken,
+			}, nil
+		}
 	}
 
 	accessToken, accessExpiresAt, err := s.doSignIn(ctx, existingUser)
