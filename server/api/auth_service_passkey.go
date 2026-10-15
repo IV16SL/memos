@@ -306,7 +306,7 @@ func (s *APIService) BeginPasskeyRegistration(ctx context.Context, _ *apipb.Begi
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to begin registration: %v", err)
 	}
-	optionsJSON, err := json.Marshal(creation)
+	optionsJSON, err := json.Marshal(creation.Response)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to marshal options: %v", err)
 	}
@@ -510,7 +510,7 @@ func (s *APIService) BeginPasskeyLogin(ctx context.Context, _ *apipb.BeginPasske
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to begin login: %v", err)
 	}
-	optionsJSON, err := json.Marshal(assertion)
+	optionsJSON, err := json.Marshal(assertion.Response)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to marshal options: %v", err)
 	}
@@ -698,7 +698,7 @@ func (s *APIService) BeginPasskeySignup(ctx context.Context, request *apipb.Begi
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to begin registration: %v", err)
 	}
-	optionsJSON, err := json.Marshal(creation)
+	optionsJSON, err := json.Marshal(creation.Response)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to marshal options: %v", err)
 	}

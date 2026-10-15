@@ -1,9 +1,12 @@
 package api
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/go-webauthn/webauthn/webauthn"
+
+	"github.com/usememos/memos/store"
 )
 
 func testPasskeySvc() *APIService {
@@ -94,5 +97,63 @@ func TestEncodeDecodePasskeyUserID(t *testing.T) {
 	}
 	if _, err := decodePasskeyUserID([]byte{1, 2, 3}); err == nil {
 		t.Fatal("expected error for short user handle")
+	}
+}
+
+// TestPasskeyOptionsShape guards the wire format that @simplewebauthn/browser
+// expects: the marshaled options must be the flat
+// PublicKeyCredentialCreationOptions / PublicKeyCredentialRequestOptions
+// object (top-level challenge), NOT wrapped in {"publicKey": ...}.
+// Marshaling protocol.CredentialCreation / protocol.CredentialAssertion
+// directly nests everything under "publicKey", which makes simplewebauthn
+// throw "Cannot read properties of undefined (reading 'replace')".
+func TestPasskeyOptionsShape(t *testing.T) {
+	w, err := webauthn.New(&webauthn.Config{
+		RPID:          "example.com",
+		RPDisplayName: "memos",
+		RPOrigins:     []string{"https://example.com"},
+	})
+	if err != nil {
+		t.Fatalf("webauthn.New: %v", err)
+	}
+	user := &passkeyUser{user: &store.User{ID: 1, Username: "alice"}, credentials: []webauthn.Credential{{ID: []byte{0x01}}}}
+
+	creation, _, err := w.BeginRegistration(user)
+	if err != nil {
+		t.Fatalf("BeginRegistration: %v", err)
+	}
+	var regShape map[string]any
+	if err := json.Unmarshal(mustMarshal(t, creation.Response), &regShape); err != nil {
+		t.Fatalf("unmarshal registration options: %v", err)
+	}
+	assertTopLevelChallenge(t, regShape, "registration")
+
+	assertion, _, err := w.BeginLogin(user)
+	if err != nil {
+		t.Fatalf("BeginLogin: %v", err)
+	}
+	var loginShape map[string]any
+	if err := json.Unmarshal(mustMarshal(t, assertion.Response), &loginShape); err != nil {
+		t.Fatalf("unmarshal login options: %v", err)
+	}
+	assertTopLevelChallenge(t, loginShape, "login")
+}
+
+func mustMarshal(t *testing.T, v any) []byte {
+	t.Helper()
+	b, err := json.Marshal(v)
+	if err != nil {
+		t.Fatalf("marshal: %v", err)
+	}
+	return b
+}
+
+func assertTopLevelChallenge(t *testing.T, shape map[string]any, what string) {
+	t.Helper()
+	if _, ok := shape["challenge"]; !ok {
+		t.Fatalf("%s options: missing top-level challenge", what)
+	}
+	if _, ok := shape["publicKey"]; ok {
+		t.Fatalf("%s options: must not be wrapped in publicKey", what)
 	}
 }

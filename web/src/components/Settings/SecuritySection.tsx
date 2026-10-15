@@ -236,20 +236,6 @@ function TOTPSetupDialog({
   const [loading, setLoading] = useState(false);
 
   const handleOpenChange = (next: boolean) => {
-    if (next && !otpauthUrl) {
-      setLoading(true);
-      authServiceClient
-        .beginTOTPSetup({})
-        .then((res) => {
-          setOtpauthUrl(res.otpauthUrl);
-          setSecret(res.secret);
-        })
-        .catch((error) => {
-          handleError(error, toast.error, { context: "Begin TOTP setup" });
-          onOpenChange(false);
-        })
-        .finally(() => setLoading(false));
-    }
     if (!next) {
       // Reset state when closed, unless backup codes are being shown.
       if (backupCodes.length === 0) {
@@ -260,6 +246,26 @@ function TOTPSetupDialog({
     }
     onOpenChange(next);
   };
+
+  // Start enrollment when the dialog opens. This cannot live in
+  // handleOpenChange: Radix does not fire onOpenChange for programmatic
+  // opens (parent flipping the controlled `open` prop), only for
+  // user-initiated closes (X, overlay, Escape).
+  useEffect(() => {
+    if (!open || otpauthUrl || backupCodes.length > 0) return;
+    setLoading(true);
+    authServiceClient
+      .beginTOTPSetup({})
+      .then((res) => {
+        setOtpauthUrl(res.otpauthUrl);
+        setSecret(res.secret);
+      })
+      .catch((error) => {
+        handleError(error, toast.error, { context: "Begin TOTP setup" });
+        onOpenChange(false);
+      })
+      .finally(() => setLoading(false));
+  }, [open]);
 
   const handleConfirm = async () => {
     if (!code) return;
