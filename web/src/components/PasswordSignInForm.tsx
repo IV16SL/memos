@@ -115,7 +115,7 @@ function PasswordSignInForm({ redirectPath }: PasswordSignInFormProps) {
             id="signin-totp-code"
             type="text"
             inputMode="numeric"
-            placeholder="123456"
+            placeholder="XXXXXX"
             value={totpCode}
             autoComplete="one-time-code"
             autoCapitalize="off"

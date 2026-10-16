@@ -396,7 +396,7 @@ function TOTPDisableDialog({
               id="totp-disable-code"
               inputMode="numeric"
               autoComplete="one-time-code"
-              placeholder="123456"
+              placeholder="XXXXXX"
               value={code}
               onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 8))}
             />
