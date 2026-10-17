@@ -14,6 +14,7 @@ interface TaskListChildProps {
     };
   };
   type?: string;
+  checked?: boolean;
 }
 
 const isCheckboxInput = (child: ReactNode): child is ReactElement<TaskListChildProps> => {
@@ -115,12 +116,17 @@ export const ListItem = ({ children, className, node: _node, ...domProps }: List
 
   if (isTaskListItem) {
     const { checkbox, content } = splitTaskListItemChildren(children);
+    // remark-gfm marks completed tasks with checked on the checkbox element;
+    // strike through the text when the task is done.
+    const isChecked = isValidElement<TaskListChildProps>(checkbox) && checkbox.props.checked === true;
 
     return (
       <li className={cn(markdownStyles.taskListItem, className)} {...domProps}>
         <NestedMarkdownRenderContext>
           {checkbox}
-          <div className={markdownStyles.taskItemContent}>{content}</div>
+          <div className={cn(markdownStyles.taskItemContent, isChecked && "text-muted-foreground line-through decoration-muted-foreground/60")}>
+            {content}
+          </div>
         </NestedMarkdownRenderContext>
       </li>
     );

@@ -78,4 +78,13 @@ describe("memo content lists", () => {
       '<div class="min-w-0 [overflow-wrap:anywhere] [&amp;&gt;*:last-child]:mb-0"> Northern Lights in Iceland — booking this for winter, <em>finally</em></div>',
     );
   });
+
+  it("strikes through the text of completed tasks only", () => {
+    const html = renderListContent("- [x] done task\n- [ ] open task");
+
+    const strikeMatches = html.match(/line-through/g) ?? [];
+    expect(strikeMatches).toHaveLength(1);
+    expect(html).toMatch(/<div class="[^"]*line-through[^"]*"> done task<\/div>/);
+    expect(html).toMatch(/<div class="[^"]*"> open task<\/div>/);
+  });
 });
