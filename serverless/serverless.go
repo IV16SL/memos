@@ -38,11 +38,18 @@ func envOr(key, fallback string) string {
 func NewHTTPHandler() (http.Handler, error) {
 	dataDir := envOr("MEMOS_DATA", "/tmp/memos-data")
 	// Vercel's synthetic Go build has no VCS metadata, so GetCurrentVersion()
-	// returns "". The web-clipper (and other clients) reject an empty version,
-	// so fall back to the calendar version of this fork.
+	// returns "" and version.Commit stays "unknown". The web-clipper (and other
+	// clients) reject an empty version, so fall back to the calendar version
+	// of this fork. Vercel exposes the deployment's commit SHA to the function
+	// at runtime via VERCEL_GIT_COMMIT_SHA, so the About page can still show
+	// the build commit chip.
 	ver := version.GetCurrentVersion()
 	if ver == "" {
 		ver = "26.10"
+	}
+	commit := version.Commit
+	if commit == "" || commit == "unknown" {
+		commit = envOr("VERCEL_GIT_COMMIT_SHA", commit)
 	}
 	p := &profile.Profile{
 		Driver:         envOr("MEMOS_DRIVER", "postgres"),
@@ -52,7 +59,7 @@ func NewHTTPHandler() (http.Handler, error) {
 		RateLimit:      true,
 		TrustedProxies: []string{"private"},
 		Version:        ver,
-		Commit:         version.Commit,
+		Commit:         commit,
 	}
 	if err := p.Validate(); err != nil {
 		return nil, fmt.Errorf("invalid profile: %w", err)
