@@ -27,7 +27,7 @@ function MemosLogo(props: Props) {
   const customLogoUrl = instanceGeneralSetting.customProfile?.logoUrl;
 
   return (
-    <div className={cn("relative min-w-0 h-auto", props.className)}>
+    <div className={cn("memos-logo relative min-w-0 h-auto", props.className)}>
       <div
         className={cn(
           "flex min-w-0 flex-row items-center justify-start text-foreground",

@@ -39,6 +39,19 @@
 }
 
 @layer components {
+  /* Brand mark hover flourish (mirrors upstream's memos-mark treatment):
+     the glyph lifts 1px and tilts 6° counter-clockwise on hover/focus. */
+  @media (prefers-reduced-motion: no-preference) {
+    .memos-logo .huan-mark {
+      transition: transform 180ms ease-out;
+    }
+
+    .memos-brand-trigger:is(:hover, :focus-visible) .huan-mark,
+    .memos-logo:hover .huan-mark {
+      transform: translateY(-1px) rotate(-6deg);
+    }
+  }
+
   /* Amap dark mode: Amap publishes no dark tile style, approximate with a filter. */
   .amap-tiles-dark {
     filter: brightness(0.65) invert(0.92) contrast(0.9) hue-rotate(180deg) saturate(0.35);

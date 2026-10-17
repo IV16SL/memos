@@ -101,7 +101,7 @@ function SpaceSwitcher({ className, size = "md" }: { className?: string; size?: 
           aria-label={`${t("space.switch")}: ${triggerLabel}`}
           title={triggerLabel}
           className={cn(
-            "text-start transition-colors hover:bg-sidebar-accent/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/40",
+            "memos-brand-trigger text-start transition-colors hover:bg-sidebar-accent/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/40",
             sidebarSurfaceVariants({ role: size === "header" ? "headerBrand" : "mobileBrand" }),
             className,
           )}
