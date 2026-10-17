@@ -39,15 +39,16 @@
 }
 
 @layer components {
-  /* Brand mark hover flourish (mirrors upstream's memos-mark treatment):
-     the glyph lifts 1px and tilts 6° counter-clockwise on hover/focus. */
+  /* Brand mark tilt follows the Space menu open state: tilted while the menu is
+     open (selected), springs back with a transition when it closes. Driven by
+     Base UI's data-popup-open (not :hover/:focus-visible, which can linger after
+     touch taps or menu close and leave the mark stuck tilted). */
   @media (prefers-reduced-motion: no-preference) {
     .memos-logo .huan-mark {
       transition: transform 180ms ease-out;
     }
 
-    .memos-brand-trigger:is(:hover, :focus-visible) .huan-mark,
-    .memos-logo:hover .huan-mark {
+    .memos-brand-trigger[data-popup-open] .huan-mark {
       transform: translateY(-1px) rotate(-6deg);
     }
   }

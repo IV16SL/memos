@@ -1,4 +1,5 @@
 import { BookOpenIcon, CodeXmlIcon, ExternalLinkIcon, GitForkIcon, GlobeIcon, HeartIcon, ScissorsIcon } from "lucide-react";
+import { HuanMark } from "@/components/HuanMark";
 import { Badge } from "@/components/ui/badge";
 import { useInstance } from "@/contexts/InstanceContext";
 import {
@@ -15,7 +16,6 @@ const GITHUB_COMMIT_URL_PREFIX = "https://github.com/usememos/memos/commit/";
 const GITHUB_RELEASE_URL_PREFIX = "https://github.com/usememos/memos/releases/tag/";
 
 const DEFAULT_TITLE = "Memos";
-const DEFAULT_LOGO = "/logo.webp";
 
 const isCommitSha = (commit: string) => /^[0-9a-f]{7,40}$/i.test(commit);
 
@@ -46,7 +46,7 @@ const About = () => {
 
   const customProfile = generalSetting.customProfile;
   const instanceTitle = customProfile?.title || DEFAULT_TITLE;
-  const instanceLogo = customProfile?.logoUrl || DEFAULT_LOGO;
+  const customLogoUrl = customProfile?.logoUrl;
   const isCustomBranded = instanceTitle !== DEFAULT_TITLE;
 
   const releaseTag = getReleaseTag(profile.version);
@@ -87,12 +87,16 @@ const About = () => {
         <div className="grid gap-10 @min-[52rem]:grid-cols-[minmax(0,0.9fr)_minmax(0,1.5fr)] @min-[52rem]:gap-8">
           <header className="min-w-0 @min-[52rem]:border-e @min-[52rem]:border-border @min-[52rem]:pe-8 @min-[52rem]:pt-7">
             <div className="flex items-center gap-4">
-              <img
-                className="size-16 shrink-0 select-none rounded-xl object-contain @min-[60rem]:size-20"
-                src={instanceLogo}
-                alt=""
-                draggable={false}
-              />
+              {customLogoUrl ? (
+                <img
+                  className="size-16 shrink-0 select-none rounded-xl object-contain @min-[60rem]:size-20"
+                  src={customLogoUrl}
+                  alt=""
+                  draggable={false}
+                />
+              ) : (
+                <HuanMark className="size-16 shrink-0 select-none @min-[60rem]:size-20" />
+              )}
               <div className="flex min-w-0 flex-wrap items-center gap-2.5">
                 <h1 className="text-3xl font-semibold tracking-tight wrap-anywhere text-foreground @min-[60rem]:text-4xl">
                   {instanceTitle}

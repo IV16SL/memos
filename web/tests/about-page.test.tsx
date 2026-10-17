@@ -123,6 +123,13 @@ describe("<About>", () => {
     expect(screen.getByText("about.demo")).toBeInTheDocument();
   });
 
+  it("uses the HuanMark vector logo when the instance has no custom logo", () => {
+    const { container } = renderAbout();
+
+    expect(container.querySelector("svg.huan-mark")).toBeInTheDocument();
+    expect(container.querySelector("header img")).not.toBeInTheDocument();
+  });
+
   it("uses custom branding for the identity hero and credits Memos", () => {
     mockInstance.generalSetting = {
       customProfile: { title: "Team Notes", description: "Our shared scratchpad.", logoUrl: "/custom-logo.png" },
