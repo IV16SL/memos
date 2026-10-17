@@ -130,16 +130,15 @@ describe("<About>", () => {
     expect(container.querySelector("header img")).not.toBeInTheDocument();
   });
 
-  it("replays the hero logo wiggle on every click", () => {
+  it("toggles the hero logo tilt on click", () => {
     const { container } = renderAbout();
     const mark = container.querySelector("svg.huan-mark") as SVGSVGElement;
 
-    expect(mark).not.toHaveClass("huan-wiggle");
+    expect(mark).not.toHaveClass("tilted");
     fireEvent.click(mark);
-    expect(mark).toHaveClass("huan-wiggle");
-    // A second click without the pointer leaving still replays the animation.
+    expect(mark).toHaveClass("tilted");
     fireEvent.click(mark);
-    expect(mark).toHaveClass("huan-wiggle");
+    expect(mark).not.toHaveClass("tilted");
   });
 
   it("uses custom branding for the identity hero and credits Memos", () => {

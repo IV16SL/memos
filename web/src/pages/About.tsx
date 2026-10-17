@@ -1,7 +1,9 @@
 import { BookOpenIcon, CodeXmlIcon, ExternalLinkIcon, GitForkIcon, GlobeIcon, HeartIcon, ScissorsIcon } from "lucide-react";
+import { useState } from "react";
 import { HuanMark } from "@/components/HuanMark";
 import { Badge } from "@/components/ui/badge";
 import { useInstance } from "@/contexts/InstanceContext";
+import { cn } from "@/lib/utils";
 import {
   MEMOS_API_DOCUMENTATION_URL,
   MEMOS_DOCUMENTATION_URL,
@@ -48,16 +50,9 @@ const About = () => {
   const instanceTitle = customProfile?.title || DEFAULT_TITLE;
   const customLogoUrl = customProfile?.logoUrl;
   const isCustomBranded = instanceTitle !== DEFAULT_TITLE;
-
-  // Re-trigger the wiggle on every click: removing + re-adding the class (with
-  // a forced reflow in between) restarts the CSS animation even when the
-  // pointer never leaves the logo.
-  const wiggleHeroLogo = (event: React.MouseEvent<SVGSVGElement>) => {
-    const mark = event.currentTarget;
-    mark.classList.remove("huan-wiggle");
-    void mark.getBoundingClientRect();
-    mark.classList.add("huan-wiggle");
-  };
+  // The hero logo tilts on click like the demo site's mark, toggled by its own
+  // state so it stays fully independent from the menu logo's open-state tilt.
+  const [heroTilted, setHeroTilted] = useState(false);
 
   const releaseTag = getReleaseTag(profile.version);
   const releaseUrl = releaseTag ? `${GITHUB_RELEASE_URL_PREFIX}${releaseTag}` : "";
@@ -106,8 +101,8 @@ const About = () => {
                 />
               ) : (
                 <HuanMark
-                  onClick={wiggleHeroLogo}
-                  className="size-16 shrink-0 cursor-pointer select-none @min-[60rem]:size-20"
+                  onClick={() => setHeroTilted((tilted) => !tilted)}
+                  className={cn("size-16 shrink-0 cursor-pointer select-none @min-[60rem]:size-20", heroTilted && "tilted")}
                 />
               )}
               <div className="flex min-w-0 flex-wrap items-center gap-2.5">
