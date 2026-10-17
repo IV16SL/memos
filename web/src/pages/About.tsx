@@ -86,7 +86,7 @@ const About = () => {
       <div className="@container mx-auto w-full max-w-5xl py-8 sm:py-16">
         <div className="grid gap-10 @min-[52rem]:grid-cols-[minmax(0,0.9fr)_minmax(0,1.5fr)] @min-[52rem]:gap-8">
           <header className="min-w-0 @min-[52rem]:border-e @min-[52rem]:border-border @min-[52rem]:pe-8 @min-[52rem]:pt-7">
-            <div className="flex items-center gap-4">
+            <div className="about-hero flex items-center gap-4">
               {customLogoUrl ? (
                 <img
                   className="size-16 shrink-0 select-none rounded-xl object-contain @min-[60rem]:size-20"

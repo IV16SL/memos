@@ -51,6 +51,24 @@
     .memos-brand-trigger[data-popup-open] .huan-mark {
       transform: translateY(-1px) rotate(-6deg);
     }
+
+    /* About hero logo has no menu state, so it wiggles on hover instead.
+       One-shot keyframes (not a persistent tilt), so it can never get stuck. */
+    .about-hero:hover .huan-mark {
+      animation: huan-mark-wiggle 450ms ease-out;
+    }
+  }
+
+  @keyframes huan-mark-wiggle {
+    0% {
+      transform: none;
+    }
+    40% {
+      transform: translateY(-1px) rotate(-6deg);
+    }
+    100% {
+      transform: none;
+    }
   }
 
   /* Amap dark mode: Amap publishes no dark tile style, approximate with a filter. */
