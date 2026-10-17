@@ -45,12 +45,12 @@
      touch taps or menu close and leave the mark stuck tilted). */
   @media (prefers-reduced-motion: no-preference) {
     .memos-logo .huan-mark,
-    .huan-mark.tilted {
+    .about-hero-mark {
       transition: transform 180ms ease-out;
     }
 
     .memos-brand-trigger[data-popup-open] .huan-mark,
-    .huan-mark.tilted {
+    .about-hero-mark:focus {
       transform: translateY(-1px) rotate(-6deg);
     }
   }

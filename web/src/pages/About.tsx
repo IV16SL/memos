@@ -1,9 +1,7 @@
 import { BookOpenIcon, CodeXmlIcon, ExternalLinkIcon, GitForkIcon, GlobeIcon, HeartIcon, ScissorsIcon } from "lucide-react";
-import { useState } from "react";
 import { HuanMark } from "@/components/HuanMark";
 import { Badge } from "@/components/ui/badge";
 import { useInstance } from "@/contexts/InstanceContext";
-import { cn } from "@/lib/utils";
 import {
   MEMOS_API_DOCUMENTATION_URL,
   MEMOS_DOCUMENTATION_URL,
@@ -50,9 +48,6 @@ const About = () => {
   const instanceTitle = customProfile?.title || DEFAULT_TITLE;
   const customLogoUrl = customProfile?.logoUrl;
   const isCustomBranded = instanceTitle !== DEFAULT_TITLE;
-  // The hero logo tilts on click like the demo site's mark, toggled by its own
-  // state so it stays fully independent from the menu logo's open-state tilt.
-  const [heroTilted, setHeroTilted] = useState(false);
 
   const releaseTag = getReleaseTag(profile.version);
   const releaseUrl = releaseTag ? `${GITHUB_RELEASE_URL_PREFIX}${releaseTag}` : "";
@@ -101,8 +96,8 @@ const About = () => {
                 />
               ) : (
                 <HuanMark
-                  onClick={() => setHeroTilted((tilted) => !tilted)}
-                  className={cn("size-16 shrink-0 cursor-pointer select-none @min-[60rem]:size-20", heroTilted && "tilted")}
+                  tabIndex={0}
+                  className="about-hero-mark size-16 shrink-0 cursor-pointer select-none focus:outline-none @min-[60rem]:size-20"
                 />
               )}
               <div className="flex min-w-0 flex-wrap items-center gap-2.5">

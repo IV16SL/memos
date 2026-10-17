@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import About from "@/pages/About";
 
@@ -130,15 +130,13 @@ describe("<About>", () => {
     expect(container.querySelector("header img")).not.toBeInTheDocument();
   });
 
-  it("toggles the hero logo tilt on click", () => {
+  it("makes the hero logo focusable so it tilts on focus and restores on blur", () => {
     const { container } = renderAbout();
     const mark = container.querySelector("svg.huan-mark") as SVGSVGElement;
 
-    expect(mark).not.toHaveClass("tilted");
-    fireEvent.click(mark);
-    expect(mark).toHaveClass("tilted");
-    fireEvent.click(mark);
-    expect(mark).not.toHaveClass("tilted");
+    // The tilt is pure CSS (:focus), so the contract is focusability itself.
+    expect(mark).toHaveAttribute("tabindex", "0");
+    expect(mark).toHaveClass("about-hero-mark");
   });
 
   it("uses custom branding for the identity hero and credits Memos", () => {
