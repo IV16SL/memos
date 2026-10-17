@@ -11,6 +11,7 @@ import {
 import { type ComponentPropsWithoutRef, forwardRef, type MouseEventHandler, type RefObject, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { useTranslate } from "@/utils/i18n";
 import {
@@ -139,9 +140,16 @@ export function FormattingToolbar({ controllerRef, exit, className }: Formatting
       {exit && (
         <>
           <div className="flex-1" />
-          <Button variant="quiet" size="icon-compact" aria-label={exitLabel} title={exitLabel} onClick={exit.onExit}>
-            <ExitIcon className="size-4" strokeWidth={1.8} />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Button variant="quiet" size="icon-compact" aria-label={exitLabel} onClick={exit.onExit}>
+                  <ExitIcon className="size-4" strokeWidth={1.8} />
+                </Button>
+              }
+            />
+            <TooltipContent side="top">{exitLabel}</TooltipContent>
+          </Tooltip>
         </>
       )}
     </div>
@@ -163,10 +171,18 @@ interface SegmentButtonProps extends ComponentPropsWithoutRef<"button"> {
 // The one segment element, shared by command toggles and dropdown triggers: the kit's
 // quiet 28px square, so the toolbar container stays transparent and only the verb that
 // is on carries the accent fill. Forwards ref + rest props so it also works as a Base UI
-// `render` trigger (which injects its own onClick/aria attributes).
+// `render` trigger (which injects its own onClick/aria attributes). The hover hint uses
+// the app's styled tooltip (not the native `title`) to match the editor toolbar.
 const SegmentButton = forwardRef<HTMLButtonElement, SegmentButtonProps>(({ Icon, label, active, ...rest }, ref) => (
-  <Button ref={ref} variant="quiet" size="icon-compact" aria-label={label} aria-pressed={active} title={label} {...rest}>
-    {Icon && <Icon className="size-4" strokeWidth={1.8} />}
-  </Button>
+  <Tooltip>
+    <TooltipTrigger
+      render={
+        <Button ref={ref} variant="quiet" size="icon-compact" aria-label={label} aria-pressed={active} {...rest}>
+          {Icon && <Icon className="size-4" strokeWidth={1.8} />}
+        </Button>
+      }
+    />
+    <TooltipContent side="top">{label}</TooltipContent>
+  </Tooltip>
 ));
 SegmentButton.displayName = "SegmentButton";
