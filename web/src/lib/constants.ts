@@ -16,7 +16,7 @@ export const SLOW_LOAD_HINT_DELAY_MS = 3000;
 export const MEMOS_WEBSITE_URL = "https://usememos.com/";
 export const MEMOS_DOCUMENTATION_URL = "https://usememos.com/docs";
 export const MEMOS_API_DOCUMENTATION_URL = "https://usememos.com/docs/api";
-export const MEMOS_GITHUB_URL = "https://github.com/usememos/memos";
+export const MEMOS_GITHUB_URL = "https://github.com/IV16SL/memos";
 
 // Official companion browser extension for saving web content to Memos.
 export const WEB_CLIPPER_URL = "https://github.com/usememos/web-clipper";

@@ -457,7 +457,7 @@ describe("App sidebar logo", () => {
     fireEvent.click(documentationLink);
     expect(sidebarState.setMobileOpen).toHaveBeenCalledWith(false);
     expect(screen.getByRole("link", { name: "about.api-docs" })).toHaveAttribute("href", "https://usememos.com/docs/api");
-    expect(screen.getByRole("link", { name: "about.github-repository" })).toHaveAttribute("href", "https://github.com/usememos/memos");
+    expect(screen.getByRole("link", { name: "about.github-repository" })).toHaveAttribute("href", "https://github.com/IV16SL/memos");
     expect(screen.queryByText("Calendar")).not.toBeInTheDocument();
     expect(screen.queryByRole("region", { name: "common.statistics" })).not.toBeInTheDocument();
     expect(screen.queryByText("common.views")).not.toBeInTheDocument();

@@ -54,14 +54,14 @@ describe("<About>", () => {
     expect(screen.getByText("about.description")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Version\s*v0\.25\.0/ })).toHaveAttribute(
       "href",
-      "https://github.com/usememos/memos/releases/tag/v0.25.0",
+      "https://github.com/IV16SL/memos/releases/tag/v0.25.0",
     );
     expect(screen.getByRole("heading", { name: "Memos" }).parentElement).toContainElement(
       screen.getByRole("link", { name: /Version\s*v0\.25\.0/ }),
     );
     expect(screen.getByRole("link", { name: "0123456" })).toHaveAttribute(
       "href",
-      "https://github.com/usememos/memos/commit/0123456789abcdef0123456789abcdef01234567",
+      "https://github.com/IV16SL/memos/commit/0123456789abcdef0123456789abcdef01234567",
     );
     expect(screen.queryByRole("link", { name: "MIT" })).not.toBeInTheDocument();
   });
@@ -73,7 +73,7 @@ describe("<About>", () => {
     expect(screen.getByRole("link", { name: /about\.documents/ })).toHaveAttribute("href", "https://usememos.com/docs");
     expect(screen.getByRole("link", { name: /about\.api-docs/ })).toHaveAttribute("href", "https://usememos.com/docs/api");
     expect(screen.getByRole("link", { name: /about\.web-clipper/ })).toHaveAttribute("href", "https://github.com/usememos/web-clipper");
-    expect(screen.getByRole("link", { name: /about\.github-repository/ })).toHaveAttribute("href", "https://github.com/usememos/memos");
+    expect(screen.getByRole("link", { name: /about\.github-repository/ })).toHaveAttribute("href", "https://github.com/IV16SL/memos");
   });
 
   it("does not surface the instance URL, administrator, or birds", () => {

@@ -12,8 +12,8 @@ import {
 import { getReleaseTag } from "@/lib/release-version";
 import { useTranslate } from "@/utils/i18n";
 
-const GITHUB_COMMIT_URL_PREFIX = "https://github.com/usememos/memos/commit/";
-const GITHUB_RELEASE_URL_PREFIX = "https://github.com/usememos/memos/releases/tag/";
+const GITHUB_COMMIT_URL_PREFIX = "https://github.com/IV16SL/memos/commit/";
+const GITHUB_RELEASE_URL_PREFIX = "https://github.com/IV16SL/memos/releases/tag/";
 
 const DEFAULT_TITLE = "Memos";
 
