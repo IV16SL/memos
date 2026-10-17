@@ -1,6 +1,6 @@
-import fullLogoUrl from "@/assets/full-logo.webp?no-inline";
 import { useInstance } from "@/contexts/InstanceContext";
 import { cn } from "@/lib/utils";
+import { HuanMark } from "./HuanMark";
 import UserAvatar from "./UserAvatar";
 
 interface Props {
@@ -24,7 +24,7 @@ function MemosLogo(props: Props) {
   const scale = COMPACT_SCALE[size];
   const { generalSetting: instanceGeneralSetting } = useInstance();
   const title = instanceGeneralSetting.customProfile?.title || "Memos";
-  const avatarUrl = instanceGeneralSetting.customProfile?.logoUrl || fullLogoUrl;
+  const customLogoUrl = instanceGeneralSetting.customProfile?.logoUrl;
 
   return (
     <div className={cn("relative min-w-0 h-auto", props.className)}>
@@ -35,7 +35,11 @@ function MemosLogo(props: Props) {
         )}
       >
         {/* The instance logo is a brand, not a person, so it keeps a square mark. */}
-        <UserAvatar className={cn("shrink-0", compact ? scale.mark : "rounded-xl")} avatarUrl={avatarUrl} />
+        {customLogoUrl ? (
+          <UserAvatar className={cn("shrink-0", compact ? scale.mark : "rounded-xl")} avatarUrl={customLogoUrl} />
+        ) : (
+          <HuanMark className={cn(compact ? scale.mark : "size-8")} />
+        )}
         {!collapsed && (
           <span
             className={cn(

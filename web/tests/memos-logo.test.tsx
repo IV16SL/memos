@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import fullLogoUrl from "@/assets/full-logo.webp?no-inline";
 import MemosLogo from "@/components/MemosLogo";
 
 const mockInstance = {
@@ -16,10 +15,15 @@ describe("<MemosLogo>", () => {
     mockInstance.generalSetting = {};
   });
 
-  it("uses the bundled logo when the instance has no custom logo", () => {
+  it("uses the bundled SVG mark when the instance has no custom logo", () => {
     const { container } = render(<MemosLogo />);
 
-    expect(container.querySelector("img")).toHaveAttribute("src", fullLogoUrl);
+    const mark = container.querySelector("svg.huan-mark");
+    expect(mark).toBeInTheDocument();
+    // Light theme: black glyph; dark theme: Bitwarden blue. The theme rule is
+    // a class on the mark itself so it follows data-theme automatically.
+    expect(mark).toHaveClass("text-black");
+    expect(container.querySelector("img")).not.toBeInTheDocument();
     expect(screen.getByText("Memos")).toBeInTheDocument();
   });
 
