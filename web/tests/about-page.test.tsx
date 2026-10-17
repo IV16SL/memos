@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import About from "@/pages/About";
 
@@ -128,6 +128,18 @@ describe("<About>", () => {
 
     expect(container.querySelector("svg.huan-mark")).toBeInTheDocument();
     expect(container.querySelector("header img")).not.toBeInTheDocument();
+  });
+
+  it("replays the hero logo wiggle on every click", () => {
+    const { container } = renderAbout();
+    const mark = container.querySelector("svg.huan-mark") as SVGSVGElement;
+
+    expect(mark).not.toHaveClass("huan-wiggle");
+    fireEvent.click(mark);
+    expect(mark).toHaveClass("huan-wiggle");
+    // A second click without the pointer leaving still replays the animation.
+    fireEvent.click(mark);
+    expect(mark).toHaveClass("huan-wiggle");
   });
 
   it("uses custom branding for the identity hero and credits Memos", () => {

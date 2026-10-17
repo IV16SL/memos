@@ -52,9 +52,10 @@
       transform: translateY(-1px) rotate(-6deg);
     }
 
-    /* About hero logo has no menu state, so it wiggles on hover instead.
-       One-shot keyframes (not a persistent tilt), so it can never get stuck. */
-    .about-hero:hover .huan-mark {
+    /* About hero logo wiggles on click only, re-triggered from React so every
+       click replays even if the pointer never leaves. Fully independent from
+       the menu logo's open-state tilt. */
+    .huan-mark.huan-wiggle {
       animation: huan-mark-wiggle 450ms ease-out;
     }
   }

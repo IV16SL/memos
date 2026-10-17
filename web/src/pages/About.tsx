@@ -49,6 +49,16 @@ const About = () => {
   const customLogoUrl = customProfile?.logoUrl;
   const isCustomBranded = instanceTitle !== DEFAULT_TITLE;
 
+  // Re-trigger the wiggle on every click: removing + re-adding the class (with
+  // a forced reflow in between) restarts the CSS animation even when the
+  // pointer never leaves the logo.
+  const wiggleHeroLogo = (event: React.MouseEvent<SVGSVGElement>) => {
+    const mark = event.currentTarget;
+    mark.classList.remove("huan-wiggle");
+    void mark.getBoundingClientRect();
+    mark.classList.add("huan-wiggle");
+  };
+
   const releaseTag = getReleaseTag(profile.version);
   const releaseUrl = releaseTag ? `${GITHUB_RELEASE_URL_PREFIX}${releaseTag}` : "";
   const versionLabel = releaseTag ?? profile.version;
@@ -86,7 +96,7 @@ const About = () => {
       <div className="@container mx-auto w-full max-w-5xl py-8 sm:py-16">
         <div className="grid gap-10 @min-[52rem]:grid-cols-[minmax(0,0.9fr)_minmax(0,1.5fr)] @min-[52rem]:gap-8">
           <header className="min-w-0 @min-[52rem]:border-e @min-[52rem]:border-border @min-[52rem]:pe-8 @min-[52rem]:pt-7">
-            <div className="about-hero flex items-center gap-4">
+            <div className="flex items-center gap-4">
               {customLogoUrl ? (
                 <img
                   className="size-16 shrink-0 select-none rounded-xl object-contain @min-[60rem]:size-20"
@@ -95,7 +105,10 @@ const About = () => {
                   draggable={false}
                 />
               ) : (
-                <HuanMark className="size-16 shrink-0 select-none @min-[60rem]:size-20" />
+                <HuanMark
+                  onClick={wiggleHeroLogo}
+                  className="size-16 shrink-0 cursor-pointer select-none @min-[60rem]:size-20"
+                />
               )}
               <div className="flex min-w-0 flex-wrap items-center gap-2.5">
                 <h1 className="text-3xl font-semibold tracking-tight wrap-anywhere text-foreground @min-[60rem]:text-4xl">
