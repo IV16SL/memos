@@ -125,6 +125,28 @@ func (s *FrontendService) registerRoutes(e *echo.Echo) {
 	e.GET("/sitemap.xml", s.getSitemapXML)
 }
 
+// disallowedAICrawlers lists AI training and data crawlers that are blocked
+// from the instance via robots.txt. General search engine crawlers
+// (Googlebot, Bingbot, ...) stay allowed under "User-agent: *".
+var disallowedAICrawlers = []string{
+	"GPTBot",
+	"ChatGPT-User",
+	"OAI-SearchBot",
+	"ClaudeBot",
+	"Claude-User",
+	"anthropic-ai",
+	"CCBot",
+	"Bytespider",
+	"PerplexityBot",
+	"Google-Extended",
+	"Applebot-Extended",
+	"Meta-ExternalAgent",
+	"FacebookBot",
+	"Amazonbot",
+	"cohere-ai",
+	"YouBot",
+}
+
 func (s *FrontendService) getRobotsTXT(c *echo.Context) error {
 	if err := s.requirePublicAccess(c.Request().Context()); err != nil {
 		return err
@@ -134,13 +156,12 @@ func (s *FrontendService) getRobotsTXT(c *echo.Context) error {
 		return err
 	}
 
-	robotsTXT := strings.Join([]string{
-		"User-agent: *",
-		"Allow: /",
-		"Host: " + instanceURL,
-		"Sitemap: " + instanceURL + "/sitemap.xml",
-	}, "\n")
-	return c.String(http.StatusOK, robotsTXT)
+	var robotsTXT strings.Builder
+	robotsTXT.WriteString("User-agent: *\nAllow: /\nHost: " + instanceURL + "\nSitemap: " + instanceURL + "/sitemap.xml")
+	for _, crawler := range disallowedAICrawlers {
+		robotsTXT.WriteString("\n\nUser-agent: " + crawler + "\nDisallow: /")
+	}
+	return c.String(http.StatusOK, robotsTXT.String())
 }
 
 func (s *FrontendService) getSitemapXML(c *echo.Context) error {

@@ -172,7 +172,16 @@ func TestFrontendService_RobotsTXT(t *testing.T) {
 
 	require.Equal(t, http.StatusOK, rec.Code)
 	require.Equal(t, "text/plain; charset=UTF-8", rec.Header().Get("Content-Type"))
-	require.Equal(t, "User-agent: *\nAllow: /\nHost: https://demo.usememos.com\nSitemap: https://demo.usememos.com/sitemap.xml", rec.Body.String())
+
+	body := rec.Body.String()
+	require.Contains(t, body, "User-agent: *\nAllow: /")
+	require.Contains(t, body, "Host: https://demo.usememos.com")
+	require.Contains(t, body, "Sitemap: https://demo.usememos.com/sitemap.xml")
+	for _, crawler := range disallowedAICrawlers {
+		require.Contains(t, body, "User-agent: "+crawler+"\nDisallow: /")
+	}
+	// Search engine crawlers stay allowed: no blanket disallow for "*".
+	require.NotContains(t, body, "User-agent: *\nDisallow: /")
 }
 
 func TestFrontendService_SitemapXML(t *testing.T) {
