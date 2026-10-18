@@ -1,5 +1,6 @@
 import type { LocationState } from "@/components/MemoEditor/types/insertMenu";
 import { LazyLocationPicker } from "@/components/map/LazyLocationPicker";
+import { PlaceSearchBox } from "@/components/map/PlaceSearchBox";
 import type { MapPoint } from "@/components/map/types";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
@@ -46,7 +47,10 @@ export const LocationDialog = ({
           <DialogDescription>Select a location on the map or enter coordinates manually</DialogDescription>
         </VisuallyHidden>
         <div className="flex flex-col">
-          <div className="w-full h-64 overflow-hidden rounded-t-md bg-muted/30">
+          <div className="px-3 pt-3">
+            <PlaceSearchBox onSelect={onPositionChange} />
+          </div>
+          <div className="mt-3 w-full h-64 overflow-hidden bg-muted/30">
             {open && <LazyLocationPicker className="h-full" latlng={position} onChange={onPositionChange} />}
           </div>
           <div className="w-full flex flex-col p-3 gap-3">

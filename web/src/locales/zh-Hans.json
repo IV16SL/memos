@@ -19,7 +19,11 @@
     "location-selected": "已选位置",
     "location-choose": "选择位置",
     "open-in-amap": "在高德地图打开",
-    "open-in-amap-aria": "在高德地图中打开位置"
+    "open-in-amap-aria": "在高德地图中打开位置",
+    "search-places": "搜索地点…",
+    "searching": "搜索中…",
+    "search-no-results": "没有找到相关地点",
+    "search-clear": "清除搜索"
   },
   "about": {
     "api-docs": "API 文档",
