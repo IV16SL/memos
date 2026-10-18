@@ -46,7 +46,6 @@
     "sso-signup-tip": "आपले खाते तयार करण्यासाठी खालीलपैकी एका प्रदात्याद्वारे साइन इन करा.",
     "welcome-back": "आपले पुन्हा स्वागत आहे.",
     "passkey-signin-failed": "पैसेकीने साइन-इन अयशस्वी झाले.",
-    "passkey-signup-description": "पैसेकीने तुमचे खाते तयार करा. पासवर्डऐवजी तुम्ही तुमच्या डिव्हाइसच्या बायोमेट्रिक्स किंवा सुरक्षा कीने साइन इन कराल.",
     "passkey-signup-failed": "पैसेकीने साइन-अप अयशस्वी झाले.",
     "sign-in-with-passkey": "पैसेकीने साइन इन करा",
     "sign-up-with-passkey": "पैसेकीने साइन अप करा",
@@ -147,7 +146,9 @@
     "resize-sidebar": "साइडबारचा आकार बदला",
     "sign-in-to-memos": "Memos मध्ये साइन इन करा",
     "unlink": "अनलिंक करा",
-    "view-all": "सर्व पहा"
+    "view-all": "सर्व पहा",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "भाषा सापडली नाही? अभिप्राय सबमिट करा"
@@ -1050,7 +1051,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "आजच्या दिवशी नवीन मेमो",

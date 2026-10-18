@@ -46,7 +46,6 @@
     "sso-signup-tip": "Jelentkezzen be az alábbi szolgáltatóval a fiók létrehozásához.",
     "welcome-back": "Üdvözöljük ismét.",
     "passkey-signin-failed": "A belépés jelkulccsal sikertelen volt.",
-    "passkey-signup-description": "Hozza létre fiókját jelkulccsal. Jelszó helyett eszköze biometrikus azonosításával vagy biztonsági kulccsal fog bejelentkezni.",
     "passkey-signup-failed": "A regisztráció jelkulccsal sikertelen volt.",
     "sign-in-with-passkey": "Bejelentkezés jelkulccsal",
     "sign-up-with-passkey": "Regisztráció jelkulccsal",
@@ -147,7 +146,9 @@
     "resize-panel": "Panel átméretezése",
     "resize-sidebar": "Oldalsáv átméretezése",
     "sign-in-to-memos": "Bejelentkezés a következőbe: Memos",
-    "view-all": "Összes megtekintése"
+    "view-all": "Összes megtekintése",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Nem található a nyelv? Visszajelzés küldése"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Új emlékeztető ezen a napon.",

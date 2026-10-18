@@ -46,7 +46,6 @@
     "sso-signup-tip": "Войдите через одного из указанных ниже поставщиков, чтобы создать учётную запись.",
     "welcome-back": "С возвращением.",
     "passkey-signin-failed": "Не удалось войти с помощью ключа доступа.",
-    "passkey-signup-description": "Создайте учётную запись с помощью ключа доступа. Вы будете входить с помощью биометрии устройства или ключа безопасности вместо пароля.",
     "passkey-signup-failed": "Не удалось зарегистрироваться с помощью ключа доступа.",
     "sign-in-with-passkey": "Войти с ключом доступа",
     "sign-up-with-passkey": "Зарегистрироваться с ключом доступа",
@@ -147,7 +146,9 @@
     "collapse-panel": "Свернуть панель",
     "expand-panel": "Развернуть панель",
     "resize-panel": "Изменить размер панели",
-    "view-all": "Просмотреть все"
+    "view-all": "Просмотреть все",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Язык не найден? Отправить отзыв"
@@ -1055,7 +1056,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Новая заметка в этот день",

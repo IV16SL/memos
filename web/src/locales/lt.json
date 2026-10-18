@@ -46,7 +46,6 @@
     "sso-signup-tip": "Prisijunkite naudodami toliau nurodytą tiekėją, kad sukurtumėte paskyrą.",
     "welcome-back": "Sveiki sugrįžę.",
     "passkey-signin-failed": "Prisijungimas prieigos raktu nepavyko.",
-    "passkey-signup-description": "Sukurkite paskyrą naudodami prieigos raktą. Prisijungsite įrenginio biometrija arba saugos raktu, o ne slaptažodžiu.",
     "passkey-signup-failed": "Registracija prieigos raktu nepavyko.",
     "sign-in-with-passkey": "Prisijungti prieigos raktu",
     "sign-up-with-passkey": "Registruotis prieigos raktu",
@@ -185,7 +184,9 @@
     "resize-panel": "Keisti skydelio dydį",
     "resize-sidebar": "Keisti šoninės juostos dydį",
     "sign-in-to-memos": "Prisijungti prie Memos",
-    "view-all": "Peržiūrėti viską"
+    "view-all": "Peržiūrėti viską",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Kalba nerasta? Pateikite atsiliepimą"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Naujas priminimas šią dieną",

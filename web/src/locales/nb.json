@@ -46,7 +46,6 @@
     "sso-signup-tip": "Logg inn med en leverandør nedenfor for å opprette kontoen din.",
     "welcome-back": "Velkommen tilbake.",
     "passkey-signin-failed": "Innlogging med passkey feilet.",
-    "passkey-signup-description": "Opprett kontoen din med en passkey. Du logger inn med enhetens biometri eller en sikkerhetsnøkkel i stedet for et passord.",
     "passkey-signup-failed": "Registrering med passkey feilet.",
     "sign-in-with-passkey": "Logg inn med passkey",
     "sign-up-with-passkey": "Registrer deg med passkey",
@@ -147,7 +146,9 @@
     "resize-panel": "Endre størrelse på panel",
     "resize-sidebar": "Endre størrelse på sidefelt",
     "sign-in-to-memos": "Logg på Memos",
-    "view-all": "Vis alle"
+    "view-all": "Vis alle",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Finner du ikke språket? Send tilbakemelding"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nytt notat denne dagen",

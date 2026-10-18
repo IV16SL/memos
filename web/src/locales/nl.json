@@ -46,7 +46,6 @@
     "sso-signup-tip": "Meld u hieronder aan met een provider om uw account aan te maken.",
     "welcome-back": "Welkom terug.",
     "passkey-signin-failed": "Inloggen met passkey mislukt.",
-    "passkey-signup-description": "Maak je account aan met een passkey. Je logt in met de biometrie van je apparaat of een beveiligingssleutel in plaats van een wachtwoord.",
     "passkey-signup-failed": "Registreren met passkey mislukt.",
     "sign-in-with-passkey": "Inloggen met passkey",
     "sign-up-with-passkey": "Registreren met passkey",
@@ -147,7 +146,9 @@
     "resize-panel": "Paneelgrootte aanpassen",
     "resize-sidebar": "Zijbalkgrootte aanpassen",
     "sign-in-to-memos": "Aanmelden bij Memos",
-    "view-all": "Alles bekijken"
+    "view-all": "Alles bekijken",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Taal niet gevonden? Geef feedback"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nieuwe memo op deze dag",

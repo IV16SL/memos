@@ -46,7 +46,6 @@
     "sso-signup-tip": "Melden Sie sich unten mit einem Anbieter an, um Ihr Konto zu erstellen.",
     "welcome-back": "Willkommen zurück.",
     "passkey-signin-failed": "Anmeldung mit Passkey fehlgeschlagen.",
-    "passkey-signup-description": "Erstelle dein Konto mit einem Passkey. Du meldest dich dann mit der Biometrie deines Geräts oder einem Sicherheitsschlüssel statt mit einem Passwort an.",
     "passkey-signup-failed": "Registrierung mit Passkey fehlgeschlagen.",
     "sign-in-with-passkey": "Mit Passkey anmelden",
     "sign-up-with-passkey": "Mit Passkey registrieren",
@@ -147,7 +146,9 @@
     "resize-panel": "Bedienfeldgröße ändern",
     "resize-sidebar": "Seitenleiste vergrößern/verkleinern",
     "sign-in-to-memos": "Anmelden bei Memos",
-    "view-all": "Alle anzeigen"
+    "view-all": "Alle anzeigen",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Sprache nicht gefunden? Geben Sie Feedback ab"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Neue Notiz an diesem Tag",

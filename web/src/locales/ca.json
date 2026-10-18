@@ -46,7 +46,6 @@
     "sso-signup-tip": "Inicia la sessió amb un proveïdor a continuació per crear el teu compte.",
     "welcome-back": "Benvingut/da de nou.",
     "passkey-signin-failed": "L'inici de sessió amb clau d'accés ha fallat.",
-    "passkey-signup-description": "Crea el teu compte amb una clau d'accés. Iniciaràs sessió amb les dades biomètriques del dispositiu o una clau de seguretat en lloc d'una contrasenya.",
     "passkey-signup-failed": "El registre amb clau d'accés ha fallat.",
     "sign-in-with-passkey": "Inicia sessió amb clau d'accés",
     "sign-up-with-passkey": "Registra't amb clau d'accés",
@@ -147,7 +146,9 @@
     "resize-panel": "Canvia la mida del panell",
     "resize-sidebar": "Canvia la mida de la barra lateral",
     "sign-in-to-memos": "Inicia la sessió a Memos",
-    "view-all": "Veure-ho tot"
+    "view-all": "Veure-ho tot",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "No s'ha trobat l'idioma? Envieu comentaris"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nova nota en aquest dia",

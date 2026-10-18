@@ -46,7 +46,6 @@
     "sso-signup-tip": "Pierakstieties, izmantojot tālāk norādīto pakalpojumu sniedzēju, lai izveidotu savu kontu.",
     "welcome-back": "Laipni lūdzam atpakaļ.",
     "passkey-signin-failed": "Pieteikšanās ar piekļuves atslēgu neizdevās.",
-    "passkey-signup-description": "Izveidojiet savu kontu ar piekļuves atslēgu. Pieteiksieties ar savas ierīces biometriju vai drošības atslēgu, nevis paroli.",
     "passkey-signup-failed": "Reģistrēšanās ar piekļuves atslēgu neizdevās.",
     "sign-in-with-passkey": "Pieteikties ar piekļuves atslēgu",
     "sign-up-with-passkey": "Reģistrēties ar piekļuves atslēgu",
@@ -185,7 +184,9 @@
     "resize-panel": "Mainīt paneļa izmērus",
     "resize-sidebar": "Mainīt sānu joslas izmērus",
     "sign-in-to-memos": "Pierakstīties pakalpojumā Memos",
-    "view-all": "Skatīt visu"
+    "view-all": "Skatīt visu",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Valoda nav atrasta? Iesniedziet atsauksmes"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Jauna piezīme šajā dienā",

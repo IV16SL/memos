@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
+import { isAmapConfigured, loadAmap, loadAmapPlugins, type AmapStatic } from "./amap";
 import { wgs84ToGcj02 } from "./gcj02";
-
-/** Amap Web API key for reverse geocoding. Set via VITE_AMAP_API_KEY at build time. */
-const AMAP_API_KEY = import.meta.env.VITE_AMAP_API_KEY as string | undefined;
 
 const NOMINATIM = {
   endpoint: "https://nominatim.openstreetmap.org/reverse",
@@ -10,15 +8,18 @@ const NOMINATIM = {
   format: "json",
 } as const;
 
-async function reverseGeocodeAmap(lat: number, lng: number): Promise<string | undefined> {
+/** Reverse-geocodes WGS-84 coordinates via the JS API Geocoder plugin. */
+async function reverseGeocodeAmap(AMap: AmapStatic, lat: number, lng: number): Promise<string | undefined> {
+  await loadAmapPlugins(AMap, ["AMap.Geocoder"]);
   // Amap expects GCJ-02 coordinates.
   const [gLat, gLng] = wgs84ToGcj02(lat, lng);
-  const url = `https://restapi.amap.com/v3/geocode/regeo?key=${AMAP_API_KEY}&location=${gLng},${gLat}&extensions=base`;
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-  const data = await response.json();
-  if (data?.status === "1") return data?.regeocode?.formatted_address as string | undefined;
-  throw new Error(`Amap regeo failed: ${data?.info ?? "unknown"}`);
+  const geocoder = new AMap.Geocoder({ extensions: "base" });
+  return new Promise((resolve, reject) => {
+    geocoder.getAddress(new AMap.LngLat(gLng, gLat), (status, result) => {
+      if (status === "complete") resolve(result.regeocode?.formattedAddress);
+      else reject(new Error(`Amap regeo failed: ${status}`));
+    });
+  });
 }
 
 async function reverseGeocodeNominatim(lat: number, lng: number): Promise<string | undefined> {
@@ -42,7 +43,11 @@ export const useReverseGeocoding = (lat: number | undefined, lng: number | undef
       if (lat === undefined || lng === undefined) return "";
 
       try {
-        const address = AMAP_API_KEY ? await reverseGeocodeAmap(lat, lng) : await reverseGeocodeNominatim(lat, lng);
+        // Reverse-geocode through the JS API plugin, using the same key +
+        // security code as the map itself (no separate Web-service key needed).
+        const address = isAmapConfigured()
+          ? await reverseGeocodeAmap(await loadAmap(), lat, lng)
+          : await reverseGeocodeNominatim(lat, lng);
         return address || coordString;
       } catch (error) {
         console.error("Failed to fetch reverse geocoding data:", error);

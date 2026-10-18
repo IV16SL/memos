@@ -46,7 +46,6 @@
     "sso-signup-tip": "برای ایجاد حساب کاربری خود، با یکی از ارائه دهندگان زیر وارد شوید.",
     "welcome-back": "خوش آمدید.",
     "passkey-signin-failed": "ورود با کلید عبور ناموفق بود.",
-    "passkey-signup-description": "حساب خود را با کلید عبور بسازید. به‌جای گذرواژه با زیست‌سنجی دستگاه یا کلید امنیتی خود وارد می‌شوید.",
     "passkey-signup-failed": "ثبت‌نام با کلید عبور ناموفق بود.",
     "sign-in-with-passkey": "ورود با کلید عبور",
     "sign-up-with-passkey": "ثبت‌نام با کلید عبور",
@@ -147,7 +146,9 @@
     "resize-sidebar": "تغییر اندازه نوار کناری",
     "sign-in-to-memos": "ورود به Memos",
     "unlink": "لغو پیوند",
-    "view-all": "مشاهده همه"
+    "view-all": "مشاهده همه",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "زبان پیدا نشد؟ ارسال بازخورد"
@@ -1050,7 +1051,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "یادداشت جدید در این روز",

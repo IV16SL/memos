@@ -76,7 +76,6 @@
     "verify-totp": "Verify",
     "sign-in-with-passkey": "Sign in with passkey",
     "sign-up-with-passkey": "Sign up with passkey",
-    "passkey-signup-description": "Create your account with a passkey. You'll sign in with your device's biometrics or security key instead of a password.",
     "passkey-signin-failed": "Passkey sign-in failed.",
     "passkey-signup-failed": "Passkey sign-up failed."
   },

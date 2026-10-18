@@ -46,7 +46,6 @@
     "sso-signup-tip": "使用下方提供者登入以建立帳號。",
     "welcome-back": "歡迎回來。",
     "passkey-signin-failed": "通行密鑰登入失敗。",
-    "passkey-signup-description": "用通行密鑰建立帳戶。之後用裝置的生物辨識或安全金鑰登入，不需要密碼。",
     "passkey-signup-failed": "通行密鑰註冊失敗。",
     "sign-in-with-passkey": "使用通行密鑰登入",
     "sign-up-with-passkey": "使用通行密鑰註冊",
@@ -226,7 +225,9 @@
     "collapse-panel": "折疊面板",
     "expand-panel": "展開面板",
     "resize-panel": "調整面板大小",
-    "view-all": "查看全部"
+    "view-all": "查看全部",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "未找到語言？ 提交回饋"
@@ -1113,6 +1114,10 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   }
 }

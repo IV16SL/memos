@@ -46,7 +46,6 @@
     "sso-signup-tip": "Inicia sesión cun provedor a continuación para crear a túa conta.",
     "welcome-back": "Benvido/a de novo.",
     "passkey-signin-failed": "Fallou o inicio de sesión coa chave de acceso.",
-    "passkey-signup-description": "Crea a túa conta cunha chave de acceso. Iniciarás sesión coa biometría do teu dispositivo ou unha chave de seguridade no canto dun contrasinal.",
     "passkey-signup-failed": "Fallou o rexistro coa chave de acceso.",
     "sign-in-with-passkey": "Iniciar sesión coa chave de acceso",
     "sign-up-with-passkey": "Rexistrarse coa chave de acceso",
@@ -147,7 +146,9 @@
     "resize-panel": "Cambiar tamaño do panel",
     "resize-sidebar": "Cambiar tamaño da barra lateral",
     "sign-in-to-memos": "Iniciar sesión en Memos",
-    "view-all": "Ver todo"
+    "view-all": "Ver todo",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Non se atopou o idioma? Enviar comentarios"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nova nota neste día",

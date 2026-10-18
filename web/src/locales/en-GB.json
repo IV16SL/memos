@@ -46,7 +46,6 @@
     "sso-signup-tip": "Sign in with a provider below to create your account.",
     "welcome-back": "Welcome back.",
     "passkey-signin-failed": "Passkey sign-in failed.",
-    "passkey-signup-description": "Create your account with a passkey. You'll sign in with your device's biometrics or security key instead of a password.",
     "passkey-signup-failed": "Passkey sign-up failed.",
     "sign-in-with-passkey": "Sign in with passkey",
     "sign-up-with-passkey": "Sign up with passkey",
@@ -147,7 +146,9 @@
     "resize-panel": "Resize panel",
     "resize-sidebar": "Resize sidebar",
     "sign-in-to-memos": "Sign in to Memos",
-    "view-all": "View all"
+    "view-all": "View all",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Language not found? Submit feedback"
@@ -1022,7 +1023,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "New memo on this day",

@@ -46,7 +46,6 @@
     "sso-signup-tip": "Conectați-vă cu un furnizor de mai jos pentru a vă crea contul.",
     "welcome-back": "Bine ați revenit.",
     "passkey-signin-failed": "Autentificarea cu cheia de acces a eșuat.",
-    "passkey-signup-description": "Creați-vă contul cu o cheie de acces. Vă veți autentifica cu datele biometrice ale dispozitivului sau cu o cheie de securitate în locul unei parole.",
     "passkey-signup-failed": "Înregistrarea cu cheia de acces a eșuat.",
     "sign-in-with-passkey": "Autentificare cu cheia de acces",
     "sign-up-with-passkey": "Înregistrare cu cheia de acces",
@@ -185,7 +184,9 @@
     "resize-panel": "Redimensionați panoul",
     "resize-sidebar": "Redimensionați bara laterală",
     "sign-in-to-memos": "Conectați-vă la Memos",
-    "view-all": "Vizualizați tot"
+    "view-all": "Vizualizați tot",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Limba nu a fost găsită? Trimiteți feedback"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Memo nou în această zi",

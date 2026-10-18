@@ -46,7 +46,6 @@
     "sso-signup-tip": "Đăng nhập bằng nhà cung cấp bên dưới để tạo tài khoản của bạn.",
     "welcome-back": "Chào mừng bạn trở lại.",
     "passkey-signin-failed": "Đăng nhập bằng passkey thất bại.",
-    "passkey-signup-description": "Tạo tài khoản của bạn bằng passkey. Bạn sẽ đăng nhập bằng sinh trắc học của thiết bị hoặc khóa bảo mật thay vì mật khẩu.",
     "passkey-signup-failed": "Đăng ký bằng passkey thất bại.",
     "sign-in-with-passkey": "Đăng nhập bằng passkey",
     "sign-up-with-passkey": "Đăng ký bằng passkey",
@@ -147,7 +146,9 @@
     "resize-sidebar": "Thay đổi kích thước thanh bên",
     "sign-in-to-memos": "Đăng nhập vào Memos",
     "unlink": "Hủy liên kết",
-    "view-all": "Xem tất cả"
+    "view-all": "Xem tất cả",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Không tìm thấy ngôn ngữ? Gửi phản hồi"
@@ -1050,7 +1051,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Ghi chú mới trong ngày này",

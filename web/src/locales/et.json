@@ -46,7 +46,6 @@
     "sso-signup-tip": "Konto loomiseks logige sisse alloleva teenusepakkujaga.",
     "welcome-back": "Tere tulemast tagasi.",
     "passkey-signin-failed": "Pääsuvõtmega sisselogimine ebaõnnestus.",
-    "passkey-signup-description": "Loo oma konto pääsuvõtmega. Logid sisse oma seadme biomeetria või turvavõtmega parooli asemel.",
     "passkey-signup-failed": "Pääsuvõtmega registreerimine ebaõnnestus.",
     "sign-in-with-passkey": "Logi sisse pääsuvõtmega",
     "sign-up-with-passkey": "Registreeru pääsuvõtmega",
@@ -185,7 +184,9 @@
     "resize-panel": "Paneeli suuruse muutmine",
     "resize-sidebar": "Külgriba suuruse muutmine",
     "sign-in-to-memos": "Logi sisse Memos",
-    "view-all": "Kuva kõik"
+    "view-all": "Kuva kõik",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Keelt ei leitud? Esitage tagasisidet"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Uus memo sel päeval",

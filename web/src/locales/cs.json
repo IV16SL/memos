@@ -46,7 +46,6 @@
     "sso-signup-tip": "Přihlaste se k níže uvedenému poskytovateli a vytvořte si účet.",
     "welcome-back": "Vítejte zpět.",
     "passkey-signin-failed": "Přihlášení pomocí přístupového klíče se nezdařilo.",
-    "passkey-signup-description": "Vytvořte si účet pomocí přístupového klíče. Budete se přihlašovat pomocí biometrických údajů zařízení nebo bezpečnostního klíče místo hesla.",
     "passkey-signup-failed": "Registrace pomocí přístupového klíče se nezdařila.",
     "sign-in-with-passkey": "Přihlásit se přístupovým klíčem",
     "sign-up-with-passkey": "Registrovat se přístupovým klíčem",
@@ -147,7 +146,9 @@
     "resize-panel": "Změnit velikost panelu",
     "resize-sidebar": "Změnit velikost postranního panelu",
     "sign-in-to-memos": "Přihlásit se do Memos",
-    "view-all": "Zobrazit vše"
+    "view-all": "Zobrazit vše",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Jazyk nenalezen? Odeslat zpětnou vazbu"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nová poznámka z tohoto dne",

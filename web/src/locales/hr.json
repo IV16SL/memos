@@ -46,7 +46,6 @@
     "sso-signup-tip": "Prijavite se s davateljem usluga u nastavku kako biste stvorili svoj račun.",
     "welcome-back": "Dobrodošli natrag.",
     "passkey-signin-failed": "Prijava pristupnim ključem nije uspjela.",
-    "passkey-signup-description": "Stvorite svoj račun pristupnim ključem. Prijavljivat ćete se biometrijom svog uređaja ili sigurnosnim ključem umjesto lozinkom.",
     "passkey-signup-failed": "Registracija pristupnim ključem nije uspjela.",
     "sign-in-with-passkey": "Prijava pristupnim ključem",
     "sign-up-with-passkey": "Registracija pristupnim ključem",
@@ -147,7 +146,9 @@
     "resize-panel": "Promijeni veličinu ploče",
     "resize-sidebar": "Promijeni veličinu bočne trake",
     "sign-in-to-memos": "Prijavi se na Memos",
-    "view-all": "Pogledaj sve"
+    "view-all": "Pogledaj sve",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Jezik nije pronađen? Pošaljite povratne informacije"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nova bilješka na današnji dan",

@@ -46,7 +46,6 @@
     "sso-signup-tip": "아래 제공업체로 로그인하여 계정을 만드세요.",
     "welcome-back": "다시 오신 것을 환영합니다.",
     "passkey-signin-failed": "패스키 로그인에 실패했습니다.",
-    "passkey-signup-description": "패스키로 계정을 만드세요. 비밀번호 대신 기기의 생체 인증이나 보안 키로 로그인합니다.",
     "passkey-signup-failed": "패스키 가입에 실패했습니다.",
     "sign-in-with-passkey": "패스키로 로그인",
     "sign-up-with-passkey": "패스키로 가입",
@@ -147,7 +146,9 @@
     "resize-sidebar": "사이드바 크기 조정",
     "sign-in-to-memos": "Memos에 로그인",
     "unlink": "연결 해제",
-    "view-all": "모두 보기"
+    "view-all": "모두 보기",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "언어를 찾을 수 없나요? 피드백 제출"
@@ -1050,7 +1051,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "오늘 새 메모가 있습니다.",

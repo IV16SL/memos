@@ -46,7 +46,6 @@
     "sso-signup-tip": "התחברו באמצעות ספק למטה כדי ליצור את החשבון שלכם.",
     "welcome-back": "ברוכים הבאים.",
     "passkey-signin-failed": "ההתחברות עם מפתח הגישה נכשלה.",
-    "passkey-signup-description": "צרו את החשבון שלכם עם מפתח גישה. תתחברו עם הביומטריה של המכשיר או מפתח אבטחה במקום סיסמה.",
     "passkey-signup-failed": "ההרשמה עם מפתח הגישה נכשלה.",
     "sign-in-with-passkey": "התחברות עם מפתח גישה",
     "sign-up-with-passkey": "הרשמה עם מפתח גישה",
@@ -218,7 +217,9 @@
     "collapse-panel": "כווץ את הפאנל",
     "expand-panel": "הרחב את הפאנל",
     "resize-panel": "שינוי גודל הפאנל",
-    "view-all": "הצג הכל"
+    "view-all": "הצג הכל",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "לא מצאתם את השפה? שלחו משוב"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "תזכיר חדש ביום זה",

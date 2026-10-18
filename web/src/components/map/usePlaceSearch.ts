@@ -1,9 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import { isAmapConfigured, loadAmap, loadAmapPlugins, type AmapPlaceSearch, type AmapPlaceSearchResult, type AmapStatic } from "./amap";
 import { gcj02ToWgs84, wgs84ToGcj02 } from "./gcj02";
 import type { MapPoint } from "./types";
-
-/** Amap Web API key for place search. Set via VITE_AMAP_API_KEY at build time. */
-const AMAP_API_KEY = import.meta.env.VITE_AMAP_API_KEY as string | undefined;
 
 const NOMINATIM = {
   endpoint: "https://nominatim.openstreetmap.org/search",
@@ -22,45 +20,45 @@ export interface PlaceResult {
   lng: number;
 }
 
-interface AmapPoi {
-  name?: string;
-  address?: string;
-  /** "lng,lat" in GCJ-02. */
-  location?: string;
-}
-
-function toPlaceResults(pois: AmapPoi[]): PlaceResult[] {
+function toPlaceResults(result: AmapPlaceSearchResult): PlaceResult[] {
+  const pois = result.poiList?.pois ?? [];
   return pois.flatMap((poi) => {
-    const [lng, lat] = (poi.location ?? "").split(",").map(Number);
+    const lng = poi.location?.getLng();
+    const lat = poi.location?.getLat();
     if (!poi.name || !Number.isFinite(lat) || !Number.isFinite(lng)) return [];
     const [wLat, wLng] = gcj02ToWgs84(lat, lng);
     return [{ name: poi.name, address: poi.address ?? "", lat: wLat, lng: wLng }];
   });
 }
 
-async function fetchAmapPois(url: string): Promise<PlaceResult[]> {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-  const data = await response.json();
-  if (data?.status !== "1") throw new Error(`Amap place search failed: ${data?.info ?? "unknown"}`);
-  return toPlaceResults((data?.pois ?? []) as AmapPoi[]);
+function searchWith(searcher: AmapPlaceSearch, keywords: string): Promise<PlaceResult[]> {
+  return new Promise((resolve, reject) => {
+    searcher.search(keywords, (status, result) => {
+      if (status === "complete" || status === "no_data") resolve(toPlaceResults(result));
+      else reject(new Error(`Amap place search failed: ${status}`));
+    });
+  });
 }
 
-/** Nearby search around a center point, sorted by distance. */
-async function searchAmapAround(query: string, center: MapPoint): Promise<PlaceResult[]> {
+function searchNearByWith(searcher: AmapPlaceSearch, AMap: AmapStatic, keywords: string, center: MapPoint): Promise<PlaceResult[]> {
   // Amap expects GCJ-02 coordinates.
   const [gLat, gLng] = wgs84ToGcj02(center.lat, center.lng);
-  const url =
-    `https://restapi.amap.com/v3/place/around?key=${AMAP_API_KEY}` +
-    `&location=${gLng},${gLat}&radius=${AROUND_RADIUS}` +
-    `&keywords=${encodeURIComponent(query)}&sortrule=distance&extensions=base`;
-  return fetchAmapPois(url);
+  return new Promise((resolve, reject) => {
+    searcher.searchNearBy(keywords, new AMap.LngLat(gLng, gLat), AROUND_RADIUS, (status, result) => {
+      if (status === "complete" || status === "no_data") resolve(toPlaceResults(result));
+      else reject(new Error(`Amap nearby search failed: ${status}`));
+    });
+  });
 }
 
-/** Nationwide keyword search. */
-async function searchAmapText(query: string): Promise<PlaceResult[]> {
-  const url = `https://restapi.amap.com/v3/place/text?key=${AMAP_API_KEY}&keywords=${encodeURIComponent(query)}&extensions=base`;
-  return fetchAmapPois(url);
+/** Haversine distance in meters between two WGS-84 points. */
+function distanceMeters(aLat: number, aLng: number, bLat: number, bLng: number): number {
+  const rad = Math.PI / 180;
+  const dLat = (bLat - aLat) * rad;
+  const dLng = (bLng - aLng) * rad;
+  const h =
+    Math.sin(dLat / 2) ** 2 + Math.cos(aLat * rad) * Math.cos(bLat * rad) * Math.sin(dLng / 2) ** 2;
+  return 2 * 6371000 * Math.asin(Math.sqrt(h));
 }
 
 interface NominatimResult {
@@ -89,25 +87,38 @@ async function searchNominatim(query: string): Promise<PlaceResult[]> {
 }
 
 async function searchPlaces(query: string, biasCenter?: MapPoint): Promise<PlaceResult[]> {
-  if (!AMAP_API_KEY) return searchNominatim(query);
-  // Nearby first: search around the bias center sorted by distance, so local
-  // results rank above same-named places in other cities. Fall back to the
-  // nationwide search when nothing is nearby.
+  // Without an Amap key, fall back to Nominatim.
+  if (!isAmapConfigured()) return searchNominatim(query);
+  // Place search runs through the JS API plugin, so it uses the same key +
+  // security code as the map itself (no separate Web-service key needed).
+  const AMap = await loadAmap();
+  await loadAmapPlugins(AMap, ["AMap.PlaceSearch"]);
+  const searcher = new AMap.PlaceSearch({ pageSize: 10, extensions: "base" });
+  // Nearby first: search around the bias center so local results rank above
+  // same-named places in other cities. Fall back to the nationwide search
+  // when nothing is nearby.
   if (biasCenter) {
     try {
-      const nearby = await searchAmapAround(query, biasCenter);
-      if (nearby.length > 0) return nearby;
+      const nearby = await searchNearByWith(searcher, AMap, query, biasCenter);
+      if (nearby.length > 0) {
+        // Belt and suspenders: the API should already rank by distance.
+        return nearby.sort(
+          (a, b) =>
+            distanceMeters(biasCenter.lat, biasCenter.lng, a.lat, a.lng) -
+            distanceMeters(biasCenter.lat, biasCenter.lng, b.lat, b.lng),
+        );
+      }
     } catch (error) {
-      console.warn("Amap around search failed, falling back to text search:", error);
+      console.warn("Amap nearby search failed, falling back to text search:", error);
     }
   }
-  return searchAmapText(query);
+  return searchWith(searcher, query);
 }
 
 /**
- * Searches places by keyword. Amap when VITE_AMAP_API_KEY is set, Nominatim
- * otherwise. With an Amap key and a bias center, nearby results (50km,
- * distance-sorted) come first; the nationwide search is the fallback.
+ * Searches places by keyword. Amap (via the JS API PlaceSearch plugin) when
+ * configured, Nominatim otherwise. With a bias center, nearby results (50km)
+ * come first; the nationwide search is the fallback.
  */
 export const usePlaceSearch = (query: string, biasCenter?: MapPoint) => {
   // Round the bias center (~1km) so map drags don't refetch the search.

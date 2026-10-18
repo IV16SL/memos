@@ -76,7 +76,6 @@
     "verify-totp": "验证",
     "sign-in-with-passkey": "使用通行密钥登录",
     "sign-up-with-passkey": "使用通行密钥注册",
-    "passkey-signup-description": "用通行密钥创建账号。之后用设备的生物识别或安全密钥登录，不需要密码。",
     "passkey-signin-failed": "通行密钥登录失败。",
     "passkey-signup-failed": "通行密钥注册失败。"
   },

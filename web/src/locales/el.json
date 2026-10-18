@@ -46,7 +46,6 @@
     "sso-signup-tip": "Συνδεθείτε με έναν πάροχο παρακάτω για να δημιουργήσετε τον λογαριασμό σας.",
     "welcome-back": "Καλώς ορίσατε και πάλι.",
     "passkey-signin-failed": "Η σύνδεση με κλειδί πρόσβασης απέτυχε.",
-    "passkey-signup-description": "Δημιουργήστε τον λογαριασμό σας με ένα κλειδί πρόσβασης. Θα συνδέεστε με τα βιομετρικά της συσκευής σας ή ένα κλειδί ασφαλείας αντί για κωδικό.",
     "passkey-signup-failed": "Η εγγραφή με κλειδί πρόσβασης απέτυχε.",
     "sign-in-with-passkey": "Σύνδεση με κλειδί πρόσβασης",
     "sign-up-with-passkey": "Εγγραφή με κλειδί πρόσβασης",
@@ -185,7 +184,9 @@
     "resize-panel": "Αλλαγή μεγέθους πίνακα",
     "resize-sidebar": "Αλλαγή μεγέθους πλευρικής γραμμής",
     "sign-in-to-memos": "Σύνδεση στο Memos",
-    "view-all": "Προβολή όλων"
+    "view-all": "Προβολή όλων",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Δεν βρέθηκε η γλώσσα; Υποβολή σχολίων"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Νέο σημείωμα αυτήν την ημέρα",

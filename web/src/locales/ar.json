@@ -46,7 +46,6 @@
     "sso-signup-tip": "سجّل الدخول باستخدام أحد مزودي الخدمة أدناه لإنشاء حسابك.",
     "welcome-back": "أهلاً بعودتك.",
     "passkey-signin-failed": "فشل تسجيل الدخول بمفتاح المرور.",
-    "passkey-signup-description": "أنشئ حسابك باستخدام مفتاح مرور. ستسجّل الدخول باستخدام المقاييس الحيوية لجهازك أو مفتاح الأمان بدلاً من كلمة المرور.",
     "passkey-signup-failed": "فشل إنشاء الحساب بمفتاح المرور.",
     "sign-in-with-passkey": "تسجيل الدخول بمفتاح المرور",
     "sign-up-with-passkey": "إنشاء حساب بمفتاح المرور",
@@ -147,7 +146,9 @@
     "resize-sidebar": "تغيير حجم الشريط الجانبي",
     "sign-in-to-memos": "تسجيل الدخول إلى Memos",
     "unlink": "إلغاء الارتباط",
-    "view-all": "عرض الكل"
+    "view-all": "عرض الكل",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "لم يتم العثور على اللغة؟ إرسال ردود الفعل"
@@ -1050,7 +1051,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "مذكرة جديدة في هذا اليوم",

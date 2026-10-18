@@ -46,7 +46,6 @@
     "sso-signup-tip": "Prijavite se s spodnjim ponudnikom, da ustvarite svoj račun.",
     "welcome-back": "Dobrodošli nazaj.",
     "passkey-signin-failed": "Prijava z geslom za dostop ni uspela.",
-    "passkey-signup-description": "Ustvarite svoj račun z geslom za dostop. Prijavljali se boste z biometrijo svoje naprave ali varnostnim ključem namesto z geslom.",
     "passkey-signup-failed": "Registracija z geslom za dostop ni uspela.",
     "sign-in-with-passkey": "Prijava z geslom za dostop",
     "sign-up-with-passkey": "Registracija z geslom za dostop",
@@ -147,7 +146,9 @@
     "resize-panel": "Spremeni velikost plošče",
     "resize-sidebar": "Spremeni velikost stranske vrstice",
     "sign-in-to-memos": "Prijava v Memos",
-    "view-all": "Ogled vseh"
+    "view-all": "Ogled vseh",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Jezik ni bil najden? Pošlji povratne informacije"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nova beležka na ta dan",

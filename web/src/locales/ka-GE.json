@@ -46,7 +46,6 @@
     "sso-signup-tip": "ანგარიშის შესაქმნელად შედით ქვემოთ მოცემული პროვაიდერის მეშვეობით.",
     "welcome-back": "კეთილი იყოს თქვენი დაბრუნება.",
     "passkey-signin-failed": "Passkey-ით შესვლა ვერ მოხერხდა.",
-    "passkey-signup-description": "შექმენით თქვენი ანგარიში passkey-ით. პაროლის ნაცვლად შეხვალთ თქვენი მოწყობილობის ბიომეტრიით ან უსაფრთხოების გასაღებით.",
     "passkey-signup-failed": "Passkey-ით რეგისტრაცია ვერ მოხერხდა.",
     "sign-in-with-passkey": "Passkey-ით შესვლა",
     "sign-up-with-passkey": "Passkey-ით რეგისტრაცია",
@@ -147,7 +146,9 @@
     "resize-panel": "პანელის ზომის შეცვლა",
     "resize-sidebar": "გვერდითი ზოლის ზომის შეცვლა",
     "sign-in-to-memos": "შესვლა Memos-ში",
-    "view-all": "ყველას ნახვა"
+    "view-all": "ყველას ნახვა",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "ენა ვერ მოიძებნა? გამოხმაურება"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "ახალი შენიშვნა ამ დღეს",

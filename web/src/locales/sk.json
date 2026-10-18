@@ -46,7 +46,6 @@
     "sso-signup-tip": "Prihláste sa pomocou poskytovateľa nižšie a vytvorte si účet.",
     "welcome-back": "Vitajte späť.",
     "passkey-signin-failed": "Prihlásenie pomocou prístupového kľúča zlyhalo.",
-    "passkey-signup-description": "Vytvorte si účet pomocou prístupového kľúča. Budete sa prihlasovať pomocou biometrických údajov zariadenia alebo bezpečnostného kľúča namiesto hesla.",
     "passkey-signup-failed": "Registrácia pomocou prístupového kľúča zlyhala.",
     "sign-in-with-passkey": "Prihlásiť sa prístupovým kľúčom",
     "sign-up-with-passkey": "Registrovať sa prístupovým kľúčom",
@@ -185,7 +184,9 @@
     "resize-panel": "Zmeniť veľkosť panela",
     "resize-sidebar": "Zmeniť veľkosť bočného panela",
     "sign-in-to-memos": "Prihlásiť sa do Memos",
-    "view-all": "Zobraziť všetko"
+    "view-all": "Zobraziť všetko",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Jazyk sa nenašiel? Odoslať spätnú väzbu"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nová poznámka v tento deň",

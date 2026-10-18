@@ -46,7 +46,6 @@
     "sso-signup-tip": "Влезте с доставчик по-долу, за да създадете профил.",
     "welcome-back": "Добре дошли отново.",
     "passkey-signin-failed": "Входът с ключ за достъп не бе успешен.",
-    "passkey-signup-description": "Създайте акаунта си с ключ за достъп. Ще влизате с биометричните данни на устройството си или със защитен ключ вместо парола.",
     "passkey-signup-failed": "Регистрацията с ключ за достъп не бе успешна.",
     "sign-in-with-passkey": "Вход с ключ за достъп",
     "sign-up-with-passkey": "Регистрация с ключ за достъп",
@@ -185,7 +184,9 @@
     "resize-panel": "Панел за преоразмеряване",
     "resize-sidebar": "Преоразмеряване на страничната лента",
     "sign-in-to-memos": "Влизане в Memos",
-    "view-all": "Вижте всички"
+    "view-all": "Вижте всички",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Езикът не е намерен? Изпратете обратна връзка"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Нова бележка на този ден",

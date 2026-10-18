@@ -46,7 +46,6 @@
     "sso-signup-tip": "Inicie sesión con un proveedor a continuación para crear su cuenta.",
     "welcome-back": "Bienvenido de nuevo.",
     "passkey-signin-failed": "Error al iniciar sesión con clave de acceso.",
-    "passkey-signup-description": "Crea tu cuenta con una clave de acceso. Iniciarás sesión con la biometría de tu dispositivo o una llave de seguridad en lugar de una contraseña.",
     "passkey-signup-failed": "Error al registrarse con clave de acceso.",
     "sign-in-with-passkey": "Iniciar sesión con clave de acceso",
     "sign-up-with-passkey": "Registrarse con clave de acceso",
@@ -147,7 +146,9 @@
     "resize-panel": "Cambiar tamaño del panel",
     "resize-sidebar": "Cambiar tamaño de la barra lateral",
     "sign-in-to-memos": "Iniciar sesión en Memos",
-    "view-all": "Ver todo"
+    "view-all": "Ver todo",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "¿Idioma no encontrado? Enviar comentarios"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nuevo memorándum en este día",

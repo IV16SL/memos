@@ -46,7 +46,6 @@
     "sso-signup-tip": "เข้าสู่ระบบด้วยผู้ให้บริการด้านล่างเพื่อสร้างบัญชีของคุณ",
     "welcome-back": "ยินดีต้อนรับกลับ",
     "passkey-signin-failed": "เข้าสู่ระบบด้วยพาสคีย์ไม่สำเร็จ",
-    "passkey-signup-description": "สร้างบัญชีของคุณด้วยพาสคีย์ คุณจะเข้าสู่ระบบด้วยไบโอเมตริกซ์ของอุปกรณ์หรือคีย์ความปลอดภัยแทนรหัสผ่าน",
     "passkey-signup-failed": "สมัครสมาชิกด้วยพาสคีย์ไม่สำเร็จ",
     "sign-in-with-passkey": "เข้าสู่ระบบด้วยพาสคีย์",
     "sign-up-with-passkey": "สมัครสมาชิกด้วยพาสคีย์",
@@ -147,7 +146,9 @@
     "resize-sidebar": "ปรับขนาดแถบด้านข้าง",
     "sign-in-to-memos": "เข้าสู่ระบบ Memos",
     "unlink": "ยกเลิกการเชื่อมโยง",
-    "view-all": "ดูทั้งหมด"
+    "view-all": "ดูทั้งหมด",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "ไม่พบภาษา? ส่งข้อเสนอแนะ"
@@ -1050,7 +1051,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "บันทึกช่วยจำใหม่ในวันนี้",

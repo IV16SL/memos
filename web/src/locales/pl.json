@@ -46,7 +46,6 @@
     "sso-signup-tip": "Zaloguj się u dostawcy poniżej, aby utworzyć konto.",
     "welcome-back": "Witamy ponownie.",
     "passkey-signin-failed": "Logowanie przy użyciu klucza dostępu nie powiodło się.",
-    "passkey-signup-description": "Utwórz konto przy użyciu klucza dostępu. Będziesz logować się przy użyciu biometrii urządzenia lub klucza bezpieczeństwa zamiast hasła.",
     "passkey-signup-failed": "Rejestracja przy użyciu klucza dostępu nie powiodła się.",
     "sign-in-with-passkey": "Zaloguj się kluczem dostępu",
     "sign-up-with-passkey": "Zarejestruj się kluczem dostępu",
@@ -147,7 +146,9 @@
     "resize-panel": "Zmień rozmiar panelu",
     "resize-sidebar": "Zmień rozmiar paska bocznego",
     "sign-in-to-memos": "Zaloguj się do Memos",
-    "view-all": "Wyświetl wszystko"
+    "view-all": "Wyświetl wszystko",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Nie znaleziono języka? Prześlij opinię"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nowa notatka z tego dnia",

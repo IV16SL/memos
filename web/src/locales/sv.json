@@ -46,7 +46,6 @@
     "sso-signup-tip": "Logga in med en leverantör nedan för att skapa ditt konto.",
     "welcome-back": "Välkommen tillbaka.",
     "passkey-signin-failed": "Inloggning med passkey misslyckades.",
-    "passkey-signup-description": "Skapa ditt konto med en passkey. Du loggar in med enhetens biometri eller en säkerhetsnyckel istället för ett lösenord.",
     "passkey-signup-failed": "Registrering med passkey misslyckades.",
     "sign-in-with-passkey": "Logga in med passkey",
     "sign-up-with-passkey": "Registrera dig med passkey",
@@ -147,7 +146,9 @@
     "resize-panel": "Ändra storlek på panelen",
     "resize-sidebar": "Ändra storlek på sidofältet",
     "sign-in-to-memos": "Logga in på Memos",
-    "view-all": "Visa alla"
+    "view-all": "Visa alla",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Språket hittades inte? Skicka feedback"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Nytt PM denna dag",

@@ -96,6 +96,52 @@ export interface AmapStatic {
   LngLat: new (lng: number, lat: number) => AmapLngLat;
   Pixel: new (x: number, y: number) => AmapPixel;
   Size: new (width: number, height: number) => AmapSize;
+  /** Loads plugins (e.g. "AMap.PlaceSearch"); constructors appear after load. */
+  plugin(plugins: string | string[], callback: () => void): void;
+  PlaceSearch: new (opts?: AmapPlaceSearchOptions) => AmapPlaceSearch;
+  Geocoder: new (opts?: AmapGeocoderOptions) => AmapGeocoder;
+}
+
+export interface AmapPlaceSearchOptions {
+  pageSize?: number;
+  pageIndex?: number;
+  city?: string;
+  extensions?: "base" | "all";
+}
+
+export interface AmapPoi {
+  name: string;
+  address: string;
+  location: AmapLngLat;
+}
+
+export interface AmapPlaceSearchResult {
+  poiList?: { pois?: AmapPoi[] };
+}
+
+export interface AmapPlaceSearch {
+  /** Nationwide keyword search (city defaults to nationwide). */
+  search(keywords: string, callback: (status: string, result: AmapPlaceSearchResult) => void): void;
+  /** POIs within radius meters of center. */
+  searchNearBy(
+    keywords: string,
+    center: AmapLngLat,
+    radius: number,
+    callback: (status: string, result: AmapPlaceSearchResult) => void,
+  ): void;
+}
+
+export interface AmapGeocoderOptions {
+  radius?: number;
+  extensions?: "base" | "all";
+}
+
+export interface AmapRegeocodeResult {
+  regeocode?: { formattedAddress?: string };
+}
+
+export interface AmapGeocoder {
+  getAddress(lnglat: AmapLngLat, callback: (status: string, result: AmapRegeocodeResult) => void): void;
 }
 
 declare global {
@@ -142,6 +188,17 @@ export function loadAmap(): Promise<AmapStatic> {
 /** Official Amap map styles. */
 export const AMAP_STYLE_NORMAL = "amap://styles/normal";
 export const AMAP_STYLE_DARK = "amap://styles/dark";
+
+/** Loads Amap plugins (idempotent; e.g. ["AMap.PlaceSearch", "AMap.Geocoder"]). */
+export function loadAmapPlugins(AMap: AmapStatic, plugins: string[]): Promise<void> {
+  return new Promise((resolve, reject) => {
+    try {
+      AMap.plugin(plugins, resolve);
+    } catch (error) {
+      reject(error instanceof Error ? error : new Error(String(error)));
+    }
+  });
+}
 
 /** Default map features (vector layers). "point" is the POI label layer. */
 export const AMAP_FEATURES_DEFAULT = ["bg", "road", "building", "point"];

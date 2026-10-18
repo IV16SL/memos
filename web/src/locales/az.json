@@ -19,7 +19,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "about": {
     "api-docs": "API sənədləri",
@@ -68,7 +72,6 @@
     "sso-signup-tip": "Hesabınızı yaratmaq üçün aşağıdakı provayderlərdən biri ilə daxil olun.",
     "welcome-back": "Yenidən xoş gəlmisiniz.",
     "passkey-signin-failed": "Passkey ilə giriş uğursuz oldu.",
-    "passkey-signup-description": "Passkey ilə hesabınızı yaradın. Şifrə əvəzinə cihazınızın biometrik məlumatları və ya təhlükəsizlik açarı ilə daxil olacaqsınız.",
     "passkey-signup-failed": "Passkey ilə qeydiyyat uğursuz oldu.",
     "sign-in-with-passkey": "Passkey ilə daxil ol",
     "sign-up-with-passkey": "Passkey ilə qeydiyyatdan keç",
@@ -248,7 +251,9 @@
     "visibility": "Görünürlük",
     "view-all": "Hamısına bax",
     "views": "Görünüşlər",
-    "yourself": "Özünüz"
+    "yourself": "Özünüz",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Dil tapılmadı? Rəy göndərin"

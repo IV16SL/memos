@@ -46,7 +46,6 @@
     "sso-signup-tip": "Masuk dengan penyedia di bawah ini untuk membuat akun Anda.",
     "welcome-back": "Selamat datang kembali.",
     "passkey-signin-failed": "Masuk dengan kunci sandi gagal.",
-    "passkey-signup-description": "Buat akun Anda dengan kunci sandi. Anda akan masuk dengan biometrik perangkat atau kunci keamanan, bukan kata sandi.",
     "passkey-signup-failed": "Pendaftaran dengan kunci sandi gagal.",
     "sign-in-with-passkey": "Masuk dengan kunci sandi",
     "sign-up-with-passkey": "Daftar dengan kunci sandi",
@@ -147,7 +146,9 @@
     "resize-sidebar": "Ubah ukuran sidebar",
     "sign-in-to-memos": "Masuk ke Memos",
     "unlink": "Putuskan tautan",
-    "view-all": "Lihat semua"
+    "view-all": "Lihat semua",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Bahasa tidak ditemukan? Kirim masukan"
@@ -1050,7 +1051,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Memo baru pada hari ini",

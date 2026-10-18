@@ -46,7 +46,6 @@
     "sso-signup-tip": "Увійдіть за допомогою постачальника нижче, щоб створити свій обліковий запис.",
     "welcome-back": "Ласкаво просимо назад.",
     "passkey-signin-failed": "Не вдалося увійти за допомогою ключа доступу.",
-    "passkey-signup-description": "Створіть обліковий запис за допомогою ключа доступу. Ви входитимете за допомогою біометрії пристрою або ключа безпеки замість пароля.",
     "passkey-signup-failed": "Не вдалося зареєструватися за допомогою ключа доступу.",
     "sign-in-with-passkey": "Увійти з ключем доступу",
     "sign-up-with-passkey": "Зареєструватися з ключем доступу",
@@ -147,7 +146,9 @@
     "resize-panel": "Змінити розмір панелі",
     "resize-sidebar": "Змінити розмір бічної панелі",
     "sign-in-to-memos": "Увійти до Memos",
-    "view-all": "Переглянути всі"
+    "view-all": "Переглянути всі",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Мова не знайдена? Надіслати відгук"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Нова нотатка цього дня",

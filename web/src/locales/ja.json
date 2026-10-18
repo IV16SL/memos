@@ -46,7 +46,6 @@
     "sso-signup-tip": "以下のプロバイダーでサインインしてアカウントを作成してください。",
     "welcome-back": "おかえりなさい。",
     "passkey-signin-failed": "パスキーでのサインインに失敗しました。",
-    "passkey-signup-description": "パスキーでアカウントを作成します。パスワードの代わりに、デバイスの生体認証やセキュリティキーでサインインします。",
     "passkey-signup-failed": "パスキーでのサインアップに失敗しました。",
     "sign-in-with-passkey": "パスキーでサインイン",
     "sign-up-with-passkey": "パスキーでサインアップ",
@@ -147,7 +146,9 @@
     "collapse-panel": "パネルを折りたたむ",
     "expand-panel": "パネルを展開する",
     "resize-panel": "パネルのサイズを変更する",
-    "view-all": "すべて表示"
+    "view-all": "すべて表示",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "言語が見つかりませんか? フィードバックを送信する"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "この日に新しいメモが作成",

@@ -19,7 +19,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "about": {
     "api-docs": "API Belgeleri",
@@ -68,7 +72,6 @@
     "sso-signup-tip": "Hesabınızı oluşturmak için aşağıdaki sağlayıcılardan biriyle giriş yapın.",
     "welcome-back": "Tekrar hoş geldiniz.",
     "passkey-signin-failed": "Geçiş anahtarıyla giriş başarısız oldu.",
-    "passkey-signup-description": "Hesabınızı bir geçiş anahtarıyla oluşturun. Şifre yerine cihazınızın biyometrisi veya bir güvenlik anahtarıyla giriş yapacaksınız.",
     "passkey-signup-failed": "Geçiş anahtarıyla kayıt başarısız oldu.",
     "sign-in-with-passkey": "Geçiş anahtarıyla giriş yap",
     "sign-up-with-passkey": "Geçiş anahtarıyla kaydol",
@@ -177,7 +180,9 @@
     "views": "Görünümler",
     "yourself": "Kendiniz",
     "empty-placeholder": "Boş",
-    "unlink": "Bağlantıyı kaldır"
+    "unlink": "Bağlantıyı kaldır",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Dil bulunamadı mı? Geri bildirim gönder"

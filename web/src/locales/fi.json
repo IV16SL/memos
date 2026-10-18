@@ -46,7 +46,6 @@
     "sso-signup-tip": "Kirjaudu sisään alla olevalla palveluntarjoajalla luodaksesi tilisi.",
     "welcome-back": "Tervetuloa takaisin.",
     "passkey-signin-failed": "Kirjautuminen pääsyavaimella epäonnistui.",
-    "passkey-signup-description": "Luo tilisi pääsyavaimella. Kirjaudut sisään laitteesi biometriikalla tai turva-avaimella salasanan sijaan.",
     "passkey-signup-failed": "Rekisteröityminen pääsyavaimella epäonnistui.",
     "sign-in-with-passkey": "Kirjaudu pääsyavaimella",
     "sign-up-with-passkey": "Rekisteröidy pääsyavaimella",
@@ -185,7 +184,9 @@
     "resize-panel": "Muuta paneelin kokoa",
     "resize-sidebar": "Muuta sivupalkin kokoa",
     "sign-in-to-memos": "Kirjaudu sisään Memos",
-    "view-all": "Näytä kaikki"
+    "view-all": "Näytä kaikki",
+    "back": "Back",
+    "copied": "Copied"
   },
   "locale-picker": {
     "no-language-feedback": "Eikö kieltä löydy? Lähetä palautetta"
@@ -1070,7 +1071,11 @@
     "location-selected": "Selected location",
     "location-choose": "Choose a location",
     "open-in-amap": "Open in Amap",
-    "open-in-amap-aria": "Open location in Amap"
+    "open-in-amap-aria": "Open location in Amap",
+    "search-places": "Search places…",
+    "searching": "Searching…",
+    "search-no-results": "No places found",
+    "search-clear": "Clear search"
   },
   "calendar": {
     "new-memo-on-day": "Uusi muistio tänä päivänä",
