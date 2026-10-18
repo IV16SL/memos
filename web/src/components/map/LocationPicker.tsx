@@ -1,58 +1,19 @@
-import L, { LatLng } from "leaflet";
-import "leaflet/dist/leaflet.css";
 import { ExternalLinkIcon, MinusIcon, PlusIcon } from "lucide-react";
-import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { MapContainer, Marker, useMap, useMapEvents } from "react-leaflet";
+import { type ReactNode, useEffect, useRef } from "react";
+import { useResolvedTheme } from "@/hooks/useResolvedTheme";
 import { cn } from "@/lib/utils";
 import { useTranslate } from "@/utils/i18n";
-import { BasemapLayer } from "./BasemapLayer";
+import { isDarkTheme } from "@/utils/theme";
+import { AMAP_MISSING_KEY_MESSAGE, type AmapMapEvent, type AmapMarker, type AmapStatic } from "./amap";
 import { gcj02ToWgs84, wgs84ToGcj02 } from "./gcj02";
-import { defaultMarkerIcon, MinimalAttributionControl } from "./map-utils";
+import { defaultMarkerDot } from "./map-utils";
 import type { MapPoint } from "./types";
+import { useAmapMap } from "./useAmapMap";
 
-// MapPoint is WGS-84 (stored); the Amap tiles render GCJ-02. Convert at the boundary.
-const toLatLng = (point: MapPoint): LatLng => {
+// MapPoint is WGS-84 (stored); the Amap SDK renders GCJ-02. Convert at the boundary.
+const toAmapLngLat = (AMap: AmapStatic, point: MapPoint) => {
   const [lat, lng] = wgs84ToGcj02(point.lat, point.lng);
-  return new LatLng(lat, lng);
-};
-const fromLatLng = (latlng: LatLng): MapPoint => {
-  const [lat, lng] = gcj02ToWgs84(latlng.lat, latlng.lng);
-  return { lat, lng };
-};
-
-interface LocationMarkerProps {
-  position: LatLng | undefined;
-  onChange: (position: MapPoint) => void;
-  readonly?: boolean;
-}
-
-const LocationMarker = ({ position: initialPosition, onChange, readonly: readOnly }: LocationMarkerProps) => {
-  const [position, setPosition] = useState(initialPosition);
-
-  const map = useMapEvents({
-    click(e) {
-      if (readOnly) {
-        return;
-      }
-
-      setPosition(e.latlng);
-      onChange(fromLatLng(e.latlng));
-    },
-  });
-
-  useEffect(() => {
-    if (initialPosition) {
-      setPosition(initialPosition);
-      map.setView(initialPosition);
-    } else {
-      setPosition(undefined);
-    }
-  }, [initialPosition, map]);
-
-  return position === undefined ? null : (
-    <Marker position={position} icon={defaultMarkerIcon} interactive={false} keyboard={false}></Marker>
-  );
+  return new AMap.LngLat(lng, lat);
 };
 
 // Reusable glass-style button component
@@ -82,142 +43,99 @@ const GlassButton = ({ icon, onClick, ariaLabel, title }: GlassButtonProps) => {
   );
 };
 
-// Container for all map control buttons
-interface ControlButtonsProps {
-  position: MapPoint | undefined;
-  onZoomIn: () => void;
-  onZoomOut: () => void;
-  onOpenAmap: () => void;
-}
-
-const ControlButtons = ({ position, onZoomIn, onZoomOut, onOpenAmap }: ControlButtonsProps) => {
-  const t = useTranslate();
-  return (
-    <div className="flex flex-col gap-1.5">
-      {position && (
-        <GlassButton
-          icon={<ExternalLinkIcon size={16} className="text-foreground" />}
-          onClick={onOpenAmap}
-          ariaLabel={t("map.open-in-amap-aria")}
-          title={t("map.open-in-amap")}
-        />
-      )}
-      <GlassButton icon={<PlusIcon size={16} className="text-foreground" />} onClick={onZoomIn} ariaLabel={t("map.zoom-in")} title={t("map.zoom-in")} />
-      <GlassButton icon={<MinusIcon size={16} className="text-foreground" />} onClick={onZoomOut} ariaLabel={t("map.zoom-out")} title={t("map.zoom-out")} />
-    </div>
-  );
-};
-
-// Custom Leaflet Control class
-class MapControlsContainer extends L.Control {
-  private container: HTMLDivElement | undefined = undefined;
-
-  onAdd() {
-    this.container = L.DomUtil.create("div", "");
-    this.container.style.pointerEvents = "auto";
-
-    // Prevent map interactions when clicking controls
-    L.DomEvent.disableClickPropagation(this.container);
-    L.DomEvent.disableScrollPropagation(this.container);
-
-    return this.container;
-  }
-
-  onRemove() {
-    this.container = undefined;
-  }
-
-  getContainer() {
-    return this.container;
-  }
-}
-
-interface MapControlsProps {
-  position: MapPoint | undefined;
-}
-
-const MapControls = ({ position }: MapControlsProps) => {
-  const map = useMap();
-  const controlRef = useRef<MapControlsContainer | null>(null);
-  const [container, setContainer] = useState<HTMLDivElement | null>(null);
-
-  const handleOpenInAmap = () => {
-    if (!position) return;
-    // Amap URI API: position is lng,lat in GCJ-02. Convert from stored WGS-84.
-    const [gLat, gLng] = wgs84ToGcj02(position.lat, position.lng);
-    const url = `https://uri.amap.com/marker?position=${gLng},${gLat}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-
-  const handleZoomIn = () => {
-    map.zoomIn();
-  };
-
-  const handleZoomOut = () => {
-    map.zoomOut();
-  };
-
-  useEffect(() => {
-    // Create custom Leaflet control
-    const control = new MapControlsContainer({ position: "topright" });
-    controlRef.current = control;
-    control.addTo(map);
-    setContainer(control.getContainer() ?? null);
-
-    return () => {
-      if (controlRef.current) {
-        controlRef.current.remove();
-        controlRef.current = null;
-      }
-      setContainer(null);
-    };
-  }, [map]);
-
-  if (!container) {
-    return null;
-  }
-
-  return createPortal(
-    <ControlButtons position={position} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} onOpenAmap={handleOpenInAmap} />,
-    container,
-  );
-};
-
-const MapCleanup = () => {
-  const map = useMap();
-
-  useEffect(() => {
-    return () => {
-      // Cleanup map instance when component unmounts
-      setTimeout(() => {
-        if (map) {
-          try {
-            map.remove();
-          } catch {
-            // Ignore errors during cleanup
-          }
-        }
-      }, 0);
-    };
-  }, [map]);
-
-  return null;
-};
-
 interface LocationPickerProps {
   readonly?: boolean;
   latlng?: MapPoint;
   onChange?: (position: MapPoint) => void;
+  onCenterChange?: (center: MapPoint) => void;
   className?: string;
 }
 
 const DEFAULT_CENTER: MapPoint = { lat: 39.9042, lng: 116.4074 }; // Beijing
 const noopOnLocationChange = () => {};
 
-const LocationPicker = ({ readonly: readOnly = false, latlng, onChange = noopOnLocationChange, className }: LocationPickerProps) => {
+const LocationPicker = ({
+  readonly: readOnly = false,
+  latlng,
+  onChange = noopOnLocationChange,
+  onCenterChange,
+  className,
+}: LocationPickerProps) => {
   const t = useTranslate();
-  const mapCenter = useMemo(() => toLatLng(latlng ?? DEFAULT_CENTER), [latlng?.lat, latlng?.lng]);
-  const markerPosition = latlng ? mapCenter : undefined;
+  const dark = isDarkTheme(useResolvedTheme());
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { map, AMap, error } = useAmapMap(containerRef, {
+    center: latlng ?? DEFAULT_CENTER,
+    zoom: 13,
+    dark,
+    scrollWheel: false,
+  });
+
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
+  const onCenterChangeRef = useRef(onCenterChange);
+  onCenterChangeRef.current = onCenterChange;
+  const markerRef = useRef<AmapMarker | null>(null);
+
+  // Click on the map places the marker.
+  useEffect(() => {
+    if (!map || readOnly) return;
+    const handleClick = (e: AmapMapEvent) => {
+      const [lat, lng] = gcj02ToWgs84(e.lnglat.getLat(), e.lnglat.getLng());
+      onChangeRef.current({ lat, lng });
+    };
+    map.on("click", handleClick);
+    return () => {
+      map.off("click", handleClick);
+    };
+  }, [map, readOnly]);
+
+  // Keep the marker in sync with the latlng prop; recenter on change.
+  useEffect(() => {
+    if (!map || !AMap) return;
+    if (!latlng) {
+      if (markerRef.current) {
+        map.remove(markerRef.current);
+        markerRef.current = null;
+      }
+      return;
+    }
+    const position = toAmapLngLat(AMap, latlng);
+    if (!markerRef.current) {
+      markerRef.current = new AMap.Marker({
+        position,
+        content: defaultMarkerDot.html,
+        offset: new AMap.Pixel(-defaultMarkerDot.size / 2, -defaultMarkerDot.size / 2),
+      });
+      map.add(markerRef.current);
+    } else {
+      markerRef.current.setPosition(position);
+    }
+    map.setCenter(position);
+  }, [map, AMap, latlng?.lat, latlng?.lng]);
+
+  // Report the map center for nearby-biased place search.
+  useEffect(() => {
+    if (!map) return;
+    const handleMoveEnd = () => {
+      const center = map.getCenter();
+      const [lat, lng] = gcj02ToWgs84(center.getLat(), center.getLng());
+      onCenterChangeRef.current?.({ lat, lng });
+    };
+    map.on("moveend", handleMoveEnd);
+    return () => {
+      map.off("moveend", handleMoveEnd);
+    };
+  }, [map]);
+
+  const handleOpenInAmap = () => {
+    if (!latlng) return;
+    // Amap URI API: position is lng,lat in GCJ-02. Convert from stored WGS-84.
+    const [gLat, gLng] = wgs84ToGcj02(latlng.lat, latlng.lng);
+    const url = `https://uri.amap.com/marker?position=${gLng},${gLat}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
   const statusLabel = latlng ? t("map.location-selected") : t("map.location-choose");
 
   return (
@@ -227,26 +145,43 @@ const LocationPicker = ({ readonly: readOnly = false, latlng, onChange = noopOnL
         className,
       )}
     >
-      <MapContainer
-        className="map-attribution-minimal h-full w-full !bg-muted"
-        center={mapCenter}
-        zoom={13}
-        scrollWheelZoom={false}
-        zoomControl={false}
-        attributionControl={false}
-      >
-        <MinimalAttributionControl />
-        <BasemapLayer />
-        <LocationMarker position={markerPosition} readonly={readOnly} onChange={onChange} />
-        <MapControls position={latlng} />
-        <MapCleanup />
-      </MapContainer>
+      <div ref={containerRef} className="h-full w-full bg-muted" />
+      {error && (
+        <div className="absolute inset-0 grid place-items-center bg-muted p-4 text-center text-sm text-muted-foreground">
+          {AMAP_MISSING_KEY_MESSAGE}
+        </div>
+      )}
 
       {!readOnly && (
-        <div className="pointer-events-none absolute left-3 top-3 z-[450] flex items-center gap-2">
+        <div className="pointer-events-none absolute left-3 top-3 z-10 flex items-center gap-2">
           <div className="rounded-full border border-border bg-background/92 px-2.5 py-1 text-[11px] font-medium tracking-[0.02em] text-foreground/80 shadow-sm backdrop-blur-sm">
             {statusLabel}
           </div>
+        </div>
+      )}
+
+      {map && (
+        <div className="absolute right-3 top-3 z-10 flex flex-col gap-1.5">
+          {latlng && (
+            <GlassButton
+              icon={<ExternalLinkIcon size={16} className="text-foreground" />}
+              onClick={handleOpenInAmap}
+              ariaLabel={t("map.open-in-amap-aria")}
+              title={t("map.open-in-amap")}
+            />
+          )}
+          <GlassButton
+            icon={<PlusIcon size={16} className="text-foreground" />}
+            onClick={() => map.zoomIn()}
+            ariaLabel={t("map.zoom-in")}
+            title={t("map.zoom-in")}
+          />
+          <GlassButton
+            icon={<MinusIcon size={16} className="text-foreground" />}
+            onClick={() => map.zoomOut()}
+            ariaLabel={t("map.zoom-out")}
+            title={t("map.zoom-out")}
+          />
         </div>
       )}
     </div>

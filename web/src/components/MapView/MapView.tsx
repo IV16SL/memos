@@ -1,5 +1,4 @@
 import { create } from "@bufbuild/protobuf";
-import type L from "leaflet";
 import { CrosshairIcon, MinusIcon, PlusIcon } from "lucide-react";
 import { type CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -15,7 +14,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 import { LocationSchema } from "@/types/proto/api/memo_service_pb";
 import { useTranslate } from "@/utils/i18n";
-import { fitMemos, MapCanvas } from "./MapCanvas";
+import { MapCanvas, type MapController } from "./MapCanvas";
 import { locationKey, type MapViewport, pointLabel, readViewport, splitLabel } from "./model";
 import { useMapMemos } from "./useMapMemos";
 import { useMapPins } from "./useMapPins";
@@ -35,7 +34,7 @@ export function MapView() {
   const { filters, removeFilter } = useMemoFilterContext();
   const query = useMapMemos();
   const pins = useMapPins(query.memos, !creatorUsername);
-  const mapRef = useRef<L.Map | null>(null);
+  const mapCtlRef = useRef<MapController | null>(null);
   const [panelSize, setPanelSize] = useState<MemoPanelSize>({ width: 0, height: 0 });
   // Only a real change may re-render the map tree.
   const onPanelSize = useCallback(
@@ -47,7 +46,8 @@ export function MapView() {
       }),
     [],
   );
-  const [tileError, setTileError] = useState(false);
+  const [mapError, setMapError] = useState(false);
+  const [mapNonce, setMapNonce] = useState(0);
   const [saving, setSaving] = useState(false);
   const [composing, setComposing] = useState(false);
   const viewport = readViewport(location.search);
@@ -87,8 +87,8 @@ export function MapView() {
       }, true),
     [updateQuery],
   );
-  const onReady = useCallback((map: L.Map | null) => {
-    mapRef.current = map;
+  const onReady = useCallback((ctl: MapController | null) => {
+    mapCtlRef.current = ctl;
   }, []);
   const onSelect = (names: string[]) => {
     if (saving) return;
@@ -176,6 +176,7 @@ export function MapView() {
       data-map-page
     >
       <MapCanvas
+        key={mapNonce}
         memos={query.memos}
         pins={pins}
         selected={selected}
@@ -188,7 +189,7 @@ export function MapView() {
         onDismiss={() => !composing && clearSelection()}
         onMove={onMove}
         onReady={onReady}
-        onTileError={() => setTileError(true)}
+        onMapError={() => setMapError(true)}
       />
       <h1 className="sr-only">{t("common.map")}</h1>
       {!query.complete && !query.isError && (
@@ -216,7 +217,7 @@ export function MapView() {
                 className={toolClass}
                 aria-label={t("map.zoom-in")}
                 title={t("map.zoom-in")}
-                onClick={() => mapRef.current?.zoomIn()}
+                onClick={() => mapCtlRef.current?.zoomIn()}
               >
                 <PlusIcon strokeWidth={1.75} />
               </button>
@@ -225,7 +226,7 @@ export function MapView() {
                 className={toolClass}
                 aria-label={t("map.zoom-out")}
                 title={t("map.zoom-out")}
-                onClick={() => mapRef.current?.zoomOut()}
+                onClick={() => mapCtlRef.current?.zoomOut()}
               >
                 <MinusIcon strokeWidth={1.75} />
               </button>
@@ -239,7 +240,7 @@ export function MapView() {
             title={t("map.fit-all")}
             disabled={query.memos.length === 0}
             onClick={() => {
-              if (mapRef.current) fitMemos(mapRef.current, query.memos);
+              mapCtlRef.current?.fitMemos(query.memos);
             }}
           >
             <CrosshairIcon strokeWidth={1.75} />
@@ -255,17 +256,15 @@ export function MapView() {
             </button>
           </p>
         )}
-        {tileError && (
+        {mapError && (
           <p role="alert" className={cn("pointer-events-auto px-4 py-2 text-sm", surfaceClass)}>
             {t("map.tile-error")}{" "}
             <button
               type="button"
               className="ms-2 underline"
               onClick={() => {
-                setTileError(false);
-                mapRef.current?.eachLayer((layer) => {
-                  if ("redraw" in layer && typeof layer.redraw === "function") layer.redraw();
-                });
+                setMapError(false);
+                setMapNonce((n) => n + 1);
               }}
             >
               {t("search.retry")}

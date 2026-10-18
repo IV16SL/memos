@@ -1,40 +1,8 @@
-import { DivIcon } from "leaflet";
 import ReactDOMServer from "react-dom/server";
-import { AttributionControl, TileLayer, type TileLayerProps } from "react-leaflet";
+import UserAvatar from "@/components/UserAvatar";
+import { cn } from "@/lib/utils";
 
-const OPENSTREETMAP_TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-
-const OPENSTREETMAP_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-
-export const OpenStreetMapTileLayer = ({ eventHandlers }: Pick<TileLayerProps, "eventHandlers"> = {}) => (
-  <TileLayer url={OPENSTREETMAP_TILE_URL} attribution={OPENSTREETMAP_ATTRIBUTION} maxZoom={19} eventHandlers={eventHandlers} />
-);
-
-// Amap (高德) standard tiles. Public tile endpoint, no API key required.
-// Tiles are in GCJ-02; convert WGS-84 coordinates with gcj02.ts before placing markers.
-const AMAP_TILE_URL = "https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}";
-
-const AMAP_ATTRIBUTION = '&copy; <a href="https://www.amap.com/">高德地图</a>';
-
-interface AmapTileLayerProps extends Pick<TileLayerProps, "eventHandlers"> {
-  /** Apply dark-mode CSS filter to tiles (Amap publishes no dark tile style). */
-  dark?: boolean;
-}
-
-export const AmapTileLayer = ({ dark, eventHandlers }: AmapTileLayerProps = {}) => (
-  <TileLayer
-    url={AMAP_TILE_URL}
-    subdomains={["1", "2", "3", "4"]}
-    attribution={AMAP_ATTRIBUTION}
-    maxZoom={18}
-    eventHandlers={eventHandlers}
-    className={dark ? "amap-tiles-dark" : undefined}
-  />
-);
-
-export const MinimalAttributionControl = () => <AttributionControl prefix={false} />;
-
-interface MarkerIconOptions {
+export interface MarkerDotOptions {
   /** The box the dot is centered in; with a halo the tinted disc fills it. */
   size?: number;
   /** Dot diameter. Defaults to the box minus 4px, the bare dot's breathing room. */
@@ -43,26 +11,57 @@ interface MarkerIconOptions {
   halo?: boolean;
 }
 
-export const createMarkerIcon = (options?: MarkerIconOptions): DivIcon => {
+/** HTML for the plain map dot. Pair with an Amap Pixel offset of (-size/2, -size/2) to center it. */
+export function markerDotHTML(options?: MarkerDotOptions): { html: string; size: number } {
   const { size = 24, dot = size - 4, halo = false } = options || {};
-  return new DivIcon({
-    className: "relative border-none bg-transparent",
-    html: ReactDOMServer.renderToString(
-      <div
-        aria-hidden="true"
-        className={`grid place-items-center rounded-full ${halo ? "bg-primary/20" : ""}`.trim()}
-        style={{ width: size, height: size }}
-      >
-        <span
-          className="rounded-full border-2 border-white shadow-[0_1px_4px_rgba(15,23,42,0.4)]"
-          style={{ width: dot, height: dot, backgroundColor: "var(--primary)" }}
-        />
-      </div>,
-    ),
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
-    popupAnchor: [0, -(size / 2 + 6)],
-  });
-};
+  const html = ReactDOMServer.renderToString(
+    <div
+      aria-hidden="true"
+      className={cn("grid place-items-center rounded-full", halo && "bg-primary/20")}
+      style={{ width: size, height: size }}
+    >
+      <span
+        className="rounded-full border-2 border-white shadow-[0_1px_4px_rgba(15,23,42,0.4)]"
+        style={{ width: dot, height: dot, backgroundColor: "var(--primary)" }}
+      />
+    </div>,
+  );
+  return { html, size };
+}
 
-export const defaultMarkerIcon = createMarkerIcon();
+export const defaultMarkerDot = markerDotHTML();
+
+const FACE_EDGE = "border-2 border-white shadow-[0_1px_4px_rgba(15,23,42,0.4)]";
+
+export type MapFaceKind = { kind: "dot" } | { kind: "photo"; url: string } | { kind: "author"; avatarUrl?: string; name?: string };
+
+/**
+ * HTML for a photo or avatar pin: a rounded photo square or round avatar,
+ * white-edged like the dot so it never blends into the basemap. Selection
+ * grows it and adds the dot's translucent halo. A photo that fails to load
+ * leaves the primary fill.
+ */
+export function faceIconHTML(face: Exclude<MapFaceKind, { kind: "dot" }>, selected: boolean): { html: string; size: number } {
+  const box = selected ? 40 : 28;
+  const side = selected ? 30 : 24;
+  const html = ReactDOMServer.renderToString(
+    <div
+      aria-hidden="true"
+      className={cn("grid place-items-center", selected && "bg-primary/20", face.kind === "photo" ? "rounded-[11px]" : "rounded-full")}
+      style={{ width: box, height: box }}
+    >
+      {face.kind === "photo" ? (
+        <span
+          className={cn("block rounded-md bg-primary bg-cover bg-center", FACE_EDGE)}
+          style={{ width: side, height: side, backgroundImage: `url(${JSON.stringify(face.url)})` }}
+        />
+      ) : (
+        <UserAvatar className={cn(FACE_EDGE, selected ? "size-[30px]" : "size-6")} avatarUrl={face.avatarUrl} name={face.name} />
+      )}
+    </div>,
+  );
+  return { html, size: box };
+}
+
+export const faceKey = (face: MapFaceKind): string =>
+  face.kind === "photo" ? `photo:${face.url}` : face.kind === "author" ? `author:${face.avatarUrl ?? ""}:${face.name ?? ""}` : "dot";

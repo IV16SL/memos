@@ -7,22 +7,31 @@ import type { MapPoint } from "./types";
 import { usePlaceSearch } from "./usePlaceSearch";
 
 interface PlaceSearchBoxProps {
-  onSelect: (point: MapPoint) => void;
+  onSelect: (point: MapPoint, name: string) => void;
+  /** Bias center for nearby-first ranking, read at search time. */
+  getBiasCenter?: () => MapPoint | undefined;
 }
 
-export const PlaceSearchBox = ({ onSelect }: PlaceSearchBoxProps) => {
+export const PlaceSearchBox = ({ onSelect, getBiasCenter }: PlaceSearchBoxProps) => {
   const t = useTranslate();
   const [input, setInput] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [biasCenter, setBiasCenter] = useState<MapPoint | undefined>(undefined);
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const getBiasCenterRef = useRef(getBiasCenter);
+  getBiasCenterRef.current = getBiasCenter;
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedQuery(input), 400);
+    const timer = setTimeout(() => {
+      setDebouncedQuery(input);
+      // Snapshot the map center for this search so drags don't refetch it.
+      setBiasCenter(getBiasCenterRef.current?.());
+    }, 400);
     return () => clearTimeout(timer);
   }, [input]);
 
-  const { data: results, isFetching, isError } = usePlaceSearch(debouncedQuery);
+  const { data: results, isFetching, isError } = usePlaceSearch(debouncedQuery, biasCenter);
 
   useEffect(() => {
     const handlePointerDown = (event: MouseEvent) => {
@@ -85,7 +94,7 @@ export const PlaceSearchBox = ({ onSelect }: PlaceSearchBoxProps) => {
                 key={`${result.lat},${result.lng},${index}`}
                 type="button"
                 onClick={() => {
-                  onSelect({ lat: result.lat, lng: result.lng });
+                  onSelect({ lat: result.lat, lng: result.lng }, result.name);
                   setInput(result.name);
                   setOpen(false);
                 }}

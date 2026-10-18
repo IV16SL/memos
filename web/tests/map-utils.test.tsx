@@ -1,52 +1,41 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
-import { createMarkerIcon, MinimalAttributionControl, OpenStreetMapTileLayer } from "@/components/map/map-utils";
+import { describe, expect, it } from "vitest";
+import { faceIconHTML, markerDotHTML } from "@/components/map/map-utils";
 
-vi.mock("leaflet", () => ({
-  DivIcon: class {
-    options: unknown;
-
-    constructor(options: unknown) {
-      this.options = options;
-    }
-  },
-}));
-
-vi.mock("react-leaflet", () => ({
-  AttributionControl: ({ prefix }: { prefix: string | false }) => <div data-testid="attribution-control" data-prefix={String(prefix)} />,
-  TileLayer: ({ url, attribution, maxZoom }: { url: string; attribution: string; maxZoom: number }) => (
-    <div data-testid="tile-layer" data-url={url} data-attribution={attribution} data-max-zoom={maxZoom} />
-  ),
-}));
-
-describe("OpenStreetMapTileLayer", () => {
-  it("uses the standard keyless tile endpoint with the required attribution", () => {
-    render(<OpenStreetMapTileLayer />);
-
-    const tileLayer = screen.getByTestId("tile-layer");
-    expect(tileLayer).toHaveAttribute("data-url", "https://tile.openstreetmap.org/{z}/{x}/{y}.png");
-    expect(tileLayer).toHaveAttribute("data-attribution", '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>');
-    expect(tileLayer).toHaveAttribute("data-max-zoom", "19");
-  });
-
-  it("removes Leaflet branding from the attribution control", () => {
-    render(<MinimalAttributionControl />);
-
-    expect(screen.getByTestId("attribution-control")).toHaveAttribute("data-prefix", "false");
-  });
-
+describe("markerDotHTML", () => {
   it("uses a compact location dot instead of an arrow-shaped pin", () => {
-    const marker = createMarkerIcon() as unknown as {
-      options: {
-        html: string;
-        iconSize: [number, number];
-        iconAnchor: [number, number];
-      };
-    };
+    const { html, size } = markerDotHTML();
 
-    expect(marker.options.html).not.toContain("<svg");
-    expect(marker.options.html).toContain("rounded-full");
-    expect(marker.options.iconSize).toEqual([24, 24]);
-    expect(marker.options.iconAnchor).toEqual([12, 12]);
+    expect(html).not.toContain("<svg");
+    expect(html).toContain("rounded-full");
+    expect(size).toBe(24);
+  });
+
+  it("adds a translucent halo for the selected state", () => {
+    expect(markerDotHTML({ halo: true }).html).toContain("bg-primary/20");
+    expect(markerDotHTML().html).not.toContain("bg-primary/20");
+  });
+});
+
+describe("faceIconHTML", () => {
+  it("renders a photo square", () => {
+    const { html, size } = faceIconHTML({ kind: "photo", url: "/thumb.jpg" }, false);
+
+    expect(html).toContain("/thumb.jpg");
+    expect(size).toBe(28);
+  });
+
+  it("renders an author avatar", () => {
+    const { html } = faceIconHTML({ kind: "author", avatarUrl: "/bob.png", name: "Bob" }, false);
+
+    expect(html).toContain("/bob.png");
+  });
+
+  it("grows a selected face pin and adds the halo", () => {
+    const face = { kind: "author" as const, avatarUrl: "/bob.png", name: "Bob" };
+
+    expect(faceIconHTML(face, false).size).toBe(28);
+    const selected = faceIconHTML(face, true);
+    expect(selected.size).toBe(40);
+    expect(selected.html).toContain("bg-primary/20");
   });
 });

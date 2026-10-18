@@ -20,7 +20,7 @@ const item = create(MemoSchema, {
   creator: "users/qa",
   location: { placeholder: "Kyoto", latitude: 35, longitude: 135 },
 });
-vi.mock("@/components/MapView/MapCanvas", () => ({ MapCanvas: () => <div data-testid="map" />, fitMemos: vi.fn() }));
+vi.mock("@/components/MapView/MapCanvas", () => ({ MapCanvas: () => <div data-testid="map" /> }));
 vi.mock("@/components/MemoPanel/MemoPanel", () => ({
   MEMO_PANEL_INSET: 12,
   MemoPanel: ({ open, busy, title, children }: { open: boolean; busy: boolean; title: string; children: ReactNode }) =>

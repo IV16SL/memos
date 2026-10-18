@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import type { LocationState } from "@/components/MemoEditor/types/insertMenu";
 import { LazyLocationPicker } from "@/components/map/LazyLocationPicker";
 import { PlaceSearchBox } from "@/components/map/PlaceSearchBox";
@@ -15,6 +16,7 @@ interface LocationDialogProps {
   onOpenChange: (open: boolean) => void;
   state: LocationState;
   onPositionChange: (position: MapPoint) => void;
+  onPlaceSelect: (position: MapPoint, name: string) => void;
   onUpdateCoordinate: (type: "lat" | "lng", value: string) => void;
   onPlaceholderChange: (placeholder: string) => void;
   onCancel: () => void;
@@ -26,6 +28,7 @@ export const LocationDialog = ({
   onOpenChange,
   state,
   onPositionChange,
+  onPlaceSelect,
   onUpdateCoordinate,
   onPlaceholderChange,
   onCancel,
@@ -33,6 +36,9 @@ export const LocationDialog = ({
 }: LocationDialogProps) => {
   const t = useTranslate();
   const { placeholder, position, latInput, lngInput } = state;
+  // Latest map center (ref: updated on moveend without re-rendering).
+  // Falls back to the current position so search is location-biased on open.
+  const centerRef = useRef<MapPoint | undefined>(undefined);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -48,10 +54,19 @@ export const LocationDialog = ({
         </VisuallyHidden>
         <div className="flex flex-col">
           <div className="px-3 pt-3">
-            <PlaceSearchBox onSelect={onPositionChange} />
+            <PlaceSearchBox onSelect={onPlaceSelect} getBiasCenter={() => centerRef.current ?? position} />
           </div>
           <div className="mt-3 w-full h-64 overflow-hidden bg-muted/30">
-            {open && <LazyLocationPicker className="h-full" latlng={position} onChange={onPositionChange} />}
+            {open && (
+              <LazyLocationPicker
+                className="h-full"
+                latlng={position}
+                onChange={onPositionChange}
+                onCenterChange={(center) => {
+                  centerRef.current = center;
+                }}
+              />
+            )}
           </div>
           <div className="w-full flex flex-col p-3 gap-3">
             <div className="grid grid-cols-2 gap-3">

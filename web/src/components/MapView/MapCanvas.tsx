@@ -1,18 +1,20 @@
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-import "leaflet.markercluster/dist/MarkerCluster.css";
-import { useEffect, useMemo, useRef } from "react";
-import ReactDOMServer from "react-dom/server";
-import { MapContainer, Marker, useMapEvents } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-cluster";
+import { useEffect, useRef } from "react";
 import { getLocationDisplayText } from "@/components/MemoMetadata/Location/locationHelpers";
-import { BasemapLayer } from "@/components/map/BasemapLayer";
+import { AMAP_MISSING_KEY_MESSAGE, type AmapMap, type AmapMarker, type AmapStatic } from "@/components/map/amap";
 import { gcj02ToWgs84, wgs84ToGcj02 } from "@/components/map/gcj02";
-import { createMarkerIcon, MinimalAttributionControl } from "@/components/map/map-utils";
-import UserAvatar from "@/components/UserAvatar";
+import { faceIconHTML, faceKey, markerDotHTML } from "@/components/map/map-utils";
+import { useAmapMap } from "@/components/map/useAmapMap";
+import { useResolvedTheme } from "@/hooks/useResolvedTheme";
 import { cn } from "@/lib/utils";
 import type { Memo } from "@/types/proto/api/memo_service_pb";
+import { isDarkTheme } from "@/utils/theme";
 import { type MapPin, type MapPinFace, type MapViewport, revealOffset } from "./model";
+
+export interface MapController {
+  fitMemos(memos: Memo[]): void;
+  zoomIn(): void;
+  zoomOut(): void;
+}
 
 interface Props {
   memos: Memo[];
@@ -27,102 +29,313 @@ interface Props {
   /** A click on bare map, which reads as "put that away" the way it does on a place card. */
   onDismiss: () => void;
   onMove: (viewport: MapViewport) => void;
-  onReady: (map: L.Map | null) => void;
-  onTileError: () => void;
+  onReady: (ctl: MapController | null) => void;
+  onMapError: () => void;
 }
 
 // Amap's own POI dots are small; ours are bigger, colored and white-edged so they never blend in.
-const markerIcon = createMarkerIcon({ size: 22, dot: 16 });
-const selectedIcon = createMarkerIcon({ size: 36, dot: 20, halo: true });
-const FACE_EDGE = "border-2 border-white shadow-[0_1px_4px_rgba(15,23,42,0.4)]";
+const markerDot = markerDotHTML({ size: 22, dot: 16 });
+const selectedDot = markerDotHTML({ size: 36, dot: 20, halo: true });
 
-/**
- * A photo or avatar pin, the calendar cell's marks at map scale: a rounded photo square or a
- * round avatar, white-edged like the dot so it never blends into the basemap. Selection grows
- * it and adds the dot's translucent halo. A photo that fails to load leaves the primary fill.
- */
-const createFaceIcon = (face: Exclude<MapPinFace, { kind: "dot" }>, selected: boolean): L.DivIcon => {
-  const box = selected ? 40 : 28;
-  const side = selected ? 30 : 24;
-  const html = ReactDOMServer.renderToString(
-    <div
-      aria-hidden="true"
-      className={cn("grid place-items-center", selected && "bg-primary/20", face.kind === "photo" ? "rounded-[11px]" : "rounded-full")}
-      style={{ width: box, height: box }}
-    >
-      {face.kind === "photo" ? (
-        <span
-          className={cn("block rounded-md bg-primary bg-cover bg-center", FACE_EDGE)}
-          style={{ width: side, height: side, backgroundImage: `url(${JSON.stringify(face.url)})` }}
-        />
-      ) : (
-        <UserAvatar className={cn(FACE_EDGE, selected ? "size-[30px]" : "size-6")} avatarUrl={face.avatarUrl} name={face.name} />
-      )}
-    </div>,
-  );
-  return L.divIcon({ html, className: "", iconSize: [box, box], iconAnchor: [box / 2, box / 2] });
-};
+/** Grid cell size (px) for manual clustering. */
+const GRID_SIZE = 40;
 
-const faceKey = (face: MapPinFace): string =>
-  face.kind === "photo" ? `photo:${face.url}` : face.kind === "author" ? `author:${face.avatarUrl ?? ""}:${face.name ?? ""}` : "dot";
-
-export function fitMemos(map: L.Map, memos: Memo[]) {
-  if (memos.length)
-    map.fitBounds(
-      L.latLngBounds(memos.map((memo) => wgs84ToGcj02(memo.location!.latitude, memo.location!.longitude))),
-      {
-        padding: [64, 96],
-        maxZoom: 15,
-      },
-    );
+interface ClusterMember {
+  memo: Memo;
+  /** GCJ-02, for the SDK. */
+  lat: number;
+  lng: number;
+  face: MapPinFace;
+  label: string;
 }
 
-function MapBehavior(props: Props) {
+function clusterBadgeHTML(count: number, active: boolean): string {
+  return `<span class="${cn(
+    "grid size-7 place-items-center rounded-full border-[1.5px] border-background bg-primary text-primary-foreground text-xs font-medium tabular-nums shadow-[0_1px_3px_rgba(15,23,42,0.35)]",
+    active && "outline-[4px] outline-primary/20",
+  )}">${count}</span>`;
+}
+
+export function MapCanvas(props: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dark = isDarkTheme(useResolvedTheme());
+  const initialViewport = useRef(props.viewport);
+  // Default to a China-centered view; the canvas fits memos once they load.
+  const initCenter = initialViewport.current ?? { lat: 35, lng: 105, zoom: 4 };
+
+  const { map, AMap, error } = useAmapMap(containerRef, {
+    center: { lat: initCenter.lat, lng: initCenter.lng },
+    zoom: initCenter.zoom,
+    dark,
+  });
+
   const latest = useRef(props);
   latest.current = props;
+  const mapRef = useRef<AmapMap | null>(null);
+  const apiRef = useRef<AmapStatic | null>(null);
+  const markerPool = useRef(new Map<string, AmapMarker>());
   const initialFit = useRef(Boolean(props.viewport));
-  const map = useMapEvents({
-    moveend: () => {
-      const center = map.getCenter().wrap();
-      // Map works in GCJ-02; report WGS-84 outward (viewport is stored in URL).
-      const [lat, lng] = gcj02ToWgs84(center.lat, center.lng);
-      latest.current.onMove({ lat, lng, zoom: map.getZoom() });
-    },
-    click: () => latest.current.onDismiss(),
-  });
+  // Suppress the map click that follows a marker/cluster click.
+  const suppressMapClickUntil = useRef(0);
+
   useEffect(() => {
-    props.onReady(map);
-    const resize = new ResizeObserver(() => map.invalidateSize({ pan: false }));
-    resize.observe(map.getContainer());
+    mapRef.current = map;
+    apiRef.current = AMap;
+  }, [map, AMap]);
+
+  useEffect(() => {
+    if (error) latest.current.onMapError();
+  }, [error]);
+
+  // Icon for a memo pin: one per face and selection state.
+  const iconCache = useRef(new Map<string, { html: string; size: number }>());
+  const iconFor = (face: MapPinFace, isSelected: boolean): { html: string; size: number } => {
+    if (face.kind === "dot") return isSelected ? selectedDot : markerDot;
+    const key = `${faceKey(face)}:${isSelected}`;
+    let icon = iconCache.current.get(key);
+    if (!icon) {
+      icon = faceIconHTML(face, isSelected);
+      iconCache.current.set(key, icon);
+    }
+    return icon;
+  };
+
+  const refreshClusters = useRef(() => {});
+  refreshClusters.current = () => {
+    const map = mapRef.current;
+    const AMap = apiRef.current;
+    if (!map || !AMap) return;
+    const { memos, pins, selected } = latest.current;
+    const selection = new Set(selected);
+    const size = map.getSize();
+    const width = size.getWidth();
+    const height = size.getHeight();
+
+    interface Desired {
+      id: string;
+      lat: number;
+      lng: number;
+      html: string;
+      iconSize: number;
+      title: string;
+      zIndex: number;
+      onClick: () => void;
+    }
+    const desired = new Map<string, Desired>();
+
+    // Grid-cluster the memos visible in the viewport (with one cell of padding).
+    const groups = new Map<string, { x: number; y: number; members: ClusterMember[] }>();
+    for (const memo of memos) {
+      if (!memo.location) continue;
+      const [lat, lng] = wgs84ToGcj02(memo.location.latitude, memo.location.longitude);
+      const px = map.lngLatToContainer(new AMap.LngLat(lng, lat));
+      const x = px.getX();
+      const y = px.getY();
+      if (x < -GRID_SIZE || x > width + GRID_SIZE || y < -GRID_SIZE || y > height + GRID_SIZE) continue;
+      const key = `${Math.floor(x / GRID_SIZE)},${Math.floor(y / GRID_SIZE)}`;
+      let group = groups.get(key);
+      if (!group) {
+        group = { x: 0, y: 0, members: [] };
+        groups.set(key, group);
+      }
+      const pin = pins.get(memo.name);
+      group.members.push({
+        memo,
+        lat,
+        lng,
+        face: pin?.face ?? { kind: "dot" },
+        label: pin?.label ?? getLocationDisplayText(memo.location),
+      });
+      group.x += x;
+      group.y += y;
+    }
+
+    for (const [key, group] of groups) {
+      if (group.members.length === 1) {
+        const member = group.members[0];
+        const isSelected = selection.has(member.memo.name);
+        const icon = iconFor(member.face, isSelected);
+        desired.set(`memo:${member.memo.name}`, {
+          id: `memo:${member.memo.name}`,
+          lat: member.lat,
+          lng: member.lng,
+          html: icon.html,
+          iconSize: icon.size,
+          title: member.label,
+          zIndex: isSelected ? 1000 : 0,
+          onClick: () => {
+            suppressMapClickUntil.current = Date.now() + 300;
+            latest.current.onSelect([member.memo.name]);
+          },
+        });
+      } else {
+        const names = group.members.map((m) => m.memo.name);
+        const active = names.some((n) => selection.has(n));
+        const cx = group.x / group.members.length;
+        const cy = group.y / group.members.length;
+        const lnglat = map.containerToLngLat(new AMap.Pixel(cx, cy));
+        desired.set(`cluster:${key}`, {
+          id: `cluster:${key}`,
+          lat: lnglat.getLat(),
+          lng: lnglat.getLng(),
+          html: clusterBadgeHTML(group.members.length, active),
+          iconSize: 28,
+          title: `${group.members.length} memos`,
+          zIndex: active ? 1000 : 0,
+          onClick: () => {
+            suppressMapClickUntil.current = Date.now() + 300;
+            latest.current.onSelect(names);
+          },
+        });
+      }
+    }
+
+    // Reconcile the marker pool with the desired set.
+    const pool = markerPool.current;
+    for (const [id, marker] of pool) {
+      if (!desired.has(id)) {
+        map.remove(marker);
+        pool.delete(id);
+      }
+    }
+    for (const [id, d] of desired) {
+      let marker = pool.get(id);
+      if (!marker) {
+        marker = new AMap.Marker({
+          position: new AMap.LngLat(d.lng, d.lat),
+          content: d.html,
+          offset: new AMap.Pixel(-d.iconSize / 2, -d.iconSize / 2),
+          title: d.title,
+          zIndex: d.zIndex,
+        });
+        marker.on("click", d.onClick);
+        // Stash the click handler so a refresh with the same id keeps one listener.
+        marker.setExtData(d.onClick);
+        pool.set(id, marker);
+        map.add(marker);
+      } else {
+        marker.setPosition(new AMap.LngLat(d.lng, d.lat));
+        marker.setContent(d.html);
+        marker.setTitle(d.title);
+        marker.setzIndex(d.zIndex);
+        const prevOnClick = marker.getExtData() as (() => void) | undefined;
+        if (prevOnClick !== d.onClick) {
+          if (prevOnClick) marker.off("click", prevOnClick);
+          marker.on("click", d.onClick);
+          marker.setExtData(d.onClick);
+        }
+      }
+    }
+  };
+
+  // Re-cluster when the view settles, when data changes, or when selection changes.
+  useEffect(() => {
+    if (!map) return;
+    const refresh = () => refreshClusters.current();
+    map.on("moveend", refresh);
+    map.on("zoomend", refresh);
     return () => {
-      resize.disconnect();
-      props.onReady(null);
+      map.off("moveend", refresh);
+      map.off("zoomend", refresh);
     };
-  }, [map, props.onReady]);
+  }, [map]);
   useEffect(() => {
+    refreshClusters.current();
+  }, [map, props.memos, props.pins, props.selected]);
+
+  // Report viewport moves (stored in the URL as WGS-84).
+  useEffect(() => {
+    if (!map) return;
+    const handleMoveEnd = () => {
+      const center = map.getCenter();
+      const [lat, lng] = gcj02ToWgs84(center.getLat(), center.getLng());
+      latest.current.onMove({ lat, lng, zoom: map.getZoom() });
+    };
+    map.on("moveend", handleMoveEnd);
+    return () => {
+      map.off("moveend", handleMoveEnd);
+    };
+  }, [map]);
+
+  // A click on bare map dismisses the selection; marker clicks suppress it.
+  useEffect(() => {
+    if (!map) return;
+    const handleClick = () => {
+      if (Date.now() < suppressMapClickUntil.current) return;
+      latest.current.onDismiss();
+    };
+    map.on("click", handleClick);
+    return () => {
+      map.off("click", handleClick);
+    };
+  }, [map]);
+
+  // Follow an external viewport (deep link / back button).
+  useEffect(() => {
+    if (!map || !AMap) return;
     const viewport = props.viewport;
     if (!viewport) return;
     const [vLat, vLng] = wgs84ToGcj02(viewport.lat, viewport.lng);
-    const center = map.getCenter().wrap();
-    if (Math.abs(center.lat - vLat) > 0.00002 || Math.abs(center.lng - vLng) > 0.00002 || map.getZoom() !== viewport.zoom) {
-      map.setView([vLat, vLng], viewport.zoom, { animate: false });
+    const center = map.getCenter();
+    if (Math.abs(center.getLat() - vLat) > 0.00002 || Math.abs(center.getLng() - vLng) > 0.00002 || map.getZoom() !== viewport.zoom) {
+      map.setZoomAndCenter(viewport.zoom, new AMap.LngLat(vLng, vLat));
     }
-  }, [map, props.viewport?.lat, props.viewport?.lng, props.viewport?.zoom]);
+  }, [map, AMap, props.viewport?.lat, props.viewport?.lng, props.viewport?.zoom]);
+
+  const fitMemosToMap = (memos: Memo[]) => {
+    const map = mapRef.current;
+    const AMap = apiRef.current;
+    if (!map || !AMap || memos.length === 0) return;
+    const markers = memos.flatMap((memo) => {
+      if (!memo.location) return [];
+      const [lat, lng] = wgs84ToGcj02(memo.location.latitude, memo.location.longitude);
+      return [new AMap.Marker({ position: new AMap.LngLat(lng, lat) })];
+    });
+    // setFitView with padding [top, right, bottom, left] and a max zoom.
+    map.setFitView(markers, false, [64, 96, 64, 96], 15);
+  };
+
+  // Expose the controller (fitMemos for the "show all" button, zoom for the +/- stack).
   useEffect(() => {
-    if (!props.complete || initialFit.current) return;
+    if (!map) return;
+    const ctl: MapController = {
+      fitMemos: fitMemosToMap,
+      zoomIn: () => map.zoomIn(),
+      zoomOut: () => map.zoomOut(),
+    };
+    latest.current.onReady(ctl);
+    return () => {
+      latest.current.onReady(null);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [map]);
+
+  // Fit once all memos arrive.
+  useEffect(() => {
+    if (!map || !props.complete || initialFit.current) return;
     initialFit.current = true;
-    fitMemos(map, props.memos);
+    fitMemosToMap(props.memos);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, props.complete, props.memos]);
+
+  // Pan a selected memo clear of the side panel.
   const selectedName = props.selected[0];
   const selectedLocation = props.memos.find((item) => item.name === selectedName)?.location;
   useEffect(() => {
-    if (!selectedLocation || !props.panelSize.width) return;
+    if (!map || !AMap || !selectedLocation || !props.panelSize.width) return;
     const [sLat, sLng] = wgs84ToGcj02(selectedLocation.latitude, selectedLocation.longitude);
-    const point = map.latLngToContainerPoint([sLat, sLng]);
-    const offset = revealOffset(point, map.getSize(), props.panelSize, props.desktop);
-    if (offset[0] || offset[1]) map.panBy(offset, { animate: false });
+    const point = map.lngLatToContainer(new AMap.LngLat(sLng, sLat));
+    const size = map.getSize();
+    const offset = revealOffset(
+      { x: point.getX(), y: point.getY() },
+      { x: size.getWidth(), y: size.getHeight() },
+      props.panelSize,
+      props.desktop,
+    );
+    if (offset[0] || offset[1]) map.panBy(offset[0], offset[1]);
   }, [
     map,
+    AMap,
     selectedName,
     props.panelSize.width,
     props.panelSize.height,
@@ -130,124 +343,15 @@ function MapBehavior(props: Props) {
     selectedLocation?.latitude,
     selectedLocation?.longitude,
   ]);
-  return null;
-}
 
-function Markers({ memos, pins, selected, onSelect }: Pick<Props, "memos" | "pins" | "selected" | "onSelect">) {
-  const names = useRef(new WeakMap<L.Marker, string>());
-  const markers = useRef(new Map<string, L.Marker>());
-  const selection = useMemo(() => new Set(selected), [selected]);
-  // Identity-stable positions: a fresh tuple per render would make every marker re-enter the cluster tree.
-  // Amap tiles are GCJ-02; stored coordinates are WGS-84.
-  const points = useMemo(
-    () =>
-      memos.map((memo) => {
-        const pin = pins.get(memo.name);
-        const [lat, lng] = wgs84ToGcj02(memo.location!.latitude, memo.location!.longitude);
-        return {
-          memo,
-          position: [lat, lng] as [number, number],
-          face: pin?.face ?? { kind: "dot" as const },
-          label: pin?.label ?? getLocationDisplayText(memo.location!),
-        };
-      }),
-    [memos, pins],
-  );
-  // One icon per face and state, so a selection change swaps two icons rather than rebuilding every pin.
-  const icons = useRef(new Map<string, L.DivIcon>());
-  const iconFor = (face: MapPinFace, isSelected: boolean): L.DivIcon => {
-    if (face.kind === "dot") return isSelected ? selectedIcon : markerIcon;
-    const key = `${faceKey(face)}:${isSelected}`;
-    let icon = icons.current.get(key);
-    if (!icon) {
-      icon = createFaceIcon(face, isSelected);
-      icons.current.set(key, icon);
-    }
-    return icon;
-  };
-  // Leaflet reads a marker's title only when it is created, and authors resolve after the pins
-  // first draw, so a changed label is written to the live marker and to what a re-added one reads.
-  useEffect(() => {
-    for (const { memo, label } of points) {
-      const marker = markers.current.get(memo.name);
-      if (!marker || marker.options.title === label) continue;
-      marker.options.title = label;
-      marker.getElement()?.setAttribute("title", label);
-    }
-  }, [points]);
-  const clusterGroup = useRef<{ refreshClusters(): void } | null>(null);
-  useEffect(() => {
-    clusterGroup.current?.refreshClusters();
-  }, [selection]);
   return (
-    <MarkerClusterGroup
-      ref={clusterGroup}
-      chunkedLoading
-      maxClusterRadius={40}
-      zoomToBoundsOnClick={false}
-      spiderfyOnMaxZoom={false}
-      showCoverageOnHover={false}
-      iconCreateFunction={(cluster: { getChildCount(): number; getAllChildMarkers(): L.Marker[] }) => {
-        const active = cluster.getAllChildMarkers().some((marker) => selection.has(names.current.get(marker) ?? ""));
-        return L.divIcon({
-          html: `<span class="grid size-7 place-items-center rounded-full border-[1.5px] border-background bg-primary text-primary-foreground text-xs font-medium tabular-nums shadow-[0_1px_3px_rgba(15,23,42,0.35)]${active ? " outline-[4px] outline-primary/20" : ""}">${cluster.getChildCount()}</span>`,
-          className: "",
-          iconSize: [28, 28],
-        });
-      }}
-      // A cluster is "the notes around here": clicking it opens them for reading instead of zooming
-      // to spread the pins apart. Zoom stays with the wheel and the +/− stack.
-      onClick={(event: L.LeafletMouseEvent & { layer?: { getAllChildMarkers(): L.Marker[] } }) => {
-        if (!event.layer?.getAllChildMarkers) return;
-        const children: L.Marker[] = event.layer.getAllChildMarkers();
-        onSelect(
-          children.flatMap((marker) => {
-            const name = names.current.get(marker);
-            return name ? [name] : [];
-          }),
-        );
-      }}
-    >
-      {points.map(({ memo, position, face, label }) => (
-        <Marker
-          key={memo.name}
-          ref={(marker) => {
-            if (marker) {
-              names.current.set(marker, memo.name);
-              markers.current.set(memo.name, marker);
-            } else markers.current.delete(memo.name);
-          }}
-          position={position}
-          icon={iconFor(face, selection.has(memo.name))}
-          zIndexOffset={selection.has(memo.name) ? 1000 : 0}
-          title={label}
-          alt={label}
-          eventHandlers={{ click: () => onSelect([memo.name]) }}
-        />
-      ))}
-    </MarkerClusterGroup>
-  );
-}
-
-export function MapCanvas(props: Props) {
-  const initial = useRef(props.viewport);
-  // Default to a China-centered view (Amap tiles); fitMemos overrides once memos load.
-  const [initLat, initLng] = initial.current ? wgs84ToGcj02(initial.current.lat, initial.current.lng) : wgs84ToGcj02(35, 105);
-  const initZoom = initial.current?.zoom ?? 4;
-  return (
-    <MapContainer
-      center={[initLat, initLng]}
-      zoom={initZoom}
-      maxZoom={19}
-      minZoom={0}
-      zoomControl={false}
-      attributionControl={false}
-      className="map-attribution-minimal absolute! inset-0 z-0 !bg-muted"
-    >
-      <BasemapLayer onTileError={props.onTileError} />
-      <MinimalAttributionControl />
-      <MapBehavior {...props} />
-      <Markers memos={props.memos} pins={props.pins} selected={props.selected} onSelect={props.onSelect} />
-    </MapContainer>
+    <div className="absolute! inset-0 z-0 bg-muted">
+      <div ref={containerRef} className="h-full w-full" />
+      {error && (
+        <div className="absolute inset-0 grid place-items-center bg-muted p-4 text-center text-sm text-muted-foreground">
+          {AMAP_MISSING_KEY_MESSAGE}
+        </div>
+      )}
+    </div>
   );
 }

@@ -1,5 +1,4 @@
 import { uniqBy } from "lodash-es";
-import toast from "react-hot-toast";
 import {
   CheckIcon,
   ImageIcon,
@@ -13,6 +12,7 @@ import {
   TypeIcon,
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { LinkMemoDialog, LocationDialog } from "@/components/MemoMetadata";
 import type { MapPoint } from "@/components/map/types";
 import { useReverseGeocoding } from "@/components/map/useReverseGeocoding";
@@ -80,11 +80,29 @@ const InsertMenu = (props: InsertMenuProps) => {
 
   const { data: displayName } = useReverseGeocoding(debouncedPosition?.lat, debouncedPosition?.lng);
 
+  // Position explicitly named via place search: reverse-geocoding must not
+  // overwrite the POI name with a verbose formatted address.
+  const searchNamedPositionRef = useRef<MapPoint | undefined>(undefined);
+
   useEffect(() => {
-    if (displayName) {
+    if (!displayName || !debouncedPosition) {
+      return;
+    }
+    const named = searchNamedPositionRef.current;
+    const isSearchNamed = named !== undefined && named.lat === debouncedPosition.lat && named.lng === debouncedPosition.lng;
+    if (!isSearchNamed) {
       setPlaceholder(displayName);
     }
-  }, [displayName, setPlaceholder]);
+  }, [displayName, debouncedPosition, setPlaceholder]);
+
+  const handlePlaceSelect = useCallback(
+    (point: MapPoint, name: string) => {
+      searchNamedPositionRef.current = point;
+      handleLocationPositionChange(point);
+      setPlaceholder(name);
+    },
+    [handleLocationPositionChange, setPlaceholder],
+  );
 
   const isUploading = selectingFlag || isUploadingProp;
   const insertionDisabled = isUploading || props.isSaving;
@@ -122,6 +140,7 @@ const InsertMenu = (props: InsertMenuProps) => {
   }, [getLocation, onLocationChange]);
 
   const handleLocationCancel = useCallback(() => {
+    searchNamedPositionRef.current = undefined;
     locationReset();
     setLocationDialogOpen(false);
   }, [locationReset]);
@@ -229,6 +248,7 @@ const InsertMenu = (props: InsertMenuProps) => {
         onOpenChange={setLocationDialogOpen}
         state={locationState}
         onPositionChange={handleLocationPositionChange}
+        onPlaceSelect={handlePlaceSelect}
         onUpdateCoordinate={updateCoordinate}
         onPlaceholderChange={setPlaceholder}
         onCancel={handleLocationCancel}
