@@ -88,11 +88,16 @@ beforeEach(() => {
 });
 
 describe("usePlaceSearch via the JS API plugin", () => {
-  it("searches nearby first, converts GCJ-02 to WGS-84, and sorts by distance", async () => {
+  it("puts nearby results first (distance-sorted), then deduplicated nationwide results", async () => {
     // Outside China GCJ-02 coincides with WGS-84, keeping the math predictable.
     mocks.state.nearbyPois = [
       { name: "Far", address: "far", lng: 20.01, lat: 10 },
       { name: "Near", address: "near", lng: 20.001, lat: 10 },
+    ];
+    mocks.state.textPois = [
+      // Same name as a nearby hit: deduplicated.
+      { name: "Near", address: "near", lng: 20.001, lat: 10 },
+      { name: "Other City Mall", address: "elsewhere", lng: 30, lat: 40 },
     ];
     const { wrapper } = setup();
     const { result } = renderHook(() => usePlaceSearch("mall", { lat: 10, lng: 20 }), { wrapper });
@@ -101,14 +106,14 @@ describe("usePlaceSearch via the JS API plugin", () => {
     expect(mocks.state.nearbyCalls).toHaveLength(1);
     expect(mocks.state.nearbyCalls[0].keywords).toBe("mall");
     expect(mocks.state.nearbyCalls[0].radius).toBe(50000);
-    expect(mocks.state.textCalls).toHaveLength(0);
+    expect(mocks.state.textCalls).toEqual(["mall"]);
 
     const names = result.current.data!.map((p) => p.name);
-    expect(names).toEqual(["Near", "Far"]);
+    expect(names).toEqual(["Near", "Far", "Other City Mall"]);
     expect(result.current.data![0]).toMatchObject({ lat: 10, lng: 20.001 });
   });
 
-  it("falls back to the nationwide search when nothing is nearby", async () => {
+  it("falls back to nationwide results when nothing is nearby", async () => {
     mocks.state.nearbyStatus = "no_data";
     mocks.state.textPois = [{ name: "Beijing Mall", address: "beijing", lng: 116.4, lat: 39.9 }];
     const { wrapper } = setup();

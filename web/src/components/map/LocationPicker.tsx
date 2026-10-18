@@ -68,7 +68,9 @@ const LocationPicker = ({
     center: latlng ?? DEFAULT_CENTER,
     zoom: 13,
     dark,
-    scrollWheel: false,
+    // Wheel zoom in the editable dialog; keep it off for read-only previews
+    // so wheeling over them scrolls the page instead of trapping the zoom.
+    scrollWheel: !readOnly,
   });
 
   const onChangeRef = useRef(onChange);

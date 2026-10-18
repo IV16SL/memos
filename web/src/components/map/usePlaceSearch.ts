@@ -94,31 +94,48 @@ async function searchPlaces(query: string, biasCenter?: MapPoint): Promise<Place
   const AMap = await loadAmap();
   await loadAmapPlugins(AMap, ["AMap.PlaceSearch"]);
   const searcher = new AMap.PlaceSearch({ pageSize: 10, extensions: "base" });
-  // Nearby first: search around the bias center so local results rank above
-  // same-named places in other cities. Fall back to the nationwide search
-  // when nothing is nearby.
-  if (biasCenter) {
-    try {
-      const nearby = await searchNearByWith(searcher, AMap, query, biasCenter);
-      if (nearby.length > 0) {
-        // Belt and suspenders: the API should already rank by distance.
-        return nearby.sort(
+
+  // Run nearby and nationwide in parallel. Nearby results come first
+  // (distance-sorted) so local matches outrank same-named places in other
+  // cities; nationwide results follow (deduplicated) so other cities stay
+  // searchable.
+  const [nearby, nationwide] = await Promise.all([
+    biasCenter
+      ? searchNearByWith(searcher, AMap, query, biasCenter).catch((error) => {
+          console.warn("Amap nearby search failed:", error);
+          return [] as PlaceResult[];
+        })
+      : Promise.resolve([] as PlaceResult[]),
+    searchWith(searcher, query).catch((error) => {
+      console.warn("Amap nationwide search failed:", error);
+      return [] as PlaceResult[];
+    }),
+  ]);
+
+  const sortByDistance = (list: PlaceResult[]) =>
+    biasCenter
+      ? [...list].sort(
           (a, b) =>
             distanceMeters(biasCenter.lat, biasCenter.lng, a.lat, a.lng) -
             distanceMeters(biasCenter.lat, biasCenter.lng, b.lat, b.lng),
-        );
-      }
-    } catch (error) {
-      console.warn("Amap nearby search failed, falling back to text search:", error);
-    }
+        )
+      : list;
+
+  const seen = new Set<string>();
+  const merged: PlaceResult[] = [];
+  for (const place of [...sortByDistance(nearby), ...nationwide]) {
+    if (seen.has(place.name)) continue;
+    seen.add(place.name);
+    merged.push(place);
   }
-  return searchWith(searcher, query);
+  return merged;
 }
 
 /**
  * Searches places by keyword. Amap (via the JS API PlaceSearch plugin) when
- * configured, Nominatim otherwise. With a bias center, nearby results (50km)
- * come first; the nationwide search is the fallback.
+ * configured, Nominatim otherwise. With a bias center, nearby results (50km,
+ * distance-sorted) come first, then nationwide results (deduplicated) so
+ * other cities stay searchable.
  */
 export const usePlaceSearch = (query: string, biasCenter?: MapPoint) => {
   // Round the bias center (~1km) so map drags don't refetch the search.
