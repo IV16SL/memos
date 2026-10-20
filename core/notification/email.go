@@ -27,7 +27,25 @@ type EmailDispatcher struct {
 // NewEmailDispatcher creates a notification email dispatcher.
 func NewEmailDispatcher(profile *profile.Profile, store *store.Store, sender EmailSender) *EmailDispatcher {
 	if sender == nil {
-		sender = email.SendAsync
+		// Send synchronously. On serverless runtimes (e.g. Vercel) the
+		// function instance is frozen as soon as the handler returns, so
+		// the background workers behind email.SendAsync never finish the
+		// SMTP round trip and the notification is silently lost. Trading
+		// a short SMTP wait in the request for guaranteed delivery.
+		sender = func(config *email.Config, message *email.Message) {
+			if err := email.Send(config, message); err != nil {
+				recipients := ""
+				if message != nil && len(message.To) > 0 {
+					recipients = message.To[0]
+					if len(message.To) > 1 {
+						recipients += " and others"
+					}
+				}
+				slog.Warn("Failed to send notification email",
+					slog.String("recipients", recipients),
+					slog.Any("error", err))
+			}
+		}
 	}
 	return &EmailDispatcher{
 		profile: profile,
