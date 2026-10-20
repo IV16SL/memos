@@ -54,6 +54,26 @@ func NewEmailDispatcher(profile *profile.Profile, store *store.Store, sender Ema
 	}
 }
 
+// emailLangForLocale maps a user locale to the notification email language.
+// Only Chinese is localized for now; everything else falls back to English.
+func emailLangForLocale(locale string) string {
+	if strings.HasPrefix(strings.ToLower(strings.TrimSpace(locale)), "zh") {
+		return "zh"
+	}
+	return "en"
+}
+
+// UserEmailLang resolves the notification email language for a user from
+// their locale setting, defaulting to English.
+func UserEmailLang(ctx context.Context, st *store.Store, userID int32) string {
+	setting, err := st.GetUserSetting(ctx, &store.FindUserSetting{UserID: &userID, Key: storepb.UserSetting_GENERAL})
+	if err != nil {
+		slog.Warn("Failed to get user locale for notification email", slog.Any("err", err), slog.Int64("user_id", int64(userID)))
+		return "en"
+	}
+	return emailLangForLocale(setting.GetGeneral().GetLocale())
+}
+
 // DispatchInboxEmail sends the email notification for an inbox entry when configured.
 func (d *EmailDispatcher) DispatchInboxEmail(ctx context.Context, inbox *store.Inbox) error {
 	if inbox == nil || inbox.Message == nil {
@@ -96,7 +116,7 @@ func (d *EmailDispatcher) DispatchInboxEmail(ctx context.Context, inbox *store.I
 		return errors.Wrap(err, "failed to get notification memos")
 	}
 
-	message, err := d.buildInboxEmailMessage(ctx, inbox, receiver, sender, memosByID)
+	message, err := d.buildInboxEmailMessage(ctx, inbox, receiver, sender, memosByID, UserEmailLang(ctx, d.store, receiver.ID))
 	if err != nil {
 		return err
 	}
@@ -132,11 +152,17 @@ func EmailConfigFromInstanceSetting(setting *storepb.InstanceNotificationSetting
 }
 
 // NewTestEmailMessage builds the plain-text test email for notification settings.
-func NewTestEmailMessage(recipientEmail, replyTo string) *email.Message {
+func NewTestEmailMessage(recipientEmail, replyTo, lang string) *email.Message {
+	subject := "[Memos] Test email"
+	body := "This is a test email from your Memos notification settings."
+	if lang == "zh" {
+		subject = "[Memos] 测试邮件"
+		body = "这是一封来自 Memos 通知设置的测试邮件。"
+	}
 	return &email.Message{
 		To:      []string{recipientEmail},
-		Subject: "[Memos] Test email",
-		Body:    "This is a test email from your Memos notification settings.",
+		Subject: subject,
+		Body:    body,
 		ReplyTo: replyTo,
 	}
 }
@@ -147,19 +173,19 @@ func ValidateEmailSetting(setting *storepb.InstanceNotificationSetting_EmailSett
 }
 
 // SendTestEmail sends a plain-text test email using notification email settings.
-func SendTestEmail(setting *storepb.InstanceNotificationSetting_EmailSetting, recipientEmail string) error {
-	return email.Send(EmailConfigFromInstanceSetting(setting), NewTestEmailMessage(recipientEmail, setting.GetReplyTo()))
+func SendTestEmail(setting *storepb.InstanceNotificationSetting_EmailSetting, recipientEmail, locale string) error {
+	return email.Send(EmailConfigFromInstanceSetting(setting), NewTestEmailMessage(recipientEmail, setting.GetReplyTo(), emailLangForLocale(locale)))
 }
 
-func (d *EmailDispatcher) buildInboxEmailMessage(ctx context.Context, inbox *store.Inbox, receiver *store.User, sender *store.User, memosByID map[int32]*store.Memo) (*email.Message, error) {
+func (d *EmailDispatcher) buildInboxEmailMessage(ctx context.Context, inbox *store.Inbox, receiver *store.User, sender *store.User, memosByID map[int32]*store.Memo, lang string) (*email.Message, error) {
 	senderName := displayNameForEmail(sender)
 	switch inbox.Message.Type {
 	case storepb.InboxMessage_MEMO_COMMENT:
-		return d.buildMemoCommentEmailMessage(inbox.Message, receiver, senderName, memosByID)
+		return d.buildMemoCommentEmailMessage(inbox.Message, receiver, senderName, memosByID, lang)
 	case storepb.InboxMessage_MEMO_MENTION:
-		return d.buildMemoMentionEmailMessage(inbox.Message, receiver, senderName, memosByID)
+		return d.buildMemoMentionEmailMessage(inbox.Message, receiver, senderName, memosByID, lang)
 	case storepb.InboxMessage_SPACE_INVITATION:
-		return d.buildSpaceInvitationEmailMessage(ctx, inbox.Message, receiver, senderName)
+		return d.buildSpaceInvitationEmailMessage(ctx, inbox.Message, receiver, senderName, lang)
 	default:
 		return nil, nil
 	}
@@ -168,7 +194,7 @@ func (d *EmailDispatcher) buildInboxEmailMessage(ctx context.Context, inbox *sto
 // buildSpaceInvitationEmailMessage renders the invitation email only while
 // the receiver still holds the pending offer, so a revoked or already handled
 // invitation never reaches their mailbox.
-func (d *EmailDispatcher) buildSpaceInvitationEmailMessage(ctx context.Context, message *storepb.InboxMessage, receiver *store.User, senderName string) (*email.Message, error) {
+func (d *EmailDispatcher) buildSpaceInvitationEmailMessage(ctx context.Context, message *storepb.InboxMessage, receiver *store.User, senderName string, lang string) (*email.Message, error) {
 	payload := message.GetSpaceInvitation()
 	if payload == nil || payload.SpaceId <= 0 {
 		return nil, nil
@@ -210,15 +236,33 @@ func (d *EmailDispatcher) buildSpaceInvitationEmailMessage(ctx context.Context, 
 		"",
 		"You are receiving this because an administrator of this Space invited you.",
 	}
+	subject := fmt.Sprintf("[Memos] %s invited you to join \"%s\"", senderName, space.Title)
+	if lang == "zh" {
+		roleName = "成员"
+		if invitation.Role == store.SpaceMemberRoleAdmin {
+			roleName = "管理员"
+		}
+		body = []string{
+			fmt.Sprintf("你好 %s，", displayNameForEmail(receiver)),
+			"",
+			fmt.Sprintf("%s 邀请你以%s身份加入空间「%s」。", senderName, roleName, space.Title),
+			"",
+			"在 Memos 中查看邀请：",
+			url,
+			"",
+			"你收到这封邮件是因为该空间的管理员邀请了你。",
+		}
+		subject = fmt.Sprintf("[Memos] %s 邀请你加入「%s」", senderName, space.Title)
+	}
 
 	return &email.Message{
 		To:      []string{receiver.Email},
-		Subject: fmt.Sprintf("[Memos] %s invited you to join \"%s\"", senderName, space.Title),
+		Subject: subject,
 		Body:    strings.Join(body, "\n"),
 	}, nil
 }
 
-func (d *EmailDispatcher) buildMemoCommentEmailMessage(message *storepb.InboxMessage, receiver *store.User, senderName string, memosByID map[int32]*store.Memo) (*email.Message, error) {
+func (d *EmailDispatcher) buildMemoCommentEmailMessage(message *storepb.InboxMessage, receiver *store.User, senderName string, memosByID map[int32]*store.Memo, lang string) (*email.Message, error) {
 	payload := message.GetMemoComment()
 	if payload == nil {
 		return nil, nil
@@ -233,25 +277,41 @@ func (d *EmailDispatcher) buildMemoCommentEmailMessage(message *storepb.InboxMes
 		return nil, nil
 	}
 
-	body := []string{
-		fmt.Sprintf("Hi %s,", displayNameForEmail(receiver)),
-		"",
-		fmt.Sprintf("%s commented on your memo.", senderName),
-		"",
-		"Open in Memos:",
-		url,
-		"",
-		"You are receiving this because you own this memo.",
+	var subject, body string
+	if lang == "zh" {
+		subject = fmt.Sprintf("[Memos] %s 评论了你的备忘录", senderName)
+		body = strings.Join([]string{
+			fmt.Sprintf("你好 %s，", displayNameForEmail(receiver)),
+			"",
+			fmt.Sprintf("%s 评论了你的备忘录。", senderName),
+			"",
+			"在 Memos 中查看：",
+			url,
+			"",
+			"你收到这封邮件是因为你是这条备忘录的所有者。",
+		}, "\n")
+	} else {
+		subject = fmt.Sprintf("[Memos] %s commented on your memo", senderName)
+		body = strings.Join([]string{
+			fmt.Sprintf("Hi %s,", displayNameForEmail(receiver)),
+			"",
+			fmt.Sprintf("%s commented on your memo.", senderName),
+			"",
+			"Open in Memos:",
+			url,
+			"",
+			"You are receiving this because you own this memo.",
+		}, "\n")
 	}
 
 	return &email.Message{
 		To:      []string{receiver.Email},
-		Subject: fmt.Sprintf("[Memos] %s commented on your memo", senderName),
-		Body:    strings.Join(body, "\n"),
+		Subject: subject,
+		Body:    body,
 	}, nil
 }
 
-func (d *EmailDispatcher) buildMemoMentionEmailMessage(message *storepb.InboxMessage, receiver *store.User, senderName string, memosByID map[int32]*store.Memo) (*email.Message, error) {
+func (d *EmailDispatcher) buildMemoMentionEmailMessage(message *storepb.InboxMessage, receiver *store.User, senderName string, memosByID map[int32]*store.Memo, lang string) (*email.Message, error) {
 	payload := message.GetMemoMention()
 	if payload == nil {
 		return nil, nil
@@ -273,21 +333,37 @@ func (d *EmailDispatcher) buildMemoMentionEmailMessage(message *storepb.InboxMes
 		return nil, nil
 	}
 
-	body := []string{
-		fmt.Sprintf("Hi %s,", displayNameForEmail(receiver)),
-		"",
-		fmt.Sprintf("%s mentioned you in a memo.", senderName),
-		"",
-		"Open in Memos:",
-		url,
-		"",
-		"You are receiving this because you were mentioned in this memo.",
+	var subject, body string
+	if lang == "zh" {
+		subject = fmt.Sprintf("[Memos] %s 在备忘录中提到了你", senderName)
+		body = strings.Join([]string{
+			fmt.Sprintf("你好 %s，", displayNameForEmail(receiver)),
+			"",
+			fmt.Sprintf("%s 在备忘录中提到了你。", senderName),
+			"",
+			"在 Memos 中查看：",
+			url,
+			"",
+			"你收到这封邮件是因为有人在这条备忘录中提到了你。",
+		}, "\n")
+	} else {
+		subject = fmt.Sprintf("[Memos] %s mentioned you in a memo", senderName)
+		body = strings.Join([]string{
+			fmt.Sprintf("Hi %s,", displayNameForEmail(receiver)),
+			"",
+			fmt.Sprintf("%s mentioned you in a memo.", senderName),
+			"",
+			"Open in Memos:",
+			url,
+			"",
+			"You are receiving this because you were mentioned in this memo.",
+		}, "\n")
 	}
 
 	return &email.Message{
 		To:      []string{receiver.Email},
-		Subject: fmt.Sprintf("[Memos] %s mentioned you in a memo", senderName),
-		Body:    strings.Join(body, "\n"),
+		Subject: subject,
+		Body:    body,
 	}, nil
 }
 

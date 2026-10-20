@@ -313,7 +313,7 @@ func (s *APIService) TestInstanceEmailSetting(ctx context.Context, request *apip
 		return nil, status.Errorf(codes.InvalidArgument, "invalid notification email setting: %v", err)
 	}
 
-	if err := notification.SendTestEmail(emailSetting, recipientEmail); err != nil {
+	if err := notification.SendTestEmail(emailSetting, recipientEmail, notification.UserEmailLang(ctx, s.Store, user.ID)); err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to send test email: %v. Check that the SMTP port matches encryption: Gmail uses port 587 with STARTTLS on and SSL/TLS off; port 465 requires SSL/TLS on", err)
 	}
 
