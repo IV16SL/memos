@@ -1,17 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { getThemeWithFallback, resolveTheme, setupSystemThemeListener } from "@/utils/theme";
 import { extractCodeContent } from "./utils";
 
 interface MermaidBlockProps {
   children?: React.ReactNode;
   className?: string;
 }
-
-type MermaidTheme = "default" | "dark";
-
-const toMermaidTheme = (appTheme: string): MermaidTheme => (appTheme === "default-dark" ? "dark" : "default");
 
 const formatErrorMessage = (err: unknown): string => {
   const msg = err instanceof Error ? err.message : "Failed to render diagram";
@@ -21,23 +15,18 @@ const formatErrorMessage = (err: unknown): string => {
   return msg;
 };
 
+// ```mermaid blocks are drawn by Pele, not mermaid.js: Pele emits SVG styled by
+// the `.pele` CSS variables in index.css, so the diagram follows the app theme
+// (including dark mode) with no re-render on theme change.
 export const MermaidBlock = ({ children, className }: MermaidBlockProps) => {
-  const { userGeneralSetting } = useAuth();
+  const containerRef = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [systemThemeChange, setSystemThemeChange] = useState(0);
 
   const codeContent = extractCodeContent(children);
-  const themePreference = getThemeWithFallback(userGeneralSetting?.theme);
-  const currentTheme = useMemo(() => resolveTheme(themePreference), [themePreference, systemThemeChange]);
 
-  // Re-resolve theme when OS preference changes (only relevant when using "system" theme)
-  useEffect(() => {
-    if (themePreference !== "system") return;
-    return setupSystemThemeListener(() => setSystemThemeChange((n) => n + 1));
-  }, [themePreference]);
-
-  // Render diagram when content or theme changes
+  // Render diagram when content changes. Theme changes need no re-render: the
+  // SVG takes its colors from CSS variables.
   useEffect(() => {
     if (!codeContent) {
       setSvg("");
@@ -49,33 +38,31 @@ export const MermaidBlock = ({ children, className }: MermaidBlockProps) => {
 
     const renderDiagram = async () => {
       try {
-        const { default: mermaid } = await import("mermaid");
+        const { renderAsync } = await import("pele/lazy");
         // Text is measured against the final glyphs, so webfonts must be loaded
         // first. The Font Loading API is absent in some environments (jsdom).
         await document.fonts?.ready;
         if (cancelled) return;
 
-        mermaid.initialize({
-          startOnLoad: false,
-          theme: toMermaidTheme(currentTheme),
-          securityLevel: "strict",
-          // Mermaid measures labels in a detached element at body level, but the
-          // rendered SVG lands inside a <pre> (monospace). "inherit" resolves to
-          // different fonts in those two places, sizing boxes too small for the
-          // final glyphs — pin the font so measurement and display agree.
-          fontFamily: getComputedStyle(document.body).fontFamily || "sans-serif",
-          suppressErrorRendering: true,
+        // Labels use the body font (the old mermaid.js block pinned the same
+        // font so measurement and display agreed); --font-mono covers code-ish
+        // parts. A memo column is narrow; the diagram shrinks to fit, but keeps
+        // the direction its author wrote.
+        const bodyStyle = getComputedStyle(document.body);
+        const { svg: renderedSvg } = await renderAsync(codeContent, {
+          fontFamily: bodyStyle.fontFamily || "sans-serif",
+          fontFamilyMono: getComputedStyle(document.documentElement).getPropertyValue("--font-mono").trim() || "monospace",
+          maxWidth: containerRef.current?.clientWidth || undefined,
+          autoDirection: false,
+          idPrefix: `diagram-${Math.random().toString(36).slice(2)}`,
         });
-
-        const id = `mermaid-${Math.random().toString(36).substring(7)}`;
-        const { svg: renderedSvg } = await mermaid.render(id, codeContent);
         if (cancelled) return;
 
         setSvg(renderedSvg);
         setError("");
       } catch (err) {
         if (cancelled) return;
-        console.error("Failed to render mermaid diagram:", err);
+        console.error("Failed to render diagram:", err);
         setSvg("");
         setError(formatErrorMessage(err));
       }
@@ -86,7 +73,7 @@ export const MermaidBlock = ({ children, className }: MermaidBlockProps) => {
     return () => {
       cancelled = true;
     };
-  }, [codeContent, currentTheme]);
+  }, [codeContent]);
 
   if (error) {
     return (
@@ -101,7 +88,8 @@ export const MermaidBlock = ({ children, className }: MermaidBlockProps) => {
 
   return (
     <div
-      className={cn("mermaid-diagram w-full flex justify-center items-center my-0 mb-2 overflow-x-auto", className)}
+      ref={containerRef}
+      className={cn("pele mermaid-diagram w-full flex justify-center items-center my-0 mb-2 overflow-x-auto", className)}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
