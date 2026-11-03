@@ -58,7 +58,6 @@ describe("automatic SSO auth pages", () => {
     vi.mocked(signInWithSSO).mockResolvedValue();
   });
   it.each([
-    { path: "/auth", element: <SignIn /> },
     { path: "/auth/signup", element: <SignUp /> },
   ])("starts once on $path and replaces the entry with a bypass preserving the destination", async ({ path, element }) => {
     const router = renderPage(`${path}?redirect=%2Fmemos%2Fexample&reason=protected-memo`, element);
@@ -138,7 +137,12 @@ describe("automatic SSO auth pages", () => {
   it("allows existing users to sign in when registration is closed", async () => {
     mocks.instance.generalSetting.disallowUserRegistration = true;
     renderPage();
-    await waitFor(() => expect(signInWithSSO).toHaveBeenCalledOnce());
+    await act(async () => {});
+    expect(signInWithSSO).not.toHaveBeenCalled();
+    const button = screen.getByRole("button", { name: "auth.continue-with: Company SSO" });
+    expect(button).toBeEnabled();
+    fireEvent.click(button);
+    expect(signInWithSSO).toHaveBeenCalledWith(provider, undefined);
   });
   it("keeps closed sign-up out of automatic SSO", () => {
     mocks.instance.generalSetting.disallowUserRegistration = true;
@@ -175,12 +179,14 @@ describe("automatic SSO auth pages", () => {
     vi.mocked(signInWithSSO).mockRejectedValueOnce(new Error("Storage unavailable"));
     renderPage();
     const button = await screen.findByRole("button", { name: "auth.continue-with: Company SSO" });
+    expect(signInWithSSO).not.toHaveBeenCalled();
+    fireEvent.click(button);
     await waitFor(() => expect(button).toBeEnabled());
     expect(button).toHaveAttribute("aria-busy", "false");
     expect(button.querySelector("svg")).not.toBeInTheDocument();
     expect(signInWithSSO).toHaveBeenCalledOnce();
-    fireEvent.click(button);
-    expect(signInWithSSO).toHaveBeenCalledTimes(2);
+    await act(async () => {});
+    expect(signInWithSSO).toHaveBeenCalledOnce();
   });
   it("restores manual controls on bfcache Back without another attempt", async () => {
     renderPage("/auth", <IdentityProviderButtons identityProviderList={[provider]} autoSignIn />);

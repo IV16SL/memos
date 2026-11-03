@@ -13,9 +13,9 @@ import { useTranslate } from "@/utils/i18n";
 
 const SignIn = () => {
   const t = useTranslate();
-  const { generalSetting: instanceGeneralSetting, profile, profileLoaded, isInitialized } = useInstance();
+  const { generalSetting: instanceGeneralSetting } = useInstance();
   const [searchParams] = useSearchParams();
-  const { identityProviderList, isLoading: identityProvidersLoading, isSuccess: identityProvidersLoaded } = useIdentityProviderList();
+  const { identityProviderList, isLoading: identityProvidersLoading } = useIdentityProviderList();
   const redirectTarget = getSafeRedirectPath(searchParams.get(AUTH_REDIRECT_PARAM));
   const signUpPath = appendSearchParams(ROUTES.AUTH_SIGNUP, searchParams);
 
@@ -31,13 +31,7 @@ const SignIn = () => {
         <AuthOptionsLoading />
       ) : showAuthOptions ? (
         <>
-          {hasIdentityProviders && (
-            <IdentityProviderButtons
-              identityProviderList={identityProviderList}
-              redirectTarget={redirectTarget}
-              autoSignIn={isInitialized && profileLoaded && !profile.needsSetup && !passwordAuthAllowed && identityProvidersLoaded}
-            />
-          )}
+          {hasIdentityProviders && <IdentityProviderButtons identityProviderList={identityProviderList} redirectTarget={redirectTarget} />}
           {hasIdentityProviders && passwordAuthAllowed && (
             <div className="my-4 flex items-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
               <div className="flex-1">

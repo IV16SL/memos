@@ -36,6 +36,10 @@ vi.mock("@/components/PasswordSignInForm", () => ({
   default: () => <div data-testid="password-sign-in" />,
 }));
 
+vi.mock("@/components/PasskeySignInButton", () => ({
+  default: () => <div data-testid="passkey-sign-in" />,
+}));
+
 vi.mock("@/utils/i18n", () => ({
   useTranslate: () => (key: string) => key,
 }));
