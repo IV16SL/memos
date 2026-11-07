@@ -142,6 +142,8 @@ describe("buildPlotOption", () => {
     expect(option.series).toMatchObject([
       {
         markPoint: {
+          symbol: "circle",
+          itemStyle: { color: "transparent" },
           label: { formatter: "abs(x)", position: "top" },
           data: [{ name: "abs(x)", coord: [3, 3] }],
         },

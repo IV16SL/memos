@@ -283,8 +283,13 @@ const buildSeriesLabel = (series: PlotSeriesConfig, data: SampledPoint[], series
     return null;
   }
   const text = series.label.text ?? seriesName;
+  // Note: symbol "none" hides the whole markPoint including its label in
+  // ECharts 5.5.1, so use a transparent circle instead: the dot is invisible
+  // but the element (and its label) still renders.
   return {
-    symbol: "none",
+    symbol: "circle",
+    symbolSize: 10,
+    itemStyle: { color: "transparent" },
     silent: true,
     label: {
       show: true,
