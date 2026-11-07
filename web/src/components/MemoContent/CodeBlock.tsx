@@ -8,6 +8,7 @@ import { getThemeWithFallback, resolveTheme } from "@/utils/theme";
 import { ensureHighlightTheme, highlightCode, isPlainTextLanguage } from "./highlight";
 import { MermaidBlock } from "./MermaidBlock";
 import type { ReactMarkdownProps } from "./markdown/types";
+import { PlotBlock } from "./PlotBlock";
 import { extractCodeContent, extractLanguage } from "./utils";
 
 interface CodeBlockProps extends ReactMarkdownProps {
@@ -28,6 +29,17 @@ export const CodeBlock = ({ children, className, node: _node, ...props }: CodeBl
         <MermaidBlock className={cn(className)} {...props}>
           {children}
         </MermaidBlock>
+      </pre>
+    );
+  }
+
+  // If it's a plot block, render with PlotBlock component (ECharts)
+  if (language === "plot") {
+    return (
+      <pre className="relative">
+        <PlotBlock className={cn(className)} {...props}>
+          {children}
+        </PlotBlock>
       </pre>
     );
   }
