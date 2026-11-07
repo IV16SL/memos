@@ -34,11 +34,15 @@ export const PlotBlock = ({ children, className }: PlotBlockProps) => {
         const config = parsePlotConfig(codeContent);
         const echarts = await import("echarts/core");
         const { LineChart } = await import("echarts/charts");
-        const { GridComponent, TooltipComponent, DataZoomComponent } = await import("echarts/components");
+        const { GridComponent, TooltipComponent, DataZoomComponent, TitleComponent, MarkPointComponent } = await import(
+          "echarts/components"
+        );
         const { CanvasRenderer } = await import("echarts/renderers");
         await document.fonts?.ready;
         if (cancelled) return;
-        echarts.use([LineChart, GridComponent, TooltipComponent, DataZoomComponent, CanvasRenderer]);
+        // TitleComponent and MarkPointComponent are required: without them
+        // ECharts silently ignores the `title` option and markPoint labels.
+        echarts.use([LineChart, GridComponent, TooltipComponent, DataZoomComponent, TitleComponent, MarkPointComponent, CanvasRenderer]);
 
         const container = containerRef.current;
         if (!container) return;
