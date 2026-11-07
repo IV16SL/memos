@@ -37,6 +37,19 @@ describe("parsePlotConfig", () => {
   it("rejects a reversed axis range", () => {
     expect(() => parsePlotConfig('{"data": [{"fn": "x"}], "x": [3, -3]}')).toThrow();
   });
+
+  it("accepts a label config", () => {
+    const config = parsePlotConfig('{"data": [{"fn": "abs(x)", "label": {"text": "y = |x|", "at": [0, 0], "position": "top"}}]}');
+    expect(config.data[0].label).toEqual({ text: "y = |x|", at: [0, 0], position: "top" });
+  });
+
+  it("rejects a bad label position", () => {
+    expect(() => parsePlotConfig('{"data": [{"fn": "x", "label": {"position": "middle"}}]}')).toThrow();
+  });
+
+  it("rejects a bad label anchor", () => {
+    expect(() => parsePlotConfig('{"data": [{"fn": "x", "label": {"at": [0]}}]}')).toThrow();
+  });
 });
 
 describe("sampleSeries", () => {
@@ -117,5 +130,41 @@ describe("buildPlotOption", () => {
     const option = buildPlotOption(parsePlotConfig('{"data": [{"fn": "x"}]}'), "#111111");
     expect(option.xAxis).toMatchObject({ min: -10, max: 10 });
     expect(option.yAxis).toMatchObject({ min: -10, max: 10 });
+  });
+
+  it("adds a line-side label defaulting to the formula at the last point", () => {
+    const option = buildPlotOption(parsePlotConfig('{"data": [{"fn": "abs(x)", "label": {}}], "x": [-3, 3], "y": [-3, 3]}'), "#111111");
+    expect(option.series).toMatchObject([
+      {
+        markPoint: {
+          label: { formatter: "abs(x)", position: "top" },
+          data: [{ name: "abs(x)", coord: [3, 3] }],
+        },
+      },
+    ]);
+  });
+
+  it("honors an explicit label text, anchor, and position", () => {
+    const option = buildPlotOption(
+      parsePlotConfig(
+        '{"data": [{"fn": "abs(x)", "label": {"text": "y = |x|", "at": [0, 0], "position": "bottom"}}], "x": [-3, 3], "y": [-3, 3]}',
+      ),
+      "#111111",
+    );
+    expect(option.series).toMatchObject([
+      {
+        markPoint: {
+          label: { formatter: "y = |x|", position: "bottom" },
+          data: [{ name: "y = |x|", coord: [0, 0] }],
+        },
+      },
+    ]);
+  });
+
+  it("adds no markPoint without a label", () => {
+    const option = buildPlotOption(parsePlotConfig(ABS_EXAMPLE), "#111111");
+    const series = option.series as unknown as { markPoint?: unknown }[];
+    expect(series[0].markPoint).toBeUndefined();
+    expect(series[1].markPoint).toBeUndefined();
   });
 });

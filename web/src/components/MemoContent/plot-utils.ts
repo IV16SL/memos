@@ -23,7 +23,18 @@ import { Parser } from "expr-eval";
  * scope plus pi and e. A series that hits a non-finite value or jumps by more
  * than the full y-axis range in one step is split there, so asymptotes such
  * as 1/x do not draw a line across the gap.
+ *
+ * A series can also carry a `label` to show its formula beside the line
+ * (an ECharts markPoint): { "text": "y = |x|", "at": [0, 0], "position": "top" }.
+ * text defaults to the series name, at defaults to the last sampled point,
+ * position defaults to "top". Omit label (or set it to false) for no label.
  */
+
+export interface PlotSeriesLabelConfig {
+  text?: string;
+  at?: [number, number];
+  position?: "top" | "bottom" | "left" | "right";
+}
 
 export interface PlotSeriesConfig {
   fn?: string;
@@ -37,6 +48,7 @@ export interface PlotSeriesConfig {
   width?: number;
   range?: [number, number];
   samples?: number;
+  label?: PlotSeriesLabelConfig | false;
 }
 
 export interface PlotConfig {
@@ -69,6 +81,9 @@ const isRange = (value: unknown): value is [number, number] =>
   value[0] < value[1];
 
 const isFiniteNumber = (value: unknown): value is number => typeof value === "number" && Number.isFinite(value);
+
+const isPoint = (value: unknown): value is [number, number] =>
+  Array.isArray(value) && value.length === 2 && isFiniteNumber(value[0]) && isFiniteNumber(value[1]);
 
 const parseSeries = (item: unknown, index: number): PlotSeriesConfig => {
   const label = "plot series " + (index + 1);
@@ -118,6 +133,21 @@ const parseSeries = (item: unknown, index: number): PlotSeriesConfig => {
   }
   if (obj.samples !== undefined && !isFiniteNumber(obj.samples)) {
     throw new Error(label + " samples must be a number");
+  }
+  if (obj.label !== undefined && obj.label !== false) {
+    if (typeof obj.label !== "object" || obj.label === null || Array.isArray(obj.label)) {
+      throw new Error(label + " label must be an object");
+    }
+    const lab = obj.label as Record<string, unknown>;
+    if (lab.text !== undefined && (typeof lab.text !== "string" || lab.text.trim().length === 0)) {
+      throw new Error(label + " label text must be a non-empty string");
+    }
+    if (lab.at !== undefined && !isPoint(lab.at)) {
+      throw new Error(label + " label at must be [x, y]");
+    }
+    if (lab.position !== undefined && (typeof lab.position !== "string" || !["top", "bottom", "left", "right"].includes(lab.position))) {
+      throw new Error(label + " label position must be top, bottom, left, or right");
+    }
   }
   return obj as unknown as PlotSeriesConfig;
 };
@@ -233,6 +263,41 @@ export const sampleSeries = (series: PlotSeriesConfig, xRange: [number, number],
   throw new Error("plot series needs exactly one of fn, x + y, r, or points");
 };
 
+const lastFinitePoint = (points: SampledPoint[]): [number, number] | null => {
+  for (let i = points.length - 1; i >= 0; i--) {
+    const point = points[i];
+    if (point !== null) {
+      return point;
+    }
+  }
+  return null;
+};
+
+/** Line-side label for one series, rendered as an ECharts markPoint. */
+const buildSeriesLabel = (series: PlotSeriesConfig, data: SampledPoint[], seriesName: string) => {
+  if (series.label === undefined || series.label === false) {
+    return null;
+  }
+  const anchor = series.label.at ?? lastFinitePoint(data);
+  if (anchor === null) {
+    return null;
+  }
+  const text = series.label.text ?? seriesName;
+  return {
+    symbol: "none",
+    silent: true,
+    label: {
+      show: true,
+      formatter: text,
+      color: series.color,
+      fontStyle: "italic" as const,
+      fontSize: 14,
+      position: series.label.position ?? "top",
+    },
+    data: [{ name: text, coord: anchor }],
+  };
+};
+
 /** Build the ECharts option for a parsed config. `ink` is the axis/label color. */
 export const buildPlotOption = (config: PlotConfig, ink: string): EChartsOption => {
   const xRange = config.x ?? DEFAULT_X_RANGE;
@@ -270,12 +335,18 @@ export const buildPlotOption = (config: PlotConfig, ink: string): EChartsOption 
       { type: "inside", xAxisIndex: 0 },
       { type: "inside", yAxisIndex: 0 },
     ],
-    series: config.data.map((s) => ({
-      type: "line",
-      name: s.name ?? s.fn ?? s.r ?? "series",
-      showSymbol: false,
-      data: sampleSeries(s, xRange, yRange),
-      lineStyle: { width: s.width ?? 2, color: s.color, type: s.dashed ? "dashed" : "solid" },
-    })),
+    series: config.data.map((s) => {
+      const data = sampleSeries(s, xRange, yRange);
+      const seriesName = s.name ?? s.fn ?? s.r ?? "series";
+      const markPoint = buildSeriesLabel(s, data, seriesName);
+      return {
+        type: "line",
+        name: seriesName,
+        showSymbol: false,
+        data,
+        lineStyle: { width: s.width ?? 2, color: s.color, type: s.dashed ? "dashed" : "solid" },
+        ...(markPoint ? { markPoint } : {}),
+      };
+    }),
   };
 };
