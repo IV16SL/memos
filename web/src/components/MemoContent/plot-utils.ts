@@ -304,7 +304,7 @@ export const buildPlotOption = (config: PlotConfig, ink: string): EChartsOption 
   const yRange = config.y ?? DEFAULT_Y_RANGE;
   return {
     animation: false,
-    ...(config.title ? { title: { text: config.title, left: "center" } } : {}),
+    ...(config.title ? { title: { text: config.title, left: "center", textStyle: { color: ink } } } : {}),
     grid: { left: 48, right: 48, top: config.title ? 48 : 36, bottom: 36 },
     tooltip: { trigger: "axis" },
     xAxis: {

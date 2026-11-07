@@ -126,6 +126,11 @@ describe("buildPlotOption", () => {
     expect(option.xAxis).toMatchObject({ axisLine: { lineStyle: { color: "#111111" } } });
   });
 
+  it("renders the title in the theme ink color", () => {
+    const option = buildPlotOption(parsePlotConfig('{"title": "y = |x|", "data": [{"fn": "x"}]}'), "#334155");
+    expect(option.title).toMatchObject({ text: "y = |x|", textStyle: { color: "#334155" } });
+  });
+
   it("defaults to a [-10, 10] range", () => {
     const option = buildPlotOption(parsePlotConfig('{"data": [{"fn": "x"}]}'), "#111111");
     expect(option.xAxis).toMatchObject({ min: -10, max: 10 });
