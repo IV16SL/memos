@@ -81,7 +81,15 @@ function isMemoListResponse(data: unknown): data is ListMemosResponse {
 }
 
 function isInfiniteMemoListData(data: unknown): data is InfiniteData<ListMemosResponse> {
-  return typeof data === "object" && data !== null && Array.isArray((data as { pages?: unknown }).pages);
+  if (typeof data !== "object" || data === null) {
+    return false;
+  }
+  const pages = (data as { pages?: unknown }).pages;
+  // The memo query cache also holds infinite comment lists under the same
+  // ["memos"] prefix; their pages carry `comments`, not `memos`. Only treat
+  // pages shaped like ListMemosResponse as memo lists, otherwise resolving a
+  // referenced memo crashes on `page.memos.find`.
+  return Array.isArray(pages) && pages.every((page) => isMemoListResponse(page));
 }
 
 function patchMemoListResponse(response: ListMemosResponse, update: MemoPatch): ListMemosResponse {
