@@ -168,6 +168,45 @@ func TestFrontendService_HiddenPathsDoNotFallbackToIndex(t *testing.T) {
 	require.Contains(t, rec.Header().Get("Content-Type"), "text/html")
 }
 
+// TestFrontendService_DiscoveryRoutesSkipFrontendCacheHeaders pins the cache
+// policy for well-known URIs. The SPA fallback already refuses them, but the
+// resulting 404 used to inherit the static asset policy, so clients and CDNs
+// could store an absent discovery endpoint for an hour.
+// Fork note: upstream drives this through net/http ServeMux + httphandler
+// after the Echo→net/http refactor; this fork still serves via Echo, so the
+// same assertions run against echo.New() and Serve(ctx, e).
+func TestFrontendService_DiscoveryRoutesSkipFrontendCacheHeaders(t *testing.T) {
+	ctx := context.Background()
+	testStore := teststore.NewTestingStore(ctx, t)
+
+	e := echo.New()
+	NewFrontendService(&profile.Profile{}, testStore).Serve(ctx, e)
+
+	for _, requestPath := range []string{
+		"/.well-known/oauth-protected-resource",
+		"/.well-known/oauth-protected-resource/mcp",
+		"/.well-known/oauth-authorization-server",
+		"/.well-known/security.txt",
+	} {
+		req := httptest.NewRequest(http.MethodGet, requestPath, nil)
+		rec := httptest.NewRecorder()
+		e.ServeHTTP(rec, req)
+
+		require.Equal(t, http.StatusNotFound, rec.Code, requestPath)
+		require.Empty(t, rec.Header().Get(echo.HeaderCacheControl), requestPath)
+		require.Empty(t, rec.Header().Get("Pragma"), requestPath)
+		require.Empty(t, rec.Header().Get("Expires"), requestPath)
+	}
+
+	// SPA routes keep the frontend HTML policy, so the exclusion stays narrow.
+	req := httptest.NewRequest(http.MethodGet, "/memos/abc", nil)
+	rec := httptest.NewRecorder()
+	e.ServeHTTP(rec, req)
+
+	require.Equal(t, http.StatusOK, rec.Code)
+	require.Equal(t, frontendHTMLCacheControl, rec.Header().Get(echo.HeaderCacheControl))
+}
+
 func TestFrontendService_SkipsDynamicRoutes(t *testing.T) {
 	ctx := context.Background()
 	testStore := teststore.NewTestingStore(ctx, t)
