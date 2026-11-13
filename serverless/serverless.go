@@ -45,7 +45,7 @@ func NewHTTPHandler() (http.Handler, error) {
 	// the build commit chip.
 	ver := version.GetCurrentVersion()
 	if ver == "" {
-		ver = "26.10"
+		ver = "26.11"
 	}
 	commit := version.Commit
 	if commit == "" || commit == "unknown" {
