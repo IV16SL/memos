@@ -141,8 +141,10 @@ func TestFrontendService_HiddenPathsDoNotFallbackToIndex(t *testing.T) {
 	ctx := context.Background()
 	testStore := teststore.NewTestingStore(ctx, t)
 
-	e := http.NewServeMux()
-	NewFrontendService(&profile.Profile{}, testStore).Serve(ctx, e, http.HandlerFunc(httphandler.NotFound))
+	// Fork note: upstream drives this through net/http ServeMux + httphandler
+	// after the Echo→net/http refactor; this fork still serves via Echo.
+	e := echo.New()
+	NewFrontendService(&profile.Profile{}, testStore).Serve(ctx, e)
 
 	// OAuth Protected Resource Metadata discovery (RFC 9728) probes these
 	// paths and reads a 404 as "not advertised"; HTML would break the client.
