@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Kliknite za prikaz NSFW vsebine",
     "comment": {
       "self": "Komentarji",
-      "write-a-comment": "Napiši komentar"
+      "write-a-comment": "Napiši komentar",
+      "view-all-count_one": "Ogled {{count}} komentarja",
+      "view-all-count_other": "Ogled vseh {{count}} komentarjev"
     },
     "copy-content": "Kopiraj vsebino",
     "copy-link": "Kopiraj povezavo",
@@ -306,9 +308,9 @@
       "updated": "Naloge posodobljene"
     },
     "new-badge": "Novo",
-    "parent-loading": "Nalaganje izvirnega zapiska ...",
-    "parent-load-error": "Izvirnega zapiska ni bilo mogoče naložiti.",
-    "parent-unavailable": "Izvirni zapisek ni na voljo",
+    "parent-loading": "Nalaganje nadrejenega zapiska ...",
+    "parent-load-error": "Nadrejenega zapiska ni bilo mogoče naložiti.",
+    "parent-unavailable": "Nadrejeni zapisek ni na voljo",
     "parent-unavailable-description": "Morda je bil izbrisan ali pa nimate več dostopa.",
     "moved": "Zapisek premaknjen",
     "back-to": "Nazaj na {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "V tem zapisku",
     "parent-memo": "Nadrejeni zapisek",
     "view-options": "Možnosti pogleda",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Dodajte reakcijo",
+    "remove-reaction": "Odstrani reakcijo",
+    "full-width": "Polna širina",
+    "full-width-hint": "Uporabi celotno širino časovnice beležk.",
+    "include-comments": "Vključi komentarje",
+    "include-comments-hint": "V seznamih prikaži komentarje skupaj z beležkami."
   },
   "message": {
     "archived-successfully": "Uspešno arhivirano",
@@ -471,7 +479,10 @@
       "appearance-description": "Izberite, kako izgleda aplikacija in kateri jezik uporablja za vaš račun.",
       "appearance-title": "Videz",
       "default-memo-visibility-description": "Vidnost velja za novo ustvarjene beležke, razen če je spremenjena v urejevalniku.",
+      "device-description": "Možnosti branja in urejanja, shranjene samo v tem brskalniku. V vaš račun se ne shranjujejo.",
+      "device-title": "Ta naprava",
       "language-description": "Takoj posodobi jezik vmesnika in ga shrani v vaš račun.",
+      "link-preview-description": "Prikaži kartico predogleda pod golimi povezavami povsod, kjer so prikazani zapiski.",
       "memo-defaults-description": "Nastavite privzete nastavitve, ki se uporabljajo pri sestavljanju novih beležk.",
       "memo-defaults-title": "Privzete nastavitve beležke",
       "theme-description": "Izbrano temo takoj uporabi v tej napravi.",

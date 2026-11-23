@@ -1,5 +1,5 @@
 import type { Element } from "hast";
-import { useLinkPreviewEnabled } from "@/contexts/ViewContext";
+import { useDevicePreferences } from "@/hooks/useDevicePreferences";
 import { useNearViewport } from "@/hooks/useNearViewport";
 import { markdownStyles } from "@/lib/markdownStyles";
 import { cn } from "@/lib/utils";
@@ -65,7 +65,7 @@ const DeferredLinkPreview = ({ children, className, href, ...props }: DeferredLi
 
 export const Paragraph = ({ children, className, node, ...props }: ParagraphProps) => {
   const { blockDepth } = useMarkdownRenderContext();
-  const linkPreviewEnabled = useLinkPreviewEnabled();
+  const { linkPreview: linkPreviewEnabled } = useDevicePreferences();
   const href = blockDepth === 0 && linkPreviewEnabled ? getSingleLinkHref(node) : undefined;
 
   if (href) {

@@ -31,7 +31,7 @@ describe("memo access transitions", () => {
       content: "my comment",
       relations: [
         create(MemoRelationSchema, {
-          type: MemoRelation_Type.COMMENT,
+          type: MemoRelation_Type.REFERENCE,
           memo: { name: "memos/comment" },
           relatedMemo: { name: parent.name, snippet: "secret" },
         }),
@@ -91,7 +91,7 @@ describe("memo access transitions", () => {
           reject = fail;
         }),
     );
-    const { result } = renderHook(() => useUpdateMemo(), { wrapper });
+    const { result } = renderHook(() => useUpdateMemo(memo.name), { wrapper });
     act(() => result.current.mutate({ update: { name: memo.name, space: "spaces/b" }, updateMask: ["space"] }));
     await waitFor(() => expect(api.updateMemo).toHaveBeenCalledOnce());
     expect(client.getQueryData(memoKeys.detail(memo.name))).toEqual(memo);

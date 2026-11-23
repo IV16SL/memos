@@ -235,7 +235,9 @@
     "click-to-show-sensitive-content": "برای نمایش محتوای حساس کلیک کنید",
     "comment": {
       "self": "نظرات",
-      "write-a-comment": "یک نظر بنویسید"
+      "write-a-comment": "یک نظر بنویسید",
+      "view-all-count_one": "مشاهده همه {{count}} نظر",
+      "view-all-count_other": "مشاهده همه {{count}} نظر"
     },
     "copy-content": "کپی محتوا",
     "copy-link": "کپی پیوند",
@@ -293,9 +295,9 @@
       "open-image": "اشتراک‌گذاری به عنوان تصویر"
     },
     "new-badge": "جدید",
-    "parent-loading": "در حال بارگیری یادداشت اصلی...",
-    "parent-load-error": "یادداشت اصلی بارگیری نشد.",
-    "parent-unavailable": "یادداشت اصلی در دسترس نیست",
+    "parent-loading": "در حال بارگیری یادداشت والد...",
+    "parent-load-error": "یادداشت والد بارگیری نشد.",
+    "parent-unavailable": "یادداشت والد در دسترس نیست",
     "parent-unavailable-description": "ممکن است حذف شده باشد یا دیگر دسترسی نداشته باشید.",
     "moved": "یادداشت منتقل شد",
     "back-to": "بازگشت به {{source}}",
@@ -319,7 +321,13 @@
       "updated": "وظایف به‌روزرسانی شدند"
     },
     "view-options": "گزینه‌های مشاهده",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "افزودن واکنش",
+    "remove-reaction": "حذف واکنش",
+    "full-width": "تمام عرض",
+    "full-width-hint": "از تمام عرض خط زمانی یادداشت‌ها استفاده کنید.",
+    "include-comments": "شامل نظرات",
+    "include-comments-hint": "نمایش نظرات در کنار یادداشت‌ها در فهرست‌ها."
   },
   "message": {
     "archived-successfully": "با موفقیت آرشیو شد",
@@ -381,7 +389,10 @@
       "appearance-description": "نحوه نمایش برنامه و زبانی که برای حساب شما استفاده می‌کند را انتخاب کنید.",
       "appearance-title": "ظاهر",
       "default-memo-visibility-description": "قابلیت مشاهده برای یادداشت‌های تازه ایجاد شده اعمال می‌شود، مگر اینکه در ویرایشگر تغییر کند.",
+      "device-description": "گزینه‌های خواندن و ویرایش که فقط در این مرورگر نگه داشته می‌شوند. در حساب شما ذخیره نمی‌شوند.",
+      "device-title": "این دستگاه",
       "language-description": "زبان رابط را فوراً به‌روزرسانی می‌کند و آن را در حساب شما ذخیره می‌کند.",
+      "link-preview-description": "نمایش کارت پیش‌نمایش زیر پیوندهای خام در هر جایی که یادداشت‌ها نمایش داده می‌شوند.",
       "memo-defaults-description": "پیش‌فرض‌های مورد استفاده هنگام نوشتن یادداشت‌های جدید را تنظیم می‌کند.",
       "memo-defaults-title": "پیش‌فرض‌های یادداشت",
       "save-media-metadata": "ذخیره فراداده رسانه",

@@ -278,7 +278,9 @@
     "click-to-show-sensitive-content": "Faceți clic pentru a afișa conținut sensibil",
     "comment": {
       "self": "Comentarii",
-      "write-a-comment": "Scrie un comentariu"
+      "write-a-comment": "Scrie un comentariu",
+      "view-all-count_one": "Vizualizați {{count}} comentariu",
+      "view-all-count_other": "Vizualizați toate cele {{count}} de comentarii"
     },
     "copy-content": "Copiați conținut",
     "copy-link": "Copiați linkul",
@@ -344,9 +346,9 @@
       "space-description": "Toți din {{space}}"
     },
     "new-badge": "Nou",
-    "parent-loading": "Se încarcă nota originală…",
-    "parent-load-error": "Nu s-a putut încărca nota originală.",
-    "parent-unavailable": "Nota originală nu este disponibilă",
+    "parent-loading": "Se încarcă nota părinte…",
+    "parent-load-error": "Nu s-a putut încărca nota părinte.",
+    "parent-unavailable": "Nota părinte nu este disponibilă",
     "parent-unavailable-description": "Este posibil să fi fost ștersă sau să nu mai ai acces.",
     "moved": "Nota mutată",
     "back-to": "Înapoi la {{source}}",
@@ -362,7 +364,13 @@
     "on-this-memo": "Pe această notă",
     "parent-memo": "Notă părinte",
     "view-options": "Opțiuni de vizualizare",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Adăugați reacția",
+    "remove-reaction": "Îndepărtați reacția",
+    "full-width": "Lățime completă",
+    "full-width-hint": "Folosește întreaga lățime a cronologiei notelor.",
+    "include-comments": "Include comentariile",
+    "include-comments-hint": "Afișează comentariile împreună cu notele în liste."
   },
   "message": {
     "archived-successfully": "Arhivat cu succes",
@@ -585,8 +593,11 @@
       "appearance-title": "Aspect",
       "default-memo-visibility": "Vizibilitatea implicită a notei",
       "default-memo-visibility-description": "Vizibilitatea aplicată notificărilor nou create, dacă nu este schimbată în editor.",
+      "device-description": "Opțiuni de citire și editare păstrate doar în acest browser. Nu sunt salvate în contul tău.",
+      "device-title": "Acest dispozitiv",
       "label": "Preferințe",
       "language-description": "Actualizează imediat limba interfeței și o salvează în contul tău.",
+      "link-preview-description": "Afișează un card de previzualizare sub linkurile simple oriunde sunt afișate memo-uri.",
       "memo-defaults-description": "Setați setările implicite folosite la compunerea noilor note.",
       "memo-defaults-title": "Memo implicite",
       "theme-description": "Aplică tema selectată imediat pe acest dispozitiv.",

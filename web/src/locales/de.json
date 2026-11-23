@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Klicken, um sensible Inhalte anzuzeigen",
     "comment": {
       "self": "Kommentare",
-      "write-a-comment": "Schreibe einen Kommentar"
+      "write-a-comment": "Schreibe einen Kommentar",
+      "view-all-count_one": "{{count}} Kommentar anzeigen",
+      "view-all-count_other": "Alle {{count}} Kommentare anzeigen"
     },
     "copy-content": "Inhalt kopieren",
     "copy-link": "Link kopieren",
@@ -306,9 +308,9 @@
       "updated": "Aufgaben aktualisiert"
     },
     "new-badge": "Neu",
-    "parent-loading": "Original-Memo wird geladen…",
-    "parent-load-error": "Original-Memo konnte nicht geladen werden.",
-    "parent-unavailable": "Original-Memo nicht verfügbar",
+    "parent-loading": "Übergeordnetes Memo wird geladen…",
+    "parent-load-error": "Übergeordnetes Memo konnte nicht geladen werden.",
+    "parent-unavailable": "Übergeordnetes Memo nicht verfügbar",
     "parent-unavailable-description": "Es wurde möglicherweise gelöscht oder Sie haben keinen Zugriff mehr darauf.",
     "moved": "Memo verschoben",
     "back-to": "Zurück zu {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "Zu diesem Memo",
     "parent-memo": "Übergeordnetes Memo",
     "view-options": "Ansichtsoptionen",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Reaktion hinzufügen",
+    "remove-reaction": "Reaktion entfernen",
+    "full-width": "Volle Breite",
+    "full-width-hint": "Die gesamte Breite der Notiz-Zeitleiste nutzen.",
+    "include-comments": "Kommentare einbeziehen",
+    "include-comments-hint": "Kommentare in Listen zusammen mit Notizen anzeigen."
   },
   "message": {
     "archived-successfully": "Erfolgreich archiviert",
@@ -471,7 +479,10 @@
       "appearance-description": "Wählen Sie aus, wie die App aussieht und welche Sprache sie für Ihr Konto verwendet.",
       "appearance-title": "Aussehen",
       "default-memo-visibility-description": "Die Sichtbarkeit wird auf neu erstellte Memos angewendet, sofern sie nicht im Editor geändert wird.",
+      "device-description": "Lese- und Bearbeitungsoptionen, die nur in diesem Browser gespeichert werden. Sie werden nicht in deinem Konto gespeichert.",
+      "device-title": "Dieses Gerät",
       "language-description": "Aktualisiert die Sprache der Benutzeroberfläche sofort und speichert sie in Ihrem Konto.",
+      "link-preview-description": "Unter reinen Links überall dort eine Vorschaukarte anzeigen, wo Memos angezeigt werden.",
       "memo-defaults-description": "Legen Sie die Standardeinstellungen fest, die beim Verfassen neuer Memos verwendet werden.",
       "memo-defaults-title": "Memo-Standardwerte",
       "theme-description": "Wendet das ausgewählte Thema sofort auf diesem Gerät an.",

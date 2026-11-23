@@ -235,7 +235,9 @@
     "click-to-show-sensitive-content": "انقر لإظهار المحتوى الحساس",
     "comment": {
       "self": "التعليقات",
-      "write-a-comment": "اكتب تعليقاً"
+      "write-a-comment": "اكتب تعليقاً",
+      "view-all-count_one": "عرض كل التعليقات ({{count}})",
+      "view-all-count_other": "عرض كل التعليقات ({{count}})"
     },
     "copy-content": "نسخ المحتوى",
     "copy-link": "نسخ الرابط",
@@ -293,9 +295,9 @@
       "open-image": "مشاركة كصورة"
     },
     "new-badge": "جديد",
-    "parent-loading": "جارٍ تحميل المذكرة الأصلية...",
-    "parent-load-error": "تعذر تحميل المذكرة الأصلية.",
-    "parent-unavailable": "المذكرة الأصلية غير متوفرة",
+    "parent-loading": "جارٍ تحميل المذكرة الأم...",
+    "parent-load-error": "تعذر تحميل المذكرة الأم.",
+    "parent-unavailable": "المذكرة الأم غير متوفرة",
     "parent-unavailable-description": "ربما تم حذفها أو ربما لم يعد لديك صلاحية الوصول إليها.",
     "moved": "تم نقل المذكرة",
     "back-to": "العودة إلى {{source}}",
@@ -312,14 +314,20 @@
     "newest-first": "الأحدث أولًا",
     "oldest-first": "الأقدم أولًا",
     "on-this-memo": "في هذه المذكرة",
-    "parent-memo": "المذكرة الأصلية",
+    "parent-memo": "المذكرة الأم",
     "task-actions": {
       "check-all": "تحديد جميع المهام",
       "uncheck-all": "إلغاء تحديد جميع المهام",
       "updated": "تم تحديث المهام"
     },
     "view-options": "خيارات العرض",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "إضافة رد فعل",
+    "remove-reaction": "إزالة التفاعل",
+    "full-width": "العرض الكامل",
+    "full-width-hint": "استخدام العرض الكامل للخط الزمني للمذكرات.",
+    "include-comments": "تضمين التعليقات",
+    "include-comments-hint": "عرض التعليقات مع المذكرات في القوائم."
   },
   "message": {
     "archived-successfully": "تمت الأرشفة بنجاح",
@@ -381,7 +389,10 @@
       "appearance-description": "اختر مظهر التطبيق واللغة المستخدمة لحسابك.",
       "appearance-title": "المظهر",
       "default-memo-visibility-description": "يتم تطبيق مستوى الرؤية على المذكرات المُنشأة حديثًا ما لم يتم تغييره في المحرر.",
+      "device-description": "خيارات القراءة والتحرير المحفوظة في هذا المتصفح فقط. لا تُحفظ في حسابك.",
+      "device-title": "هذا الجهاز",
       "language-description": "يُحدّث لغة واجهة المستخدم فورًا ويحفظها في حسابك.",
+      "link-preview-description": "إظهار بطاقة معاينة أسفل الروابط المجردة أينما تُعرض الملاحظات.",
       "memo-defaults-description": "يُعيّن الإعدادات الافتراضية المستخدمة عند كتابة مذكرات جديدة.",
       "memo-defaults-title": "الإعدادات الافتراضية للمذكرات",
       "save-media-metadata": "حفظ بيانات الوسائط الوصفية",

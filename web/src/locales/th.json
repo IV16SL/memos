@@ -235,7 +235,9 @@
     "click-to-show-sensitive-content": "คลิกเพื่อแสดงเนื้อหาไม่เหมาะสม (NSFW)",
     "comment": {
       "self": "ความคิดเห็น",
-      "write-a-comment": "เขียนความคิดเห็น"
+      "write-a-comment": "เขียนความคิดเห็น",
+      "view-all-count_one": "ดูความคิดเห็นทั้งหมด {{count}} รายการ",
+      "view-all-count_other": "ดูความคิดเห็นทั้งหมด {{count}} รายการ"
     },
     "copy-content": "คัดลอกเนื้อหา",
     "copy-link": "คัดลอกลิงก์",
@@ -293,9 +295,9 @@
       "open-image": "แชร์เป็นรูปภาพ"
     },
     "new-badge": "ใหม่",
-    "parent-loading": "กำลังโหลดบันทึกต้นฉบับ…",
-    "parent-load-error": "ไม่สามารถโหลดบันทึกต้นฉบับได้",
-    "parent-unavailable": "บันทึกต้นฉบับไม่พร้อมใช้งาน",
+    "parent-loading": "กำลังโหลดบันทึกหลัก…",
+    "parent-load-error": "ไม่สามารถโหลดบันทึกหลักได้",
+    "parent-unavailable": "บันทึกหลักไม่พร้อมใช้งาน",
     "parent-unavailable-description": "อาจถูกลบไปแล้วหรือคุณอาจไม่สามารถเข้าถึงได้อีกต่อไป",
     "moved": "ย้ายบันทึกแล้ว",
     "back-to": "กลับไปที่ {{source}}",
@@ -319,7 +321,13 @@
       "updated": "อัปเดตงานแล้ว"
     },
     "view-options": "ตัวเลือกการดู",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "เพิ่มปฏิกิริยา",
+    "remove-reaction": "ลบการตอบสนอง",
+    "full-width": "เต็มความกว้าง",
+    "full-width-hint": "ใช้ความกว้างทั้งหมดของไทม์ไลน์บันทึกช่วยจำ",
+    "include-comments": "รวมความคิดเห็น",
+    "include-comments-hint": "แสดงความคิดเห็นร่วมกับบันทึกช่วยจำในรายการ"
   },
   "message": {
     "archived-successfully": "เก็บถาวรเรียบร้อยแล้ว",
@@ -381,7 +389,10 @@
       "appearance-description": "เลือกลักษณะการแสดงผลของแอปและภาษาที่ใช้สำหรับบัญชีของคุณ",
       "appearance-title": "ลักษณะการแสดงผล",
       "default-memo-visibility-description": "การมองเห็นที่ใช้กับบันทึกช่วยจำที่สร้างใหม่ เว้นแต่จะเปลี่ยนแปลงในโปรแกรมแก้ไข",
+      "device-description": "ตัวเลือกการอ่านและแก้ไขที่เก็บไว้ในเบราว์เซอร์นี้เท่านั้น ไม่ได้บันทึกลงในบัญชีของคุณ",
+      "device-title": "อุปกรณ์นี้",
       "language-description": "อัปเดตภาษาของอินเทอร์เฟซทันทีและบันทึกไว้ในบัญชีของคุณ",
+      "link-preview-description": "แสดงการ์ดตัวอย่างใต้ลิงก์เปล่าทุกที่ที่แสดงบันทึก",
       "memo-defaults-description": "ตั้งค่าเริ่มต้นที่ใช้เมื่อเขียนบันทึกช่วยจำใหม่",
       "memo-defaults-title": "ค่าเริ่มต้นของบันทึกช่วยจำ",
       "save-media-metadata": "บันทึกข้อมูลเมตาของสื่อ",

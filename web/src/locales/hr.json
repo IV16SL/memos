@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Klikni za prikaz osjetljivog sadržaja",
     "comment": {
       "self": "Komentari",
-      "write-a-comment": "Napiši komentar"
+      "write-a-comment": "Napiši komentar",
+      "view-all-count_one": "Pogledaj {{count}} komentar",
+      "view-all-count_other": "Pogledaj svih {{count}} komentara"
     },
     "copy-content": "Kopiraj sadržaj",
     "copy-link": "Kopiraj link",
@@ -306,9 +308,9 @@
       "updated": "Zadaci ažurirani"
     },
     "new-badge": "Novi",
-    "parent-loading": "Učitavanje izvorne bilješke…",
-    "parent-load-error": "Nije moguće učitati izvornu bilješku.",
-    "parent-unavailable": "Izvorna bilješka nije dostupna",
+    "parent-loading": "Učitavanje nadređenog podsjetnika…",
+    "parent-load-error": "Nije moguće učitati nadređeni podsjetnik.",
+    "parent-unavailable": "Nadređeni podsjetnik nije dostupan",
     "parent-unavailable-description": "Možda je izbrisana ili više nemate pristup.",
     "moved": "Bilješka je premještena",
     "back-to": "Natrag na {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "Na ovom podsjetniku",
     "parent-memo": "Nadređeni podsjetnik",
     "view-options": "Opcije prikaza",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Dodajte reakciju",
+    "remove-reaction": "Ukloni reakciju",
+    "full-width": "Puna širina",
+    "full-width-hint": "Koristi cijelu širinu vremenske crte memoa.",
+    "include-comments": "Uključi komentare",
+    "include-comments-hint": "Prikaži komentare uz memoe na popisima."
   },
   "message": {
     "archived-successfully": "Uspješno arhivirano",
@@ -471,7 +479,10 @@
       "appearance-description": "Odaberite kako aplikacija izgleda i koji jezik koristi za vaš račun.",
       "appearance-title": "Izgled",
       "default-memo-visibility-description": "Vidljivost se primjenjuje na novostvorene bilješke osim ako se ne promijeni u uređivaču.",
+      "device-description": "Postavke čitanja i uređivanja koje se čuvaju samo u ovom pregledniku. Ne spremaju se na vaš račun.",
+      "device-title": "Ovaj uređaj",
       "language-description": "Odmah ažurira jezik sučelja i sprema ga na vaš račun.",
+      "link-preview-description": "Prikaži karticu pregleda ispod golih poveznica gdje god se prikazuju bilješke.",
       "memo-defaults-description": "Postavite zadane postavke koje se koriste pri sastavljanju novih bilješki.",
       "memo-defaults-title": "Zadane postavke bilješke",
       "theme-description": "Odmah primjenjuje odabranu temu na ovom uređaju.",

@@ -8,6 +8,7 @@ const mocks = vi.hoisted(() => ({
   dispatch: vi.fn(),
   markNewMemo: vi.fn(),
   memoSave: vi.fn(),
+
   newMemoName: null as string | null,
   timestamps: {} as { createTime?: Date; updateTime?: Date },
 }));

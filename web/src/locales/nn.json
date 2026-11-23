@@ -345,7 +345,9 @@
     "click-to-show-sensitive-content": "Trykk for å vise sensitivt innhald",
     "comment": {
       "self": "Kommentarar",
-      "write-a-comment": "Skriv ein kommentar"
+      "write-a-comment": "Skriv ein kommentar",
+      "view-all-count_one": "Vis {{count}} kommentar",
+      "view-all-count_other": "Vis alle {{count}} kommentarane"
     },
     "compact-mode": "Kompakt modus",
     "connections": "Tilknytingar",
@@ -378,10 +380,10 @@
     "oldest-first": "Eldste fyrst",
     "on-this-memo": "På dette notatet",
     "order-by": "Sorter etter",
-    "parent-load-error": "Klarte diverre ikkje å laste opphavsnotatet.",
-    "parent-loading": "Lastar opphavsnotatet…",
+    "parent-load-error": "Klarte diverre ikkje å laste det overordna notatet.",
+    "parent-loading": "Lastar det overordna notatet…",
     "parent-memo": "Overordna notat",
-    "parent-unavailable": "Opphavsnotatet er ikkje tilgjengeleg",
+    "parent-unavailable": "Det overordna notatet er ikkje tilgjengeleg",
     "parent-unavailable-description": "Det kan vera sletta, eller du har ikkje lenger åtgang.",
     "pinned": "Festa",
     "share": {
@@ -429,7 +431,13 @@
       "space": "Medlemer",
       "space-description": "Alle i {{space}}"
     },
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Legg til reaksjon",
+    "remove-reaction": "Fjern reaksjon",
+    "full-width": "Full breidd",
+    "full-width-hint": "Bruk heile breidda på tidslina for notata.",
+    "include-comments": "Inkluder kommentarar",
+    "include-comments-hint": "Vis kommentarar saman med notat i lister."
   },
   "message": {
     "archived-successfully": "Arkivert",
@@ -775,8 +783,11 @@
       "appearance-title": "Utsjånad",
       "default-memo-visibility": "Standard synlegheit for notat",
       "default-memo-visibility-description": "Synlegheita som vert nytta for nye notat dersom ho ikkje vert endra i redigeringa.",
+      "device-description": "Lese- og redigeringsval som berre vert lagra i denne nettlesaren. Dei vert ikkje lagra på kontoen din.",
+      "device-title": "Denne eininga",
       "label": "Brukarval",
       "language-description": "Endrar grensesnittspråket med ein gong og lagrar det på kontoen din.",
+      "link-preview-description": "Vis eit førehandsvisingskort under reine lenkjer overalt der notat vert viste.",
       "memo-defaults-description": "Vel standardane som vert nytta når du skriv nye notat.",
       "memo-defaults-title": "Notatstandardar",
       "save-media-metadata": "Lagre mediemetadata",

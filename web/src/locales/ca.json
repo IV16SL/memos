@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Fes clic per mostrar contingut sensible",
     "comment": {
       "self": "Comentaris",
-      "write-a-comment": "Escriu un comentari"
+      "write-a-comment": "Escriu un comentari",
+      "view-all-count_one": "Veure {{count}} comentari",
+      "view-all-count_other": "Veure els {{count}} comentaris"
     },
     "copy-content": "Copia el contingut",
     "copy-link": "Copia l'enllaç",
@@ -306,9 +308,9 @@
       "updated": "Tasques actualitzades"
     },
     "new-badge": "Nou",
-    "parent-loading": "S'està carregant la nota original...",
-    "parent-load-error": "No s'ha pogut carregar la nota original.",
-    "parent-unavailable": "Nota original no disponible",
+    "parent-loading": "S'està carregant la nota principal...",
+    "parent-load-error": "No s'ha pogut carregar la nota principal.",
+    "parent-unavailable": "Nota principal no disponible",
     "parent-unavailable-description": "Potser s'ha suprimit o ja no hi tens accés.",
     "moved": "Nota moguda",
     "back-to": "Torna a {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "En aquesta nota",
     "parent-memo": "Nota principal",
     "view-options": "Opcions de visualització",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Afegeix reacció",
+    "remove-reaction": "Elimina la reacció",
+    "full-width": "Amplada completa",
+    "full-width-hint": "Utilitza tota l'amplada de la cronologia dels memos.",
+    "include-comments": "Inclou els comentaris",
+    "include-comments-hint": "Mostra els comentaris juntament amb els memos a les llistes."
   },
   "message": {
     "archived-successfully": "Arxivat correctament",
@@ -471,7 +479,10 @@
       "appearance-description": "Trieu com es veu l'aplicació i quin idioma utilitza per al vostre compte.",
       "appearance-title": "Aparença",
       "default-memo-visibility-description": "La visibilitat s'aplica a les notes de nova creació tret que es modifiqui a l'editor.",
+      "device-description": "Opcions de lectura i edició desades només en aquest navegador. No es desen al vostre compte.",
+      "device-title": "Aquest dispositiu",
       "language-description": "Actualitza l'idioma de la interfície immediatament i el desa al vostre compte.",
+      "link-preview-description": "Mostra una targeta de previsualització sota els enllaços nus allà on es mostrin notes.",
       "memo-defaults-description": "Estableix els valors predeterminats que s'utilitzen per redactar memòries noves.",
       "memo-defaults-title": "Memo per defecte",
       "theme-description": "Aplica el tema seleccionat immediatament en aquest dispositiu.",

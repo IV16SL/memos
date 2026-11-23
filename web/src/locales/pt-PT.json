@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Clique para mostrar conteúdo NSFW",
     "comment": {
       "self": "Comentários",
-      "write-a-comment": "Escreva um comentário"
+      "write-a-comment": "Escreva um comentário",
+      "view-all-count_one": "Ver {{count}} comentário",
+      "view-all-count_other": "Ver todos os {{count}} comentários"
     },
     "copy-content": "Copiar Conteúdo",
     "copy-link": "Copiar link",
@@ -306,9 +308,9 @@
       "updated": "Tarefas atualizadas"
     },
     "new-badge": "Novo",
-    "parent-loading": "A carregar memorando original…",
-    "parent-load-error": "Não foi possível carregar o memorando original.",
-    "parent-unavailable": "Memorando original indisponível",
+    "parent-loading": "A carregar memorando pai…",
+    "parent-load-error": "Não foi possível carregar o memorando pai.",
+    "parent-unavailable": "Memorando pai indisponível",
     "parent-unavailable-description": "Pode ter sido eliminado ou pode já não ter acesso a ele.",
     "moved": "Memorando movido",
     "back-to": "Voltar para {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "Neste memorando",
     "parent-memo": "Memorando pai",
     "view-options": "Opções de visualização",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Adicionar reação",
+    "remove-reaction": "Remover reação",
+    "full-width": "Largura total",
+    "full-width-hint": "Usar toda a largura da linha do tempo dos memos.",
+    "include-comments": "Incluir comentários",
+    "include-comments-hint": "Mostrar comentários juntamente com os memos nas listas."
   },
   "message": {
     "archived-successfully": "Arquivado com sucesso",
@@ -471,7 +479,10 @@
       "appearance-description": "Escolha a aparência do aplicativo e qual idioma ele usa para sua conta.",
       "appearance-title": "Aparência",
       "default-memo-visibility-description": "Visibilidade aplicada a memorandos recém-criados, a menos que seja alterada no editor.",
+      "device-description": "Opções de leitura e edição guardadas apenas neste navegador. Não são guardadas na sua conta.",
+      "device-title": "Este dispositivo",
       "language-description": "Atualiza o idioma da interface imediatamente e salva-o em sua conta.",
+      "link-preview-description": "Mostrar um cartão de pré-visualização sob ligações soltas onde quer que os memos sejam apresentados.",
       "memo-defaults-description": "Defina os padrões usados ​​ao redigir novos memorandos.",
       "memo-defaults-title": "Padrões de memorando",
       "theme-description": "Aplica o tema selecionado imediatamente neste dispositivo.",

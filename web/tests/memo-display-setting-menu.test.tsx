@@ -12,8 +12,8 @@ vi.mock("@/utils/i18n", () => ({
       "common.created-at": "Created",
       "common.last-updated-at": "Last updated",
       "memo.compact-mode": "Compact mode",
+      "memo.full-width": "Full width",
       "memo.direction": "Direction",
-      "memo.grid-compact-hint": "Grid layouts always use compact cards.",
       "memo.layout": "Layout",
       "memo.layout-auto": "Auto",
       "memo.layout-auto-description": "As many columns as fit",
@@ -37,7 +37,7 @@ describe("MemoDisplaySettingMenu", () => {
     localStorage.clear();
   });
 
-  it("opens from an accessible trigger and explains the compact grid constraint", () => {
+  it("opens from an accessible trigger and holds only the Timeline's own options", () => {
     render(
       <ViewProvider>
         <MemoDisplaySettingMenu />
@@ -51,15 +51,18 @@ describe("MemoDisplaySettingMenu", () => {
 
     fireEvent.click(trigger);
 
-    const compactMode = screen.getByRole("switch", { name: "Compact mode" });
-    expect(compactMode).not.toBeChecked();
-    expect(compactMode).toBeEnabled();
+    // Compact mode and link preview moved to Settings > Preferences > This device.
+    expect(screen.queryByRole("switch", { name: "Compact mode" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("switch", { name: "Link preview" })).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("radio", { name: "2 columns" }));
+    const fullWidth = screen.getByRole("switch", { name: "Full width" });
+    expect(fullWidth).not.toBeChecked();
+    expect(fullWidth).toBeEnabled();
 
-    expect(compactMode).toBeChecked();
-    expect(compactMode).toHaveAttribute("aria-disabled", "true");
-    expect(screen.getByText("Grid layouts always use compact cards.")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("radio", { name: "Auto" }));
+
+    expect(fullWidth).toBeChecked();
+    expect(fullWidth).toHaveAttribute("aria-disabled", "true");
   });
 
   it("opens only from the arrow, not the adjacent Timeline link", () => {

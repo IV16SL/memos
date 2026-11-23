@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Kliknij, aby pokazać treści NSFW",
     "comment": {
       "self": "Komentarze",
-      "write-a-comment": "Napisz komentarz"
+      "write-a-comment": "Napisz komentarz",
+      "view-all-count_one": "Wyświetl {{count}} komentarz",
+      "view-all-count_other": "Wyświetl wszystkie {{count}} komentarza"
     },
     "copy-content": "Kopiuj treść",
     "copy-link": "Kopiuj link",
@@ -306,9 +308,9 @@
       "uncheck-all": "Odznacz wszystkie zadania",
       "updated": "Zadania zaktualizowane"
     },
-    "parent-loading": "Ładowanie oryginalnej notatki…",
-    "parent-load-error": "Nie można załadować oryginalnej notatki.",
-    "parent-unavailable": "Oryginalna notatka jest niedostępna",
+    "parent-loading": "Ładowanie notatki nadrzędnej…",
+    "parent-load-error": "Nie można załadować notatki nadrzędnej.",
+    "parent-unavailable": "Notatka nadrzędna jest niedostępna",
     "parent-unavailable-description": "Mogła zostać usunięta lub nie masz już do niej dostępu.",
     "moved": "Notatka przeniesiona",
     "back-to": "Powrót do {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "W tej notatce",
     "parent-memo": "Notatka nadrzędna",
     "view-options": "Opcje widoku",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Dodaj reakcję",
+    "remove-reaction": "Usuń reakcję",
+    "full-width": "Pełna szerokość",
+    "full-width-hint": "Używaj całej szerokości osi czasu notatek.",
+    "include-comments": "Uwzględnij komentarze",
+    "include-comments-hint": "Pokazuj komentarze razem z notatkami na listach."
   },
   "message": {
     "archived-successfully": "Zarchiwizowano pomyślnie",
@@ -471,7 +479,10 @@
       "appearance-description": "Wybierz wygląd aplikacji i język, którego używa na Twoim koncie.",
       "appearance-title": "Wygląd",
       "default-memo-visibility-description": "Widoczność stosowana do nowo utworzonych notatek, chyba że zostanie zmieniona w edytorze.",
+      "device-description": "Ustawienia czytania i edycji przechowywane tylko w tej przeglądarce. Nie są zapisywane na Twoim koncie.",
+      "device-title": "To urządzenie",
       "language-description": "Natychmiast aktualizuje język interfejsu i zapisuje go na Twoim koncie.",
+      "link-preview-description": "Pokazuj kartę podglądu pod samymi linkami wszędzie tam, gdzie wyświetlane są notatki.",
       "memo-defaults-description": "Ustaw wartości domyślne używane podczas tworzenia nowych notatek.",
       "memo-defaults-title": "Domyślne ustawienia notatki",
       "theme-description": "Natychmiast stosuje wybrany motyw na tym urządzeniu.",

@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Haz clic para mostrar contenido sensible",
     "comment": {
       "self": "Comentarios",
-      "write-a-comment": "Escribe un comentario"
+      "write-a-comment": "Escribe un comentario",
+      "view-all-count_one": "Ver {{count}} comentario",
+      "view-all-count_other": "Ver los {{count}} comentarios"
     },
     "copy-content": "Copiar contenido",
     "copy-link": "Copiar enlace",
@@ -306,9 +308,9 @@
       "updated": "Tareas actualizadas"
     },
     "new-badge": "Nuevo",
-    "parent-loading": "Cargando memorándum original…",
-    "parent-load-error": "No se pudo cargar el memorándum original.",
-    "parent-unavailable": "Memorándum original no disponible.",
+    "parent-loading": "Cargando memo principal…",
+    "parent-load-error": "No se pudo cargar el memo principal.",
+    "parent-unavailable": "Memo principal no disponible.",
     "parent-unavailable-description": "Es posible que se haya eliminado o que ya no tengas acceso.",
     "moved": "Memorándum movido.",
     "back-to": "Volver a {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "En este memo",
     "parent-memo": "Memo principal",
     "view-options": "Opciones de vista",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Añadir reacción",
+    "remove-reaction": "Eliminar reacción",
+    "full-width": "Ancho completo",
+    "full-width-hint": "Usar todo el ancho de la cronología de memos.",
+    "include-comments": "Incluir comentarios",
+    "include-comments-hint": "Mostrar los comentarios junto a los memos en las listas."
   },
   "message": {
     "archived-successfully": "Archivado correctamente",
@@ -471,7 +479,10 @@
       "appearance-description": "Elija cómo se ve la aplicación y qué idioma utiliza para su cuenta.",
       "appearance-title": "Apariencia",
       "default-memo-visibility-description": "La visibilidad se aplicó a las notas recién creadas a menos que se modifiquen en el editor.",
+      "device-description": "Opciones de lectura y edición guardadas solo en este navegador. No se guardan en tu cuenta.",
+      "device-title": "Este dispositivo",
       "language-description": "Actualiza el idioma de la interfaz inmediatamente y lo guarda en su cuenta.",
+      "link-preview-description": "Mostrar una tarjeta de vista previa bajo los enlaces sueltos allí donde se muestren notas.",
       "memo-defaults-description": "Establezca los valores predeterminados utilizados al redactar nuevas notas.",
       "memo-defaults-title": "Valores predeterminados de notas",
       "theme-description": "Aplica el tema seleccionado inmediatamente en este dispositivo.",

@@ -235,7 +235,9 @@
     "click-to-show-sensitive-content": "숨겨진 콘텐츠 보기",
     "comment": {
       "self": "댓글",
-      "write-a-comment": "댓글 작성"
+      "write-a-comment": "댓글 작성",
+      "view-all-count_one": "댓글 {{count}}개 모두 보기",
+      "view-all-count_other": "댓글 {{count}}개 모두 보기"
     },
     "copy-content": "콘텐츠 복사",
     "copy-link": "링크 복사",
@@ -293,9 +295,9 @@
       "open-image": "이미지로 공유"
     },
     "new-badge": "신규",
-    "parent-loading": "원본 메모 불러오는 중…",
-    "parent-load-error": "원본 메모를 불러올 수 없습니다.",
-    "parent-unavailable": "원본 메모를 사용할 수 없습니다.",
+    "parent-loading": "상위 메모 불러오는 중…",
+    "parent-load-error": "상위 메모를 불러올 수 없습니다.",
+    "parent-unavailable": "상위 메모를 사용할 수 없습니다.",
     "parent-unavailable-description": "메모가 삭제되었거나 더 이상 접근 권한이 없을 수 있습니다.",
     "moved": "메모가 이동되었습니다.",
     "back-to": "{{source}}으로 돌아가기",
@@ -319,7 +321,13 @@
       "updated": "작업 업데이트됨"
     },
     "view-options": "보기 옵션",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "반응 추가",
+    "remove-reaction": "반응 제거",
+    "full-width": "전체 너비",
+    "full-width-hint": "메모 타임라인의 전체 너비를 사용합니다.",
+    "include-comments": "댓글 포함",
+    "include-comments-hint": "목록에 메모와 함께 댓글을 표시합니다."
   },
   "message": {
     "archived-successfully": "성공적으로 보관되었습니다",
@@ -381,7 +389,10 @@
       "appearance-description": "앱의 모양과 계정에 사용할 언어를 선택하세요.",
       "appearance-title": "모양",
       "default-memo-visibility-description": "편집기에서 변경하지 않는 한 새로 생성된 메모에 표시됩니다.",
+      "device-description": "이 브라우저에만 저장되는 읽기 및 편집 설정입니다. 계정에는 저장되지 않습니다.",
+      "device-title": "이 기기",
       "language-description": "인터페이스 언어를 즉시 업데이트하고 계정에 저장합니다.",
+      "link-preview-description": "메모가 표시되는 모든 곳에서 단독 링크 아래에 미리보기 카드를 표시합니다.",
       "memo-defaults-description": "새 메모를 작성할 때 사용할 기본 설정을 지정합니다.",
       "memo-defaults-title": "메모 기본 설정",
       "save-media-metadata": "미디어 메타데이터 저장",

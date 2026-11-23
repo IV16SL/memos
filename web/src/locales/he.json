@@ -311,7 +311,9 @@
     "click-to-show-sensitive-content": "לחצו כדי להציג תוכן רגיש",
     "comment": {
       "self": "תגובות",
-      "write-a-comment": "כתבו תגובה"
+      "write-a-comment": "כתבו תגובה",
+      "view-all-count_one": "הצג {{count}} תגובה",
+      "view-all-count_other": "הצג את כל {{count}} התגובות"
     },
     "copy-content": "העתק תוכן",
     "copy-link": "העתק קישור",
@@ -386,16 +388,22 @@
       "space": "חברים",
       "space-description": "כל מי שב-{{space}}"
     },
-    "parent-loading": "טוען את התזכיר המקורי…",
-    "parent-load-error": "לא ניתן היה לטעון את התזכיר המקורי.",
-    "parent-unavailable": "התזכיר המקורי אינו זמין",
+    "parent-loading": "טוען את תזכיר האב…",
+    "parent-load-error": "לא ניתן היה לטעון את תזכיר האב.",
+    "parent-unavailable": "תזכיר האב אינו זמין",
     "parent-unavailable-description": "ייתכן שהוא נמחק או שאין לך עוד גישה.",
     "moved": "התזכיר הועבר",
     "back-to": "חזרה אל {{source}}",
     "connections": "חיבורים",
     "on-this-memo": "על תזכיר זה",
     "parent-memo": "תזכיר אב",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "הוסף תגובה",
+    "remove-reaction": "הסר תגובה",
+    "full-width": "רוחב מלא",
+    "full-width-hint": "שימוש בכל הרוחב של ציר הזמן של הפתקים.",
+    "include-comments": "הכללת תגובות",
+    "include-comments-hint": "הצגת תגובות לצד פתקים ברשימות."
   },
   "message": {
     "archived-successfully": "הועבר לארכיון בהצלחה",
@@ -618,8 +626,11 @@
       "appearance-title": "מראה",
       "default-memo-visibility": "נראות ברירת המחדל של הפתק",
       "default-memo-visibility-description": "הנראות שחלה על פתקים חדשים שנוצרו, אלא אם תשנו אותה בעורך.",
+      "device-description": "אפשרויות קריאה ועריכה שנשמרות רק בדפדפן זה. הן אינן נשמרות בחשבונך.",
+      "device-title": "מכשיר זה",
       "label": "העדפות",
       "language-description": "מעדכן את שפת הממשק באופן מיידי ושומר אותה בחשבון שלכם.",
+      "link-preview-description": "הצגת כרטיס תצוגה מקדימה מתחת לקישורים חשופים בכל מקום שבו מוצגים פתקים.",
       "memo-defaults-description": "הגדירו את ברירות המחדל המשמשות בעת כתיבת פתקים חדשים.",
       "memo-defaults-title": "ברירות מחדל של פתקים",
       "save-media-metadata": "שמור מטא־נתונים של מדיה",

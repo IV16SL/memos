@@ -278,7 +278,9 @@
     "click-to-show-sensitive-content": "Tundliku sisu kuvamiseks klõpsake",
     "comment": {
       "self": "Kommentaarid",
-      "write-a-comment": "Kirjutage kommentaar"
+      "write-a-comment": "Kirjutage kommentaar",
+      "view-all-count_one": "Kuva {{count}} kommentaar",
+      "view-all-count_other": "Kuva kõik {{count}} kommentaari"
     },
     "copy-content": "Kopeeri sisu",
     "copy-link": "Kopeeri link",
@@ -344,9 +346,9 @@
       "space-description": "Kõik ruumis {{space}}"
     },
     "new-badge": "Uus",
-    "parent-loading": "Algse memo laadimine…",
-    "parent-load-error": "Algse memo laadimine ebaõnnestus.",
-    "parent-unavailable": "Algne memo pole saadaval",
+    "parent-loading": "Ülemmemo laadimine…",
+    "parent-load-error": "Ülemmemo laadimine ebaõnnestus.",
+    "parent-unavailable": "Ülemmemo pole saadaval",
     "parent-unavailable-description": "See võib olla kustutatud või teil pole enam juurdepääsu.",
     "moved": "Memo teisaldatud",
     "back-to": "Tagasi {{source}} juurde",
@@ -362,7 +364,13 @@
     "on-this-memo": "Sellel memo peal",
     "parent-memo": "Ülemmemo",
     "view-options": "Vaate valikud",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Lisa reaktsioon",
+    "remove-reaction": "Eemaldage reaktsioon",
+    "full-width": "Täislaius",
+    "full-width-hint": "Kasuta memode ajajoone kogu laiust.",
+    "include-comments": "Kaasa kommentaarid",
+    "include-comments-hint": "Näita loendites kommentaare koos memodega."
   },
   "message": {
     "archived-successfully": "Arhiveerimine õnnestus",
@@ -585,8 +593,11 @@
       "appearance-title": "Välimus",
       "default-memo-visibility": "Memode vaikenähtavus",
       "default-memo-visibility-description": "Nähtavus rakendatakse äsja loodud memodele, kui seda pole redaktoris muudetud.",
+      "device-description": "Lugemis- ja muutmisvalikud, mida hoitakse ainult selles brauseris. Neid ei salvestata teie kontole.",
+      "device-title": "See seade",
       "label": "Eelistused",
       "language-description": "Värskendab koheselt liidese keelt ja salvestab selle teie kontole.",
+      "link-preview-description": "Näita eelvaatekaarti paljaste linkide all kõikjal, kus memosid kuvatakse.",
       "memo-defaults-description": "Määrake uute memode koostamisel kasutatavad vaikeseaded.",
       "memo-defaults-title": "Memo vaikeseaded",
       "theme-description": "Rakendab valitud teema kohe selles seadmes.",

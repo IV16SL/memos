@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Klik om NSFW-inhoud te tonen",
     "comment": {
       "self": "Opmerkingen",
-      "write-a-comment": "Schrijf een opmerking"
+      "write-a-comment": "Schrijf een opmerking",
+      "view-all-count_one": "{{count}} opmerking bekijken",
+      "view-all-count_other": "Alle {{count}} opmerkingen bekijken"
     },
     "copy-content": "Inhoud kopiëren",
     "copy-link": "Kopieer link",
@@ -306,9 +308,9 @@
       "updated": "Taken bijgewerkt"
     },
     "new-badge": "Nieuw",
-    "parent-loading": "Originele memo laden…",
-    "parent-load-error": "De originele memo kon niet worden geladen.",
-    "parent-unavailable": "Originele memo niet beschikbaar",
+    "parent-loading": "Hoofdmemo laden…",
+    "parent-load-error": "De hoofdmemo kon niet worden geladen.",
+    "parent-unavailable": "Hoofdmemo niet beschikbaar",
     "parent-unavailable-description": "Deze is mogelijk verwijderd of je hebt er geen toegang meer toe.",
     "moved": "Memo verplaatst",
     "back-to": "Terug naar {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "In deze memo",
     "parent-memo": "Hoofdmemo",
     "view-options": "Weergaveopties",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Reactie toevoegen",
+    "remove-reaction": "Reactie verwijderen",
+    "full-width": "Volledige breedte",
+    "full-width-hint": "Gebruik de volledige breedte van de memotijdlijn.",
+    "include-comments": "Opmerkingen opnemen",
+    "include-comments-hint": "Toon opmerkingen samen met memo's in lijsten."
   },
   "message": {
     "archived-successfully": "Succesvol gearchiveerd",
@@ -471,7 +479,10 @@
       "appearance-description": "Kies hoe de app eruit ziet en welke taal deze gebruikt voor uw account.",
       "appearance-title": "Verschijning",
       "default-memo-visibility-description": "Zichtbaarheid wordt toegepast op nieuw gemaakte memo's, tenzij gewijzigd in de editor.",
+      "device-description": "Lees- en bewerkingsvoorkeuren die alleen in deze browser worden bewaard. Ze worden niet in je account opgeslagen.",
+      "device-title": "Dit apparaat",
       "language-description": "Werkt de interfacetaal onmiddellijk bij en slaat deze op in uw account.",
+      "link-preview-description": "Toon een voorbeeldkaart onder kale links overal waar memo's worden weergegeven.",
       "memo-defaults-description": "Stel de standaardinstellingen in die worden gebruikt bij het opstellen van nieuwe memo's.",
       "memo-defaults-title": "Standaardinstellingen voor memo's",
       "theme-description": "Past het geselecteerde thema onmiddellijk toe op dit apparaat.",

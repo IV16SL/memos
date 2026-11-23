@@ -235,7 +235,9 @@
     "click-to-show-sensitive-content": "संवेदनशील सामग्री दिखाने के लिए क्लिक करें",
     "comment": {
       "self": "टिप्पणियाँ",
-      "write-a-comment": "टिप्पणी लिखें"
+      "write-a-comment": "टिप्पणी लिखें",
+      "view-all-count_one": "{{count}} टिप्पणी देखें",
+      "view-all-count_other": "सभी {{count}} टिप्पणियाँ देखें"
     },
     "copy-content": "सामग्री कॉपी करें",
     "copy-link": "लिंक कॉपी करें",
@@ -293,9 +295,9 @@
       "open-image": "इमेज के तौर पर शेयर करें"
     },
     "new-badge": "नया",
-    "parent-loading": "ओरिजिनल मेमो लोड हो रहा है…",
-    "parent-load-error": "ओरिजिनल मेमो लोड नहीं हो सका.",
-    "parent-unavailable": "ओरिजिनल मेमो उपलब्ध नहीं है",
+    "parent-loading": "पैरेंट मेमो लोड हो रहा है…",
+    "parent-load-error": "पैरेंट मेमो लोड नहीं हो सका.",
+    "parent-unavailable": "पैरेंट मेमो उपलब्ध नहीं है",
     "parent-unavailable-description": "हो सकता है कि इसे डिलीट कर दिया गया हो या अब आपके पास एक्सेस न हो.",
     "moved": "मेमो मूव किया गया",
     "back-to": "{{source}} पर वापस जाएं",
@@ -319,7 +321,13 @@
       "updated": "टास्क अपडेट किए गए"
     },
     "view-options": "ऑप्शन देखें",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "रिएक्शन जोड़ें",
+    "remove-reaction": "रिएक्शन हटाएँ",
+    "full-width": "पूरी चौड़ाई",
+    "full-width-hint": "मेमो समयरेखा की पूरी चौड़ाई का उपयोग करें।",
+    "include-comments": "टिप्पणियाँ शामिल करें",
+    "include-comments-hint": "सूचियों में मेमो के साथ टिप्पणियाँ दिखाएँ।"
   },
   "message": {
     "archived-successfully": "सफलतापूर्वक संग्रहीत किया गया",
@@ -381,7 +389,10 @@
       "appearance-description": "चुनें कि ऐप कैसा दिखता है और आपके अकाउंट के लिए वह कौन सी भाषा इस्तेमाल करता है।",
       "appearance-title": "अपीयरेंस",
       "default-memo-visibility-description": "एडिटर में बदलाव किए जाने तक नए बनाए गए मेमो पर विज़िबिलिटी लागू होती है।",
+      "device-description": "पढ़ने और संपादन के विकल्प जो केवल इस ब्राउज़र में रखे जाते हैं। ये आपके खाते में सहेजे नहीं जाते।",
+      "device-title": "यह डिवाइस",
       "language-description": "इंटरफ़ेस भाषा को तुरंत अपडेट करता है और इसे आपके अकाउंट में सेव करता है।",
+      "link-preview-description": "जहाँ भी मेमो दिखाए जाएँ, सादे लिंक के नीचे पूर्वावलोकन कार्ड दिखाएँ।",
       "memo-defaults-description": "नए मेमो बनाते समय इस्तेमाल होने वाले डिफ़ॉल्ट सेट करें।",
       "memo-defaults-title": "मेमो डिफ़ॉल्ट",
       "save-media-metadata": "मीडिया मेटाडेटा सेव करें",

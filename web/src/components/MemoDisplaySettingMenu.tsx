@@ -44,21 +44,8 @@ const SettingRow = ({ label, description, children }: SettingRowProps) => (
 function MemoDisplaySettingsContent() {
   const t = useTranslate();
   const direction = useDirection();
-  const {
-    orderByTimeAsc,
-    timeBasis,
-    compactMode,
-    linkPreview,
-    maxColumns,
-    setTimeBasis,
-    setOrderByTimeAsc,
-    setCompactMode,
-    setLinkPreview,
-    setMaxColumns,
-  } = useView();
-  // Multi-column grids always render compact tiles, so the toggle is shown as on and locked
-  // there; it only becomes a real choice at a single column.
-  const compactLocked = maxColumns !== 1;
+  const { orderByTimeAsc, timeBasis, fullWidth, maxColumns, setTimeBasis, setOrderByTimeAsc, setFullWidth, setMaxColumns } = useView();
+  const fullWidthLocked = maxColumns == 0;
 
   const timeBasisOptions = [
     { value: "create_time", label: t("common.created-at") },
@@ -169,16 +156,13 @@ function MemoDisplaySettingsContent() {
       </section>
 
       <section className="space-y-1 border-t border-border/60 px-2.5 py-2">
-        <SettingRow label={t("memo.compact-mode")} description={compactLocked ? t("memo.grid-compact-hint") : undefined}>
+        <SettingRow label={t("memo.full-width")} description={t("memo.full-width-hint")}>
           <Switch
-            aria-label={t("memo.compact-mode")}
-            checked={compactLocked || compactMode}
-            onCheckedChange={setCompactMode}
-            disabled={compactLocked}
+            aria-label={t("memo.full-width")}
+            checked={fullWidthLocked || fullWidth}
+            onCheckedChange={setFullWidth}
+            disabled={fullWidthLocked}
           />
-        </SettingRow>
-        <SettingRow label={t("memo.link-preview")}>
-          <Switch aria-label={t("memo.link-preview")} checked={linkPreview} onCheckedChange={setLinkPreview} />
         </SettingRow>
       </section>
     </div>

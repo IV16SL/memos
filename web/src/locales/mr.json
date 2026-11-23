@@ -235,7 +235,9 @@
     "click-to-show-sensitive-content": "संवेदनशील सामग्री दाखवण्यासाठी क्लिक करा",
     "comment": {
       "self": "टिप्पण्या",
-      "write-a-comment": "टिप्पणी लिहा"
+      "write-a-comment": "टिप्पणी लिहा",
+      "view-all-count_one": "{{count}} टिप्पणी पहा",
+      "view-all-count_other": "सर्व {{count}} टिप्पण्या पहा"
     },
     "copy-content": "सामग्रीची प्रत बनवा",
     "copy-link": "लिंकची प्रत बनवा",
@@ -293,9 +295,9 @@
       "open-image": "प्रतिमा म्हणून शेअर करा"
     },
     "new-badge": "नविन",
-    "parent-loading": "मूळ मेमो लोड होत आहे…",
-    "parent-load-error": "मूळ मेमो लोड होऊ शकला नाही.",
-    "parent-unavailable": "मूळ मेमो अनुपलब्ध",
+    "parent-loading": "पालक मेमो लोड होत आहे…",
+    "parent-load-error": "पालक मेमो लोड होऊ शकला नाही.",
+    "parent-unavailable": "पालक मेमो अनुपलब्ध",
     "parent-unavailable-description": "तो कदाचित हटवला गेला असेल किंवा तुमचा प्रवेश आता नसेल.",
     "moved": "ज्ञापन हलवले",
     "back-to": "{{source}} कडे परत",
@@ -319,7 +321,13 @@
       "updated": "कार्ये अद्यतनित केली"
     },
     "view-options": "पाहण्याचे पर्याय",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "प्रतिक्रिया जोडा",
+    "remove-reaction": "प्रतिक्रिया काढून टाका",
+    "full-width": "पूर्ण रुंदी",
+    "full-width-hint": "मेमो कालरेषेची संपूर्ण रुंदी वापरा.",
+    "include-comments": "टिप्पण्या समाविष्ट करा",
+    "include-comments-hint": "याद्यांमध्ये मेमोसोबत टिप्पण्या दाखवा."
   },
   "message": {
     "archived-successfully": "यशस्वीरित्या संग्रहित केले",
@@ -381,7 +389,10 @@
       "appearance-description": "तुमच्या खात्यासाठी ॲप कसे दिसेल आणि कोणती भाषा वापरेल ते निवडा.",
       "appearance-title": "स्वरूप",
       "default-memo-visibility-description": "संपादकामध्ये बदल न केल्यास, नव्याने तयार केलेल्या मेमोंना दृश्यमानता लागू होते.",
+      "device-description": "केवळ या ब्राउझरमध्ये ठेवलेले वाचन आणि संपादन पर्याय. ते तुमच्या खात्यात जतन केले जात नाहीत.",
+      "device-title": "हे उपकरण",
       "language-description": "इंटरफेसची भाषा त्वरित अद्ययावत करते आणि ती तुमच्या खात्यात जतन करते.",
+      "link-preview-description": "जिथे मेमो दाखवले जातात तिथे साध्या दुव्यांखाली पूर्वावलोकन कार्ड दाखवा.",
       "memo-defaults-description": "नवीन मेमो तयार करताना वापरले जाणारे डीफॉल्ट सेट करा.",
       "memo-defaults-title": "मेमो डीफॉल्ट्स",
       "save-media-metadata": "मीडिया मेटाडेटा जतन करा",

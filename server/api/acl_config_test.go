@@ -33,7 +33,6 @@ func TestPublicMethodsArePublic(t *testing.T) {
 		// Memo Service
 		"/memos.api.MemoService/GetMemo",
 		"/memos.api.MemoService/ListMemos",
-		"/memos.api.MemoService/ListMemoComments",
 		"/memos.api.MemoService/ListMemoAttachments",
 		"/memos.api.MemoService/ListMemoReactions",
 		"/memos.api.MemoService/ListMemoRelations",
@@ -154,7 +153,6 @@ func TestAuthBootstrapClassification(t *testing.T) {
 	gatedWhilePrivate := []string{
 		"/memos.api.MemoService/ListMemos",
 		"/memos.api.MemoService/GetMemo",
-		"/memos.api.MemoService/ListMemoComments",
 		"/memos.api.MemoService/ListMemoAttachments",
 		"/memos.api.MemoService/ListMemoReactions",
 		"/memos.api.MemoService/ListMemoRelations",

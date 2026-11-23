@@ -125,12 +125,9 @@ export const memoService = {
       space: options.parentMemoName ? undefined : (options.space ?? state.metadata.space),
     });
 
-    const memo = options.parentMemoName
-      ? await memoServiceClient.createMemoComment({
-          parent: options.parentMemoName,
-          comment: memoData,
-        })
-      : await memoServiceClient.createMemo({ memo: memoData });
+    const memo = await memoServiceClient.createMemo({
+      memo: options.parentMemoName ? { ...memoData, parent: options.parentMemoName } : memoData,
+    });
 
     return { memoName: memo.name, hasChanges: true };
   },

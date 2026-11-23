@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Click to show sensitive content",
     "comment": {
       "self": "Comments",
-      "write-a-comment": "Write a comment"
+      "write-a-comment": "Write a comment",
+      "view-all-count_one": "View {{count}} comment",
+      "view-all-count_other": "View all {{count}} comments"
     },
     "copy-content": "Copy Content",
     "copy-link": "Copy Link",
@@ -305,9 +307,9 @@
       "uncheck-all": "Uncheck all tasks",
       "updated": "Tasks updated"
     },
-    "parent-loading": "Loading original memo…",
-    "parent-load-error": "Couldn’t load the original memo.",
-    "parent-unavailable": "Original memo unavailable",
+    "parent-loading": "Loading parent memo…",
+    "parent-load-error": "Couldn’t load the parent memo.",
+    "parent-unavailable": "Parent memo unavailable",
     "parent-unavailable-description": "It may have been deleted or you may no longer have access.",
     "moved": "Memo moved",
     "back-to": "Back to {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "On this memo",
     "parent-memo": "Parent memo",
     "view-options": "View options",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Add reaction",
+    "remove-reaction": "Remove reaction",
+    "full-width": "Full width",
+    "full-width-hint": "Use entire width of the memo timeline.",
+    "include-comments": "Include comments",
+    "include-comments-hint": "Show comments alongside memos in lists."
   },
   "message": {
     "archived-successfully": "Archived successfully",
@@ -471,7 +479,10 @@
       "appearance-description": "Choose how the app looks and which language it uses for your account.",
       "appearance-title": "Appearance",
       "default-memo-visibility-description": "Visibility applied to newly created memos unless changed in the editor.",
+      "device-description": "Reading and editing choices kept in this browser. They are not saved to your account.",
+      "device-title": "This device",
       "language-description": "Updates the interface language immediately and saves it to your account.",
+      "link-preview-description": "Show a preview card under bare links wherever memos are displayed.",
       "memo-defaults-description": "Set the defaults used when composing new memos.",
       "memo-defaults-title": "Memo defaults",
       "theme-description": "Applies the selected theme immediately on this device.",
