@@ -235,7 +235,9 @@
     "click-to-show-sensitive-content": "Nhấp để hiện nội dung nhạy cảm",
     "comment": {
       "self": "Bình luận",
-      "write-a-comment": "Viết bình luận"
+      "write-a-comment": "Viết bình luận",
+      "view-all-count_one": "Xem tất cả {{count}} bình luận",
+      "view-all-count_other": "Xem tất cả {{count}} bình luận"
     },
     "copy-content": "Sao chép nội dung",
     "copy-link": "Sao chép liên kết",
@@ -293,9 +295,9 @@
       "open-image": "Chia sẻ dưới dạng ảnh"
     },
     "new-badge": "Mới",
-    "parent-loading": "Đang tải bản ghi nhớ gốc…",
-    "parent-load-error": "Không thể tải bản ghi nhớ gốc.",
-    "parent-unavailable": "Bản ghi nhớ gốc không khả dụng",
+    "parent-loading": "Đang tải ghi chú cha…",
+    "parent-load-error": "Không thể tải ghi chú cha.",
+    "parent-unavailable": "Ghi chú cha không khả dụng",
     "parent-unavailable-description": "Có thể bản ghi nhớ đã bị xóa hoặc bạn không còn quyền truy cập nữa.",
     "moved": "Bản ghi nhớ đã được di chuyển",
     "back-to": "Quay lại {{source}}",
@@ -319,7 +321,13 @@
       "updated": "Nhiệm vụ đã được cập nhật"
     },
     "view-options": "Tùy chọn xem",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Thêm biểu tượng cảm xúc",
+    "remove-reaction": "Xóa phản ứng",
+    "full-width": "Toàn bộ chiều rộng",
+    "full-width-hint": "Sử dụng toàn bộ chiều rộng của dòng thời gian ghi chú.",
+    "include-comments": "Bao gồm bình luận",
+    "include-comments-hint": "Hiển thị bình luận cùng với ghi chú trong danh sách."
   },
   "message": {
     "archived-successfully": "Lưu trữ thành công",
@@ -381,7 +389,10 @@
       "appearance-description": "Chọn giao diện ứng dụng và ngôn ngữ ứng dụng sử dụng cho tài khoản của bạn.",
       "appearance-title": "Giao diện",
       "default-memo-visibility-description": "Chế độ hiển thị được áp dụng cho các ghi chú mới được tạo trừ khi được thay đổi trong trình chỉnh sửa.",
+      "device-description": "Tùy chọn đọc và chỉnh sửa chỉ được lưu trong trình duyệt này. Chúng không được lưu vào tài khoản của bạn.",
+      "device-title": "Thiết bị này",
       "language-description": "Cập nhật ngôn ngữ giao diện ngay lập tức và lưu vào tài khoản của bạn.",
+      "link-preview-description": "Hiển thị thẻ xem trước bên dưới các liên kết trần ở bất cứ nơi nào ghi chú được hiển thị.",
       "memo-defaults-description": "Đặt các cài đặt mặc định được sử dụng khi soạn thảo ghi chú mới.",
       "memo-defaults-title": "Cài đặt mặc định ghi chú",
       "save-media-metadata": "Lưu siêu dữ liệu phương tiện",

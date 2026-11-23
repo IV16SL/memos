@@ -278,7 +278,9 @@
     "click-to-show-sensitive-content": "Noklikšķiniet, lai parādītu sensitīvu saturu",
     "comment": {
       "self": "komentāri",
-      "write-a-comment": "Uzrakstiet komentāru"
+      "write-a-comment": "Uzrakstiet komentāru",
+      "view-all-count_one": "Skatīt {{count}} komentāru",
+      "view-all-count_other": "Skatīt visus {{count}} komentārus"
     },
     "copy-content": "Kopēt saturu",
     "copy-link": "Kopēt saiti",
@@ -344,9 +346,9 @@
       "space-description": "Visi telpā {{space}}"
     },
     "new-badge": "Jauns",
-    "parent-loading": "Notiek sākotnējās piezīmes ielāde…",
-    "parent-load-error": "Nevarēja ielādēt sākotnējo piezīmi.",
-    "parent-unavailable": "Sākotnējā piezīme nav pieejama",
+    "parent-loading": "Notiek galvenās piezīmes ielāde…",
+    "parent-load-error": "Nevarēja ielādēt galveno piezīmi.",
+    "parent-unavailable": "Galvenā piezīme nav pieejama",
     "parent-unavailable-description": "Iespējams, tā ir izdzēsta vai jums vairs nav piekļuves.",
     "moved": "Piezīme pārvietota",
     "back-to": "Atpakaļ uz {{source}}",
@@ -362,7 +364,13 @@
     "on-this-memo": "Šajā piezīmē",
     "parent-memo": "Galvenā piezīme",
     "view-options": "Skata opcijas",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Pievienojiet reakciju",
+    "remove-reaction": "Noņemiet reakciju",
+    "full-width": "Pilns platums",
+    "full-width-hint": "Izmantot visu piezīmju laika skalas platumu.",
+    "include-comments": "Iekļaut komentārus",
+    "include-comments-hint": "Sarakstos rādīt komentārus kopā ar piezīmēm."
   },
   "message": {
     "archived-successfully": "Veiksmīgi arhivēts",
@@ -585,8 +593,11 @@
       "appearance-title": "Izskats",
       "default-memo-visibility": "Noklusējuma piezīmju redzamība",
       "default-memo-visibility-description": "Redzamība tiek piemērota jaunizveidotajām piezīmēm, ja vien tas nav mainīts redaktorā.",
+      "device-description": "Lasīšanas un rediģēšanas izvēles, kas tiek glabātas tikai šajā pārlūkā. Tās netiek saglabātas jūsu kontā.",
+      "device-title": "Šī ierīce",
       "label": "Preferences",
       "language-description": "Nekavējoties atjaunina saskarnes valodu un saglabā to jūsu kontā.",
+      "link-preview-description": "Rādīt priekšskatījuma kartīti zem kailām saitēm visur, kur tiek rādītas piezīmes.",
       "memo-defaults-description": "Iestatiet noklusējuma iestatījumus, kas tiek izmantoti, veidojot jaunas piezīmes.",
       "memo-defaults-title": "Atgādņu noklusējuma iestatījumi",
       "theme-description": "Šajā ierīcē nekavējoties tiek lietots atlasītais motīvs.",

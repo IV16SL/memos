@@ -278,7 +278,9 @@
     "click-to-show-sensitive-content": "Spustelėkite, kad būtų rodomas jautrus turinys",
     "comment": {
       "self": "Komentarai",
-      "write-a-comment": "Parašyk komentarą"
+      "write-a-comment": "Parašyk komentarą",
+      "view-all-count_one": "Peržiūrėti {{count}} komentarą",
+      "view-all-count_other": "Peržiūrėti visus {{count}} komentarų"
     },
     "copy-content": "Kopijuoti turinį",
     "copy-link": "Kopijuoti nuorodą",
@@ -344,9 +346,9 @@
       "space-description": "Visi erdvėje {{space}}"
     },
     "new-badge": "Nauja",
-    "parent-loading": "Įkeliamas originalus priminimas…",
-    "parent-load-error": "Nepavyko įkelti originalaus priminimo.",
-    "parent-unavailable": "Originalus priminimas nepasiekiamas",
+    "parent-loading": "Įkeliamas pagrindinis priminimas…",
+    "parent-load-error": "Nepavyko įkelti pagrindinio priminimo.",
+    "parent-unavailable": "Pagrindinis priminimas nepasiekiamas",
     "parent-unavailable-description": "Jis galėjo būti ištrintas arba jūs nebeturite prieigos.",
     "moved": "Priminimas perkeltas",
     "back-to": "Atgal į {{source}}",
@@ -362,7 +364,13 @@
     "on-this-memo": "Šiame priminime",
     "parent-memo": "Pagrindinis priminimas",
     "view-options": "Peržiūros parinktys",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Pridėti reakciją",
+    "remove-reaction": "Pašalinti reakciją",
+    "full-width": "Visas plotis",
+    "full-width-hint": "Naudoti visą atmintinių laiko juostos plotį.",
+    "include-comments": "Įtraukti komentarus",
+    "include-comments-hint": "Sąrašuose rodyti komentarus kartu su atmintinėmis."
   },
   "message": {
     "archived-successfully": "Sėkmingai suarchyvuota",
@@ -585,8 +593,11 @@
       "appearance-title": "Išvaizda",
       "default-memo-visibility": "Numatytasis atmintinės matomumas",
       "default-memo-visibility-description": "Matomumas taikomas naujai sukurtoms pastaboms, nebent tai būtų pakeista redaktoriuje.",
+      "device-description": "Skaitymo ir redagavimo pasirinkimai, saugomi tik šioje naršyklėje. Jie neįrašomi į jūsų paskyrą.",
+      "device-title": "Šis įrenginys",
       "label": "Parinktys",
       "language-description": "Nedelsiant atnaujina sąsajos kalbą ir išsaugo ją paskyroje.",
+      "link-preview-description": "Rodyti peržiūros kortelę po plikomis nuorodomis visur, kur rodomi užrašai.",
       "memo-defaults-description": "Nustatykite numatytuosius nustatymus, naudojamus kuriant naujas pastabas.",
       "memo-defaults-title": "Atmintinės numatytosios nuostatos",
       "theme-description": "Šiame įrenginyje iš karto pritaiko pasirinktą temą.",

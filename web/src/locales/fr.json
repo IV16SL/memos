@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Cliquez pour afficher le contenu sensible",
     "comment": {
       "self": "Commentaires",
-      "write-a-comment": "Écrire un commentaire"
+      "write-a-comment": "Écrire un commentaire",
+      "view-all-count_one": "Voir {{count}} commentaire",
+      "view-all-count_other": "Voir les {{count}} commentaires"
     },
     "copy-content": "Copier le contenu",
     "copy-link": "Copier le lien",
@@ -306,9 +308,9 @@
       "updated": "Tâches mises à jour"
     },
     "new-badge": "Nouveau",
-    "parent-loading": "Chargement du mémo original…",
-    "parent-load-error": "Impossible de charger le mémo original.",
-    "parent-unavailable": "Mémo original indisponible.",
+    "parent-loading": "Chargement du mémo parent…",
+    "parent-load-error": "Impossible de charger le mémo parent.",
+    "parent-unavailable": "Mémo parent indisponible.",
     "parent-unavailable-description": "Il a peut-être été supprimé ou vous n'y avez plus accès.",
     "moved": "Mémo déplacé",
     "back-to": "Retour à {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "Sur ce mémo",
     "parent-memo": "Mémo parent",
     "view-options": "Options d'affichage",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Ajouter une réaction",
+    "remove-reaction": "Supprimer la réaction",
+    "full-width": "Pleine largeur",
+    "full-width-hint": "Utiliser toute la largeur de la chronologie des mémos.",
+    "include-comments": "Inclure les commentaires",
+    "include-comments-hint": "Afficher les commentaires avec les mémos dans les listes."
   },
   "message": {
     "archived-successfully": "Archivé avec succès",
@@ -471,7 +479,10 @@
       "appearance-description": "Choisissez l'apparence de l'application et la langue qu'elle utilise pour votre compte.",
       "appearance-title": "Apparence",
       "default-memo-visibility-description": "Visibilité appliquée aux mémos nouvellement créés, sauf modification dans l'éditeur.",
+      "device-description": "Choix de lecture et d'édition conservés uniquement dans ce navigateur. Ils ne sont pas enregistrés dans votre compte.",
+      "device-title": "Cet appareil",
       "language-description": "Met à jour immédiatement la langue de l'interface et l'enregistre sur votre compte.",
+      "link-preview-description": "Afficher une carte d'aperçu sous les liens bruts partout où des mémos sont affichés.",
       "memo-defaults-description": "Définissez les valeurs par défaut utilisées lors de la rédaction de nouveaux mémos.",
       "memo-defaults-title": "Valeurs par défaut du mémo",
       "theme-description": "Applique immédiatement le thème sélectionné sur cet appareil.",

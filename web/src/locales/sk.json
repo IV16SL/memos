@@ -278,7 +278,9 @@
     "click-to-show-sensitive-content": "Kliknutím zobrazíte citlivý obsah",
     "comment": {
       "self": "Komentáre",
-      "write-a-comment": "Napíšte komentár"
+      "write-a-comment": "Napíšte komentár",
+      "view-all-count_one": "Zobraziť {{count}} komentár",
+      "view-all-count_other": "Zobraziť všetkých {{count}} komentárov"
     },
     "copy-content": "Kopírovať obsah",
     "copy-link": "Kopírovať odkaz",
@@ -344,9 +346,9 @@
       "space-description": "Všetci v {{space}}"
     },
     "new-badge": "Nové",
-    "parent-loading": "Načítava sa pôvodná poznámka…",
-    "parent-load-error": "Nepodarilo sa načítať pôvodnú poznámku.",
-    "parent-unavailable": "Pôvodná poznámka nie je k dispozícii",
+    "parent-loading": "Načítava sa nadradená poznámka…",
+    "parent-load-error": "Nepodarilo sa načítať nadradenú poznámku.",
+    "parent-unavailable": "Nadradená poznámka nie je k dispozícii",
     "parent-unavailable-description": "Možno bola odstránená alebo k nej už nemáte prístup.",
     "moved": "Poznámka presunutá",
     "back-to": "Späť na {{source}}",
@@ -362,7 +364,13 @@
     "on-this-memo": "V tejto poznámke",
     "parent-memo": "Nadradená poznámka",
     "view-options": "Možnosti zobrazenia",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Pridajte reakciu",
+    "remove-reaction": "Odstráňte reakciu",
+    "full-width": "Plná šírka",
+    "full-width-hint": "Využiť celú šírku časovej osi poznámok.",
+    "include-comments": "Zahrnúť komentáre",
+    "include-comments-hint": "Zobraziť komentáre v zoznamoch spolu s poznámkami."
   },
   "message": {
     "archived-successfully": "Úspešne archivované",
@@ -585,8 +593,11 @@
       "appearance-title": "Vzhľad",
       "default-memo-visibility": "Predvolená viditeľnosť poznámky",
       "default-memo-visibility-description": "Viditeľnosť sa použije na novovytvorené poznámky, pokiaľ sa nezmení v editore.",
+      "device-description": "Voľby čítania a úprav uložené len v tomto prehliadači. Do vášho účtu sa neukladajú.",
+      "device-title": "Toto zariadenie",
       "label": "Predvoľby",
       "language-description": "Okamžite aktualizuje jazyk rozhrania a uloží ho do vášho účtu.",
+      "link-preview-description": "Zobrazovať kartu s náhľadom pod holými odkazmi všade, kde sa poznámky zobrazujú.",
       "memo-defaults-description": "Nastavte predvolené hodnoty používané pri vytváraní nových poznámok.",
       "memo-defaults-title": "Predvolené nastavenia poznámok",
       "theme-description": "Ihneď použije vybratú tému na tomto zariadení.",

@@ -278,7 +278,9 @@
     "click-to-show-sensitive-content": "Кликните да бисте приказали осетљив садржај",
     "comment": {
       "self": "Коментари",
-      "write-a-comment": "Напишите коментар"
+      "write-a-comment": "Напишите коментар",
+      "view-all-count_one": "Погледајте {{count}} коментар",
+      "view-all-count_other": "Погледајте свих {{count}} коментара"
     },
     "copy-content": "Копирај садржај",
     "copy-link": "Копирај везу",
@@ -344,9 +346,9 @@
       "space-description": "Сви у {{space}}"
     },
     "new-badge": "Ново",
-    "parent-loading": "Учитавање оригиналне белешке…",
-    "parent-load-error": "Није могуће учитати оригиналну белешку.",
-    "parent-unavailable": "Оригинална белешка није доступна",
+    "parent-loading": "Учитавање надређене поруке…",
+    "parent-load-error": "Није могуће учитати надређену поруку.",
+    "parent-unavailable": "Надређена порука није доступна",
     "parent-unavailable-description": "Можда је обрисана или више немате приступ.",
     "moved": "Белешка је премештена",
     "back-to": "Назад на {{source}}",
@@ -362,7 +364,13 @@
     "on-this-memo": "На овој поруци",
     "parent-memo": "Надређена порука",
     "view-options": "Опције приказа",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Додајте реакцију",
+    "remove-reaction": "Уклоните реакцију",
+    "full-width": "Пуна ширина",
+    "full-width-hint": "Користи целу ширину временске линије мемоа.",
+    "include-comments": "Укључи коментаре",
+    "include-comments-hint": "Прикажи коментаре уз мемое на листама."
   },
   "message": {
     "archived-successfully": "Архивирано је успешно",
@@ -585,8 +593,11 @@
       "appearance-title": "Изглед",
       "default-memo-visibility": "Подразумевана видљивост белешке",
       "default-memo-visibility-description": "Видљивост се примењује на новокреиране белешке осим ако се не промени у уређивачу.",
+      "device-description": "Подешавања читања и уређивања која се чувају само у овом прегледачу. Не чувају се на вашем налогу.",
+      "device-title": "Овај уређај",
       "label": "Преференцес",
       "language-description": "Одмах ажурира језик интерфејса и чува га на вашем налогу.",
+      "link-preview-description": "Прикажи картицу прегледа испод голих веза свуда где се приказују белешке.",
       "memo-defaults-description": "Подесите подразумеване вредности које се користе приликом састављања нових белешки.",
       "memo-defaults-title": "Подразумеване вредности за белешке",
       "theme-description": "Одмах примењује изабрану тему на овом уређају.",

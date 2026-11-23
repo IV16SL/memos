@@ -8,10 +8,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { useAuth } from "@/contexts/AuthContext";
-import { useTagCounts, useUpdateUserSetting } from "@/hooks/useUserQueries";
+import { useCommentScopeFilter } from "@/hooks/useMemoFilters";
+import { useTagCounts, useUpdateUserSetting, useUserStats } from "@/hooks/useUserQueries";
+import { combineCELFilters } from "@/lib/cel-filter";
 import { colorToHex } from "@/lib/color";
 import { buildUserSettingName } from "@/lib/resource-names";
-import { isValidTagPattern } from "@/lib/tag";
+import { getTagRuleUsage, isValidTagPattern } from "@/lib/tag";
 import { cn } from "@/lib/utils";
 import {
   UserSetting_Key,
@@ -48,11 +50,28 @@ const toLocalTagMeta = (meta: {
   blur: meta.blurContent,
 });
 
+const TagRuleCount = ({ rule, tagCounts, userName }: { rule: string; tagCounts?: Record<string, number>; userName?: string }) => {
+  const t = useTranslate();
+  const usage = useMemo(() => tagCounts && getTagRuleUsage(rule, tagCounts), [rule, tagCounts]);
+  // The count is of what a memo list would show for the rule, so it follows the lists' comment scope.
+  const commentScopeFilter = useCommentScopeFilter();
+  const filter = usage?.filter ? combineCELFilters(usage.filter, commentScopeFilter) : undefined;
+  const { data } = useUserStats(userName, { filter, enabled: !!filter });
+  const count = filter ? data?.totalMemoCount : usage?.count;
+  if (count === undefined) return null;
+  return (
+    <>
+      <span className="text-border">/</span>
+      <span>{t("setting.tags.used-count", { count })}</span>
+    </>
+  );
+};
+
 const TagsSection = () => {
   const t = useTranslate();
   const { currentUser, userTagsSetting, refetchSettings } = useAuth();
   const { mutateAsync: updateUserSetting } = useUpdateUserSetting();
-  const { data: tagCounts = {} } = useTagCounts(true);
+  const { data: tagCounts } = useTagCounts(true, { filter: useCommentScopeFilter() });
   const originalSetting = useMemo(() => userTagsSetting ?? create(UserSetting_TagsSettingSchema, {}), [userTagsSetting]);
 
   // Local state: map of tagName → { color, blur } for editing.
@@ -71,7 +90,7 @@ const TagsSection = () => {
 
   // All known tag names: union of saved entries and tags used in memos.
   const allKnownTags = useMemo(
-    () => Array.from(new Set([...Object.keys(localTags), ...Object.keys(tagCounts)])).sort(),
+    () => Array.from(new Set([...Object.keys(localTags), ...Object.keys(tagCounts ?? {})])).sort(),
     [localTags, tagCounts],
   );
 
@@ -80,8 +99,8 @@ const TagsSection = () => {
     () =>
       Object.keys(localTags)
         .sort()
-        .map((name) => ({ name, count: Object.hasOwn(tagCounts, name) ? tagCounts[name] : 0 })),
-    [localTags, tagCounts],
+        .map((name) => ({ name })),
+    [localTags],
   );
 
   const originalMetaMap = useMemo(
@@ -238,8 +257,7 @@ const TagsSection = () => {
                     </div>
                     <div className="mt-1 flex flex-wrap items-center gap-2 pl-6 text-xs text-muted-foreground">
                       <span>{t("setting.tags.matching-rule")}</span>
-                      <span className="text-border">/</span>
-                      <span>{t("setting.tags.used-count", { count: row.count })}</span>
+                      <TagRuleCount rule={row.name} tagCounts={tagCounts} userName={currentUser?.name} />
                     </div>
                   </div>
 

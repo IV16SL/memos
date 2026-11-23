@@ -6,8 +6,8 @@ import { Paragraph } from "@/components/MemoContent/markdown/Paragraph";
 const viewState = vi.hoisted(() => ({ linkPreview: true }));
 
 // Paragraph reads the global preference via this hook.
-vi.mock("@/contexts/ViewContext", () => ({
-  useLinkPreviewEnabled: () => viewState.linkPreview,
+vi.mock("@/hooks/useDevicePreferences", () => ({
+  useDevicePreferences: () => ({ linkPreview: viewState.linkPreview }),
 }));
 
 // The link-preview card fetches metadata via this hook; stub it so the card would

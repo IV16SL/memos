@@ -270,17 +270,22 @@
     "disconnected": "Canlı güncellemeler kullanılamıyor"
   },
   "memo": {
-    "pinned": "Sabitlendi",
-    "parent-loading": "Özgün not yükleniyor…",
-    "parent-load-error": "Özgün not yüklenemedi.",
-    "parent-unavailable": "Özgün not kullanılamıyor",
-    "parent-unavailable-description": "Silinmiş olabilir ya da artık erişiminiz olmayabilir.",
+    "pinned": "Sabitlenmiş",
+    "parent-loading": "Üst not yükleniyor…",
+    "parent-load-error": "Üst not yüklenemedi.",
+    "parent-unavailable": "Üst nota ulaşılamıyor",
+    "parent-unavailable-description": "Silinmiş olabilir ya da artık erişim iznin kalmamış olabilir.",
+    "no-memos-yet": "Henüz not yok",
+    "no-matching-memos": "Eşleşen not yok",
+    "clear-filters": "Filtreleri temizle",
     "moved": "Not taşındı",
     "back-to": "Geri dön: {{source}}",
     "click-to-show-sensitive-content": "Hassas içeriği göstermek için tıklayın",
     "comment": {
       "self": "Yorumlar",
-      "write-a-comment": "Yorum yaz"
+      "write-a-comment": "Yorum yaz",
+      "view-all-count_one": "{{count}} yorumu gör",
+      "view-all-count_other": "{{count}} yorumun tümünü gör"
     },
     "copy-content": "İçeriği kopyala",
     "copy-link": "Bağlantıyı Kopyala",
@@ -358,7 +363,13 @@
       "uncheck-all": "Tüm görevlerin işaretini kaldırın",
       "updated": "Görevler güncellendi"
     },
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Tepki ekle",
+    "remove-reaction": "Reaksiyonu kaldır",
+    "full-width": "Tam genişlik",
+    "full-width-hint": "Not zaman tünelinin tüm genişliğini kullan.",
+    "include-comments": "Yorumları dahil et",
+    "include-comments-hint": "Listelerde yorumları notlarla birlikte göster."
   },
   "message": {
     "archived-successfully": "Başarıyla arşivlendi",
@@ -643,7 +654,10 @@
       "appearance-description": "Uygulamanın nasıl görüneceğini ve hesabınız için hangi dili kullanacağını seçin.",
       "appearance-title": "Dış görünüş",
       "default-memo-visibility-description": "Editörde değiştirilmediği sürece görünürlük yeni oluşturulan notlara uygulandı.",
+      "device-description": "Yalnızca bu tarayıcıda tutulan okuma ve düzenleme tercihleri. Hesabına kaydedilmez.",
+      "device-title": "Bu cihaz",
       "language-description": "Arayüz dilini anında günceller ve hesabınıza kaydeder.",
+      "link-preview-description": "Notlarda geçen yalın bağlantıların altında önizleme kartı göster.",
       "memo-defaults-description": "Yeni notlar oluştururken kullanılan varsayılanları ayarlayın.",
       "memo-defaults-title": "Not varsayılanları",
       "save-media-metadata": "Medya meta verilerini kaydet",

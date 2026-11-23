@@ -278,7 +278,9 @@
     "click-to-show-sensitive-content": "Klik for at vise følsomt indhold",
     "comment": {
       "self": "Kommentarer",
-      "write-a-comment": "Skriv en kommentar"
+      "write-a-comment": "Skriv en kommentar",
+      "view-all-count_one": "Vis {{count}} kommentar",
+      "view-all-count_other": "Vis alle {{count}} kommentarer"
     },
     "copy-content": "Kopier indhold",
     "copy-link": "Kopiér link",
@@ -344,9 +346,9 @@
       "space-description": "Alle i {{space}}"
     },
     "new-badge": "Ny",
-    "parent-loading": "Indlæser originalt notat…",
-    "parent-load-error": "Kunne ikke indlæse det originale notat.",
-    "parent-unavailable": "Originalt notat er ikke tilgængeligt",
+    "parent-loading": "Indlæser overordnet notat…",
+    "parent-load-error": "Kunne ikke indlæse det overordnede notat.",
+    "parent-unavailable": "Overordnet notat er ikke tilgængeligt",
     "parent-unavailable-description": "Det er muligvis blevet slettet, eller du har muligvis ikke længere adgang.",
     "moved": "Notat flyttet",
     "back-to": "Tilbage til {{source}}",
@@ -362,7 +364,13 @@
     "on-this-memo": "På dette notat",
     "parent-memo": "Overordnet notat",
     "view-options": "Visningsmuligheder",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Tilføj reaktion",
+    "remove-reaction": "Fjern reaktion",
+    "full-width": "Fuld bredde",
+    "full-width-hint": "Brug hele bredden af memoernes tidslinje.",
+    "include-comments": "Medtag kommentarer",
+    "include-comments-hint": "Vis kommentarer sammen med memoer i lister."
   },
   "message": {
     "archived-successfully": "Arkiveret",
@@ -585,8 +593,11 @@
       "appearance-title": "Udseende",
       "default-memo-visibility": "Standard memosynlighed",
       "default-memo-visibility-description": "Synlighed anvendt på nyoprettede notater, medmindre det ændres i editoren.",
+      "device-description": "Læse- og redigeringsvalg, der kun gemmes i denne browser. De gemmes ikke på din konto.",
+      "device-title": "Denne enhed",
       "label": "Præferencer",
       "language-description": "Opdaterer grænsefladesproget med det samme og gemmer det på din konto.",
+      "link-preview-description": "Vis et forhåndsvisningskort under rene links, hvor end memoer vises.",
       "memo-defaults-description": "Indstil de standardindstillinger, der bruges, når du komponerer nye notater.",
       "memo-defaults-title": "Memo standarder",
       "theme-description": "Anvender det valgte tema med det samme på denne enhed.",

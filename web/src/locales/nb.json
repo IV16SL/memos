@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Klikk for å vise NSFW-innhold",
     "comment": {
       "self": "Kommentarer",
-      "write-a-comment": "Skriv en kommentar"
+      "write-a-comment": "Skriv en kommentar",
+      "view-all-count_one": "Vis {{count}} kommentar",
+      "view-all-count_other": "Vis alle {{count}} kommentarer"
     },
     "copy-content": "Kopier innhold",
     "copy-link": "Kopier link",
@@ -306,9 +308,9 @@
       "updated": "Oppgaver oppdatert"
     },
     "new-badge": "Ny",
-    "parent-loading": "Laster inn originalt notat…",
-    "parent-load-error": "Kunne ikke laste inn det originale notatet.",
-    "parent-unavailable": "Originalt notat er ikke tilgjengelig",
+    "parent-loading": "Laster inn overordnet notat…",
+    "parent-load-error": "Kunne ikke laste inn det overordnede notatet.",
+    "parent-unavailable": "Overordnet notat er ikke tilgjengelig",
     "parent-unavailable-description": "Det kan ha blitt slettet, eller du har kanskje ikke lenger tilgang.",
     "moved": "Notat flyttet",
     "back-to": "Tilbake til {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "På dette notatet",
     "parent-memo": "Overordnet notat",
     "view-options": "Visningsalternativer",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Legg til reaksjon",
+    "remove-reaction": "Fjern reaksjonen",
+    "full-width": "Full bredde",
+    "full-width-hint": "Bruk hele bredden på memoenes tidslinje.",
+    "include-comments": "Inkluder kommentarer",
+    "include-comments-hint": "Vis kommentarer sammen med memoer i lister."
   },
   "message": {
     "archived-successfully": "Arkivering vellykket",
@@ -471,7 +479,10 @@
       "appearance-description": "Velg hvordan appen ser ut og hvilket språk den bruker for kontoen din.",
       "appearance-title": "Utseende",
       "default-memo-visibility-description": "Synlighet brukt på nyopprettede notater med mindre de endres i redigeringsprogrammet.",
+      "device-description": "Lese- og redigeringsvalg som bare lagres i denne nettleseren. De lagres ikke på kontoen din.",
+      "device-title": "Denne enheten",
       "language-description": "Oppdaterer grensesnittspråket umiddelbart og lagrer det på kontoen din.",
+      "link-preview-description": "Vis et forhåndsvisningskort under rene lenker overalt der notater vises.",
       "memo-defaults-description": "Angi standardinnstillingene som brukes når du skriver nye notater.",
       "memo-defaults-title": "Memo standarder",
       "theme-description": "Bruker det valgte temaet umiddelbart på denne enheten.",

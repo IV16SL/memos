@@ -235,7 +235,9 @@
     "click-to-show-sensitive-content": "Klik untuk menampilkan konten NSFW",
     "comment": {
       "self": "Komentar",
-      "write-a-comment": "Tulis komentar"
+      "write-a-comment": "Tulis komentar",
+      "view-all-count_one": "Lihat semua {{count}} komentar",
+      "view-all-count_other": "Lihat semua {{count}} komentar"
     },
     "copy-content": "Salin Konten",
     "copy-link": "Salin Tautan",
@@ -293,9 +295,9 @@
       "open-image": "Bagikan sebagai gambar"
     },
     "new-badge": "Baru",
-    "parent-loading": "Memuat memo asli…",
-    "parent-load-error": "Tidak dapat memuat memo asli.",
-    "parent-unavailable": "Memo asli tidak tersedia",
+    "parent-loading": "Memuat memo induk…",
+    "parent-load-error": "Tidak dapat memuat memo induk.",
+    "parent-unavailable": "Memo induk tidak tersedia",
     "parent-unavailable-description": "Memo tersebut mungkin telah dihapus atau Anda mungkin tidak lagi memiliki akses.",
     "moved": "Memo dipindahkan",
     "back-to": "Kembali ke {{source}}",
@@ -319,7 +321,13 @@
       "updated": "Tugas diperbarui"
     },
     "view-options": "Opsi tampilan",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Tambahkan reaksi",
+    "remove-reaction": "Hapus reaksi",
+    "full-width": "Lebar penuh",
+    "full-width-hint": "Gunakan seluruh lebar linimasa memo.",
+    "include-comments": "Sertakan komentar",
+    "include-comments-hint": "Tampilkan komentar bersama memo dalam daftar."
   },
   "message": {
     "archived-successfully": "Berhasil diarsipkan",
@@ -381,7 +389,10 @@
       "appearance-description": "Pilih tampilan aplikasi dan bahasa yang digunakan untuk akun Anda.",
       "appearance-title": "Tampilan",
       "default-memo-visibility-description": "Visibilitas diterapkan pada memo yang baru dibuat kecuali diubah di editor.",
+      "device-description": "Pilihan membaca dan menyunting yang hanya disimpan di peramban ini. Tidak disimpan ke akun Anda.",
+      "device-title": "Perangkat ini",
       "language-description": "Memperbarui bahasa antarmuka secara instan dan menyimpannya ke akun Anda.",
+      "link-preview-description": "Tampilkan kartu pratinjau di bawah tautan polos di mana pun memo ditampilkan.",
       "memo-defaults-description": "Mengatur default yang digunakan saat membuat memo baru.",
       "memo-defaults-title": "Default memo",
       "save-media-metadata": "Menyimpan metadata media",

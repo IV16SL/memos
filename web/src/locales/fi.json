@@ -278,7 +278,9 @@
     "click-to-show-sensitive-content": "Napsauta näyttääksesi arkaluontoisen sisällön",
     "comment": {
       "self": "Kommentit",
-      "write-a-comment": "Kirjoita kommentti"
+      "write-a-comment": "Kirjoita kommentti",
+      "view-all-count_one": "Näytä {{count}} kommentti",
+      "view-all-count_other": "Näytä kaikki {{count}} kommenttia"
     },
     "copy-content": "Kopioi sisältö",
     "copy-link": "Kopioi linkki",
@@ -344,9 +346,9 @@
       "space-description": "Kaikki tilassa {{space}}"
     },
     "new-badge": "Uusi",
-    "parent-loading": "Ladataan alkuperäistä muistiota…",
-    "parent-load-error": "Alkuperäistä muistiota ei voitu ladata.",
-    "parent-unavailable": "Alkuperäinen muistio ei ole käytettävissä",
+    "parent-loading": "Ladataan ylämuistiota…",
+    "parent-load-error": "Ylämuistiota ei voitu ladata.",
+    "parent-unavailable": "Ylämuistio ei ole käytettävissä",
     "parent-unavailable-description": "Se on ehkä poistettu tai sinulla ei ehkä enää ole siihen pääsyä.",
     "moved": "Muistio siirretty",
     "back-to": "Takaisin kohtaan {{source}}",
@@ -362,7 +364,13 @@
     "on-this-memo": "Tässä muistiossa",
     "parent-memo": "Ylämuistio",
     "view-options": "Näytä asetukset",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Lisää reaktio",
+    "remove-reaction": "Poista reaktio",
+    "full-width": "Täysi leveys",
+    "full-width-hint": "Käytä muistioiden aikajanan koko leveyttä.",
+    "include-comments": "Sisällytä kommentit",
+    "include-comments-hint": "Näytä kommentit muistioiden rinnalla luetteloissa."
   },
   "message": {
     "archived-successfully": "Arkistointi onnistui",
@@ -585,8 +593,11 @@
       "appearance-title": "Ulkonäkö",
       "default-memo-visibility": "Oletusmuistin näkyvyys",
       "default-memo-visibility-description": "Näkyvyys koskee äskettäin luotuja muistioita, ellei sitä ole muutettu editorissa.",
+      "device-description": "Luku- ja muokkausvalinnat, jotka tallennetaan vain tähän selaimeen. Niitä ei tallenneta tiliisi.",
+      "device-title": "Tämä laite",
       "label": "Asetukset",
       "language-description": "Päivittää käyttöliittymän kielen välittömästi ja tallentaa sen tilillesi.",
+      "link-preview-description": "Näytä esikatselukortti paljaiden linkkien alla kaikkialla, missä muistiinpanoja näytetään.",
       "memo-defaults-description": "Aseta oletusasetukset, joita käytetään luotaessa uusia muistioita.",
       "memo-defaults-title": "Muistiinpanon oletusasetukset",
       "theme-description": "Ottaa valitun teeman käyttöön välittömästi tässä laitteessa.",

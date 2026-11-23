@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Clicca per mostrare contenuti sensibili",
     "comment": {
       "self": "Commenti",
-      "write-a-comment": "Scrivi un commento"
+      "write-a-comment": "Scrivi un commento",
+      "view-all-count_one": "Visualizza {{count}} commento",
+      "view-all-count_other": "Visualizza tutti i {{count}} commenti"
     },
     "copy-content": "Copia contenuto",
     "copy-link": "Copia link",
@@ -306,9 +308,9 @@
       "updated": "Attività aggiornate"
     },
     "new-badge": "Nuovo",
-    "parent-loading": "Caricamento del memo originale in corso…",
-    "parent-load-error": "Impossibile caricare il memo originale.",
-    "parent-unavailable": "Memo originale non disponibile",
+    "parent-loading": "Caricamento del memo principale in corso…",
+    "parent-load-error": "Impossibile caricare il memo principale.",
+    "parent-unavailable": "Memo principale non disponibile",
     "parent-unavailable-description": "Potrebbe essere stato eliminato o potresti non avere più accesso.",
     "moved": "Memo spostato",
     "back-to": "Torna a {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "Su questo memo",
     "parent-memo": "Memo principale",
     "view-options": "Opzioni di visualizzazione",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Aggiungi reazione",
+    "remove-reaction": "Rimuovi la reazione",
+    "full-width": "Larghezza intera",
+    "full-width-hint": "Usa tutta la larghezza della cronologia dei memo.",
+    "include-comments": "Includi commenti",
+    "include-comments-hint": "Mostra i commenti insieme ai memo negli elenchi."
   },
   "message": {
     "archived-successfully": "Archiviato con successo",
@@ -471,7 +479,10 @@
       "appearance-description": "Scegli l'aspetto dell'app e la lingua da utilizzare per il tuo account.",
       "appearance-title": "Aspetto",
       "default-memo-visibility-description": "Visibilità applicata ai promemoria appena creati a meno che non vengano modificati nell'editor.",
+      "device-description": "Scelte di lettura e modifica salvate solo in questo browser. Non vengono salvate nel tuo account.",
+      "device-title": "Questo dispositivo",
       "language-description": "Aggiorna immediatamente la lingua dell'interfaccia e la salva sul tuo account.",
+      "link-preview-description": "Mostra una scheda di anteprima sotto i link semplici ovunque vengano mostrati i memo.",
       "memo-defaults-description": "Imposta le impostazioni predefinite utilizzate durante la composizione di nuovi promemoria.",
       "memo-defaults-title": "Impostazioni predefinite del promemoria",
       "theme-description": "Applica immediatamente il tema selezionato su questo dispositivo.",

@@ -1,5 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { DEVICE_PREFERENCES_KEY, updateDevicePreferences } from "@/hooks/useDevicePreferences";
 
 const mocks = vi.hoisted(() => ({
   mutate: vi.fn(),
@@ -51,5 +52,24 @@ describe("PreferencesSection media metadata setting", () => {
       generalSetting: { saveMediaMetadata: true },
       updateMask: ["save_media_metadata"],
     });
+  });
+
+  it("toggles device preferences in this browser without touching the account setting", () => {
+    render(<PreferencesSection />);
+
+    fireEvent.click(screen.getByRole("switch", { name: "memo.link-preview" }));
+    fireEvent.click(screen.getByRole("switch", { name: "memo.compact-mode" }));
+    fireEvent.click(screen.getByRole("switch", { name: "memo.include-comments" }));
+
+    expect(JSON.parse(localStorage.getItem(DEVICE_PREFERENCES_KEY) ?? "null")).toEqual({
+      linkPreview: false,
+      doubleClickEdit: false,
+      compactMode: true,
+      includeComments: true,
+    });
+    expect(mocks.mutate).not.toHaveBeenCalled();
+
+    act(() => updateDevicePreferences({ linkPreview: true }));
+    expect(screen.getByRole("switch", { name: "memo.link-preview" })).toBeChecked();
   });
 });

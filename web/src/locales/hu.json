@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Kattints a kényes tartalom megjelenítéséhez",
     "comment": {
       "self": "Hozzászólások",
-      "write-a-comment": "Írj hozzászólást"
+      "write-a-comment": "Írj hozzászólást",
+      "view-all-count_one": "Összes hozzászólás megtekintése ({{count}})",
+      "view-all-count_other": "Összes hozzászólás megtekintése ({{count}})"
     },
     "copy-content": "Tartalom másolása",
     "copy-link": "Hivatkozás másolása",
@@ -306,9 +308,9 @@
       "updated": "Feladatok frissítve"
     },
     "new-badge": "Új",
-    "parent-loading": "Eredeti feljegyzés betöltése…",
-    "parent-load-error": "Az eredeti feljegyzés nem tölthető be.",
-    "parent-unavailable": "Az eredeti feljegyzés nem érhető el.",
+    "parent-loading": "Szülő feljegyzés betöltése…",
+    "parent-load-error": "A szülő feljegyzés nem tölthető be.",
+    "parent-unavailable": "A szülő feljegyzés nem érhető el.",
     "parent-unavailable-description": "Lehet, hogy törölték, vagy már nincs hozzáférésed.",
     "moved": "Feljegyzés áthelyezve.",
     "back-to": "Vissza a {{source}}-hez",
@@ -324,7 +326,13 @@
     "on-this-memo": "Ezen a feljegyzésen",
     "parent-memo": "Szülő feljegyzés",
     "view-options": "Megtekintési beállítások",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Adja hozzá a reakciót",
+    "remove-reaction": "Távolítsa el a reakciót",
+    "full-width": "Teljes szélesség",
+    "full-width-hint": "A jegyzetek idővonalának teljes szélességét használja.",
+    "include-comments": "Hozzászólások belefoglalása",
+    "include-comments-hint": "A listákban a hozzászólások a jegyzetekkel együtt jelennek meg."
   },
   "message": {
     "archived-successfully": "Sikeres archiválás",
@@ -471,7 +479,10 @@
       "appearance-description": "Válassza ki, hogyan nézzen ki az alkalmazás, és melyik nyelvet használja a fiókjához.",
       "appearance-title": "Megjelenés",
       "default-memo-visibility-description": "A láthatóság az újonnan létrehozott jegyzetekre vonatkozik, hacsak nem módosítja a szerkesztőben.",
+      "device-description": "Csak ebben a böngészőben tárolt olvasási és szerkesztési beállítások. Nem kerülnek mentésre a fiókodba.",
+      "device-title": "Ez az eszköz",
       "language-description": "Azonnal frissíti a felület nyelvét, és elmenti a fiókjába.",
+      "link-preview-description": "Előnézeti kártya megjelenítése a csupasz hivatkozások alatt mindenhol, ahol jegyzetek jelennek meg.",
       "memo-defaults-description": "Állítsa be az új jegyzetek írásakor használt alapértelmezett értékeket.",
       "memo-defaults-title": "A jegyzet alapbeállításai",
       "theme-description": "Azonnal alkalmazza a kiválasztott témát ezen az eszközön.",

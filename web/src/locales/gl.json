@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Preme para mostrar contido NSFW",
     "comment": {
       "self": "Comentarios",
-      "write-a-comment": "Escribe un comentario"
+      "write-a-comment": "Escribe un comentario",
+      "view-all-count_one": "Ver {{count}} comentario",
+      "view-all-count_other": "Ver os {{count}} comentarios"
     },
     "copy-content": "Copiar contido",
     "copy-link": "Copiar ligazón",
@@ -306,9 +308,9 @@
       "updated": "Tarefas actualizadas"
     },
     "new-badge": "Novidade",
-    "parent-loading": "Cargando a nota orixinal…",
-    "parent-load-error": "Non se puido cargar a nota orixinal.",
-    "parent-unavailable": "Nota orixinal non dispoñible",
+    "parent-loading": "Cargando a nota principal…",
+    "parent-load-error": "Non se puido cargar a nota principal.",
+    "parent-unavailable": "Nota principal non dispoñible",
     "parent-unavailable-description": "Pode que se eliminase ou que xa non teñas acceso.",
     "moved": "Nota movida",
     "back-to": "Volver a {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "Nesta nota",
     "parent-memo": "Nota principal",
     "view-options": "Ver opcións",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Engadir reacción",
+    "remove-reaction": "Eliminar a reacción",
+    "full-width": "Largura completa",
+    "full-width-hint": "Usar toda a largura da cronoloxía dos memos.",
+    "include-comments": "Incluír comentarios",
+    "include-comments-hint": "Mostrar os comentarios xunto aos memos nas listas."
   },
   "message": {
     "archived-successfully": "Arquivada correctamente",
@@ -471,7 +479,10 @@
       "appearance-description": "Escolle o aspecto da aplicación e o idioma que usa para a túa conta.",
       "appearance-title": "Aparición",
       "default-memo-visibility-description": "A visibilidade aplícase ás notas recentemente creadas a non ser que se modifique no editor.",
+      "device-description": "Opcións de lectura e edición gardadas só neste navegador. Non se gardan na túa conta.",
+      "device-title": "Este dispositivo",
       "language-description": "Actualiza o idioma da interface inmediatamente e gárdao na túa conta.",
+      "link-preview-description": "Mostrar unha tarxeta de vista previa baixo as ligazóns soltas onde queira que se mostren notas.",
       "memo-defaults-description": "Establece os valores predeterminados utilizados ao redactar novas notas.",
       "memo-defaults-title": "Valores predeterminados da nota",
       "theme-description": "Aplica o tema seleccionado inmediatamente neste dispositivo.",

@@ -14,7 +14,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ checked, node: _node
   const { memo } = useMemoViewContext();
   const { readonly } = useMemoViewDerived();
   const checkboxRef = useRef<HTMLButtonElement>(null);
-  const { mutate: updateMemo } = useUpdateMemo();
+  const { mutate: updateMemo } = useUpdateMemo(memo?.name);
 
   const handleChange = async (newChecked: boolean) => {
     // Don't update if readonly or no memo

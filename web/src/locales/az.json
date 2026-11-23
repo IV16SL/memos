@@ -342,16 +342,18 @@
   },
   "memo": {
     "pinned": "Sabitlənib",
-    "parent-loading": "İlkin memo yüklənir…",
-    "parent-load-error": "İlkin memonu yükləmək mümkün olmadı.",
-    "parent-unavailable": "İlkin memo əlçatan deyil",
+    "parent-loading": "Ana qeyd yüklənir…",
+    "parent-load-error": "Ana qeydi yükləmək mümkün olmadı.",
+    "parent-unavailable": "Ana qeyd əlçatan deyil",
     "parent-unavailable-description": "Silinmiş ola bilər və ya artıq giriş icazəniz yoxdur.",
     "moved": "Memo köçürüldü",
     "back-to": "{{source}} bölməsinə qayıt",
     "click-to-show-sensitive-content": "Həssas məzmunu göstərmək üçün klikləyin",
     "comment": {
       "self": "Şərhlər",
-      "write-a-comment": "Şərh yazın"
+      "write-a-comment": "Şərh yazın",
+      "view-all-count_one": "Bütün {{count}} şərhə bax",
+      "view-all-count_other": "Bütün {{count}} şərhə bax"
     },
     "copy-content": "Məzmunu kopyala",
     "copy-link": "Keçidi kopyala",
@@ -429,7 +431,13 @@
       "space": "Üzvlər",
       "space-description": "{{space}} daxilində hamı"
     },
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Reaksiya əlavə et",
+    "remove-reaction": "Reaksiyanı çıxar",
+    "full-width": "Tam en",
+    "full-width-hint": "Qeydlərin zaman xəttinin bütün enindən istifadə et.",
+    "include-comments": "Şərhləri daxil et",
+    "include-comments-hint": "Siyahılarda şərhləri qeydlərlə birlikdə göstər."
   },
   "message": {
     "archived-successfully": "Uğurla arxivləndi",
@@ -788,8 +796,11 @@
       "appearance-title": "Görünüş",
       "default-memo-visibility": "Defolt qeyd görünürlüyü",
       "default-memo-visibility-description": "Redaktorda dəyişdirilmədikcə yeni yaradılan qeydlərə tətbiq edilən görünürlük.",
+      "device-description": "Yalnız bu brauzerdə saxlanılan oxuma və redaktə seçimləri. Hesabınıza yadda saxlanılmır.",
+      "device-title": "Bu cihaz",
       "label": "Tərcihlər",
       "language-description": "İnterfeys dilini dərhal yeniləyir və hesabınızda yadda saxlayır.",
+      "link-preview-description": "Memolar harada göstərilirsə, çılpaq keçidlərin altında önizləmə kartı göstər.",
       "memo-defaults-description": "Yeni qeyd yazarkən istifadə olunan defolt dəyərləri təyin edin.",
       "memo-defaults-title": "Qeyd üçün defoltlar",
       "save-media-metadata": "Media metaməlumatını yadda saxla",

@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { useAuth } from "@/contexts/AuthContext";
+import { updateDevicePreferences, useDevicePreferences } from "@/hooks/useDevicePreferences";
 import { useUpdateUserGeneralSetting } from "@/hooks/useUserQueries";
 import { UserSetting_GeneralSetting, UserSetting_GeneralSettingSchema } from "@/types/proto/api/user_service_pb";
 import { loadLocale, useTranslate } from "@/utils/i18n";
@@ -18,6 +19,7 @@ import SettingSection from "./SettingSection";
 const PreferencesSection = () => {
   const t = useTranslate();
   const { currentUser, userGeneralSetting: generalSetting, refetchSettings } = useAuth();
+  const devicePreferences = useDevicePreferences();
   const { mutate: updateUserGeneralSetting, isPending: isUpdatingGeneralSetting } = useUpdateUserGeneralSetting(currentUser?.name);
 
   const handleLocaleSelectChange = (locale: Locale) => {
@@ -147,6 +149,34 @@ const PreferencesSection = () => {
               checked={setting.saveMediaMetadata}
               disabled={isUpdatingGeneralSetting}
               onCheckedChange={handleSaveMediaMetadataChange}
+            />
+          </SettingListItem>
+        </SettingList>
+      </SettingGroup>
+
+      <SettingGroup title={t("setting.preference.device-title")} description={t("setting.preference.device-description")} showSeparator>
+        <SettingList>
+          <SettingListItem label={t("memo.link-preview")} description={t("setting.preference.link-preview-description")}>
+            <Switch
+              aria-label={t("memo.link-preview")}
+              checked={devicePreferences.linkPreview}
+              onCheckedChange={(linkPreview) => updateDevicePreferences({ linkPreview })}
+            />
+          </SettingListItem>
+
+          <SettingListItem label={t("memo.compact-mode")} description={t("memo.grid-compact-hint")}>
+            <Switch
+              aria-label={t("memo.compact-mode")}
+              checked={devicePreferences.compactMode}
+              onCheckedChange={(compactMode) => updateDevicePreferences({ compactMode })}
+            />
+          </SettingListItem>
+
+          <SettingListItem label={t("memo.include-comments")} description={t("memo.include-comments-hint")}>
+            <Switch
+              aria-label={t("memo.include-comments")}
+              checked={devicePreferences.includeComments}
+              onCheckedChange={(includeComments) => updateDevicePreferences({ includeComments })}
             />
           </SettingListItem>
         </SettingList>

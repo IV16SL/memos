@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "Klicka för att visa känsligt innehåll (NSFW)",
     "comment": {
       "self": "Kommentarer",
-      "write-a-comment": "Skriv en kommentar"
+      "write-a-comment": "Skriv en kommentar",
+      "view-all-count_one": "Visa {{count}} kommentar",
+      "view-all-count_other": "Visa alla {{count}} kommentarer"
     },
     "copy-content": "Kopiera innehåll",
     "copy-link": "Kopiera länk",
@@ -306,9 +308,9 @@
       "updated": "Uppgifter uppdaterade"
     },
     "new-badge": "Ny",
-    "parent-loading": "Laddar originalmemot…",
-    "parent-load-error": "Kunde inte läsa in originalmemot.",
-    "parent-unavailable": "Originalmemot är inte tillgängligt",
+    "parent-loading": "Laddar överordnat PM…",
+    "parent-load-error": "Kunde inte läsa in överordnat PM.",
+    "parent-unavailable": "Överordnat PM är inte tillgängligt",
     "parent-unavailable-description": "Det kan ha tagits bort eller så har du inte längre åtkomst.",
     "moved": "Memot flyttat",
     "back-to": "Tillbaka till {{source}}",
@@ -324,7 +326,13 @@
     "on-this-memo": "På detta PM",
     "parent-memo": "Överordnat PM",
     "view-options": "Visningsalternativ",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "Lägg till reaktion",
+    "remove-reaction": "Ta bort reaktionen",
+    "full-width": "Full bredd",
+    "full-width-hint": "Använd hela bredden på anteckningarnas tidslinje.",
+    "include-comments": "Inkludera kommentarer",
+    "include-comments-hint": "Visa kommentarer tillsammans med anteckningar i listor."
   },
   "message": {
     "archived-successfully": "Arkiverad framgångsrikt",
@@ -471,7 +479,10 @@
       "appearance-description": "Välj hur appen ser ut och vilket språk den använder för ditt konto.",
       "appearance-title": "Utseende",
       "default-memo-visibility-description": "Synlighet tillämpas på nyskapade memon om de inte ändras i redigeraren.",
+      "device-description": "Läs- och redigeringsval som bara sparas i den här webbläsaren. De sparas inte på ditt konto.",
+      "device-title": "Den här enheten",
       "language-description": "Uppdaterar gränssnittsspråket omedelbart och sparar det på ditt konto.",
+      "link-preview-description": "Visa ett förhandsvisningskort under rena länkar överallt där memon visas.",
       "memo-defaults-description": "Ställ in standardinställningarna som används när du skriver nya anteckningar.",
       "memo-defaults-title": "Memo standardinställningar",
       "theme-description": "Tillämpar det valda temat direkt på den här enheten.",

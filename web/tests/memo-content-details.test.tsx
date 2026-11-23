@@ -1,10 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { MemoMarkdownRenderer } from "@/components/MemoContent/MemoMarkdownRenderer";
-
-vi.mock("@/contexts/ViewContext", () => ({
-  useLinkPreviewEnabled: () => true,
-}));
 
 const renderContent = (content: string) => render(<MemoMarkdownRenderer content={content} resolvedMentionUsernames={new Set()} />);
 

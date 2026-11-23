@@ -240,7 +240,9 @@
     "click-to-show-sensitive-content": "クリックしてセンシティブな内容を表示",
     "comment": {
       "self": "コメント",
-      "write-a-comment": "コメントを書く"
+      "write-a-comment": "コメントを書く",
+      "view-all-count_one": "{{count}} 件のコメントをすべて表示",
+      "view-all-count_other": "{{count}} 件のコメントをすべて表示"
     },
     "copy-content": "コンテンツをコピー",
     "copy-link": "リンクをコピー",
@@ -315,16 +317,22 @@
       "updated": "タスクが更新されました"
     },
     "new-badge": "新着",
-    "parent-loading": "元のメモを読み込んでいます…",
-    "parent-load-error": "元のメモを読み込めませんでした。",
-    "parent-unavailable": "元のメモが利用できません",
+    "parent-loading": "親メモを読み込んでいます…",
+    "parent-load-error": "親メモを読み込めませんでした。",
+    "parent-unavailable": "親メモが利用できません",
     "parent-unavailable-description": "削除されたか、アクセス権がなくなった可能性があります。",
     "moved": "メモが移動されました",
     "back-to": "{{source}}に戻る",
     "connections": "接続",
     "on-this-memo": "このメモについて",
     "parent-memo": "親メモ",
-    "expand": "Show more"
+    "expand": "Show more",
+    "add-reaction": "リアクションを追加",
+    "remove-reaction": "反応を取り除く",
+    "full-width": "全幅表示",
+    "full-width-hint": "メモのタイムラインを幅いっぱいに表示します。",
+    "include-comments": "コメントを含める",
+    "include-comments-hint": "一覧にメモと一緒にコメントを表示します。"
   },
   "message": {
     "archived-successfully": "アーカイブが完了しました",
@@ -471,7 +479,10 @@
       "appearance-description": "アプリの外観と、アカウントで使用する言語を選択します。",
       "appearance-title": "外観",
       "default-memo-visibility-description": "エディターで変更しない限り、新しく作成されたメモに表示設定が適用されます。",
+      "device-description": "このブラウザーにのみ保存される閲覧・編集の設定です。アカウントには保存されません。",
+      "device-title": "このデバイス",
       "language-description": "インターフェイス言語をすぐに更新し、アカウントに保存します。",
+      "link-preview-description": "メモが表示されるすべての場所で、単独のリンクの下にプレビューカードを表示します。",
       "memo-defaults-description": "新しいメモを作成するときに使用するデフォルトを設定します。",
       "memo-defaults-title": "メモのデフォルト",
       "theme-description": "選択したテーマをこのデバイスにすぐに適用します。",

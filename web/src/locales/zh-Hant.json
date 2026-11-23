@@ -319,7 +319,9 @@
     "click-to-show-sensitive-content": "點擊顯示敏感內容",
     "comment": {
       "self": "評論",
-      "write-a-comment": "寫下評論"
+      "write-a-comment": "寫下評論",
+      "view-all-count_one": "查看全部 {{count}} 則評論",
+      "view-all-count_other": "查看全部 {{count}} 則評論"
     },
     "copy-content": "複製內容",
     "copy-link": "複製連結",
@@ -394,16 +396,22 @@
       "space": "成員",
       "space-description": "{{space}} 的所有人"
     },
-    "parent-loading": "正在載入原始備忘錄…",
-    "parent-load-error": "無法載入原始備忘錄。",
-    "parent-unavailable": "原始備忘錄不可用",
+    "parent-loading": "正在載入父備忘錄…",
+    "parent-load-error": "無法載入父備忘錄。",
+    "parent-unavailable": "父備忘錄不可用",
     "parent-unavailable-description": "它可能已被刪除，或者您可能已失去存取權限。",
     "moved": "備忘錄已移動",
     "back-to": "返回 {{source}}",
     "connections": "關聯",
     "on-this-memo": "在此備忘錄中",
-    "parent-memo": "原始備忘錄",
-    "expand": "Show more"
+    "parent-memo": "父備忘錄",
+    "expand": "Show more",
+    "add-reaction": "新增表情回應",
+    "remove-reaction": "移除表情回應",
+    "full-width": "全寬顯示",
+    "full-width-hint": "使用備忘錄時間軸的完整寬度。",
+    "include-comments": "包含評論",
+    "include-comments-hint": "在列表中同時顯示評論與備忘錄。"
   },
   "message": {
     "archived-successfully": "封存成功",
@@ -626,8 +634,11 @@
       "appearance-title": "外觀",
       "default-memo-visibility": "備忘錄預設瀏覽權限",
       "default-memo-visibility-description": "套用於新建立的備忘錄，除非在編輯器中變更。",
+      "device-description": "僅保存在此瀏覽器中的閱讀與編輯選項，不會儲存到你的帳號。",
+      "device-title": "此裝置",
       "label": "偏好設定",
       "language-description": "立即更新介面語言並儲存至您的帳號。",
+      "link-preview-description": "在顯示 Memo 的任何位置，為單獨的連結顯示預覽卡片。",
       "memo-defaults-description": "設定撰寫新備忘錄時使用的預設值。",
       "memo-defaults-title": "備忘錄預設值",
       "save-media-metadata": "儲存媒體中繼資料",
