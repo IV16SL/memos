@@ -113,12 +113,8 @@ const About = () => {
                 {profile.demo && <Badge variant="warning">{t("about.demo")}</Badge>}
               </div>
             </div>
-            <p className="mt-8 text-4xl leading-[1.15] tracking-tight wrap-anywhere text-foreground @min-[60rem]:text-[3.25rem]">
-              {customProfile?.description || (
-                <>
-                  <span className="block">Your thoughts, your data,</span> <span className="block">shared on your terms.</span>
-                </>
-              )}
+            <p className="mt-6 text-balance text-xl leading-7 font-medium wrap-anywhere text-foreground">
+              {customProfile?.description || "Simple note-taking for your everyday thoughts."}
             </p>
             <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground @min-[60rem]:text-lg">{t("about.description")}</p>
 
