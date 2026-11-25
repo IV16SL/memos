@@ -33,16 +33,25 @@ describe("MemoSpaceBadge", () => {
     state.spaces = [{ name: "spaces/product", title: "Product" }];
     render(<MemoSpaceBadge spaceName="spaces/product" />);
 
-    expect(screen.getByTitle("Space: Product")).toHaveTextContent("Product");
-    expect(screen.getByTitle("Space: Product")).not.toHaveTextContent("product");
+    expect(screen.getByLabelText("Space: Product")).toHaveTextContent("Product");
+    expect(screen.getByLabelText("Space: Product")).not.toHaveTextContent("product");
+  });
+
+  it("uses the styled Tooltip instead of the browser native title", () => {
+    state.spaces = [{ name: "spaces/product", title: "Product" }];
+    render(<MemoSpaceBadge spaceName="spaces/product" />);
+
+    const badge = screen.getByLabelText("Space: Product");
+    expect(badge).not.toHaveAttribute("title");
   });
 
   it("uses the shared pill presentation", () => {
     state.spaces = [{ name: "spaces/product", title: "Product" }];
     render(<MemoSpaceBadge spaceName="spaces/product" />);
 
-    const badge = screen.getByTitle("Space: Product");
-    expect(badge).toHaveAttribute("data-slot", "badge");
+    const badge = screen.getByLabelText("Space: Product");
+    expect(badge).toHaveAttribute("data-slot", "tooltip-trigger");
+    expect(badge).toHaveClass("rounded-full");
     expect(badge.querySelector(".lucide-astroid")).not.toBeNull();
   });
 
@@ -51,7 +60,7 @@ describe("MemoSpaceBadge", () => {
     state.spaces = [{ name: "spaces/product", title: longTitle }];
     render(<MemoSpaceBadge spaceName="spaces/product" />);
 
-    const badge = screen.getByTitle(`Space: ${longTitle}`);
+    const badge = screen.getByLabelText(`Space: ${longTitle}`);
     expect(badge).toHaveClass("max-w-36", "sm:max-w-48");
     expect(screen.getByText(longTitle)).toHaveClass("min-w-0", "flex-1", "truncate");
   });
@@ -63,7 +72,7 @@ describe("MemoSpaceBadge", () => {
     ];
     render(<MemoSpaceBadge spaceName="spaces/product-notes" />);
 
-    const badge = screen.getByTitle("Space: Product (product-notes)");
+    const badge = screen.getByLabelText("Space: Product (product-notes)");
     expect(badge).toHaveClass("max-w-52", "sm:max-w-64");
     expect(badge).toHaveTextContent("Product · product-notes");
     expect(badge.querySelector(".font-mono")).toHaveClass("max-w-[48%]", "shrink-0", "truncate");
@@ -77,7 +86,7 @@ describe("MemoSpaceBadge", () => {
     ];
     render(<MemoSpaceBadge spaceName={`spaces/${uuid}`} />);
 
-    expect(screen.getByTitle(`Space: Product (${uuid})`)).toHaveTextContent("Product · 123e4567…");
+    expect(screen.getByLabelText(`Space: Product (${uuid})`)).toHaveTextContent("Product · 123e4567…");
   });
 
   it("keeps both ends of long custom UIDs visible", () => {
@@ -87,13 +96,13 @@ describe("MemoSpaceBadge", () => {
     ];
     render(<MemoSpaceBadge spaceName="spaces/customer-support-production" />);
 
-    expect(screen.getByTitle("Space: Product (customer-support-production)")).toHaveTextContent("Product · customer…uction");
+    expect(screen.getByLabelText("Space: Product (customer-support-production)")).toHaveTextContent("Product · customer…uction");
   });
 
   it("uses a neutral title while still exposing an unknown Space UID", () => {
     render(<MemoSpaceBadge spaceName="spaces/private" />);
 
-    expect(screen.getByTitle("Space (private)")).toHaveTextContent("Space · private");
+    expect(screen.getByLabelText("Space (private)")).toHaveTextContent("Space · private");
     expect(screen.queryByText("spaces/private")).not.toBeInTheDocument();
   });
 
