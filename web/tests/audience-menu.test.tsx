@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { createInitialState, EditorProvider, useEditorContext, useEditorSelector } from "@/components/MemoEditor/state";
 import AudienceMenu from "@/components/MemoEditor/Toolbar/AudienceMenu";
@@ -158,11 +158,31 @@ describe("AudienceMenu Space row", () => {
     ];
     render(<AudienceMenu value={Visibility.PRIVATE} space="spaces/work" onChange={vi.fn()} onSpaceChange={vi.fn()} />);
 
-    expect(screen.getByRole("button")).toHaveAttribute("title", `${longTitle} · memo.visibility.private`);
+    const trigger = screen.getByRole("button");
+    expect(trigger).not.toHaveAttribute("title");
+    expect(trigger).toHaveAccessibleName(`${longTitle} · memo.visibility.private`);
     await openMenu();
     await openSpaces(longTitle);
     expect(screen.getByRole("menuitem", { name: "Twin (a)" })).toBeInTheDocument();
     expect(screen.getByRole("menuitem", { name: "Twin (b)" })).toBeInTheDocument();
+  });
+
+  it("shows the audience summary in the styled Tooltip instead of the native title", async () => {
+    render(<AudienceMenu value={Visibility.PRIVATE} space="spaces/work" onChange={vi.fn()} onSpaceChange={vi.fn()} />);
+    const trigger = screen.getByRole("button");
+
+    expect(trigger).not.toHaveAttribute("title");
+    fireEvent.keyDown(document.body, { key: "Tab" });
+    act(() => trigger.focus());
+    const tooltip = await waitFor(
+      () => {
+        const popup = document.querySelector('[data-slot="tooltip-content"]');
+        expect(popup).not.toBeNull();
+        return popup!;
+      },
+      { timeout: 2000 },
+    );
+    expect(tooltip).toHaveTextContent("Work · memo.visibility.private");
   });
 
   it("hides the Space row when there is no Space to add to", async () => {

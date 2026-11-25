@@ -12,6 +12,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import VisibilityIcon from "@/components/VisibilityIcon";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { useSpaces } from "@/hooks/useSpaceQueries";
@@ -52,28 +53,36 @@ const AudienceMenu = ({ value, onChange, space, onSpaceChange, disabled }: Audie
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        render={<Button variant="quiet" size="sm" className="min-w-0 max-w-64 shrink gap-1 text-muted-foreground" disabled={disabled} />}
-        title={summary}
-        aria-label={summary}
-      >
-        {onSpaceChange && space && (
-          <>
-            <span className="flex min-w-0 max-w-32 items-center gap-1 sm:max-w-40">
-              <SpaceIcon icon={selectedSpace?.icon} size={14} />
-              <span className="truncate">{destination}</span>
-            </span>
-            <span aria-hidden className="shrink-0 opacity-40">
-              ·
-            </span>
-          </>
-        )}
-        <span className="flex shrink-0 items-center gap-1">
-          <VisibilityIcon visibility={value} className="size-3.5 text-current" />
-          <span>{visibilityLabel}</span>
-        </span>
-        <ChevronDownIcon className="size-3 opacity-50" strokeWidth={1.8} />
-      </DropdownMenuTrigger>
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <DropdownMenuTrigger
+              render={
+                <Button variant="quiet" size="sm" className="min-w-0 max-w-64 shrink gap-1 text-muted-foreground" disabled={disabled} />
+              }
+              aria-label={summary}
+            >
+              {onSpaceChange && space && (
+                <>
+                  <span className="flex min-w-0 max-w-32 items-center gap-1 sm:max-w-40">
+                    <SpaceIcon icon={selectedSpace?.icon} size={14} />
+                    <span className="truncate">{destination}</span>
+                  </span>
+                  <span aria-hidden className="shrink-0 opacity-40">
+                    ·
+                  </span>
+                </>
+              )}
+              <span className="flex shrink-0 items-center gap-1">
+                <VisibilityIcon visibility={value} className="size-3.5 text-current" />
+                <span>{visibilityLabel}</span>
+              </span>
+              <ChevronDownIcon className="size-3 opacity-50" strokeWidth={1.8} />
+            </DropdownMenuTrigger>
+          }
+        />
+        <TooltipContent>{summary}</TooltipContent>
+      </Tooltip>
       <DropdownMenuContent align="start" size="sm" className="w-56" aria-label={t("common.visibility")}>
         {/* Two lines per audience: the description is the only place the app explains who can
             read a memo, and translations run long. The menu's fixed width makes long copy wrap
