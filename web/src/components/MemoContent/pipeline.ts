@@ -13,7 +13,6 @@ import { remarkPreserveType } from "@/utils/remark-plugins/remark-preserve-type"
 import { remarkSplitMixedTaskLists } from "@/utils/remark-plugins/remark-split-mixed-task-lists";
 import { remarkMemoSyntax } from "@/utils/remark-plugins/remark-tag";
 import { SANITIZE_SCHEMA } from "./constants";
-import { rehypeMoreMarker } from "./rehypeMoreMarker";
 import { rehypeTaskProgress } from "./rehypeTaskProgress";
 
 /**
@@ -33,8 +32,6 @@ export const buildRemarkPlugins = (mathRemarkPlugins: PluggableList = []): Plugg
 
 export const buildRehypePlugins = (mathRehypePlugins: PluggableList = []): PluggableList => [
   rehypeRaw,
-  // Convert <!--more--> to a marker element before sanitize strips comments.
-  rehypeMoreMarker,
   // Count task list progress before sanitize strips the checkbox state.
   rehypeTaskProgress,
   [rehypeSanitize, SANITIZE_SCHEMA],
