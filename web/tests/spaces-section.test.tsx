@@ -117,6 +117,21 @@ vi.mock("@/utils/i18n", () => ({
     key === "setting.spaces.delete-confirm-title" && params?.space ? `${key} ${params.space}` : key,
 }));
 
+// The picker renders the full 2035-icon Lucide catalog (see custom-icons.ts);
+// opening it takes seconds in jsdom and times out the tests. These tests
+// cover picker interaction, not the catalog size, so use a small subset
+// with the icons the tests actually pick.
+vi.mock("@/lib/custom-icons", async () => {
+  const { AstroidIcon, BookIcon, LeafIcon, NotebookPenIcon } = await import("lucide-react");
+  const symbols = { book: BookIcon, leaf: LeafIcon, "notebook-pen": NotebookPenIcon };
+  return {
+    CUSTOM_SYMBOLS: symbols,
+    customIconsEqual: (a?: { value?: { case?: string; value?: string } }, b?: { value?: { case?: string; value?: string } }) =>
+      a?.value?.case === b?.value?.case && a?.value?.value === b?.value?.value,
+    getCustomSymbol: (name: string, fallback: unknown = AstroidIcon) => (symbols as Record<string, unknown>)[name] ?? fallback,
+  };
+});
+
 const adminSpace: Space = {
   $typeName: "memos.api.Space",
   name: "spaces/product",

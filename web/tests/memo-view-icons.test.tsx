@@ -15,7 +15,36 @@ vi.mock("@/hooks/useUserQueries", () => ({
   userKeys: { memoViews: () => ["views"] },
 }));
 vi.mock("@/contexts/MemoFilterContext", () => ({ useMemoFilterContext: () => ({ setMemoView: vi.fn() }) }));
-vi.mock("@/utils/i18n", () => ({ useTranslate: () => (key: string) => key }));
+vi.mock("@/utils/i18n", () => {
+  // The page renders real English for these keys (see en.json); the test
+  // asserts on that text, so return the real values here and fall back to
+  // the key for everything else (the repo's usual identity-mock behavior).
+  const labels: Record<string, string> = {
+    "setting.memo-view.validate": "Validate",
+    "setting.memo-view.empty-title": "No views yet",
+    "setting.memo-view.loading": "Loading views…",
+    "setting.memo-view.load-error": "Couldn’t load views.",
+    "setting.memo-view.retry": "Retry",
+    "setting.memo-view.example-recent-title": "Recent notes",
+    "setting.memo-view.example-open-tasks-title": "Open tasks",
+  };
+  return { useTranslate: () => (key: string) => labels[key] ?? key };
+});
+
+// The picker renders the full 2035-icon Lucide catalog (see custom-icons.ts);
+// opening it takes seconds in jsdom and times out the tests. These tests
+// cover picker interaction, not the catalog size, so use a small subset
+// with the icons the tests actually pick.
+vi.mock("@/lib/custom-icons", async () => {
+  const { AstroidIcon, BookIcon, LeafIcon, NotebookPenIcon } = await import("lucide-react");
+  const symbols = { book: BookIcon, leaf: LeafIcon, "notebook-pen": NotebookPenIcon };
+  return {
+    CUSTOM_SYMBOLS: symbols,
+    customIconsEqual: (a?: { value?: { case?: string; value?: string } }, b?: { value?: { case?: string; value?: string } }) =>
+      a?.value?.case === b?.value?.case && a?.value?.value === b?.value?.value,
+    getCustomSymbol: (name: string, fallback: unknown = AstroidIcon) => (symbols as Record<string, unknown>)[name] ?? fallback,
+  };
+});
 
 const emoji = create(MemoView_IconSchema, { value: { case: "emoji", value: "🌱" } });
 const leaf = create(MemoView_IconSchema, { value: { case: "lucide", value: "leaf" } });
