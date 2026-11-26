@@ -94,13 +94,15 @@ const collectReferences = (files: Record<string, string>) => {
 };
 
 describe("locale key usage", () => {
+  // Scans every source file, so it takes ~3s even alone and overruns the
+  // 5s default under full-suite load. The work is legitimate; give it room.
   it("references every English key and reviews every computed key pattern", () => {
     const references = collectReferences(sourceFiles);
 
     expect(references.unreviewedPatterns, "Add finite values for new computed translation keys").toEqual([]);
     expect([...references.dynamicPatterns].sort(), "Remove stale computed-key rules").toEqual(Object.keys(dynamicKeyParts).sort());
     expect(Object.keys(source).filter((key) => !references.keys.has(key) && !references.keys.has(pluralBase(key)))).toEqual([]);
-  });
+  }, 30000);
 
   it("counts runtime key definitions but ignores comments and type-only references", () => {
     const references = collectReferences({
