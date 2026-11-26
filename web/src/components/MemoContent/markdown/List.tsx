@@ -77,7 +77,9 @@ export const List = ({ ordered, children, className, node: _node, ...domProps }:
   const isTaskList = className?.includes(TASK_LIST_CLASS);
   const listClass = isTaskList ? markdownStyles.taskList : ordered ? markdownStyles.orderedList : markdownStyles.bulletList;
 
-  const total = Number((domProps as Record<string, unknown>)["data-task-total"] ?? (domProps as Record<string, unknown>)["dataTaskTotal"] ?? 0);
+  const total = Number(
+    (domProps as Record<string, unknown>)["data-task-total"] ?? (domProps as Record<string, unknown>)["dataTaskTotal"] ?? 0,
+  );
   const checked = Number(
     (domProps as Record<string, unknown>)["data-task-checked"] ?? (domProps as Record<string, unknown>)["dataTaskChecked"] ?? 0,
   );
@@ -124,7 +126,9 @@ export const ListItem = ({ children, className, node: _node, ...domProps }: List
       <li className={cn(markdownStyles.taskListItem, className)} {...domProps}>
         <NestedMarkdownRenderContext>
           {checkbox}
-          <div className={cn(markdownStyles.taskItemContent, isChecked && "text-muted-foreground line-through decoration-muted-foreground/60")}>
+          <div
+            className={cn(markdownStyles.taskItemContent, isChecked && "text-muted-foreground line-through decoration-muted-foreground/60")}
+          >
             {content}
           </div>
         </NestedMarkdownRenderContext>

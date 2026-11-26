@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { isAmapConfigured, loadAmap, loadAmapPlugins, type AmapStatic } from "./amap";
+import { type AmapStatic, isAmapConfigured, loadAmap, loadAmapPlugins } from "./amap";
 import { wgs84ToGcj02 } from "./gcj02";
 
 const NOMINATIM = {
@@ -45,9 +45,7 @@ export const useReverseGeocoding = (lat: number | undefined, lng: number | undef
       try {
         // Reverse-geocode through the JS API plugin, using the same key +
         // security code as the map itself (no separate Web-service key needed).
-        const address = isAmapConfigured()
-          ? await reverseGeocodeAmap(await loadAmap(), lat, lng)
-          : await reverseGeocodeNominatim(lat, lng);
+        const address = isAmapConfigured() ? await reverseGeocodeAmap(await loadAmap(), lat, lng) : await reverseGeocodeNominatim(lat, lng);
         return address || coordString;
       } catch (error) {
         console.error("Failed to fetch reverse geocoding data:", error);

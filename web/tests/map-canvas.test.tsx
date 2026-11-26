@@ -2,8 +2,8 @@ import { create } from "@bufbuild/protobuf";
 import { render } from "@testing-library/react";
 import type { ComponentProps } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { wgs84ToGcj02 } from "@/components/map/gcj02";
 import { MapCanvas } from "@/components/MapView/MapCanvas";
+import { wgs84ToGcj02 } from "@/components/map/gcj02";
 import { MemoSchema } from "@/types/proto/api/memo_service_pb";
 
 const fakes = vi.hoisted(() => {
@@ -141,8 +141,7 @@ beforeEach(() => {
 });
 
 // Outside China: GCJ-02 coincides with WGS-84, keeping the fake pixels predictable.
-const memoAt = (name: string, lat: number, lng: number) =>
-  create(MemoSchema, { name, location: { latitude: lat, longitude: lng } });
+const memoAt = (name: string, lat: number, lng: number) => create(MemoSchema, { name, location: { latitude: lat, longitude: lng } });
 
 function props(): ComponentProps<typeof MapCanvas> {
   return {
@@ -194,9 +193,7 @@ describe("map viewport", () => {
     expect(fakes.map.setFitView).not.toHaveBeenCalled();
     rerender(<MapCanvas {...initial} memos={[memo]} complete />);
     expect(fakes.map.setFitView).toHaveBeenCalledOnce();
-    rerender(
-      <MapCanvas {...initial} memos={[memo, memoAt("memos/b", 11, 21)]} complete panelSize={{ width: 400, height: 776 }} />,
-    );
+    rerender(<MapCanvas {...initial} memos={[memo, memoAt("memos/b", 11, 21)]} complete panelSize={{ width: 400, height: 776 }} />);
     expect(fakes.map.setFitView).toHaveBeenCalledOnce();
   });
 
@@ -226,7 +223,11 @@ describe("map pins", () => {
       ["memos/dot", { face: { kind: "dot" as const }, label: "dot" }],
     ]);
     render(
-      <MapCanvas {...props()} memos={[place("memos/photo", 10, 20), place("memos/author", 11, 21), place("memos/dot", 12, 22)]} pins={pins} />,
+      <MapCanvas
+        {...props()}
+        memos={[place("memos/photo", 10, 20), place("memos/author", 11, 21), place("memos/dot", 12, 22)]}
+        pins={pins}
+      />,
     );
 
     expect(markerTitled("photo").content).toContain("/thumb.jpg");

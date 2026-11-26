@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { isAmapConfigured, loadAmap, loadAmapPlugins, type AmapPlaceSearch, type AmapPlaceSearchResult, type AmapStatic } from "./amap";
+import { type AmapPlaceSearch, type AmapPlaceSearchResult, type AmapStatic, isAmapConfigured, loadAmap, loadAmapPlugins } from "./amap";
 import { gcj02ToWgs84, wgs84ToGcj02 } from "./gcj02";
 import type { MapPoint } from "./types";
 
@@ -56,8 +56,7 @@ function distanceMeters(aLat: number, aLng: number, bLat: number, bLng: number):
   const rad = Math.PI / 180;
   const dLat = (bLat - aLat) * rad;
   const dLng = (bLng - aLng) * rad;
-  const h =
-    Math.sin(dLat / 2) ** 2 + Math.cos(aLat * rad) * Math.cos(bLat * rad) * Math.sin(dLng / 2) ** 2;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(aLat * rad) * Math.cos(bLat * rad) * Math.sin(dLng / 2) ** 2;
   return 2 * 6371000 * Math.asin(Math.sqrt(h));
 }
 
@@ -116,8 +115,7 @@ async function searchPlaces(query: string, biasCenter?: MapPoint): Promise<Place
     biasCenter
       ? [...list].sort(
           (a, b) =>
-            distanceMeters(biasCenter.lat, biasCenter.lng, a.lat, a.lng) -
-            distanceMeters(biasCenter.lat, biasCenter.lng, b.lat, b.lng),
+            distanceMeters(biasCenter.lat, biasCenter.lng, a.lat, a.lng) - distanceMeters(biasCenter.lat, biasCenter.lng, b.lat, b.lng),
         )
       : list;
 

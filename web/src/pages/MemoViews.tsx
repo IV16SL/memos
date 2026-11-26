@@ -42,7 +42,7 @@ import { handleError } from "@/lib/error";
 import { getMemoViewId } from "@/lib/memo-views";
 import { cn } from "@/lib/utils";
 import { MemoView, MemoView_IconSchema, MemoViewSchema } from "@/types/proto/api/user_service_pb";
-import { useTranslate, type Translations } from "@/utils/i18n";
+import { type Translations, useTranslate } from "@/utils/i18n";
 
 const getMemoViewExamples = (t: (key: Translations) => string) => [
   {
@@ -504,7 +504,9 @@ const MemoViews = () => {
             <div className="grid gap-5 p-4 sm:p-5">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h2 className="text-base font-semibold text-foreground">{isEditing ? t("setting.memo-view.edit-view") : t("setting.memo-view.create")}</h2>
+                  <h2 className="text-base font-semibold text-foreground">
+                    {isEditing ? t("setting.memo-view.edit-view") : t("setting.memo-view.create")}
+                  </h2>
                   <p className="mt-1 text-sm text-muted-foreground">{t("setting.memo-view.form-description")}</p>
                 </div>
                 <a
