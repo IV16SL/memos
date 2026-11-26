@@ -146,7 +146,6 @@
     "resize-sidebar": "تغيير حجم الشريط الجانبي",
     "sign-in-to-memos": "تسجيل الدخول إلى Memos",
     "unlink": "إلغاء الارتباط",
-    "view-all": "عرض الكل",
     "back": "Back",
     "copied": "Copied"
   },
@@ -321,9 +320,6 @@
       "updated": "تم تحديث المهام"
     },
     "view-options": "خيارات العرض",
-    "expand": "Show more",
-    "add-reaction": "إضافة رد فعل",
-    "remove-reaction": "إزالة التفاعل",
     "full-width": "العرض الكامل",
     "full-width-hint": "استخدام العرض الكامل للخط الزمني للمذكرات.",
     "include-comments": "تضمين التعليقات",

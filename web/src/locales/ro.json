@@ -184,7 +184,6 @@
     "resize-panel": "Redimensionați panoul",
     "resize-sidebar": "Redimensionați bara laterală",
     "sign-in-to-memos": "Conectați-vă la Memos",
-    "view-all": "Vizualizați tot",
     "back": "Back",
     "copied": "Copied"
   },
@@ -364,9 +363,6 @@
     "on-this-memo": "Pe această notă",
     "parent-memo": "Notă părinte",
     "view-options": "Opțiuni de vizualizare",
-    "expand": "Show more",
-    "add-reaction": "Adăugați reacția",
-    "remove-reaction": "Îndepărtați reacția",
     "full-width": "Lățime completă",
     "full-width-hint": "Folosește întreaga lățime a cronologiei notelor.",
     "include-comments": "Include comentariile",

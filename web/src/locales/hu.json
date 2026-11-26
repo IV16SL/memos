@@ -146,7 +146,6 @@
     "resize-panel": "Panel átméretezése",
     "resize-sidebar": "Oldalsáv átméretezése",
     "sign-in-to-memos": "Bejelentkezés a következőbe: Memos",
-    "view-all": "Összes megtekintése",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "Ezen a feljegyzésen",
     "parent-memo": "Szülő feljegyzés",
     "view-options": "Megtekintési beállítások",
-    "expand": "Show more",
-    "add-reaction": "Adja hozzá a reakciót",
-    "remove-reaction": "Távolítsa el a reakciót",
     "full-width": "Teljes szélesség",
     "full-width-hint": "A jegyzetek idővonalának teljes szélességét használja.",
     "include-comments": "Hozzászólások belefoglalása",

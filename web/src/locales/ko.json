@@ -146,7 +146,6 @@
     "resize-sidebar": "사이드바 크기 조정",
     "sign-in-to-memos": "Memos에 로그인",
     "unlink": "연결 해제",
-    "view-all": "모두 보기",
     "back": "Back",
     "copied": "Copied"
   },
@@ -321,9 +320,6 @@
       "updated": "작업 업데이트됨"
     },
     "view-options": "보기 옵션",
-    "expand": "Show more",
-    "add-reaction": "반응 추가",
-    "remove-reaction": "반응 제거",
     "full-width": "전체 너비",
     "full-width-hint": "메모 타임라인의 전체 너비를 사용합니다.",
     "include-comments": "댓글 포함",

@@ -146,7 +146,6 @@
     "resize-sidebar": "تغییر اندازه نوار کناری",
     "sign-in-to-memos": "ورود به Memos",
     "unlink": "لغو پیوند",
-    "view-all": "مشاهده همه",
     "back": "Back",
     "copied": "Copied"
   },
@@ -321,9 +320,6 @@
       "updated": "وظایف به‌روزرسانی شدند"
     },
     "view-options": "گزینه‌های مشاهده",
-    "expand": "Show more",
-    "add-reaction": "افزودن واکنش",
-    "remove-reaction": "حذف واکنش",
     "full-width": "تمام عرض",
     "full-width-hint": "از تمام عرض خط زمانی یادداشت‌ها استفاده کنید.",
     "include-comments": "شامل نظرات",

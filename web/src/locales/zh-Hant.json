@@ -225,7 +225,6 @@
     "collapse-panel": "折疊面板",
     "expand-panel": "展開面板",
     "resize-panel": "調整面板大小",
-    "view-all": "查看全部",
     "back": "Back",
     "copied": "Copied"
   },
@@ -405,9 +404,6 @@
     "connections": "關聯",
     "on-this-memo": "在此備忘錄中",
     "parent-memo": "父備忘錄",
-    "expand": "Show more",
-    "add-reaction": "新增表情回應",
-    "remove-reaction": "移除表情回應",
     "full-width": "全寬顯示",
     "full-width-hint": "使用備忘錄時間軸的完整寬度。",
     "include-comments": "包含評論",

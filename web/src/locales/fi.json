@@ -184,7 +184,6 @@
     "resize-panel": "Muuta paneelin kokoa",
     "resize-sidebar": "Muuta sivupalkin kokoa",
     "sign-in-to-memos": "Kirjaudu sisään Memos",
-    "view-all": "Näytä kaikki",
     "back": "Back",
     "copied": "Copied"
   },
@@ -364,9 +363,6 @@
     "on-this-memo": "Tässä muistiossa",
     "parent-memo": "Ylämuistio",
     "view-options": "Näytä asetukset",
-    "expand": "Show more",
-    "add-reaction": "Lisää reaktio",
-    "remove-reaction": "Poista reaktio",
     "full-width": "Täysi leveys",
     "full-width-hint": "Käytä muistioiden aikajanan koko leveyttä.",
     "include-comments": "Sisällytä kommentit",

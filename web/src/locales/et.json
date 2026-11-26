@@ -184,7 +184,6 @@
     "resize-panel": "Paneeli suuruse muutmine",
     "resize-sidebar": "Külgriba suuruse muutmine",
     "sign-in-to-memos": "Logi sisse Memos",
-    "view-all": "Kuva kõik",
     "back": "Back",
     "copied": "Copied"
   },
@@ -364,9 +363,6 @@
     "on-this-memo": "Sellel memo peal",
     "parent-memo": "Ülemmemo",
     "view-options": "Vaate valikud",
-    "expand": "Show more",
-    "add-reaction": "Lisa reaktsioon",
-    "remove-reaction": "Eemaldage reaktsioon",
     "full-width": "Täislaius",
     "full-width-hint": "Kasuta memode ajajoone kogu laiust.",
     "include-comments": "Kaasa kommentaarid",

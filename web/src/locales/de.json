@@ -146,7 +146,6 @@
     "resize-panel": "Bedienfeldgröße ändern",
     "resize-sidebar": "Seitenleiste vergrößern/verkleinern",
     "sign-in-to-memos": "Anmelden bei Memos",
-    "view-all": "Alle anzeigen",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "Zu diesem Memo",
     "parent-memo": "Übergeordnetes Memo",
     "view-options": "Ansichtsoptionen",
-    "expand": "Show more",
-    "add-reaction": "Reaktion hinzufügen",
-    "remove-reaction": "Reaktion entfernen",
     "full-width": "Volle Breite",
     "full-width-hint": "Die gesamte Breite der Notiz-Zeitleiste nutzen.",
     "include-comments": "Kommentare einbeziehen",

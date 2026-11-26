@@ -146,7 +146,6 @@
     "resize-panel": "Promijeni veličinu ploče",
     "resize-sidebar": "Promijeni veličinu bočne trake",
     "sign-in-to-memos": "Prijavi se na Memos",
-    "view-all": "Pogledaj sve",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "Na ovom podsjetniku",
     "parent-memo": "Nadređeni podsjetnik",
     "view-options": "Opcije prikaza",
-    "expand": "Show more",
-    "add-reaction": "Dodajte reakciju",
-    "remove-reaction": "Ukloni reakciju",
     "full-width": "Puna širina",
     "full-width-hint": "Koristi cijelu širinu vremenske crte memoa.",
     "include-comments": "Uključi komentare",

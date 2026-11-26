@@ -146,7 +146,6 @@
     "resize-sidebar": "Redimensionar barra lateral",
     "sign-in-to-memos": "Entrar em Memos",
     "unlink": "Desvincular",
-    "view-all": "Ver tudo",
     "back": "Back",
     "copied": "Copied"
   },
@@ -321,9 +320,6 @@
       "updated": "Tarefas atualizadas"
     },
     "view-options": "Opções de visualização",
-    "expand": "Show more",
-    "add-reaction": "Adicionar reação",
-    "remove-reaction": "Remover reação",
     "full-width": "Largura total",
     "full-width-hint": "Usar toda a largura da linha do tempo dos memos.",
     "include-comments": "Incluir comentários",

@@ -146,7 +146,6 @@
     "resize-panel": "Spremeni velikost plošče",
     "resize-sidebar": "Spremeni velikost stranske vrstice",
     "sign-in-to-memos": "Prijava v Memos",
-    "view-all": "Ogled vseh",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "V tem zapisku",
     "parent-memo": "Nadrejeni zapisek",
     "view-options": "Možnosti pogleda",
-    "expand": "Show more",
-    "add-reaction": "Dodajte reakcijo",
-    "remove-reaction": "Odstrani reakcijo",
     "full-width": "Polna širina",
     "full-width-hint": "Uporabi celotno širino časovnice beležk.",
     "include-comments": "Vključi komentarje",

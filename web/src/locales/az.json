@@ -249,7 +249,6 @@
     "username": "İstifadəçi adı",
     "version": "Versiya",
     "visibility": "Görünürlük",
-    "view-all": "Hamısına bax",
     "views": "Görünüşlər",
     "yourself": "Özünüz",
     "back": "Back",
@@ -431,9 +430,6 @@
       "space": "Üzvlər",
       "space-description": "{{space}} daxilində hamı"
     },
-    "expand": "Show more",
-    "add-reaction": "Reaksiya əlavə et",
-    "remove-reaction": "Reaksiyanı çıxar",
     "full-width": "Tam en",
     "full-width-hint": "Qeydlərin zaman xəttinin bütün enindən istifadə et.",
     "include-comments": "Şərhləri daxil et",

@@ -185,7 +185,6 @@
     "views": "视图",
     "yourself": "您自己",
     "resize-sidebar": "调整侧边栏大小",
-    "view-all": "查看全部",
     "back": "返回",
     "copied": "已复制"
   },
@@ -360,9 +359,6 @@
     "parent-unavailable": "父备忘录不可用",
     "parent-unavailable-description": "它可能已被删除，或者您可能已失去访问权限。",
     "moved": "备忘录已移动",
-    "expand": "展开全文",
-    "add-reaction": "添加表态",
-    "remove-reaction": "移除表态",
     "full-width": "全宽显示",
     "full-width-hint": "使用备忘录时间线的全部宽度。",
     "include-comments": "包含评论",

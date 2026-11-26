@@ -184,7 +184,6 @@
     "resize-panel": "Keisti skydelio dydį",
     "resize-sidebar": "Keisti šoninės juostos dydį",
     "sign-in-to-memos": "Prisijungti prie Memos",
-    "view-all": "Peržiūrėti viską",
     "back": "Back",
     "copied": "Copied"
   },
@@ -364,9 +363,6 @@
     "on-this-memo": "Šiame priminime",
     "parent-memo": "Pagrindinis priminimas",
     "view-options": "Peržiūros parinktys",
-    "expand": "Show more",
-    "add-reaction": "Pridėti reakciją",
-    "remove-reaction": "Pašalinti reakciją",
     "full-width": "Visas plotis",
     "full-width-hint": "Naudoti visą atmintinių laiko juostos plotį.",
     "include-comments": "Įtraukti komentarus",

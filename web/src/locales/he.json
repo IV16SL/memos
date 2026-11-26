@@ -217,7 +217,6 @@
     "collapse-panel": "כווץ את הפאנל",
     "expand-panel": "הרחב את הפאנל",
     "resize-panel": "שינוי גודל הפאנל",
-    "view-all": "הצג הכל",
     "back": "Back",
     "copied": "Copied"
   },
@@ -397,9 +396,6 @@
     "connections": "חיבורים",
     "on-this-memo": "על תזכיר זה",
     "parent-memo": "תזכיר אב",
-    "expand": "Show more",
-    "add-reaction": "הוסף תגובה",
-    "remove-reaction": "הסר תגובה",
     "full-width": "רוחב מלא",
     "full-width-hint": "שימוש בכל הרוחב של ציר הזמן של הפתקים.",
     "include-comments": "הכללת תגובות",

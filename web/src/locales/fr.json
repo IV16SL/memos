@@ -146,7 +146,6 @@
     "resize-panel": "Redimensionner le panneau",
     "resize-sidebar": "Redimensionner la barre latérale",
     "sign-in-to-memos": "Se connecter à Memos",
-    "view-all": "Tout afficher",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "Sur ce mémo",
     "parent-memo": "Mémo parent",
     "view-options": "Options d'affichage",
-    "expand": "Show more",
-    "add-reaction": "Ajouter une réaction",
-    "remove-reaction": "Supprimer la réaction",
     "full-width": "Pleine largeur",
     "full-width-hint": "Utiliser toute la largeur de la chronologie des mémos.",
     "include-comments": "Inclure les commentaires",

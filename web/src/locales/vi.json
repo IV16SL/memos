@@ -146,7 +146,6 @@
     "resize-sidebar": "Thay đổi kích thước thanh bên",
     "sign-in-to-memos": "Đăng nhập vào Memos",
     "unlink": "Hủy liên kết",
-    "view-all": "Xem tất cả",
     "back": "Back",
     "copied": "Copied"
   },
@@ -321,9 +320,6 @@
       "updated": "Nhiệm vụ đã được cập nhật"
     },
     "view-options": "Tùy chọn xem",
-    "expand": "Show more",
-    "add-reaction": "Thêm biểu tượng cảm xúc",
-    "remove-reaction": "Xóa phản ứng",
     "full-width": "Toàn bộ chiều rộng",
     "full-width-hint": "Sử dụng toàn bộ chiều rộng của dòng thời gian ghi chú.",
     "include-comments": "Bao gồm bình luận",

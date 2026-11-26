@@ -184,7 +184,6 @@
     "resize-panel": "Zmeniť veľkosť panela",
     "resize-sidebar": "Zmeniť veľkosť bočného panela",
     "sign-in-to-memos": "Prihlásiť sa do Memos",
-    "view-all": "Zobraziť všetko",
     "back": "Back",
     "copied": "Copied"
   },
@@ -364,9 +363,6 @@
     "on-this-memo": "V tejto poznámke",
     "parent-memo": "Nadradená poznámka",
     "view-options": "Možnosti zobrazenia",
-    "expand": "Show more",
-    "add-reaction": "Pridajte reakciu",
-    "remove-reaction": "Odstráňte reakciu",
     "full-width": "Plná šírka",
     "full-width-hint": "Využiť celú šírku časovej osi poznámok.",
     "include-comments": "Zahrnúť komentáre",

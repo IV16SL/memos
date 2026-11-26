@@ -249,7 +249,6 @@
     "username": "Username",
     "version": "Version",
     "visibility": "Visibility",
-    "view-all": "View all",
     "views": "Views",
     "yourself": "Yourself",
     "back": "Back",
@@ -434,8 +433,7 @@
       "public-description": "Anyone, even signed out",
       "space": "Members",
       "space-description": "Everyone in {{space}}"
-    },
-    "expand": "Show more"
+    }
   },
   "message": {
     "archived-successfully": "Archived successfully",

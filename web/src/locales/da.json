@@ -184,7 +184,6 @@
     "resize-panel": "Tilpas størrelse på panel",
     "resize-sidebar": "Tilpas størrelse på sidebjælke",
     "sign-in-to-memos": "Log ind på Memos",
-    "view-all": "Vis alle",
     "back": "Back",
     "copied": "Copied"
   },
@@ -364,9 +363,6 @@
     "on-this-memo": "På dette notat",
     "parent-memo": "Overordnet notat",
     "view-options": "Visningsmuligheder",
-    "expand": "Show more",
-    "add-reaction": "Tilføj reaktion",
-    "remove-reaction": "Fjern reaktion",
     "full-width": "Fuld bredde",
     "full-width-hint": "Brug hele bredden af memoernes tidslinje.",
     "include-comments": "Medtag kommentarer",

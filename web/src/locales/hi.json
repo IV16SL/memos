@@ -146,7 +146,6 @@
     "resize-sidebar": "साइडबार का साइज़ बदलें",
     "sign-in-to-memos": "साइन इन करें Memos",
     "unlink": "अनलिंक करें",
-    "view-all": "सभी देखें",
     "back": "Back",
     "copied": "Copied"
   },
@@ -321,9 +320,6 @@
       "updated": "टास्क अपडेट किए गए"
     },
     "view-options": "ऑप्शन देखें",
-    "expand": "Show more",
-    "add-reaction": "रिएक्शन जोड़ें",
-    "remove-reaction": "रिएक्शन हटाएँ",
     "full-width": "पूरी चौड़ाई",
     "full-width-hint": "मेमो समयरेखा की पूरी चौड़ाई का उपयोग करें।",
     "include-comments": "टिप्पणियाँ शामिल करें",

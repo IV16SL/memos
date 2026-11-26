@@ -146,7 +146,6 @@
     "resize-sidebar": "Ubah ukuran sidebar",
     "sign-in-to-memos": "Masuk ke Memos",
     "unlink": "Putuskan tautan",
-    "view-all": "Lihat semua",
     "back": "Back",
     "copied": "Copied"
   },
@@ -321,9 +320,6 @@
       "updated": "Tugas diperbarui"
     },
     "view-options": "Opsi tampilan",
-    "expand": "Show more",
-    "add-reaction": "Tambahkan reaksi",
-    "remove-reaction": "Hapus reaksi",
     "full-width": "Lebar penuh",
     "full-width-hint": "Gunakan seluruh lebar linimasa memo.",
     "include-comments": "Sertakan komentar",

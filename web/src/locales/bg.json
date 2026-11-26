@@ -184,7 +184,6 @@
     "resize-panel": "Панел за преоразмеряване",
     "resize-sidebar": "Преоразмеряване на страничната лента",
     "sign-in-to-memos": "Влизане в Memos",
-    "view-all": "Вижте всички",
     "back": "Back",
     "copied": "Copied"
   },
@@ -364,9 +363,6 @@
     "on-this-memo": "В тази бележка",
     "parent-memo": "Родителска бележка",
     "view-options": "Опции за преглед",
-    "expand": "Show more",
-    "add-reaction": "Добавете реакция",
-    "remove-reaction": "Премахнете реакцията",
     "full-width": "Пълна ширина",
     "full-width-hint": "Използване на цялата ширина на хронологията на бележките.",
     "include-comments": "Включване на коментари",

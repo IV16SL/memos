@@ -146,7 +146,6 @@
     "resize-panel": "Canvia la mida del panell",
     "resize-sidebar": "Canvia la mida de la barra lateral",
     "sign-in-to-memos": "Inicia la sessió a Memos",
-    "view-all": "Veure-ho tot",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "En aquesta nota",
     "parent-memo": "Nota principal",
     "view-options": "Opcions de visualització",
-    "expand": "Show more",
-    "add-reaction": "Afegeix reacció",
-    "remove-reaction": "Elimina la reacció",
     "full-width": "Amplada completa",
     "full-width-hint": "Utilitza tota l'amplada de la cronologia dels memos.",
     "include-comments": "Inclou els comentaris",

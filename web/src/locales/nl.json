@@ -146,7 +146,6 @@
     "resize-panel": "Paneelgrootte aanpassen",
     "resize-sidebar": "Zijbalkgrootte aanpassen",
     "sign-in-to-memos": "Aanmelden bij Memos",
-    "view-all": "Alles bekijken",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "In deze memo",
     "parent-memo": "Hoofdmemo",
     "view-options": "Weergaveopties",
-    "expand": "Show more",
-    "add-reaction": "Reactie toevoegen",
-    "remove-reaction": "Reactie verwijderen",
     "full-width": "Volledige breedte",
     "full-width-hint": "Gebruik de volledige breedte van de memotijdlijn.",
     "include-comments": "Opmerkingen opnemen",

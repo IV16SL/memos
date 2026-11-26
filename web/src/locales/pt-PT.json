@@ -146,7 +146,6 @@
     "resize-panel": "Redimensionar painel",
     "resize-sidebar": "Redimensionar barra lateral",
     "sign-in-to-memos": "Entrar em Memos",
-    "view-all": "Ver tudo",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "Neste memorando",
     "parent-memo": "Memorando pai",
     "view-options": "Opções de visualização",
-    "expand": "Show more",
-    "add-reaction": "Adicionar reação",
-    "remove-reaction": "Remover reação",
     "full-width": "Largura total",
     "full-width-hint": "Usar toda a largura da linha do tempo dos memos.",
     "include-comments": "Incluir comentários",

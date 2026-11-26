@@ -146,7 +146,6 @@
     "resize-panel": "Zmień rozmiar panelu",
     "resize-sidebar": "Zmień rozmiar paska bocznego",
     "sign-in-to-memos": "Zaloguj się do Memos",
-    "view-all": "Wyświetl wszystko",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "W tej notatce",
     "parent-memo": "Notatka nadrzędna",
     "view-options": "Opcje widoku",
-    "expand": "Show more",
-    "add-reaction": "Dodaj reakcję",
-    "remove-reaction": "Usuń reakcję",
     "full-width": "Pełna szerokość",
     "full-width-hint": "Używaj całej szerokości osi czasu notatek.",
     "include-comments": "Uwzględnij komentarze",

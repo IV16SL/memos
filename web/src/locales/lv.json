@@ -184,7 +184,6 @@
     "resize-panel": "Mainīt paneļa izmērus",
     "resize-sidebar": "Mainīt sānu joslas izmērus",
     "sign-in-to-memos": "Pierakstīties pakalpojumā Memos",
-    "view-all": "Skatīt visu",
     "back": "Back",
     "copied": "Copied"
   },
@@ -364,9 +363,6 @@
     "on-this-memo": "Šajā piezīmē",
     "parent-memo": "Galvenā piezīme",
     "view-options": "Skata opcijas",
-    "expand": "Show more",
-    "add-reaction": "Pievienojiet reakciju",
-    "remove-reaction": "Noņemiet reakciju",
     "full-width": "Pilns platums",
     "full-width-hint": "Izmantot visu piezīmju laika skalas platumu.",
     "include-comments": "Iekļaut komentārus",

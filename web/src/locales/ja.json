@@ -146,7 +146,6 @@
     "collapse-panel": "パネルを折りたたむ",
     "expand-panel": "パネルを展開する",
     "resize-panel": "パネルのサイズを変更する",
-    "view-all": "すべて表示",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "connections": "接続",
     "on-this-memo": "このメモについて",
     "parent-memo": "親メモ",
-    "expand": "Show more",
-    "add-reaction": "リアクションを追加",
-    "remove-reaction": "反応を取り除く",
     "full-width": "全幅表示",
     "full-width-hint": "メモのタイムラインを幅いっぱいに表示します。",
     "include-comments": "コメントを含める",

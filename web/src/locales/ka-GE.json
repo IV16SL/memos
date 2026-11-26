@@ -146,7 +146,6 @@
     "resize-panel": "პანელის ზომის შეცვლა",
     "resize-sidebar": "გვერდითი ზოლის ზომის შეცვლა",
     "sign-in-to-memos": "შესვლა Memos-ში",
-    "view-all": "ყველას ნახვა",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "ამ მემოზე",
     "parent-memo": "მშობელი მემო",
     "view-options": "ნახვის პარამეტრები",
-    "expand": "Show more",
-    "add-reaction": "დაამატეთ რეაქცია",
-    "remove-reaction": "რეაქციის ამოღება",
     "full-width": "სრული სიგანე",
     "full-width-hint": "მემოების დროის ხაზის სრული სიგანის გამოყენება.",
     "include-comments": "კომენტარების ჩართვა",

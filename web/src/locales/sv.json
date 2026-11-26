@@ -146,7 +146,6 @@
     "resize-panel": "Ändra storlek på panelen",
     "resize-sidebar": "Ändra storlek på sidofältet",
     "sign-in-to-memos": "Logga in på Memos",
-    "view-all": "Visa alla",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "På detta PM",
     "parent-memo": "Överordnat PM",
     "view-options": "Visningsalternativ",
-    "expand": "Show more",
-    "add-reaction": "Lägg till reaktion",
-    "remove-reaction": "Ta bort reaktionen",
     "full-width": "Full bredd",
     "full-width-hint": "Använd hela bredden på anteckningarnas tidslinje.",
     "include-comments": "Inkludera kommentarer",

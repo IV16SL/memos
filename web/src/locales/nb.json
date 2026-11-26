@@ -146,7 +146,6 @@
     "resize-panel": "Endre størrelse på panel",
     "resize-sidebar": "Endre størrelse på sidefelt",
     "sign-in-to-memos": "Logg på Memos",
-    "view-all": "Vis alle",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "På dette notatet",
     "parent-memo": "Overordnet notat",
     "view-options": "Visningsalternativer",
-    "expand": "Show more",
-    "add-reaction": "Legg til reaksjon",
-    "remove-reaction": "Fjern reaksjonen",
     "full-width": "Full bredde",
     "full-width-hint": "Bruk hele bredden på memoenes tidslinje.",
     "include-comments": "Inkluder kommentarer",

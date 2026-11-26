@@ -146,7 +146,6 @@
     "resize-panel": "Змінити розмір панелі",
     "resize-sidebar": "Змінити розмір бічної панелі",
     "sign-in-to-memos": "Увійти до Memos",
-    "view-all": "Переглянути всі",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "У цій нотатці",
     "parent-memo": "Батьківська нотатка",
     "view-options": "Параметри перегляду",
-    "expand": "Show more",
-    "add-reaction": "Додайте реакцію",
-    "remove-reaction": "Видалити реакцію",
     "full-width": "На всю ширину",
     "full-width-hint": "Використовувати всю ширину хронології нотаток.",
     "include-comments": "Включати коментарі",

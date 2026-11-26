@@ -184,7 +184,6 @@
     "resize-panel": "Промени величину панела",
     "resize-sidebar": "Промени величину бочне траке",
     "sign-in-to-memos": "Пријавите се на Memos",
-    "view-all": "Погледајте све",
     "back": "Back",
     "copied": "Copied"
   },
@@ -364,9 +363,6 @@
     "on-this-memo": "На овој поруци",
     "parent-memo": "Надређена порука",
     "view-options": "Опције приказа",
-    "expand": "Show more",
-    "add-reaction": "Додајте реакцију",
-    "remove-reaction": "Уклоните реакцију",
     "full-width": "Пуна ширина",
     "full-width-hint": "Користи целу ширину временске линије мемоа.",
     "include-comments": "Укључи коментаре",

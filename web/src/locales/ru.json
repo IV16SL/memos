@@ -146,7 +146,6 @@
     "collapse-panel": "Свернуть панель",
     "expand-panel": "Развернуть панель",
     "resize-panel": "Изменить размер панели",
-    "view-all": "Просмотреть все",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "connections": "Подключения",
     "on-this-memo": "К этой заметке",
     "parent-memo": "Родительская заметка",
-    "expand": "Show more",
-    "add-reaction": "Добавить реакцию",
-    "remove-reaction": "Удалить реакцию",
     "full-width": "Во всю ширину",
     "full-width-hint": "Использовать всю ширину хронологии заметок.",
     "include-comments": "Включать комментарии",

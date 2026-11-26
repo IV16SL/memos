@@ -217,7 +217,6 @@
     "user": "Brukar",
     "username": "Brukarnamn",
     "version": "Versjon",
-    "view-all": "Vis alle",
     "views": "Visingar",
     "visibility": "Synlegheit",
     "yourself": "Deg sjølv",
@@ -431,9 +430,6 @@
       "space": "Medlemer",
       "space-description": "Alle i {{space}}"
     },
-    "expand": "Show more",
-    "add-reaction": "Legg til reaksjon",
-    "remove-reaction": "Fjern reaksjon",
     "full-width": "Full breidd",
     "full-width-hint": "Bruk heile breidda på tidslina for notata.",
     "include-comments": "Inkluder kommentarar",

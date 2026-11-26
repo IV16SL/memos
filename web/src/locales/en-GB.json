@@ -146,7 +146,6 @@
     "resize-panel": "Resize panel",
     "resize-sidebar": "Resize sidebar",
     "sign-in-to-memos": "Sign in to Memos",
-    "view-all": "View all",
     "back": "Back",
     "copied": "Copied"
   },
@@ -326,9 +325,6 @@
     "on-this-memo": "On this memo",
     "parent-memo": "Parent memo",
     "view-options": "View options",
-    "expand": "Show more",
-    "add-reaction": "Add reaction",
-    "remove-reaction": "Remove reaction",
     "full-width": "Full width",
     "full-width-hint": "Use entire width of the memo timeline.",
     "include-comments": "Include comments",
