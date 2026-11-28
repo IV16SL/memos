@@ -12,6 +12,15 @@ const MAX_CONCURRENT_UPLOADS = 4;
 export const uploadService = {
   async uploadFile(localFile: LocalFile, signal?: AbortSignal): Promise<Attachment> {
     const { file, motionMedia } = localFile;
+    // Read the whole file into memory up front. On Android the file picker
+    // hands the browser a content URI whose read permission can lapse after
+    // the reference is acquired; the old code re-read the File once per
+    // chunk (metadata extraction, then a spec round-trip, then one round-trip
+    // per chunk), so a later slice could fail with "The requested file could
+    // not be read" even though the file was picked fine. Buffering once keeps
+    // the upload working after the underlying file becomes unreadable.
+    // Bounded by the instance upload size limit (30 MB by default).
+    const buffer = new Uint8Array(await file.arrayBuffer());
     const mediaMetadata = await localFile.mediaMetadata;
     const spec = create(UploadAttachmentSpecSchema, {
       attachment: create(AttachmentSchema, {
@@ -20,7 +29,7 @@ export const uploadService = {
         motionMedia: motionMedia ? create(MotionMediaSchema, motionMedia) : undefined,
         mediaMetadata,
       }),
-      totalSize: BigInt(file.size),
+      totalSize: BigInt(buffer.length),
     });
     // The spec call carries no data so that retrying it after a lost response
     // can at worst orphan an upload, never create a duplicate attachment.
@@ -31,12 +40,12 @@ export const uploadService = {
     const chunkSize = Math.min(initial.maxChunkSize, DEFAULT_CHUNK_SIZE);
     for (let offset = 0; ; ) {
       signal?.throwIfAborted();
-      const end = Math.min(offset + chunkSize, file.size);
+      const end = Math.min(offset + chunkSize, buffer.length);
       const request: Pick<UploadAttachmentRequest, "upload" | "writeOffset" | "data" | "finishWrite"> = {
         upload: { case: "uploadId", value: initial.uploadId },
         writeOffset: BigInt(offset),
-        data: new Uint8Array(await file.slice(offset, end).arrayBuffer()),
-        finishWrite: end === file.size,
+        data: buffer.slice(offset, end),
+        finishWrite: end === buffer.length,
       };
       // Retrying the identical last write is safe even if its response was lost
       // after the server finalized the attachment.

@@ -25,19 +25,19 @@ describe("chunked attachment uploads", () => {
     }));
   });
 
-  it("reads only file slices and writes consecutive offsets", async () => {
+  it("buffers the whole file once and writes consecutive offsets", async () => {
     const local = localFile("abcdefgh");
-    const wholeFileRead = vi.spyOn(local.file, "arrayBuffer").mockRejectedValue(new Error("must not read the whole file"));
+    const wholeFileRead = vi.spyOn(local.file, "arrayBuffer");
     const slice = vi.spyOn(local.file, "slice");
 
     await expect(uploadService.uploadFile(local)).resolves.toEqual(attachment);
 
-    expect(wholeFileRead).not.toHaveBeenCalled();
-    expect(slice.mock.calls).toEqual([
-      [0, 3],
-      [3, 6],
-      [6, 8],
-    ]);
+    // The file is read into memory once up front so later chunks never
+    // re-read the File: on Android the picker hands the browser a content
+    // URI whose read permission can lapse between round-trips, and a later
+    // slice would fail with "The requested file could not be read".
+    expect(wholeFileRead).toHaveBeenCalledTimes(1);
+    expect(slice).not.toHaveBeenCalled();
     const requests = uploadAttachment.mock.calls.map(([request]) => request);
     expect(requests[0].upload.case).toBe("spec");
     expect(requests[0].upload.value.totalSize).toBe(8n);
